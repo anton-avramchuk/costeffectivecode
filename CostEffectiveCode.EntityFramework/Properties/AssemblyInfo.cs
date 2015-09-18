@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CostEffectiveCode.EntityFramework")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("CostEffectiveCode + EntityFramework integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("CostEffectiveCode")]
 [assembly: AssemblyProduct("CostEffectiveCode.EntityFramework")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CostEffectiveCode.Akka")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("CostEffectiveCode + Akka.net integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("CostEffectiveSoft")]
 [assembly: AssemblyProduct("CostEffectiveCode.Akka")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
