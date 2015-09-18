@@ -1,7 +1,6 @@
-﻿using System;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+﻿using CostEffectiveCode.Domain.Cqrs.Commands;
 
-namespace CostEffectiveCode.Common.Messaging.Observable
+namespace CostEffectiveCode.Messaging.Observable
 {
     /// <summary>
     /// This interface provides API over standard .NET events mechanism

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     [PublicAPI]
     public class StopProcessEventArgs : ProcessEventArgsBase

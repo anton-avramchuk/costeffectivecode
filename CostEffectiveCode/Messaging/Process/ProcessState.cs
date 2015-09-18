@@ -1,7 +1,7 @@
 ﻿// ReSharper disable ConvertToAutoProperty
 // ReSharper disable ConvertPropertyToExpressionBody
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     public class ProcessState
     {

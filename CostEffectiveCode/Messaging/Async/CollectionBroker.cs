@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Async
+namespace CostEffectiveCode.Messaging.Async
 {
     public class CollectionBroker<T> : IBroker<T>
     {

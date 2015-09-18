@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using CostEffectiveCode.Common;
-using CostEffectiveCode.Common.Messaging;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging

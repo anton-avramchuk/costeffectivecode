@@ -1,7 +1,6 @@
 ﻿using System;
-using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     public abstract class ProcessEventArgsBase : EventArgs
     {

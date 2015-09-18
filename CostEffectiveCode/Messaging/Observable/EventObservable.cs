@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 
-namespace CostEffectiveCode.Common.Messaging.Observable
+namespace CostEffectiveCode.Messaging.Observable
 {
     /// <summary>
     /// Event-based implementation of IObservable&lt;T&gt;

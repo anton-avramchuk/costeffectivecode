@@ -2,7 +2,7 @@
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     public class PubSubProcProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         : IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult>

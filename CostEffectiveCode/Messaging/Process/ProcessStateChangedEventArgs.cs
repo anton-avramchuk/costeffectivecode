@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     public class ProcessStateChangedEventArgs<TProcessState> : ProcessEventArgsBase
         where TProcessState: ProcessState

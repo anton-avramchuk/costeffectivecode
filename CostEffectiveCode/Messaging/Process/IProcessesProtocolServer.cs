@@ -2,7 +2,7 @@
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common.Messaging.Process
+namespace CostEffectiveCode.Messaging.Process
 {
     /// <summary>
     /// Here is where <b>PubSubProc [PSP] protocol</b> appears.

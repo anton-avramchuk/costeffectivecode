@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CostEffectiveCode.Common.Messaging.Observable;
 using CostEffectiveCode.Domain.Cqrs.Commands;
+using CostEffectiveCode.Messaging.Observable;
+
 // ReSharper disable ConvertPropertyToExpressionBody
 
-namespace CostEffectiveCode.Common.Messaging.Sync
+namespace CostEffectiveCode.Messaging.Sync
 {
     public class SyncBroker<T> : IBroker<T>
     {
