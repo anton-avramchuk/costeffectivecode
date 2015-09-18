@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CostEffectiveCode")]
-[assembly: AssemblyDescription("General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns")]
+[assembly: AssemblyTitle("CostEffectiveCode.Sample")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CostEffectiveCode")]
-[assembly: AssemblyProduct("CostEffectiveCode")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CostEffectiveCode.Sample")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ce963146-9b80-4aa2-b557-8dd1dacd5288")]
+[assembly: Guid("373e6fa9-ccb3-46e5-ba31-7dece94f5479")]
 
 // Version information for an assembly consists of the following four values:
 //
