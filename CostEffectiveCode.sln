@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Sample", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.EntityFramework", "CostEffectiveCode.EntityFramework\CostEffectiveCode.EntityFramework.csproj", "{C1B17256-9CD1-40B8-9854-2D228F1E01DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Akka", "CostEffectiveCode.Akka\CostEffectiveCode.Akka.csproj", "{0B9630EC-08E6-4F7F-91F8-E72199C8874A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B9630EC-08E6-4F7F-91F8-E72199C8874A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B9630EC-08E6-4F7F-91F8-E72199C8874A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B9630EC-08E6-4F7F-91F8-E72199C8874A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B9630EC-08E6-4F7F-91F8-E72199C8874A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
