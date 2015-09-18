@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode", "CostEf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Sample", "CostEffectiveCode.Sample\CostEffectiveCode.Sample.csproj", "{373E6FA9-CCB3-46E5-BA31-7DECE94F5479}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.EntityFramework", "CostEffectiveCode.EntityFramework\CostEffectiveCode.EntityFramework.csproj", "{C1B17256-9CD1-40B8-9854-2D228F1E01DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{373E6FA9-CCB3-46E5-BA31-7DECE94F5479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{373E6FA9-CCB3-46E5-BA31-7DECE94F5479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{373E6FA9-CCB3-46E5-BA31-7DECE94F5479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B17256-9CD1-40B8-9854-2D228F1E01DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
