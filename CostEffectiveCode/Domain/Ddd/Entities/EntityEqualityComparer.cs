@@ -12,8 +12,9 @@ namespace CostEffectiveCode.Domain.Ddd.Entities
             if (x == null || y == null)
                 return false;
 
-            if (x is IEntity && y is IEntity)
-                return ((IEntity)x).GetId() == ((IEntity)y).GetId();
+            var entity = x as IEntity;
+            if (entity != null && y is IEntity)
+                return entity.GetId() == ((IEntity)y).GetId();
 
             return x.Equals(y);
         }

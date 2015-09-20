@@ -27,7 +27,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
             [NotNull] Expression<Func<TEntity, TKey>> expression,
             SortOrder sortOrder = SortOrder.Asc)
         {
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             Expression = expression;
             SortOrder = sortOrder;
         }

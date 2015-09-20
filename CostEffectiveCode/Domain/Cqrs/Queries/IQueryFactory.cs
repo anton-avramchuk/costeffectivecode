@@ -18,9 +18,5 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
             where TEntity : class, IEntity
             where TSpecification: ISpecification<TEntity>
             where TQuery : IQuery<TEntity, TSpecification>;
-
-
-        TQuery GetSpecificQuery<TQuery>()
-            where TQuery : ISpecificQuery;
     }
 }

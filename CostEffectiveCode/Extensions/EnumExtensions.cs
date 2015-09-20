@@ -26,20 +26,17 @@ namespace CostEffectiveCode.Extensions
         public static string GetDescription(this Enum member)
         {
             if (member.GetType().IsEnum == false)
-                throw new ArgumentOutOfRangeException("member", "member is not enum");
+                throw new ArgumentOutOfRangeException(nameof(member), "member is not enum");
 
             FieldInfo fieldInfo = member.GetType().GetField(member.ToString());
 
             if (fieldInfo == null)
                 return null;
 
-            DescriptionAttribute[] attributes = (DescriptionAttribute[]) fieldInfo
+            var attributes = (DescriptionAttribute[]) fieldInfo
                 .GetCustomAttributes<DescriptionAttribute>(false);
 
-            if (attributes.Length > 0)
-                return attributes[0].Description;
-
-            return member.ToString();
+            return attributes.Length > 0 ? attributes[0].Description : member.ToString();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace CostEffectiveCode.Domain
         long TotalCount { get; }
     }
 
+    [PublicAPI]
     public static class PagedEnumerable
     {
         /// <summary>
@@ -59,10 +60,7 @@ namespace CostEffectiveCode.Domain
                 return GetEnumerator();
             }
 
-            public long TotalCount
-            {
-                get { return _totalCount; }
-            }
+            public long TotalCount => _totalCount;
         }
     }
 }

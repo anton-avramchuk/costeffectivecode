@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Web
 {
@@ -7,6 +8,7 @@ namespace CostEffectiveCode.Web
     /// This technique helps you to avoid writing boilerplate code as the controller is built in runtime.
     /// You can choose between Allow or Deny approach -- by specifying it in the controller selector class.
     /// </summary>
+    [PublicAPI]
     [AttributeUsage(AttributeTargets.Class)]
     public class DenyScaffoldAttribute : Attribute
     {

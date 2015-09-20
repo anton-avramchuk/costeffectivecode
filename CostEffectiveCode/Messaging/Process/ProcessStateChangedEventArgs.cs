@@ -3,12 +3,14 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging.Process
 {
+    [PublicAPI]
     public class ProcessStateChangedEventArgs<TProcessState> : ProcessEventArgsBase
         where TProcessState: ProcessState
     {
-        public ProcessStateChangedEventArgs([NotNull] TProcessState processState, Guid processGuid) : base(processGuid)
+        public ProcessStateChangedEventArgs([NotNull] TProcessState processState, Guid processGuid)
+            : base(processGuid)
         {
-            if (processState == null) throw new ArgumentNullException("processState");
+            if (processState == null) throw new ArgumentNullException(nameof(processState));
             State = processState;
         }
 

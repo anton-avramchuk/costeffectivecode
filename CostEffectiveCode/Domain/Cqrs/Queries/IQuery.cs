@@ -18,7 +18,8 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
            [NotNull] Expression<Func<TEntity, TProperty>> expression,
            SortOrder sortOrder = SortOrder.Asc);
 
-        IQuery<TEntity, TSpecification> Include<TProperty>([NotNull] Expression<Func<TEntity, TProperty>> expression);
+        IQuery<TEntity, TSpecification> Include<TProperty>(
+            [NotNull] Expression<Func<TEntity, TProperty>> expression);
 
         [NotNull]
         TEntity Single();
@@ -31,17 +32,11 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         bool Any();
 
-		/// <summary>
-		/// Нумерация с нуля, не с единицы
-		/// </summary>
-		/// <param name="pageNumber"></param>
+		/// <param name="pageNumber">starting 0</param>
 		/// <param name="take"></param>
 		/// <returns></returns>
         [NotNull]
-        IPagedEnumerable<TEntity> Paged(int pageNumber, int take);
-        
-        [NotNull]
-        IPagedEnumerable<TEntity> SkipTake(int skip, int take);
+        IPagedEnumerable<TEntity> Paged(int pageNumber, int take);       
 
 	    long Count();
     }

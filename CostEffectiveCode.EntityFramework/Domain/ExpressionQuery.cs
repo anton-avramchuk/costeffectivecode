@@ -27,7 +27,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public ExpressionQuery(
             [NotNull] ILinqProvider linqProvider)
         {
-            if (linqProvider == null) throw new ArgumentNullException("linqProvider");
+            if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
 
             _linqProvider = linqProvider;
         }
@@ -56,7 +56,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public IQuery<TEntity, IExpressionSpecification<TEntity>> Where(
             IExpressionSpecification<TEntity> specification)
         {
-            if (specification == null) throw new ArgumentNullException("specification");
+            if (specification == null) throw new ArgumentNullException(nameof(specification));
             GetQueryable(specification);
             return this;
         }
@@ -65,7 +65,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             Expression<Func<TEntity, TProperty>> expression,
             SortOrder sortOrder = SortOrder.Asc)
         {
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             var sorting = new Sorting<TEntity, TProperty>(expression, sortOrder);
             GetQueryable();
             
@@ -91,7 +91,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public IQuery<TEntity, IExpressionSpecification<TEntity>> Include<TProperty>(
             Expression<Func<TEntity, TProperty>> expression)
         {
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             GetQueryable().Include(expression);
             return this;
         }
@@ -130,21 +130,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             return res;
         }
 
-        public IPagedEnumerable<TEntity> SkipTake(int skip, int take)
-        {
-            GetQueryable();          
-            var res = new PagedList<TEntity>(_queryable.Count());
-            var raw = _queryable
-                .Skip(skip)
-                .Take(take)
-                .ToArray();
-
-            res.AddRange(raw);
-
-            return res;
-        }
-
-	    public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)
+        public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)
 	    {
 			return GetQueryable().Select(i => selector(i));
 	    }

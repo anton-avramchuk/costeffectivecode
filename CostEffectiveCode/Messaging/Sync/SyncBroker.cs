@@ -1,27 +1,26 @@
 ﻿using System.Threading.Tasks;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Messaging.Observable;
-
-// ReSharper disable ConvertPropertyToExpressionBody
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging.Sync
 {
+    [PublicAPI]
     public class SyncBroker<T> : IBroker<T>
     {
         private readonly IObservable<T> _observable;
         private readonly bool _nonBlocking;
-        private T _recentMessage;
 
         public SyncBroker(IObservable<T> observable, bool nonBlocking = false)
         {
             _observable = observable;
             _nonBlocking = nonBlocking;
-            _recentMessage = default(T);
+            RecentMessage = default(T);
         }
 
         public void Publish(T message)
         {
-            _recentMessage = message;
+            RecentMessage = message;
 
             if (_nonBlocking)
             {
@@ -42,11 +41,6 @@ namespace CostEffectiveCode.Messaging.Sync
             _observable.RemoveHandler(handler);
         }
 
-        public bool IsSelfControlled { get { return true; } }
-
-        public T RecentMessage
-        {
-            get { return _recentMessage; }
-        }
+        public T RecentMessage { get; private set; }
     }
 }

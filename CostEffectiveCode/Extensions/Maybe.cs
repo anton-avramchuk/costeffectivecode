@@ -10,9 +10,7 @@ namespace CostEffectiveCode.Extensions
         [NotNull]
         public static T CheckNotNull<T>(this T obj)
         {
-            if (obj == null) throw new ConfigurationErrorsException(string.Format(
-                "instance of type \"{0}\" is null",
-                typeof(T)));
+            if (obj == null) throw new ConfigurationErrorsException($"instance of type \"{typeof (T)}\" is null");
 
             return obj;
         }
@@ -20,18 +18,13 @@ namespace CostEffectiveCode.Extensions
         public static TResult With<TInput, TResult>(this TInput o, Func<TInput, TResult> evaluator)
             where TResult : class where TInput : class
         {
-
-            if (o == null) return null;
-
-            return evaluator(o);
-
+            return o == null ? null : evaluator(o);
         }
 
         public static TResult Return<TInput, TResult>(this TInput o,
             Func<TInput, TResult> evaluator, TResult failureValue) where TInput : class
         {
-            if (o == null) return failureValue;
-            return evaluator(o);
+            return o == null ? failureValue : evaluator(o);
         }
 
         public static TInput If<TInput>(this TInput o, Func<TInput, bool> evaluator)

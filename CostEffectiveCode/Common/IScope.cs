@@ -10,22 +10,17 @@ namespace CostEffectiveCode.Common
     [PublicAPI]
     public interface IScope<out T>
     {
-        T GetScoped();
+        T Instance { get; }
     }
 
     public class Scope<T> : IScope<T>
     {
-        T _subject;
-
         public Scope([NotNull] T subject)
         {
-            if (subject == null) throw new ArgumentNullException("subject");
-            _subject = subject;
+            if (subject == null) throw new ArgumentNullException(nameof(subject));
+            Instance = subject;
         }
 
-        public T GetScoped()
-        {
-            return _subject;
-        }
+        public T Instance { get; }
     }
 }

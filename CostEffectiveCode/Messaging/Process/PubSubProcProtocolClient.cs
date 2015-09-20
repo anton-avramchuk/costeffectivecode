@@ -7,7 +7,8 @@ namespace CostEffectiveCode.Messaging.Process
     public class PubSubProcProtocolClient<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         : IProcessesProtocolClient<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         where TProcessState : ProcessState
-        where TProcessException : ProcessExceptionBase, new()     {
+        where TProcessException : ProcessExceptionBase, new()
+    {
         private readonly IPublisher<StartProcessEventArgs<TProcessOptions>> _startPublisher;
         private readonly ISubscriber<ProcessStateChangedEventArgs<TProcessState>> _stateChangedSubscriber;
         private readonly ISubscriber<ProcessFailedEventArgs<TProcessException>> _failedSubscriber;
@@ -19,7 +20,7 @@ namespace CostEffectiveCode.Messaging.Process
             [CanBeNull] ISubscriber<ProcessFailedEventArgs<TProcessException>> failedSubscriber,
             [CanBeNull] ISubscriber<ProcessFinishedEventArgs<TProcessResult>> finishedSubscriber)
         {
-            if (startPublisher == null) throw new ArgumentNullException("startPublisher");
+            if (startPublisher == null) throw new ArgumentNullException(nameof(startPublisher));
 
             _startPublisher = startPublisher;
             _stateChangedSubscriber = stateChangedSubscriber;

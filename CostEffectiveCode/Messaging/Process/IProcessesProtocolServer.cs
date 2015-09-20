@@ -17,7 +17,8 @@ namespace CostEffectiveCode.Messaging.Process
     [PublicAPI]
     public interface IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         where TProcessState : ProcessState
-        where TProcessException : ProcessExceptionBase, new()     {
+        where TProcessException : ProcessExceptionBase, new()
+    {
         void OnProcessStart(ICommand<StartProcessEventArgs<TProcessOptions>> handler);
 
         void ChangeState(ProcessStateChangedEventArgs<TProcessState> message);
@@ -34,7 +35,8 @@ namespace CostEffectiveCode.Messaging.Process
             this IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult> server,
             Action<StartProcessEventArgs<TProcessOptions>> handler)
             where TProcessState : ProcessState
-            where TProcessException : ProcessExceptionBase, new()         {
+            where TProcessException : ProcessExceptionBase, new()
+        {
             server.OnProcessStart(new ActionCommand<StartProcessEventArgs<TProcessOptions>>(handler));
         }
 
@@ -43,7 +45,8 @@ namespace CostEffectiveCode.Messaging.Process
             TProcessState processState,
             Guid processGuid)
             where TProcessState : ProcessState
-            where TProcessException : ProcessExceptionBase, new()         {
+            where TProcessException : ProcessExceptionBase, new()
+        {
             server.ChangeState(new ProcessStateChangedEventArgs<TProcessState>(processState, processGuid));
         }
 
@@ -51,7 +54,8 @@ namespace CostEffectiveCode.Messaging.Process
             this IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult> server,
             TProcessException error, Guid processGuid)
             where TProcessState : ProcessState
-            where TProcessException : ProcessExceptionBase, new()         {
+            where TProcessException : ProcessExceptionBase, new()
+        {
             server.Fail(new ProcessFailedEventArgs<TProcessException>(error, processGuid));
         }
 
@@ -59,7 +63,8 @@ namespace CostEffectiveCode.Messaging.Process
             this IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult> server,
             TProcessResult result, Guid processGuid)
             where TProcessState : ProcessState
-            where TProcessException : ProcessExceptionBase, new()         {
+            where TProcessException : ProcessExceptionBase, new()
+        {
             server.Finish(new ProcessFinishedEventArgs<TProcessResult>(result, processGuid));
         }
     }

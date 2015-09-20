@@ -2,41 +2,43 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Reflection
 {
     internal class Accessor<TObject, TProperty> : IAccessor<TObject, TProperty>
     {
-        private readonly Func<TObject, TProperty> getter;
-        private readonly Action<TObject, TProperty> setter;
+        private readonly Func<TObject, TProperty> _getter;
+        private readonly Action<TObject, TProperty> _setter;
 
         public Accessor(Func<TObject, TProperty> getter, Action<TObject, TProperty> setter)
         {
-            this.getter = getter;
-            this.setter = setter;
+            this._getter = getter;
+            this._setter = setter;
         }
 
         public void Set(TObject @object, TProperty value)
         {
-            setter(@object, value);
+            _setter(@object, value);
         }
 
         public TProperty Get(TObject @object)
         {
-            return getter(@object);
+            return _getter(@object);
         }
 
         public void Set(object @object, object value)
         {
-            setter((TObject)@object, (TProperty)value);
+            _setter((TObject)@object, (TProperty)value);
         }
 
         public object Get(object @object)
         {
-            return getter((TObject)@object);
+            return _getter((TObject)@object);
         }
     }
 
+    [PublicAPI]
     public static class Accessor
     {
         public static AccessorBuilder<TObject> For<TObject>()
@@ -54,10 +56,10 @@ namespace CostEffectiveCode.Reflection
                     throw new NotSupportedException();
                 }
 
-                ParameterExpression param1 = Expression.Parameter(typeof(TObject), "object");
-                ParameterExpression param2 = Expression.Parameter(typeof(TProperty), "value");
+                var param1 = Expression.Parameter(typeof(TObject), "object");
+                var param2 = Expression.Parameter(typeof(TProperty), "value");
 
-                Action<TObject, TProperty> setter = MakeSetter<TProperty>(param1, param2, memberExpression.Member);
+                var setter = MakeSetter<TProperty>(param1, param2, memberExpression.Member);
 
                 return new Accessor<TObject, TProperty>(expression.Compile(), setter);
             }
@@ -66,7 +68,7 @@ namespace CostEffectiveCode.Reflection
                                                                             ParameterExpression param2,
                                                                             MemberInfo memberInfo)
             {
-                Expression<Action<TObject, TProperty>> exp = Expression.Lambda<Action<TObject, TProperty>>(
+                var exp = Expression.Lambda<Action<TObject, TProperty>>(
                     Expression.Assign(Expression.MakeMemberAccess(param1, memberInfo), param2),
                     param1,
                     param2);
@@ -76,23 +78,23 @@ namespace CostEffectiveCode.Reflection
 
             public IAccessor<TObject, TProperty> From<TProperty>(string memberName)
             {
-                MemberInfo[] member = typeof(TObject).GetMember(memberName,
+                var member = typeof(TObject).GetMember(memberName,
                                                                  BindingFlags.Instance |
                                                                  BindingFlags.Public |
                                                                  BindingFlags.NonPublic);
 
-                MemberInfo memberInfo = member.FirstOrDefault();
+                var memberInfo = member.FirstOrDefault();
                 if (memberInfo == null)
                 {
                     throw new NotSupportedException();
                 }
 
-                ParameterExpression param1 = Expression.Parameter(typeof(TObject), "object");
-                ParameterExpression param2 = Expression.Parameter(typeof(TProperty), "value");
+                var param1 = Expression.Parameter(typeof(TObject), "object");
+                var param2 = Expression.Parameter(typeof(TProperty), "value");
 
-                Func<TObject, TProperty> getter = MakeGetter<TProperty>(memberInfo, param1);
+                var getter = MakeGetter<TProperty>(memberInfo, param1);
 
-                Action<TObject, TProperty> setter = MakeSetter<TProperty>(param1, param2, memberInfo);
+                var setter = MakeSetter<TProperty>(param1, param2, memberInfo);
 
                 return new Accessor<TObject, TProperty>(getter, setter);
             }
@@ -100,7 +102,7 @@ namespace CostEffectiveCode.Reflection
             private static Func<TObject, TProperty> MakeGetter<TProperty>(MemberInfo memberInfo,
                                                                           ParameterExpression param1)
             {
-                Expression<Func<TObject, TProperty>> expression = Expression.Lambda<Func<TObject, TProperty>>(
+                var expression = Expression.Lambda<Func<TObject, TProperty>>(
                     Expression.MakeMemberAccess(param1, memberInfo), param1);
 
                 return expression.Compile();

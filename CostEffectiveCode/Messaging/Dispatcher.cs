@@ -6,13 +6,15 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging
 {
+    [PublicAPI]
+    // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class Dispatcher<T> : IPublisher<T>
     {
         #region Vars
 
         private IMapper _mapper;
 
-        protected Dictionary<Type, List<IRepublisher>> _publishers;
+        protected Dictionary<Type, List<IRepublisher>> Publishers;
 
         [CanBeNull]
         public IMapper Mapper
@@ -22,7 +24,7 @@ namespace CostEffectiveCode.Messaging
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 _mapper = value;
@@ -56,7 +58,7 @@ namespace CostEffectiveCode.Messaging
                 _outterPublisherFunc = GetPublisher;
             }
 
-            public IPublisher<TPublisherEventArgs> GetPublisher(T ea)
+            private IPublisher<TPublisherEventArgs> GetPublisher(T ea)
             {
                 return _outterPublisher;
             }
@@ -106,9 +108,9 @@ namespace CostEffectiveCode.Messaging
         protected void InitIndex<TPublisherEventArgs>()
         {
             var key = typeof(TPublisherEventArgs);
-            if (!_publishers.ContainsKey(key))
+            if (!Publishers.ContainsKey(key))
             {
-                _publishers[key] = new List<IRepublisher>();
+                Publishers[key] = new List<IRepublisher>();
             }
         }
 
@@ -121,7 +123,7 @@ namespace CostEffectiveCode.Messaging
             where TPublisher : IPublisher<TPublisherEventArgs>
         {
             InitIndex<T>();
-            _publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisher));
+            Publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisher));
             return this;
         }
 
@@ -130,7 +132,7 @@ namespace CostEffectiveCode.Messaging
             Func<T, TPublisherEventArgs> mapFunc, Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
         {
             InitIndex<T>();
-            _publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisherSelector));
+            Publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisherSelector));
             return this;
         }
 
@@ -161,21 +163,21 @@ namespace CostEffectiveCode.Messaging
 
         public void ClearMapping()
         {
-            _publishers = new Dictionary<Type, List<IRepublisher>>();
+            Publishers = new Dictionary<Type, List<IRepublisher>>();
         }
 
         #endregion
 
         public virtual void Publish([NotNull] T message)
         {
-            if (message == null) throw new ArgumentNullException("message");
+            if (message == null) throw new ArgumentNullException(nameof(message));
             var key = message.GetType();
-            if (!_publishers.ContainsKey(key))
+            if (!Publishers.ContainsKey(key))
             {
                 throw new ConfigurationErrorsException();
             }
 
-            foreach (var p in _publishers[key])
+            foreach (var p in Publishers[key])
             {
                 p.Republish(message);
             }

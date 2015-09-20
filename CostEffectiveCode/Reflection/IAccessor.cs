@@ -1,7 +1,10 @@
-﻿namespace CostEffectiveCode.Reflection
+﻿using JetBrains.Annotations;
+
+namespace CostEffectiveCode.Reflection
 {
-    public interface IAccessor<in TObject, TProperty> : ISetter<TObject, TProperty>, IGetter<TObject, TProperty>,
-        ISetter, IGetter
+    [PublicAPI]
+    public interface IAccessor<in TObject, TProperty>
+        : ISetter<TObject, TProperty>, IGetter<TObject, TProperty>, ISetter, IGetter
     {
     }
 

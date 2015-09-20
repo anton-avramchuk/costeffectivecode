@@ -58,23 +58,29 @@ namespace CostEffectiveCode.Extensions
             var significantValue = value%100;
 
             if (significantValue >= 10 && significantValue <= 20)
-                return string.Format("{0} {1}", value, fiveForm);
+                return $"{value} {fiveForm}";
 
             var lastDigit = value%10;
-            if (lastDigit == 1)
-                return string.Format("{0} {1}", value, oneForm);
+            switch (lastDigit)
+            {
+                case 1:
+                    return $"{value} {oneForm}";
+                case 2:
+                case 3:
+                case 4:
+                    return $"{value} {twoForm}";
+            }
 
-            if (lastDigit == 2 || lastDigit == 3 || lastDigit == 4)
-                return string.Format("{0} {1}", value, twoForm);
-
-            return string.Format("{0} {1}", value, fiveForm);
+            return $"{value} {fiveForm}";
 
         }
 
         [PublicAPI]
         public static string ToUnderscoreCase(this string str)
         {
-            return string.Concat(str.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower();
+            return string
+                .Concat(str.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()))
+                .ToLower();
         }
     }
 }

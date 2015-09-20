@@ -25,7 +25,7 @@ namespace CostEffectiveCode.Messaging
     {
         public static ICommand<T> Subscribe<T>(this ISubscriber<T> subscriber, [NotNull] Action<T> action)
         {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             var cmd = new ActionCommand<T>(action);
             subscriber.Subscribe(cmd);
             return cmd;

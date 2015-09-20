@@ -8,9 +8,10 @@ namespace CostEffectiveCode.Messaging.Process
     {
         public TProcessResult ProcessResult { get; set; }
 
-        public ProcessFinishedEventArgs([NotNull] TProcessResult processResult, Guid processGuid) : base(processGuid)
+        public ProcessFinishedEventArgs([NotNull] TProcessResult processResult, Guid processGuid)
+            : base(processGuid)
         {
-            if (processResult == null) throw new ArgumentNullException("processResult");
+            if (processResult == null) throw new ArgumentNullException(nameof(processResult));
 
             ProcessResult = processResult;
         }

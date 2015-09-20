@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CostEffectiveCode.Domain.Cqrs.Commands;
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging.Observable
 {
@@ -8,6 +9,7 @@ namespace CostEffectiveCode.Messaging.Observable
     /// Based on the collection of ICommand&lt;T&gt; implementation of IObservable&lt;T&gt;
     /// </summary>
     /// <typeparam name="T">type of message</typeparam>
+    [PublicAPI]
     public class CommandsCollectionObservable<T> : IObservable<T>
     {
         private readonly ICollection<ICommand<T>> _handlersCollection;

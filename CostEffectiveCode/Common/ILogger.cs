@@ -19,7 +19,9 @@ namespace CostEffectiveCode.Common
         void Error(object message);
 
         void ErrorFormat(string message, params object[] arguments);
+
         void DebugFormat(string message, params object[] arguments);
+
 	    void Error(string unexpextedError, Exception exception);
     }
 }

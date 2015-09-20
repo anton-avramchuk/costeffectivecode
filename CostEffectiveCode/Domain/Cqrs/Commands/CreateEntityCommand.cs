@@ -10,8 +10,8 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
     {
         public override void Execute(T context)
         {
-            UnitOfWorkScope.GetScoped().Save(context);
-            UnitOfWorkScope.GetScoped().Commit();
+            UnitOfWorkScope.Instance.Save(context);
+            UnitOfWorkScope.Instance.Commit();
         }
 
         public CreateEntityCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScope)

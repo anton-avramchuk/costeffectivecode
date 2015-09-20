@@ -1,4 +1,5 @@
 ﻿using CostEffectiveCode.Domain.Cqrs.Commands;
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging.Observable
 {
@@ -6,6 +7,7 @@ namespace CostEffectiveCode.Messaging.Observable
     /// This interface provides API over standard .NET events mechanism
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [PublicAPI]
     public interface IObservable<T>
     {
         void AddHandler(ICommand<T> handler);

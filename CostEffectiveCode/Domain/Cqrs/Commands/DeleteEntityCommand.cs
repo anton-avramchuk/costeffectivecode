@@ -15,8 +15,8 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
 
         public override void Execute(T context)
         {
-            UnitOfWorkScope.GetScoped().Delete(context);
-            UnitOfWorkScope.GetScoped().Commit();
+            UnitOfWorkScope.Instance.Delete(context);
+            UnitOfWorkScope.Instance.Commit();
         }
     }
 }

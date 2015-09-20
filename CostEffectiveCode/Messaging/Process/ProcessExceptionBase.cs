@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Messaging.Process
 {
+    [PublicAPI]
     public abstract class ProcessExceptionBase : Exception
     {
         protected ProcessExceptionBase()

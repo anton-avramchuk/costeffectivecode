@@ -1,38 +1,50 @@
-﻿using System.Web.Mvc;
+﻿using System;
+
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace CostEffectiveCode.EntityFramework.Domain
 {
     [UsedImplicitly]
     public class CommandQueryFactory : ICommandFactory, IQueryFactory
     {
+        private readonly OwinContext _context;
+
         #region ICommandFactory Implementation
+
+        public CommandQueryFactory([NotNull] OwinContext context)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            _context = context;
+        }
+
 
         public TCommand GetCommand<TEntity, TCommand>() where TCommand : ICommand<TEntity>
         {
-            return DependencyResolver.Current.GetService<TCommand>().CheckNotNull();
+            return _context.Get<TCommand>().CheckNotNull();
         }
 
         public T GetCommand<T>() where T:ICommand
         {
-            return DependencyResolver.Current.GetService<T>().CheckNotNull();
+            return _context.Get<T>().CheckNotNull();
         }
 
         public CreateEntityCommand<T> GetCreateCommand<T>() where T : class, IEntity
         {
-            var createEntityCommand = DependencyResolver.Current.GetService<CreateEntityCommand<T>>();
+            var createEntityCommand = _context.Get<CreateEntityCommand<T>>();
 
             return createEntityCommand.CheckNotNull();
         }
 
         public DeleteEntityCommand<T> GetDeleteCommand<T>() where T : class, IEntity
         {
-            return DependencyResolver.Current.GetService<DeleteEntityCommand<T>>().CheckNotNull();
+            return _context.Get<DeleteEntityCommand<T>>().CheckNotNull();
         }
 
         #endregion
@@ -42,8 +54,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public IQuery<TEntity,IExpressionSpecification<TEntity>> GetQuery<TEntity>()
             where TEntity : class, IEntity
         {
-            return DependencyResolver.Current
-                .GetService<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
+            return _context.Get<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
                 .CheckNotNull();
         }
 
@@ -51,8 +62,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             where TEntity : class, IEntity
             where TSpecification : ISpecification<TEntity>
         {
-            return DependencyResolver.Current
-                .GetService<IQuery<TEntity, TSpecification>>()
+            return _context.Get<IQuery<TEntity, TSpecification>>()
                 .CheckNotNull();
         }
 
@@ -61,22 +71,9 @@ namespace CostEffectiveCode.EntityFramework.Domain
             where TSpecification : ISpecification<TEntity>
             where TQuery: IQuery<TEntity, TSpecification>
         {
-            return DependencyResolver.Current
-                .GetService<TQuery>()
+            return _context.Get<TQuery>()
                 .CheckNotNull();
         }
-
-        public ISpecificQuery<TResult, TFilter> GetSpecificQuery<TQuery, TResult, TFilter>() where TQuery : ISpecificQuery<TResult, TFilter>
-        {
-            return DependencyResolver.Current.GetService<TQuery>();
-        }
-
-        public TQuery GetSpecificQuery<TQuery>()
-            where TQuery : ISpecificQuery
-        {
-            return DependencyResolver.Current.GetService<TQuery>().CheckNotNull();
-        }
-
 
         #endregion
     }

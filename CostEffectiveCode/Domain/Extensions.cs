@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Linq.Expressions;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
@@ -11,6 +10,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain
 {
+    [PublicAPI]
     public static class Extensions
     {
         #region Dynamic Expression Compilation
@@ -57,7 +57,7 @@ namespace CostEffectiveCode.Domain
             Action<T> negative = null)
             where T : IEntity
         {
-            if (positive == null) throw new ArgumentNullException("positive");
+            if (positive == null) throw new ArgumentNullException(nameof(positive));
             if (specification.IsSatisfiedBy(subject))
             {
                 positive.Invoke(subject);
@@ -103,16 +103,6 @@ namespace CostEffectiveCode.Domain
             return query
                 .Where(new ExpressionSpecification<TEntity>(expression));
         }
-
-        //public static IQuery<TEntity, IExpressionSpecification<TEntity>> Where<TEntity>(
-        //    this IQuery<TEntity, IExpressionSpecification<TEntity>> query,
-        //    Func<TEntity, bool> func)
-        //    where TEntity : class, IEntity
-        //{
-        //    return query
-        //        .Where(new ExpressionSpecification<TEntity>(x => func(x)));
-        //}
-
 
         [CanBeNull]
         public static TEntity ById<TEntity>(

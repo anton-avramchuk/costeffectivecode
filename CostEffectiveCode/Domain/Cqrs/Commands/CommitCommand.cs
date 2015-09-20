@@ -14,7 +14,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
 
         public void Execute()
         {
-            _scope.GetScoped().Commit();
+            _scope.Instance.Commit();
         }
     }
 }

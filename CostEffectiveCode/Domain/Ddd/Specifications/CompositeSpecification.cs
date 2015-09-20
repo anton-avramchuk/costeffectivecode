@@ -13,8 +13,8 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
 
         protected CompositeSpecification([NotNull] ISpecification<T> left, [NotNull] ISpecification<T> right)
         {
-            if (left == null) throw new ArgumentNullException("left");
-            if (right == null) throw new ArgumentNullException("right");
+            if (left == null) throw new ArgumentNullException(nameof(left));
+            if (right == null) throw new ArgumentNullException(nameof(right));
 
             Left = left;
             Right = right;
@@ -72,6 +72,7 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
     public class ExpressionAndSpecification<T> : AndSpecification<T>, IExpressionSpecification<T>
         where T :class, IEntity
     {
+        // Don't alt+enter with r# refactoring here
         public ExpressionAndSpecification(
             [NotNull] IExpressionSpecification<T> left,
             [NotNull] IExpressionSpecification<T> right)
@@ -80,20 +81,16 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
         }
 
 
-        public Expression<Func<T, bool>> Expression
-        {
-            get
-            {
-                return System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(System.Linq.Expressions.Expression.And(
-                    ((IExpressionSpecification<T>) Left).Expression,
-                    ((IExpressionSpecification<T>) Right).Expression));
-            }
-        }
+        public Expression<Func<T, bool>> Expression => System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(
+            System.Linq.Expressions.Expression.And(
+                ((IExpressionSpecification<T>) Left).Expression,
+                ((IExpressionSpecification<T>) Right).Expression));
     }
 
     public class ExpressionOrSpecification<T> : OrSpecification<T>, IExpressionSpecification<T>
         where T : class, IEntity
     {
+        // Don't alt+enter with r# refactoring here
         public ExpressionOrSpecification(
             [NotNull] IExpressionSpecification<T> left,
             [NotNull] IExpressionSpecification<T> right)
@@ -102,15 +99,10 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
         }
 
 
-        public Expression<Func<T, bool>> Expression
-        {
-            get
-            {
-                return System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(System.Linq.Expressions.Expression.Or(
-                    ((IExpressionSpecification<T>)Left).Expression,
-                    ((IExpressionSpecification<T>)Right).Expression));
-            }
-        }
+        public Expression<Func<T, bool>> Expression => System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(
+            System.Linq.Expressions.Expression.Or(
+                ((IExpressionSpecification<T>)Left).Expression,
+                ((IExpressionSpecification<T>)Right).Expression));
     }
 
 }

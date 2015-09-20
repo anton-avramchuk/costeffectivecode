@@ -16,12 +16,6 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
             Id = id;
         }
 
-        public KeyValuePair<string, object> KeyValue
-        {
-            get
-            {
-                return new KeyValuePair<string, object>("Id", Id);
-            }
-        }
+        public KeyValuePair<string, object> KeyValue => new KeyValuePair<string, object>("Id", Id);
     }
 }

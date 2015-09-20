@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain.Ddd
 {
+    [PublicAPI]
     public class AggregationRootCollection<TAggregationRoot, TChild> : ICollection<TChild>
         where TChild: class, IEntity
         where TAggregationRoot: class, IEntity
@@ -21,11 +22,12 @@ namespace CostEffectiveCode.Domain.Ddd
 
         #region Static Reflection Optimization
 
-        private static readonly Dictionary<string, PropertyInfo> AggreagationRootProperties = new Dictionary<string, PropertyInfo>();
+        private static readonly Dictionary<string, PropertyInfo> AggreagationRootProperties =
+            new Dictionary<string, PropertyInfo>();
 
         private static PropertyInfo GetAggregationRootProperty()
         {
-            var key = string.Format("{0}{1}", typeof(TAggregationRoot), typeof(TChild));
+            var key = $"{typeof (TAggregationRoot)}{typeof (TChild)}";
             if (!AggreagationRootProperties.ContainsKey(key))
             {
                 AggreagationRootProperties[key] = typeof(TChild)
@@ -56,8 +58,9 @@ namespace CostEffectiveCode.Domain.Ddd
             [NotNull] TAggregationRoot root,
             [NotNull] ICollection<TChild> storage )
         {
-            if (root == null) throw new ArgumentNullException("root");
-            if (storage == null) throw new ArgumentNullException("storage");
+            if (root == null) throw new ArgumentNullException(nameof(root));
+            if (storage == null) throw new ArgumentNullException(nameof(storage));
+
             _root = root;
             _storage = storage.IsReadOnly
                 ? new List<TChild>(storage) 
@@ -117,9 +120,9 @@ namespace CostEffectiveCode.Domain.Ddd
             return res;
         }
 
-        public int Count { get { return _storage.Count; } }
-        
-        public bool IsReadOnly { get { return false; }}
+        public int Count => _storage.Count;
+
+        public bool IsReadOnly => false;
 
         #endregion
     }

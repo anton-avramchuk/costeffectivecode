@@ -8,11 +8,6 @@ namespace CostEffectiveCode.Messaging.Process
     {
         private TProcessOptions _options;
 
-        //public StartProcessEventArgs([NotNull] TProcessOptions options, Guid processGuid) : base(processGuid)
-        //{
-        //    InitOptions(options);
-        //}
-
         public StartProcessEventArgs([NotNull] TProcessOptions options) : base(Guid.NewGuid())
         {
             InitOptions(options);
@@ -20,13 +15,10 @@ namespace CostEffectiveCode.Messaging.Process
 
         private void InitOptions(TProcessOptions options)
         {
-            if (options == null) throw new ArgumentNullException("options");
+            if (options == null) throw new ArgumentNullException(nameof(options));
             _options = options;
         }
 
-        public TProcessOptions Options
-        {
-            get { return _options; }
-        }
+        public TProcessOptions Options => _options;
     }
 }

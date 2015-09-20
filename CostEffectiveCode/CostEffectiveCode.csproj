@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CostEffectiveCode</RootNamespace>
     <AssemblyName>CostEffectiveCode</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,10 +35,6 @@
       <HintPath>..\packages\JetBrains.Annotations.9.2.0\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -53,7 +50,6 @@
     <Compile Include="Common\ICache.cs" />
     <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\IMapper.cs" />
-    <Compile Include="Common\IScheduler.cs" />
     <Compile Include="Common\IScope.cs" />
     <Compile Include="Messaging\Async\CollectionBroker.cs" />
     <Compile Include="Messaging\IBroker.cs" />
@@ -83,11 +79,8 @@
     <Compile Include="Domain\Cqrs\Commands\DeleteEntityCommand.cs" />
     <Compile Include="Domain\Cqrs\Commands\ICommand.cs" />
     <Compile Include="Domain\Cqrs\Commands\ICommandFactory.cs" />
-    <Compile Include="Domain\Cqrs\Commands\IQueuedCommand.cs" />
-    <Compile Include="Domain\Cqrs\Commands\ScheduledCommand.cs" />
     <Compile Include="Domain\Cqrs\Queries\IQuery.cs" />
     <Compile Include="Domain\Cqrs\Queries\IQueryFactory.cs" />
-    <Compile Include="Domain\Cqrs\Queries\ISpecificQuery.cs" />
     <Compile Include="Domain\Cqrs\Queries\Sorting.cs" />
     <Compile Include="Domain\Cqrs\UnitOfWorkScopeCommand.cs" />
     <Compile Include="Domain\Ddd\AggregationRootCollection.cs" />
@@ -95,7 +88,6 @@
     <Compile Include="Domain\Ddd\Entities\EntityBase.cs" />
     <Compile Include="Domain\Ddd\Entities\EntityEqualityComparer.cs" />
     <Compile Include="Domain\Ddd\Entities\IEntity.cs" />
-    <Compile Include="Domain\Ddd\IValidator.cs" />
     <Compile Include="Domain\Ddd\PagedList.cs" />
     <Compile Include="Domain\Ddd\Specifications\CompositeSpecification.cs" />
     <Compile Include="Domain\Ddd\Specifications\ExpressionSpecification.cs" />
@@ -106,14 +98,10 @@
     <Compile Include="Domain\Ddd\UnitOfWork\IDataContext.cs" />
     <Compile Include="Domain\Ddd\UnitOfWork\ILinqProvider.cs" />
     <Compile Include="Domain\Ddd\UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="Domain\Ddd\UnitOfWork\TestLinqProvider.cs" />
     <Compile Include="Domain\Extensions.cs" />
-    <Compile Include="Domain\IComment.cs" />
     <Compile Include="Domain\PagedEnumerable.cs" />
-    <Compile Include="Domain\ServiceBase.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\Maybe.cs" />
-    <Compile Include="Extensions\SerializationHelper.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Messaging\Dispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

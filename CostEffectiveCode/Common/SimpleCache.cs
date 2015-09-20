@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace CostEffectiveCode.Common
 {
@@ -10,7 +9,7 @@ namespace CostEffectiveCode.Common
         {
             public DateTime Expire;
 
-            public object Value;
+            public readonly object Value;
 
             public CacheValue(DateTime expire, object value)
             {

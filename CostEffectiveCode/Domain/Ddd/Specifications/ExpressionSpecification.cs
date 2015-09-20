@@ -13,22 +13,11 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
 
         private Func<T, bool> _func;
 
-        private Func<T, bool> Func
-        {
-            get
-            {
-                if (_func == null)
-                {
-                    _func = Expression.Compile();
-                }
-
-                return _func;
-            }
-        }
+        private Func<T, bool> Func => _func ?? (_func = Expression.Compile());
 
         public ExpressionSpecification([NotNull] Expression<Func<T, bool>> expression)
         {
-            if (expression == null) throw new ArgumentNullException("expression");
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
             Expression = expression;
         }
 

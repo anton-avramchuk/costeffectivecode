@@ -7,7 +7,8 @@ namespace CostEffectiveCode.Messaging.Process
     public class PubSubProcProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         : IProcessesProtocolServer<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         where TProcessState : ProcessState
-        where TProcessException : ProcessExceptionBase, new()     {
+        where TProcessException : ProcessExceptionBase, new()
+    {
         private readonly ISubscriber<StartProcessEventArgs<TProcessOptions>> _startProcesSubscriber;
         private readonly IPublisher<ProcessStateChangedEventArgs<TProcessState>> _processStateChangedPublisher;
         private readonly IPublisher<ProcessFailedEventArgs<TProcessException>> _processFailedPublisher;

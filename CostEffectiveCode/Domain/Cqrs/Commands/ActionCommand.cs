@@ -9,7 +9,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
 
         public ActionCommand([NotNull] Action<T> action)
         {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
             _action = action;
         }
 

@@ -13,7 +13,7 @@ namespace CostEffectiveCode.Domain.Cqrs
 
         protected UnitOfWorkScopeCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScopeScope)
         {
-            if (unitOfWorkScopeScope == null) throw new ArgumentNullException("unitOfWorkScopeScope");
+            if (unitOfWorkScopeScope == null) throw new ArgumentNullException(nameof(unitOfWorkScopeScope));
             UnitOfWorkScope = unitOfWorkScopeScope;
         }
     }
@@ -26,7 +26,7 @@ namespace CostEffectiveCode.Domain.Cqrs
 
         protected UnitOfWorkScopeCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScope)
         {
-            if (unitOfWorkScope == null) throw new ArgumentNullException("unitOfWorkScope");
+            if (unitOfWorkScope == null) throw new ArgumentNullException(nameof(unitOfWorkScope));
             UnitOfWorkScope = unitOfWorkScope;
         }
     }
