@@ -76,7 +76,6 @@ namespace CostEffectiveCode.Messaging
             void Republish(T domainEventArgs);
         }
 
-
         #endregion
 
         public Dispatcher()
@@ -84,7 +83,8 @@ namespace CostEffectiveCode.Messaging
             ClearMapping();
         }
 
-        public Dispatcher([NotNull] IMapper mapper):this()
+        public Dispatcher([NotNull] IMapper mapper)
+            :this()
         {
             Mapper = mapper;
         }
@@ -123,7 +123,8 @@ namespace CostEffectiveCode.Messaging
             where TPublisher : IPublisher<TPublisherEventArgs>
         {
             InitIndex<T>();
-            Publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisher));
+            Publishers[typeof(T)]
+                .Add(new Converter<TPublisherEventArgs>(mapFunc, publisher));
             return this;
         }
 
@@ -132,11 +133,13 @@ namespace CostEffectiveCode.Messaging
             Func<T, TPublisherEventArgs> mapFunc, Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
         {
             InitIndex<T>();
-            Publishers[typeof(TPublisherEventArgs)].Add(new Converter<TPublisherEventArgs>(mapFunc, publisherSelector));
+            Publishers[typeof(T)]
+                .Add(new Converter<TPublisherEventArgs>(mapFunc, publisherSelector));
             return this;
         }
 
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs>(Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
+        public Dispatcher<T> CreateMapping<TPublisherEventArgs>(
+            Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
         {
             return CreateMapping(UseMapper<TPublisherEventArgs>, publisherSelector);
         }
