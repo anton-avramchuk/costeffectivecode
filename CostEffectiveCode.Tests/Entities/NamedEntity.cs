@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Tests.Entities
+namespace CostEffectiveCode.EntityFramework.Tests.Entities
 {
     public abstract class NamedEntity : EntityBase<long>
     {

@@ -4,7 +4,7 @@ using CostEffectiveCode.Messaging;
 using Moq;
 using NUnit.Framework;
 
-namespace CostEffectiveCode.Tests.Tests
+namespace CostEffectiveCode.EntityFramework.Tests.Tests
 {
     [TestFixture]
     public class DispatcherTests

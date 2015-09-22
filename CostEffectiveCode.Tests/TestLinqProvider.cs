@@ -5,23 +5,15 @@ using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
-namespace CostEffectiveCode.Tests
+namespace CostEffectiveCode.EntityFramework.Tests
 {
     public class TestLinqProvider : ILinqProvider
     {
-        private readonly Dictionary<Type, ArrayList> _source;
+        private readonly Dictionary<Type, IEnumerable> _source;
 
-        public TestLinqProvider(Dictionary<Type, IEnumerable> values)
+        public TestLinqProvider(Dictionary<Type, IEnumerable> testStorage)
         {
-            _source = new Dictionary<Type, ArrayList>();
-            // type checking
-            foreach (var value in values)
-            {
-                _source[value.Key] = new ArrayList(value.Value
-                    .Cast<object>()
-                    .Select(v => Convert.ChangeType(v, value.Key))
-                    .ToArray());
-            }
+            _source = testStorage;
         }
 
         public IQueryable<T> Query<T>() where T : class, IEntity

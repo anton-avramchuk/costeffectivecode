@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Linq;
 using CostEffectiveCode.Domain.Ddd;
-using CostEffectiveCode.Tests.Entities;
+using CostEffectiveCode.EntityFramework.Tests.Entities;
 using NUnit.Framework;
 
-namespace CostEffectiveCode.Tests.Tests
+namespace CostEffectiveCode.EntityFramework.Tests.Tests
 {
     public class AggregationRootCollectionTests : DataTestsBase
     {

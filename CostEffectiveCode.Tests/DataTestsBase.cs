@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace CostEffectiveCode.Tests
+namespace CostEffectiveCode.EntityFramework.Tests
 {
     public class DataTestsBase
     {

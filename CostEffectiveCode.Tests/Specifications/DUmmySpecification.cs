@@ -1,7 +1,7 @@
 ﻿using CostEffectiveCode.Domain.Ddd.Specifications;
-using CostEffectiveCode.Tests.Entities;
+using CostEffectiveCode.EntityFramework.Tests.Entities;
 
-namespace CostEffectiveCode.Tests.Specifications
+namespace CostEffectiveCode.EntityFramework.Tests.Specifications
 {
     class DummySpecification : ISpecification<Product>
     {

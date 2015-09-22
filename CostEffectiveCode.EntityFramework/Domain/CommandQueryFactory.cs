@@ -14,6 +14,9 @@ namespace CostEffectiveCode.EntityFramework.Domain
     [UsedImplicitly]
     public class CommandQueryFactory : ICommandFactory, IQueryFactory
     {
+        /// <summary>
+        /// Used for DI container purposes at the moment
+        /// </summary>
         private readonly OwinContext _context;
 
         #region ICommandFactory Implementation
@@ -30,7 +33,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             return _context.Get<TCommand>().CheckNotNull();
         }
 
-        public T GetCommand<T>() where T:ICommand
+        public T GetCommand<T>() where T : ICommand
         {
             return _context.Get<T>().CheckNotNull();
         }
@@ -42,6 +45,13 @@ namespace CostEffectiveCode.EntityFramework.Domain
             return createEntityCommand.CheckNotNull();
         }
 
+        public UpdateEntityCommand<T> GetUpdateCommand<T>() where T : class, IEntity
+        {
+            var updateEntityCommand = _context.Get<UpdateEntityCommand<T>>();
+
+            return updateEntityCommand.CheckNotNull();
+        }
+
         public DeleteEntityCommand<T> GetDeleteCommand<T>() where T : class, IEntity
         {
             return _context.Get<DeleteEntityCommand<T>>().CheckNotNull();
@@ -51,7 +61,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
 
         #region IQueryFactory implementation
 
-        public IQuery<TEntity,IExpressionSpecification<TEntity>> GetQuery<TEntity>()
+        public IQuery<TEntity, IExpressionSpecification<TEntity>> GetQuery<TEntity>()
             where TEntity : class, IEntity
         {
             return _context.Get<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
@@ -69,7 +79,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public TQuery GetQuery<TEntity, TSpecification, TQuery>()
             where TEntity : class, IEntity
             where TSpecification : ISpecification<TEntity>
-            where TQuery: IQuery<TEntity, TSpecification>
+            where TQuery : IQuery<TEntity, TSpecification>
         {
             return _context.Get<TQuery>()
                 .CheckNotNull();

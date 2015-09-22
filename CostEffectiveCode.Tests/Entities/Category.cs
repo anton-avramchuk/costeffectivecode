@@ -3,7 +3,7 @@ using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Ddd;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Tests.Entities
+namespace CostEffectiveCode.EntityFramework.Tests.Entities
 {
     public class Category : NamedEntity
     {

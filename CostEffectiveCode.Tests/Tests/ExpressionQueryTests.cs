@@ -3,12 +3,12 @@ using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.EntityFramework.Domain;
-using CostEffectiveCode.Tests.Entities;
+using CostEffectiveCode.EntityFramework.Tests.Entities;
 using NUnit.Framework;
 
-namespace CostEffectiveCode.Tests.Tests
+namespace CostEffectiveCode.EntityFramework.Tests.Tests
 {
-    public class LinqQueryTests : DataTestsBase
+    public class ExpressionQueryTests : DataTestsBase
     {
         private ExpressionQuery<Product> _query;
 
