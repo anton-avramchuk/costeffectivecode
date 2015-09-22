@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Akka", "C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0906BE64-AB1C-45D7-93BF-09F7AD346741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Tests", "CostEffectiveCode.Tests\CostEffectiveCode.Tests.csproj", "{F74B2921-E073-42B0-B59E-DBF677E6B0D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.EntityFramework.Tests", "CostEffectiveCode.Tests\CostEffectiveCode.EntityFramework.Tests.csproj", "{F74B2921-E073-42B0-B59E-DBF677E6B0D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
