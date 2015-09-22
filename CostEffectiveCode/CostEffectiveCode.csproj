@@ -51,6 +51,7 @@
     <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\IMapper.cs" />
     <Compile Include="Common\IScope.cs" />
+    <Compile Include="Domain\Cqrs\Commands\UpdateEntityCommand.cs" />
     <Compile Include="Messaging\Async\CollectionBroker.cs" />
     <Compile Include="Messaging\IBroker.cs" />
     <Compile Include="Messaging\IPublisher.cs" />

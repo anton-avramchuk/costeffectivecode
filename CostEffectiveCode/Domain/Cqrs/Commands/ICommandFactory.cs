@@ -15,6 +15,9 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
         CreateEntityCommand<T> GetCreateCommand<T>()
             where T : class, IEntity;
 
+        UpdateEntityCommand<T> GetUpdateCommand<T>()
+            where T : class, IEntity;
+
         DeleteEntityCommand<T> GetDeleteCommand<T>()
             where T : class, IEntity;
     }

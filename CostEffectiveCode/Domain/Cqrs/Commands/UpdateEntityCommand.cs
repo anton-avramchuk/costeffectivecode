@@ -6,21 +6,21 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain.Cqrs.Commands
 {
-    public class CreateEntityCommand<T> : UnitOfWorkScopeCommand<T>
+    public class UpdateEntityCommand<T> : UnitOfWorkScopeCommand<T>
         where T : class, IEntity
     {
         public override void Execute(T context)
         {
-            if (context.GetId() != null)
+            if (context.GetId() == null)
             {
-                throw new ArgumentException("Given entity has Id specified. Such entities are not supported", nameof(context));
+                throw new ArgumentException("Given entity has no Id specified - so it cannot be updated", nameof(context));
             }
 
             UnitOfWorkScope.Instance.Save(context);
             UnitOfWorkScope.Instance.Commit();
         }
 
-        public CreateEntityCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScope)
+        public UpdateEntityCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScope)
             : base(unitOfWorkScope)
         {
         }
