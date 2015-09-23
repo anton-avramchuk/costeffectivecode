@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "CostEffectiveCode.BackOffice.AspNet5.Sample"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-CostEffectiveCode.BackOffice.AspNet5.Sample-79fa362a-ee40-49bc-a279-23f8c54ea2b4;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
