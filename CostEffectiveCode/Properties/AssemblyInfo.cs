@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CostEffectiveCode")]
 [assembly: AssemblyDescription("General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CostEffectiveCode")]
+[assembly: AssemblyCompany("HighTech.today")]
 [assembly: AssemblyProduct("CostEffectiveCode")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

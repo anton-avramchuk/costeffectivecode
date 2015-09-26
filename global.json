@@ -1,7 +1,10 @@
 {
     "sdk": {
         "version": "1.0.0-beta5",
-        "runtime": "clr",
+        "runtime": "coreclr",
         "architecture": "x64"
-    }
+    },
+    "projects": [
+        "wrap"
+    ]
 }

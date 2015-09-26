@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CostEffectiveCode.EntityFramework")]
 [assembly: AssemblyDescription("CostEffectiveCode + EntityFramework integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CostEffectiveCode")]
+[assembly: AssemblyCompany("HighTech.today")]
 [assembly: AssemblyProduct("CostEffectiveCode.EntityFramework")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

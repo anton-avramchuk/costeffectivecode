@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CostEffectiveCode.Akka")]
 [assembly: AssemblyDescription("CostEffectiveCode + Akka.net integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CostEffectiveSoft")]
+[assembly: AssemblyCompany("HighTech.today")]
 [assembly: AssemblyProduct("CostEffectiveCode.Akka")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
