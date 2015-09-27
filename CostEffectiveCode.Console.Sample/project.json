@@ -1,27 +1,27 @@
-{
-    "version": "1.0.0-*",
-    "description": "CostEffectiveCode.Console.Sample Console Application",
-    "authors": [ "HighTech.today" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
+﻿{
+  "version": "1.0.0-*",
+  "description": "CostEffectiveCode.Console.Sample Console Application",
+  "authors": [ "HighTech.today" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
 
-    "dependencies": {
-    },
+  "dependencies": {
+  },
 
-    "commands": {
-        "CostEffectiveCode.Console.Sample": "CostEffectiveCode.Console.Sample"
-    },
+  "commands": {
+    "CostEffectiveCode.Console.Sample": "CostEffectiveCode.Console.Sample"
+  },
 
-    "frameworks": {
-        "dnxcore50": {
-            "dependencies": {
-                "System.Collections": "4.0.10-beta-23019",
-                "System.Console": "4.0.0-beta-23019",
-                "System.Linq": "4.0.0-beta-23019",
-                "System.Threading": "4.0.10-beta-23019",
-                "Microsoft.CSharp": "4.0.0-beta-23019"
-            }
-        }
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Collections": "4.0.10-beta-23019",
+        "System.Console": "4.0.0-beta-23019",
+        "System.Linq": "4.0.0-beta-23019",
+        "System.Threading": "4.0.10-beta-23019",
+        "Microsoft.CSharp": "4.0.0-beta-23019"
+      }
     }
+  }
 }

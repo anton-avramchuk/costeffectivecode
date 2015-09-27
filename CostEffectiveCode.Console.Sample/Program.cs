@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CostEffectiveCode.Console.Sample
+﻿namespace CostEffectiveCode.Console.Sample
 {
     public class Program
     {
