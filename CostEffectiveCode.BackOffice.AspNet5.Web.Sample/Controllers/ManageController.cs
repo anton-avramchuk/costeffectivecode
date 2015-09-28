@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-using System.Security.Principal;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
-using CostEffectiveCode.BackOffice.AspNet5.Web.Sample;
 using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Models;
 using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Services;
+using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.ViewModels.Manage;
 
 namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Controllers
 {
