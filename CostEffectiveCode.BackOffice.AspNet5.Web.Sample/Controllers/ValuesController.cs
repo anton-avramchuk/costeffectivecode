@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.WebApi.Sample.Controllers
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
