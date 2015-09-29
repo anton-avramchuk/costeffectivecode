@@ -1,60 +1,55 @@
 ﻿using System;
-
+using CostEffectiveCode.Common;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
-using Microsoft.Owin;
-using Microsoft.AspNet.Identity;
 
-namespace CostEffectiveCode.EntityFramework.Domain
+namespace CostEffectiveCode.EntityFramework
 {
     [UsedImplicitly]
     public class CommandQueryFactory : ICommandFactory, IQueryFactory
     {
-        /// <summary>
-        /// Used for DI container purposes at the moment
-        /// </summary>
-        private readonly OwinContext _context;
+        private readonly IDiContainer _container;
 
         #region ICommandFactory Implementation
 
-        public CommandQueryFactory([NotNull] OwinContext context)
+        public CommandQueryFactory([NotNull] IDiContainer container)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            _context = context;
+            if (container == null) throw new ArgumentNullException(nameof(container));
+            _container = container;
         }
 
 
         public TCommand GetCommand<TEntity, TCommand>() where TCommand : ICommand<TEntity>
         {
-            return _context.Get<TCommand>().CheckNotNull();
+            return _container.Resolve<TCommand>().CheckNotNull();
         }
 
         public T GetCommand<T>() where T : ICommand
         {
-            return _context.Get<T>().CheckNotNull();
+            return _container.Resolve<T>().CheckNotNull();
         }
 
         public CreateEntityCommand<T> GetCreateCommand<T>() where T : class, IEntity
         {
-            var createEntityCommand = _context.Get<CreateEntityCommand<T>>();
+            var createEntityCommand = _container.Resolve<CreateEntityCommand<T>>();
 
             return createEntityCommand.CheckNotNull();
         }
 
         public UpdateEntityCommand<T> GetUpdateCommand<T>() where T : class, IEntity
         {
-            var updateEntityCommand = _context.Get<UpdateEntityCommand<T>>();
+            var updateEntityCommand = _container.Resolve<UpdateEntityCommand<T>>();
 
             return updateEntityCommand.CheckNotNull();
         }
 
         public DeleteEntityCommand<T> GetDeleteCommand<T>() where T : class, IEntity
         {
-            return _context.Get<DeleteEntityCommand<T>>().CheckNotNull();
+            return _container.Resolve<DeleteEntityCommand<T>>().CheckNotNull();
         }
 
         #endregion
@@ -64,7 +59,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
         public IQuery<TEntity, IExpressionSpecification<TEntity>> GetQuery<TEntity>()
             where TEntity : class, IEntity
         {
-            return _context.Get<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
+            return _container.Resolve<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
                 .CheckNotNull();
         }
 
@@ -72,7 +67,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             where TEntity : class, IEntity
             where TSpecification : ISpecification<TEntity>
         {
-            return _context.Get<IQuery<TEntity, TSpecification>>()
+            return _container.Resolve<IQuery<TEntity, TSpecification>>()
                 .CheckNotNull();
         }
 
@@ -81,7 +76,7 @@ namespace CostEffectiveCode.EntityFramework.Domain
             where TSpecification : ISpecification<TEntity>
             where TQuery : IQuery<TEntity, TSpecification>
         {
-            return _context.Get<TQuery>()
+            return _container.Resolve<TQuery>()
                 .CheckNotNull();
         }
 

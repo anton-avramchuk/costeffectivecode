@@ -161,49 +161,6 @@
           "lib/net20/JetBrains.Annotations.dll": {}
         }
       },
-      "Microsoft.AspNet.Authentication/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection": "1.0.0-beta7",
-          "Microsoft.AspNet.Http": "1.0.0-beta7",
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta7",
-          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta7",
-          "Microsoft.Framework.OptionsModel": "1.0.0-beta7",
-          "Microsoft.Framework.WebEncoders": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Authentication.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Authentication.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Authentication.Cookies/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Authentication": "1.0.0-beta7",
-          "Microsoft.Framework.WebEncoders": "1.0.0-beta7",
-          "Newtonsoft.Json": "6.0.6"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Authentication.Cookies.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Authentication.Cookies.dll": {}
-        }
-      },
       "Microsoft.AspNet.Authorization/1.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -222,83 +179,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Authorization.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Cryptography.Internal/1.0.0-beta7": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Cryptography.Internal.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Cryptography.Internal.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Cryptography.KeyDerivation/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Cryptography.Internal": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Cryptography.KeyDerivation.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Cryptography.KeyDerivation.dll": {}
-        }
-      },
-      "Microsoft.AspNet.DataProtection/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Cryptography.Internal": "1.0.0-beta7",
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta7",
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta7",
-          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta7",
-          "Microsoft.Framework.OptionsModel": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "System.IO",
-          "System.Security",
-          "System.Xml",
-          "System.Xml.Linq"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.DataProtection.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.DataProtection.dll": {}
-        }
-      },
-      "Microsoft.AspNet.DataProtection.Abstractions/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.DataProtection.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.DataProtection.Abstractions.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Abstractions/1.0.0-beta7": {
@@ -479,50 +359,6 @@
           "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
         }
       },
-      "Microsoft.AspNet.Identity/3.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta7",
-          "Microsoft.AspNet.Cryptography.KeyDerivation": "1.0.0-beta7",
-          "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Identity.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Identity.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Identity.Core/2.2.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Identity.Owin/2.2.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Identity.Core": "2.2.1",
-          "Microsoft.Owin.Security": "2.1.0",
-          "Microsoft.Owin.Security.Cookies": "2.1.0",
-          "Microsoft.Owin.Security.OAuth": "2.1.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
-        }
-      },
       "Microsoft.AspNet.Mvc.Abstractions/6.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -618,47 +454,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Client/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.4"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Core/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Client": "5.2.3"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Owin/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Core": "[5.2.3, 5.3.0)",
-          "Microsoft.Owin": "2.0.2",
-          "Owin": "1.0"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.Owin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.Owin.dll": {}
         }
       },
       "Microsoft.AspNet.WebUtilities/1.0.0-beta7": {
@@ -1100,26 +895,6 @@
           "lib/dnx451/Microsoft.Framework.OptionsModel.dll": {}
         }
       },
-      "Microsoft.Framework.WebEncoders/1.0.0-beta7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta7",
-          "Microsoft.Framework.OptionsModel": "1.0.0-beta7",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta7"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.WebEncoders.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.WebEncoders.dll": {}
-        }
-      },
       "Microsoft.Framework.WebEncoders.Core/1.0.0-beta7": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1150,60 +925,6 @@
           "lib/dnx451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Microsoft.Owin/2.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Owin": "1.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.dll": {}
-        }
-      },
-      "Microsoft.Owin.Security/2.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Owin": "2.1.0",
-          "Owin": "1.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
-        }
-      },
-      "Microsoft.Owin.Security.Cookies/2.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Owin": "2.1.0",
-          "Microsoft.Owin.Security": "2.1.0",
-          "Owin": "1.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
-        }
-      },
-      "Microsoft.Owin.Security.OAuth/2.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Owin": "2.1.0",
-          "Microsoft.Owin.Security": "2.1.0",
-          "Newtonsoft.Json": "4.5.11",
-          "Owin": "1.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        }
-      },
       "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
@@ -1211,15 +932,6 @@
         },
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Owin/1.0": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Owin.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Owin.dll": {}
         }
       },
       "Remotion.Linq/2.0.0-beta-002": {
@@ -1394,36 +1106,6 @@
         "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/JetBrains.Annotations.PCL328.xml"
       ]
     },
-    "Microsoft.AspNet.Authentication/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "Z3UEugE53Kg0rZCEz2wHCEDmHrb9k9OVSzZG5OTSqs8K0fz06wvMoHYvSl/AVSAp6Tw9b7tqvATr9usP7Hpgyg==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Authentication.dll",
-        "lib/dnx451/Microsoft.AspNet.Authentication.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Authentication.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Authentication.xml",
-        "Microsoft.AspNet.Authentication.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.Authentication.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.Authentication.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.Authentication.Cookies/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "ObK6iDhEfaXSWfvu1RUgQUSz6WeNe8dicXOL11E7sP/RsmQv0wxXkueZ22++MMN+dEYjKRDimqtTb5TIaLuO5g==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Authentication.Cookies.dll",
-        "lib/dnx451/Microsoft.AspNet.Authentication.Cookies.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Authentication.Cookies.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Authentication.Cookies.xml",
-        "Microsoft.AspNet.Authentication.Cookies.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.Authentication.Cookies.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.Authentication.Cookies.nuspec",
-        "repo.json"
-      ]
-    },
     "Microsoft.AspNet.Authorization/1.0.0-beta7": {
       "type": "package",
       "serviceable": true,
@@ -1436,74 +1118,6 @@
         "Microsoft.AspNet.Authorization.1.0.0-beta7.nupkg",
         "Microsoft.AspNet.Authorization.1.0.0-beta7.nupkg.sha512",
         "Microsoft.AspNet.Authorization.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.Cryptography.Internal/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "kiQW5KPRXwrkd4O+belMdfH1hGbdqjPA6eFk4V0irg9aGT5eux6R1zK02gW2X+e8bJzgu7ygzFCTztpIvG0GNA==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Cryptography.Internal.dll",
-        "lib/dnx451/Microsoft.AspNet.Cryptography.Internal.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Cryptography.Internal.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Cryptography.Internal.xml",
-        "lib/net451/Microsoft.AspNet.Cryptography.Internal.dll",
-        "lib/net451/Microsoft.AspNet.Cryptography.Internal.xml",
-        "Microsoft.AspNet.Cryptography.Internal.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.Cryptography.Internal.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.Cryptography.Internal.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.Cryptography.KeyDerivation/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "OhbE06XVioG6hMKXbIi5OMMRi1KxFHTepjo4RPRtXZlSn2CS/U/gm1Eoa7sKTIb/vGI0AXkxsB9LuiYIIsnquQ==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Cryptography.KeyDerivation.dll",
-        "lib/dnx451/Microsoft.AspNet.Cryptography.KeyDerivation.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Cryptography.KeyDerivation.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Cryptography.KeyDerivation.xml",
-        "lib/net451/Microsoft.AspNet.Cryptography.KeyDerivation.dll",
-        "lib/net451/Microsoft.AspNet.Cryptography.KeyDerivation.xml",
-        "Microsoft.AspNet.Cryptography.KeyDerivation.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.Cryptography.KeyDerivation.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.Cryptography.KeyDerivation.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.DataProtection/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "5FkEOmP2ge3GywWH6yWqALIj1C5DyEV3O3Axaa0EgxqV52nklcZKHijK8+4FJ0ErE+kIN5DIYBgx7o/+eLKBOg==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.DataProtection.dll",
-        "lib/dnx451/Microsoft.AspNet.DataProtection.xml",
-        "lib/dnxcore50/Microsoft.AspNet.DataProtection.dll",
-        "lib/dnxcore50/Microsoft.AspNet.DataProtection.xml",
-        "lib/net451/Microsoft.AspNet.DataProtection.dll",
-        "lib/net451/Microsoft.AspNet.DataProtection.xml",
-        "Microsoft.AspNet.DataProtection.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.DataProtection.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.DataProtection.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.DataProtection.Abstractions/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "5rrDbGzjV73VssN0bIyalAK4r0OnZyo+n12d1FtiXI/7Le2vBAZGNYdB8jngMS+7aX6sWAEahQ/UP+ANrDoa+g==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.DataProtection.Abstractions.dll",
-        "lib/dnx451/Microsoft.AspNet.DataProtection.Abstractions.xml",
-        "lib/dnxcore50/Microsoft.AspNet.DataProtection.Abstractions.dll",
-        "lib/dnxcore50/Microsoft.AspNet.DataProtection.Abstractions.xml",
-        "lib/net451/Microsoft.AspNet.DataProtection.Abstractions.dll",
-        "lib/net451/Microsoft.AspNet.DataProtection.Abstractions.xml",
-        "Microsoft.AspNet.DataProtection.Abstractions.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.DataProtection.Abstractions.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.DataProtection.Abstractions.nuspec",
         "repo.json"
       ]
     },
@@ -1645,45 +1259,6 @@
         "repo.json"
       ]
     },
-    "Microsoft.AspNet.Identity/3.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "B/dEHKfoT/z32yR2PmlHVJqAWf6VtHkITM+4bC++5gf6S1AdjTvWlugFT5eX7poHAt/Ivk6kHl4sjgEV+ergEA==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Identity.dll",
-        "lib/dnx451/Microsoft.AspNet.Identity.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Identity.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Identity.xml",
-        "Microsoft.AspNet.Identity.3.0.0-beta7.nupkg",
-        "Microsoft.AspNet.Identity.3.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.Identity.nuspec",
-        "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.Identity.Core/2.2.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "jjurNglpmcv0SLBd4Fmar8ZoJ2yqfTf6iuP3p8wVH7Nvanfo8l3qTBzq3qRQz2BQlb6iXJiDWPjcnIImVz512g==",
-      "files": [
-        "lib/net45/Microsoft.AspNet.Identity.Core.dll",
-        "lib/net45/Microsoft.AspNet.Identity.Core.xml",
-        "Microsoft.AspNet.Identity.Core.2.2.1.nupkg",
-        "Microsoft.AspNet.Identity.Core.2.2.1.nupkg.sha512",
-        "Microsoft.AspNet.Identity.Core.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.Identity.Owin/2.2.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "Cz/dqC85+6bgPj9Mt1qGLJ+v8HdTqXTMe1ms4e8pzPXJjDJw3DK7XtimtDtWwiDs63vnIDgy195TByV9wxEwjA==",
-      "files": [
-        "lib/net45/Microsoft.AspNet.Identity.Owin.dll",
-        "lib/net45/Microsoft.AspNet.Identity.Owin.xml",
-        "Microsoft.AspNet.Identity.Owin.2.2.1.nupkg",
-        "Microsoft.AspNet.Identity.Owin.2.2.1.nupkg.sha512",
-        "Microsoft.AspNet.Identity.Owin.nuspec"
-      ]
-    },
     "Microsoft.AspNet.Mvc.Abstractions/6.0.0-beta7": {
       "type": "package",
       "serviceable": true,
@@ -1759,45 +1334,6 @@
         "Microsoft.AspNet.Routing.1.0.0-beta7.nupkg.sha512",
         "Microsoft.AspNet.Routing.nuspec",
         "repo.json"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Client/5.2.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "3kiI8peSXbXHDDrRuo+QaX0iCEVRe0nvn2dBDRw656uPX32UalbBlSIDUDlJxu05eau4tnuhsikiUuugvvoUoQ==",
-      "files": [
-        "lib/net45/System.Net.Http.Formatting.dll",
-        "lib/net45/System.Net.Http.Formatting.xml",
-        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
-        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
-        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg",
-        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg.sha512",
-        "Microsoft.AspNet.WebApi.Client.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Core/5.2.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "o90QYlRV8VKR1S7+EcJw9w8WSyVFLl+IIzN8ILZ+n2t6rsc/KS8kBxRzA7wCFPRUHhebCfLqilBk39phvanx3g==",
-      "files": [
-        "Content/web.config.transform",
-        "lib/net45/System.Web.Http.dll",
-        "lib/net45/System.Web.Http.xml",
-        "Microsoft.AspNet.WebApi.Core.5.2.3.nupkg",
-        "Microsoft.AspNet.WebApi.Core.5.2.3.nupkg.sha512",
-        "Microsoft.AspNet.WebApi.Core.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Owin/5.2.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "eMftC99BNMgnp/PDbfT6OCDW94n1uVBC6bF9Z0HkkC5h1hR4LSsKoy9jvw7aXBi6PN6tuK6uje5UjWvXodbKGA==",
-      "files": [
-        "lib/net45/System.Web.Http.Owin.dll",
-        "lib/net45/System.Web.Http.Owin.xml",
-        "Microsoft.AspNet.WebApi.Owin.5.2.3.nupkg",
-        "Microsoft.AspNet.WebApi.Owin.5.2.3.nupkg.sha512",
-        "Microsoft.AspNet.WebApi.Owin.nuspec"
       ]
     },
     "Microsoft.AspNet.WebUtilities/1.0.0-beta7": {
@@ -2192,23 +1728,6 @@
         "repo.json"
       ]
     },
-    "Microsoft.Framework.WebEncoders/1.0.0-beta7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "ziUq93WCTE1uFJU0/KwrPIKhPl3J16Bcj5p+0lRcH8MKQt65w9Ab5wh4XwA09U7lSdMISOBQwgqkwf70bYZoNw==",
-      "files": [
-        "lib/dnx451/Microsoft.Framework.WebEncoders.dll",
-        "lib/dnx451/Microsoft.Framework.WebEncoders.xml",
-        "lib/dnxcore50/Microsoft.Framework.WebEncoders.dll",
-        "lib/dnxcore50/Microsoft.Framework.WebEncoders.xml",
-        "lib/net45/Microsoft.Framework.WebEncoders.dll",
-        "lib/net45/Microsoft.Framework.WebEncoders.xml",
-        "Microsoft.Framework.WebEncoders.1.0.0-beta7.nupkg",
-        "Microsoft.Framework.WebEncoders.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.Framework.WebEncoders.nuspec",
-        "repo.json"
-      ]
-    },
     "Microsoft.Framework.WebEncoders.Core/1.0.0-beta7": {
       "type": "package",
       "serviceable": true,
@@ -2243,56 +1762,6 @@
         "repo.json"
       ]
     },
-    "Microsoft.Owin/2.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "lk0kK64mlmcmtWX8YOYkZsnZKDoGEzMZhe8e1bcP+FFcgD4f2QfKwvu5Z8Bh8WS0VO7Rgk+DJ0hwW0k+S/UGMg==",
-      "files": [
-        "lib/net40/Microsoft.Owin.dll",
-        "lib/net40/Microsoft.Owin.XML",
-        "lib/net45/Microsoft.Owin.dll",
-        "lib/net45/Microsoft.Owin.XML",
-        "Microsoft.Owin.2.1.0.nupkg",
-        "Microsoft.Owin.2.1.0.nupkg.sha512",
-        "Microsoft.Owin.nuspec"
-      ]
-    },
-    "Microsoft.Owin.Security/2.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "4n1V0p+O6W1L0xHUM8Cjp2Y+MmmUkiCZv6PvRNIDCJD9zlerBJa2HECo9lUiWC+KuasQJ3QxB1FmipNBxdXXIQ==",
-      "files": [
-        "lib/net45/Microsoft.Owin.Security.dll",
-        "lib/net45/Microsoft.Owin.Security.XML",
-        "Microsoft.Owin.Security.2.1.0.nupkg",
-        "Microsoft.Owin.Security.2.1.0.nupkg.sha512",
-        "Microsoft.Owin.Security.nuspec"
-      ]
-    },
-    "Microsoft.Owin.Security.Cookies/2.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "P+3cjwBpUDGF+5s+oMfyySG0qvLqb71M+1q9jGSsaF0qCg14ix0qF5pEV6IqhGUEgV40E/1K4hDcWjS+essVoQ==",
-      "files": [
-        "lib/net45/Microsoft.Owin.Security.Cookies.dll",
-        "lib/net45/Microsoft.Owin.Security.Cookies.xml",
-        "Microsoft.Owin.Security.Cookies.2.1.0.nupkg",
-        "Microsoft.Owin.Security.Cookies.2.1.0.nupkg.sha512",
-        "Microsoft.Owin.Security.Cookies.nuspec"
-      ]
-    },
-    "Microsoft.Owin.Security.OAuth/2.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "jR/LoeV02Cne9IV6fG4L9KR+uofPLokq6sxGy4bBDxLAAmZ35y0H/NiV6riqXSee6PypNAcJzTytJpYb0xK6Hw==",
-      "files": [
-        "lib/net45/Microsoft.Owin.Security.OAuth.dll",
-        "lib/net45/Microsoft.Owin.Security.OAuth.XML",
-        "Microsoft.Owin.Security.OAuth.2.1.0.nupkg",
-        "Microsoft.Owin.Security.OAuth.2.1.0.nupkg.sha512",
-        "Microsoft.Owin.Security.OAuth.nuspec"
-      ]
-    },
     "Newtonsoft.Json/6.0.6": {
       "type": "package",
       "sha512": "w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
@@ -2315,16 +1784,6 @@
         "Newtonsoft.Json.6.0.6.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
-      ]
-    },
-    "Owin/1.0": {
-      "type": "package",
-      "sha512": "OseTFniKmyp76mEzOBwIKGBRS5eMoYNkMKaMXOpxx9jv88+b6mh1rSaw43vjBOItNhaLFG3d0a20PfHyibH5sw==",
-      "files": [
-        "lib/net40/Owin.dll",
-        "Owin.1.0.0.nupkg",
-        "Owin.1.0.0.nupkg.sha512",
-        "Owin.nuspec"
       ]
     },
     "Remotion.Linq/2.0.0-beta-002": {
@@ -2388,11 +1847,7 @@
       "CostEffectiveCode >= 2.0.0-*",
       "JetBrains.Annotations >= 9.2.0",
       "EntityFramework.Commands >= 7.0.0-beta7",
-      "EntityFramework.SqlServer >= 7.0.0-beta7",
-      "Microsoft.AspNet.WebApi.Owin >= 5.2.3",
-      "Microsoft.AspNet.Identity >= 3.0.0-beta7",
-      "Microsoft.AspNet.Identity.Core >= 2.2.1",
-      "Microsoft.AspNet.Identity.Owin >= 2.2.1"
+      "EntityFramework.SqlServer >= 7.0.0-beta7"
     ]
   }
 }

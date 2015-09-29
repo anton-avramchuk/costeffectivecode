@@ -11,7 +11,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 using Microsoft.Data.Entity;
 
-namespace CostEffectiveCode.EntityFramework.Domain
+namespace CostEffectiveCode.EntityFramework
 {
     public class ExpressionQuery<TEntity> : IQuery<TEntity, IExpressionSpecification<TEntity>>
         where TEntity : class, IEntity

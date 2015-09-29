@@ -4,7 +4,7 @@ using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
-namespace CostEffectiveCode.EntityFramework.Domain
+namespace CostEffectiveCode.EntityFramework
 {
     public class ExpressionQueryFactory : IQueryFactory
     {
