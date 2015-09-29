@@ -18,6 +18,7 @@
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta7",
@@ -31,6 +32,7 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Hosting --config hosting.ini",
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5004",
     "ef": "EntityFramework.Commands"
   },
 
