@@ -2,6 +2,29 @@
   "locked": false,
   "version": 1,
   "targets": {
+    ".NETFramework,Version=v4.5.1": {
+      "JetBrains.Annotations/9.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net20/JetBrains.Annotations.dll": {}
+        },
+        "runtime": {
+          "lib/net20/JetBrains.Annotations.dll": {}
+        }
+      },
+      "System.Configuration.Abstractions/2.0.2.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net45/System.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Configuration.Abstractions.dll": {}
+        }
+      }
+    },
     "DNX,Version=v4.5.1": {
       "JetBrains.Annotations/9.2.0": {
         "type": "package",
@@ -831,11 +854,15 @@
     }
   },
   "projectFileDependencyGroups": {
-    "": [],
-    "DNX,Version=v4.5.1": [
+    "": [
       "JetBrains.Annotations >= 9.2.0",
-      "Microsoft.AspNet.Mvc.DataAnnotations >= 6.0.0-beta7",
       "System.Configuration.Abstractions >= 2.0.2.3"
+    ],
+    ".NETFramework,Version=v4.5.1": [
+      "fx/System.ComponentModel.DataAnnotations >= 4.0.0.0"
+    ],
+    "DNX,Version=v4.5.1": [
+      "Microsoft.AspNet.Mvc.DataAnnotations >= 6.0.0-beta7"
     ]
   }
 }

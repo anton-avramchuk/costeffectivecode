@@ -5,13 +5,19 @@
     "tags": [ "" ],
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
     "licenseUrl": "",
-
+    "dependencies": {
+        "JetBrains.Annotations": "9.2.0",
+        "System.Configuration.Abstractions": "2.0.2.3"
+    },
     "frameworks": {
+        "net451": {
+            "frameworkAssemblies": {
+                "System.ComponentModel.DataAnnotations": "4.0.0.0"
+            }
+        },
         "dnx451": {
             "dependencies": {
-                "JetBrains.Annotations": "9.2.0",
-                "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-beta7",
-                "System.Configuration.Abstractions": "2.0.2.3"
+                "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-beta7"
             }
         }
     }
