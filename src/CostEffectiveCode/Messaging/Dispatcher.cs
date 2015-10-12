@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using CostEffectiveCode.Common;
 using JetBrains.Annotations;
 
@@ -35,39 +36,49 @@ namespace CostEffectiveCode.Messaging
 
         #region Internal Helpers
 
-        internal class Converter<TPublisherEventArgs> : IRepublisher
+        internal class Converter<TEventArgs, TPublisherEventArgs> : IRepublisher
+            where TEventArgs : T
         {
-            private readonly Func<T, TPublisherEventArgs> _func;
+            private readonly Func<TEventArgs, TPublisherEventArgs> _func;
 
-            private readonly Func<T, IPublisher<TPublisherEventArgs>> _outterPublisherFunc;
+            private readonly Func<TEventArgs, IPublisher<TPublisherEventArgs>> _outterPublisherFunc;
 
             private readonly IPublisher<TPublisherEventArgs> _outterPublisher;
 
-            internal Converter(Func<T, TPublisherEventArgs> func,
-                Func<T, IPublisher<TPublisherEventArgs>> outterPublisherFunc)
+            internal Converter(
+                Func<TEventArgs, TPublisherEventArgs> func,
+                Func<TEventArgs, IPublisher<TPublisherEventArgs>> outterPublisherFunc)
             {
                 _func = func;
                 _outterPublisherFunc = outterPublisherFunc;
             }
 
-            
-            internal Converter(Func<T, TPublisherEventArgs> func, IPublisher<TPublisherEventArgs> outterPublisher)
+
+            internal Converter(
+                Func<TEventArgs, TPublisherEventArgs> func,
+                IPublisher<TPublisherEventArgs> outterPublisher)
             {
                 _func = func;
                 _outterPublisher = outterPublisher;
                 _outterPublisherFunc = GetPublisher;
             }
 
-            private IPublisher<TPublisherEventArgs> GetPublisher(T ea)
+            private IPublisher<TPublisherEventArgs> GetPublisher(TEventArgs ea)
             {
                 return _outterPublisher;
             }
 
             public void Republish(T domainEventArgs)
             {
-                _outterPublisherFunc
-                    .Invoke(domainEventArgs)
-                    .Publish(_func.Invoke(domainEventArgs));
+                // that's ok
+                var args = (TEventArgs) domainEventArgs;
+                var publisher = _outterPublisherFunc.Invoke(args);
+                if (publisher == null)
+                {
+                    throw new ConfigurationErrorsException($"Publisher for args \"{domainEventArgs}\" is not found");    
+                }
+
+                publisher.Publish(_func.Invoke(args));
             }
         }
 
@@ -84,14 +95,15 @@ namespace CostEffectiveCode.Messaging
         }
 
         public Dispatcher([NotNull] IMapper mapper)
-            :this()
+            : this()
         {
             Mapper = mapper;
         }
 
         #region Private
 
-        private TPublisherEventArgs UseMapper<TPublisherEventArgs>(T ea)
+        private TPublisherEventArgs UseMapper<TEventArgs, TPublisherEventArgs>(TEventArgs ea)
+            where TEventArgs : T
         {
             CheckMapper();
             return _mapper.Map<TPublisherEventArgs>(ea);
@@ -105,9 +117,10 @@ namespace CostEffectiveCode.Messaging
             }
         }
 
-        protected void InitIndex<TPublisherEventArgs>()
+        protected void InitIndex<TEventArgs>()
+            where TEventArgs : T
         {
-            var key = typeof(TPublisherEventArgs);
+            var key = typeof (TEventArgs);
             if (!Publishers.ContainsKey(key))
             {
                 Publishers[key] = new List<IRepublisher>();
@@ -118,51 +131,36 @@ namespace CostEffectiveCode.Messaging
 
         #region Mappings
 
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs, TPublisher>(
-            Func<T, TPublisherEventArgs> mapFunc, TPublisher publisher)
-            where TPublisher : IPublisher<TPublisherEventArgs>
+        public Dispatcher<T> CreateMapping<TEventArgs, TPublisherEventArgs>(
+            [NotNull]Func<TEventArgs, TPublisherEventArgs> map,
+            [NotNull]Func<TEventArgs, IPublisher<TPublisherEventArgs>> selector)
+            where TEventArgs : T
         {
-            InitIndex<T>();
-            Publishers[typeof(T)]
-                .Add(new Converter<TPublisherEventArgs>(mapFunc, publisher));
+            InitIndex<TEventArgs>();
+            Publishers[typeof(TEventArgs)].Add(new Converter<TEventArgs, TPublisherEventArgs>(map, selector));
             return this;
         }
 
-
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs>(
-            Func<T, TPublisherEventArgs> mapFunc, Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
+        public Dispatcher<T> CreateMapping<TEventArgs, TPublisherEventArgs>(
+            [NotNull] Func<TEventArgs, TPublisherEventArgs> map,
+            [NotNull] Func<TEventArgs, IPublisher<TPublisherEventArgs>> to,
+            [CanBeNull] params Func<TEventArgs, bool>[] patterns)
+            where TEventArgs : T
         {
-            InitIndex<T>();
-            Publishers[typeof(T)]
-                .Add(new Converter<TPublisherEventArgs>(mapFunc, publisherSelector));
-            return this;
+            return CreateMapping(
+                map,
+                arg => patterns == null || !patterns.Any() || patterns.All(p => p.Invoke(arg))
+                    ? to.Invoke(arg)
+                    : null);
         }
 
         public Dispatcher<T> CreateMapping<TPublisherEventArgs>(
-            Func<T, IPublisher<TPublisherEventArgs>> publisherSelector)
+            [NotNull] Func<T, TPublisherEventArgs> map,
+            [NotNull] Func<T, IPublisher<TPublisherEventArgs>> to,
+            [CanBeNull] params Func<T, bool>[] patterns)
         {
-            return CreateMapping(UseMapper<TPublisherEventArgs>, publisherSelector);
-        }
-
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs, TPublisher>(TPublisher publisher)
-            where TPublisher : IPublisher<TPublisherEventArgs>
-        {
-            CheckMapper();
-            return CreateMapping(UseMapper<TPublisherEventArgs>, publisher);
-        }
-
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs, TPublisher>(
-            Func<T, TPublisherEventArgs> mapFunc)
-            where TPublisher : IPublisher<TPublisherEventArgs>, new()
-        {
-            return CreateMapping(mapFunc, new TPublisher());
-        }
-
-        public Dispatcher<T> CreateMapping<TPublisherEventArgs, TPublisher>()
-            where TPublisher : IPublisher<TPublisherEventArgs>, new()
-        {
-            return CreateMapping<TPublisherEventArgs, TPublisher>(new TPublisher());
-        }
+            return CreateMapping<T, TPublisherEventArgs>(map, to, patterns);
+;        }
 
         public void ClearMapping()
         {
@@ -174,10 +172,11 @@ namespace CostEffectiveCode.Messaging
         public virtual void Publish([NotNull] T message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
+
             var key = message.GetType();
             if (!Publishers.ContainsKey(key))
             {
-                throw new ConfigurationErrorsException();
+                throw new ConfigurationErrorsException($"Key of type \"{key}\" is not found in mapping");
             }
 
             foreach (var p in Publishers[key])
