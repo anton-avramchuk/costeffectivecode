@@ -1,0 +1,3 @@
+[submodule "CostEffectiveCode.BackOffice"]
+	path = CostEffectiveCode.BackOffice
+	url = git@github.com:hightechtoday/costeffectivecode-backoffice.git
