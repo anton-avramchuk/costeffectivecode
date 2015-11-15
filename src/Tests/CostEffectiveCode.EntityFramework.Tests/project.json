@@ -1,22 +1,21 @@
 ﻿{
-    "version": "2.0.0-*",
-    "description": "CostEffectiveCode.EntityFramework.Tests Class Library",
-    "authors": [ "HighTech.today" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
-
-    "frameworks": {
-        "dnx451": {
-            "dependencies": {
-                "CostEffectiveCode": "2.0.0-*",
-                "CostEffectiveCode.EntityFramework": "2.0.0-*",
-                "Jetbrains.Annotations" :  "9.2.0",
-                "NUnit": "2.6.4",
-                "Moq": "4.2.1507.118",
-                "EntityFramework": "6.1.3",
-                "Newtonsoft.Json": "7.0.1"
-            }
-        }
+  "version": "2.0.0-*",
+  "description": "CostEffectiveCode.EntityFramework.Tests Class Library",
+  "authors": [ "HighTech.today" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "dependencies": {
+    "CostEffectiveCode": "2.0.0-*",
+    "CostEffectiveCode.EntityFramework": "2.0.0-*",
+    "Jetbrains.Annotations": "9.2.0",
+    "NUnit": "2.6.4",
+    "Moq": "4.2.1507.118",
+    "EntityFramework": "6.1.3",
+    "Newtonsoft.Json": "7.0.1"
+  },
+  "frameworks": {
+    "net451": {
     }
+  }
 }

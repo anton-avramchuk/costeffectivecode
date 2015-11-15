@@ -79,3 +79,4 @@ node_modules
 *.min.js
 *.min.css
 project.lock.json
+*.DotSettings.user

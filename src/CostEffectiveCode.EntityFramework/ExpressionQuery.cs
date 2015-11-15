@@ -9,20 +9,25 @@ using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
+#if DNX451
 using Microsoft.Data.Entity;
+#endif
+#if NET451
+using System.Data.Entity;
+#endif
 
 namespace CostEffectiveCode.EntityFramework
 {
     public class ExpressionQuery<TEntity> : IQuery<TEntity, IExpressionSpecification<TEntity>>
         where TEntity : class, IEntity
     {
-        #region Vars
+#region Vars
 
         private readonly ILinqProvider _linqProvider;
 
-        #endregion
+#endregion
 
-        #region Constructor
+#region Constructor
 
         public ExpressionQuery(
             [NotNull] ILinqProvider linqProvider)
@@ -32,7 +37,7 @@ namespace CostEffectiveCode.EntityFramework
             _linqProvider = linqProvider;
         }
 
-        #endregion
+#endregion
 
         private IQueryable<TEntity> _queryable;
 
