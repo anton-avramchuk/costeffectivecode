@@ -37,7 +37,6 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "CostEffectiveCode.BackOffice": "1.0.0-*"
       }
     },
     "dnxcore50": { }
