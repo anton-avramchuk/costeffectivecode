@@ -1,4 +1,4 @@
-﻿{
+{
     "webroot": "wwwroot",
     "userSecretsId": "aspnet5-CostEffectiveCode.BackOffice.AspNet5.Web.Sample-03f5ba97-2ad6-4038-9db2-945aa04e2fc2",
     "version": "1.0.0-*",
@@ -16,9 +16,8 @@
         "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta7",
         "Microsoft.AspNet.Mvc": "6.0.0-beta7",
         "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
+        "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
         "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-        "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
         "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
         "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta7",
         "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta7",
@@ -31,7 +30,7 @@
     },
 
     "commands": {
-        "web": "Microsoft.AspNet.Hosting --config hosting.ini",
+        "web": "Microsoft.AspNet.Server.Kestrel",
         "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5004",
         "ef": "EntityFramework.Commands"
     },
