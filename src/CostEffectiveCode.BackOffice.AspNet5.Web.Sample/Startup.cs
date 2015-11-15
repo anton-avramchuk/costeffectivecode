@@ -77,20 +77,20 @@ namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample
             loggerFactory.AddDebug();
 
             // Configure the HTTP request pipeline.
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
 
             // Add the following to the request pipeline only in development environment.
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }
-            else
-            {
-                // Add Error handling middleware which catches all application specific errors and
-                // sends the request to the following path or controller action.
-                app.UseExceptionHandler("/Home/Error");
-            }
+            //else
+            //{
+            //    // Add Error handling middleware which catches all application specific errors and
+            //    // sends the request to the following path or controller action.
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
 
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
