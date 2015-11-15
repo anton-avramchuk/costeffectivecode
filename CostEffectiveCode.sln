@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F64C539C
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.EntityFramework.Tests", "src\Tests\CostEffectiveCode.EntityFramework.Tests\CostEffectiveCode.EntityFramework.Tests.xproj", "{893B63AE-3C5B-479C-B53A-C8B179050D09}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.Backoffice.AspNet5.Web.Sample", "CostEffectiveCode.Backoffice.AspNet5.Web.Sample\CostEffectiveCode.Backoffice.AspNet5.Web.Sample.xproj", "{CA388A95-ED59-43CC-9575-D8A30062FA59}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.Backoffice.AspNet5.Web.Sample", "src\CostEffectiveCode.Backoffice.AspNet5.Web.Sample\CostEffectiveCode.Backoffice.AspNet5.Web.Sample.xproj", "{CA388A95-ED59-43CC-9575-D8A30062FA59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

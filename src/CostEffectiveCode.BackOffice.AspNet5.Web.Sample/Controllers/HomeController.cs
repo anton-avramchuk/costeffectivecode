@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 
-namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Controllers
+namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Controllers
 {
     public class HomeController : Controller
     {

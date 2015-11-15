@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
-namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Models
+namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

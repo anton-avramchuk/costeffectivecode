@@ -6,11 +6,11 @@ using System.Security.Claims;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
-using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Models;
-using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Services;
-using CostEffectiveCode.BackOffice.AspNet5.Web.Sample.ViewModels.Manage;
+using CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Models;
+using CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Services;
+using CostEffectiveCode.Backoffice.AspNet5.Web.Sample.ViewModels.Manage;
 
-namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Controllers
+namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Controllers
 {
     [Authorize]
     public class ManageController : Controller
@@ -353,7 +353,7 @@ namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Controllers
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await _userManager.FindByIdAsync(Context.User.GetUserId());
+            return await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
         }
 
         private IActionResult RedirectToLocal(string returnUrl)

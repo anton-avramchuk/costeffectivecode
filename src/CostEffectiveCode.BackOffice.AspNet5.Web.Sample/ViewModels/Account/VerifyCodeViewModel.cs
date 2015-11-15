@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.ViewModels.Account
+namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.ViewModels.Account
 {
     public class VerifyCodeViewModel
     {
