@@ -11,10 +11,11 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
     {
         public override void Execute(T context)
         {
-            if (context.GetId() != null)
-            {
-                throw new ArgumentException("Given entity has Id specified. Such entities are not supported", nameof(context));
-            }
+            // TODO: fix later
+            //if (context.GetId() != null)
+            //{
+            //    throw new ArgumentException("Given entity has Id specified. Such entities are not supported", nameof(context));
+            //}
 
             UnitOfWorkScope.Instance.Save(context);
             UnitOfWorkScope.Instance.Commit();
