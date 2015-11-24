@@ -23,7 +23,9 @@ namespace CostEffectiveCode.EntityFramework
         }
 
 
-        public TCommand GetCommand<TEntity, TCommand>() where TCommand : ICommand<TEntity>
+        public TCommand GetCommand<TEntity, TCommand>()
+            where TCommand : ICommand<TEntity>
+            where TEntity : IEntity
         {
             return _container.Resolve<TCommand>().CheckNotNull();
         }
@@ -40,11 +42,9 @@ namespace CostEffectiveCode.EntityFramework
             return createEntityCommand.CheckNotNull();
         }
 
-        public UpdateEntityCommand<T> GetUpdateCommand<T>() where T : class, IEntity
+        public CommitCommand GetCommitCommand()
         {
-            var updateEntityCommand = _container.Resolve<UpdateEntityCommand<T>>();
-
-            return updateEntityCommand.CheckNotNull();
+            return _container.Resolve<CommitCommand>().CheckNotNull();
         }
 
         public DeleteEntityCommand<T> GetDeleteCommand<T>() where T : class, IEntity

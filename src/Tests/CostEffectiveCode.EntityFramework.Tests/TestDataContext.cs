@@ -42,7 +42,7 @@ namespace CostEffectiveCode.EntityFramework.Tests
             // pass-through
         }
 
-        public void Save<TEntity>(TEntity entity)
+        public void Add<TEntity>(TEntity entity)
             where TEntity : class, IEntity
         {
             (TestStorage[typeof(TEntity)] as List<TEntity>)

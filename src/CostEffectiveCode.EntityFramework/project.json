@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.0.0-*",
+  "version": "2.0.2-*",
   "description": "Library for integration of CostEffectiveCode general-purpose framework with EntityFramework",
   "authors": [ "HighTech.today" ],
   "tags": [ "" ],

@@ -7,13 +7,13 @@ namespace CostEffectiveCode.Domain.Ddd.UnitOfWork
     [PublicAPI]
     public interface IUnitOfWork: IDisposable
     {
-        void Commit();
-
-        void Save<TEntity>(TEntity entity)
+        void Add<TEntity>(TEntity entity)
             where TEntity : class, IEntity;
 
         void Delete<TEntity>(TEntity entity)
             where TEntity : class, IEntity;
+
+        void Commit();
     }
 
 }

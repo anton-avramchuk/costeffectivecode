@@ -11,13 +11,9 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
     {
         public override void Execute(T context)
         {
-            // TODO: fix later
-            //if (context.GetId() != null)
-            //{
-            //    throw new ArgumentException("Given entity has Id specified. Such entities are not supported", nameof(context));
-            //}
+            // we don't check for Id, because sometimes we have to create entities with predefined Id value
 
-            UnitOfWorkScope.Instance.Save(context);
+            UnitOfWorkScope.Instance.Add(context);
             UnitOfWorkScope.Instance.Commit();
         }
 
