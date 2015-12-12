@@ -12,7 +12,7 @@ namespace CostEffectiveCode.Akka.Actors
 
         public CommandActor([NotNull] ICommand<T> command)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (command == null) throw new ArgumentNullException(nameof(command));
             _command = command;
 
             Receive<T>(message => _command.Execute(message));

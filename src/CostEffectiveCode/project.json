@@ -16,8 +16,8 @@
       }
     },
     "dnx451": {
-      "dependencies": {
-        "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-rc1-final"
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
       }
     }
   }

@@ -7,9 +7,9 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
-using CostEffectiveCode.SampleProject.Web.Models;
 using CostEffectiveCode.SampleProject.Web.Services;
 using CostEffectiveCode.SampleProject.Web.ViewModels.Manage;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 
 namespace CostEffectiveCode.SampleProject.Web.Controllers
 {

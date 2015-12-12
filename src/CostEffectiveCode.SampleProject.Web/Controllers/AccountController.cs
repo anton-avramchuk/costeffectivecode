@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
-using CostEffectiveCode.SampleProject.Web.Models;
 using CostEffectiveCode.SampleProject.Web.Services;
 using CostEffectiveCode.SampleProject.Web.ViewModels.Account;
 

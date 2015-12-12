@@ -6,6 +6,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.EntityFramework
 {
+    [Obsolete("Was used as a naive implementation in tests", true)]
     public class ExpressionQueryFactory : IQueryFactory
     {
         private readonly ILinqProvider _linqProvider;

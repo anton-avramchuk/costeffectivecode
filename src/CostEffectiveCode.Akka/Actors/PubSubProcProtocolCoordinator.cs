@@ -1,7 +1,7 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 using CostEffectiveCode.Akka.Helpers;
-using CostEffectiveCode.Messaging.Process;
+using CostEffectiveCode.Processes.EventArgs;
+using CostEffectiveCode.Processes.State;
 
 namespace CostEffectiveCode.Akka.Actors
 {

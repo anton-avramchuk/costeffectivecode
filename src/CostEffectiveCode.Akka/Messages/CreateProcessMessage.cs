@@ -1,7 +1,5 @@
 ﻿using System;
-using CostEffectiveCode.Akka.Actors;
 using JetBrains.Annotations;
-// ReSharper disable UseNameofExpression
 namespace CostEffectiveCode.Akka.Messages
 {
     public class CreateProcessMessage
@@ -9,7 +7,7 @@ namespace CostEffectiveCode.Akka.Messages
         public CreateProcessMessage([NotNull] Type actorType, [CanBeNull] Type processCoordinatorType = null)
         {
             ProcessCoordinatorType = processCoordinatorType;
-            if (actorType == null) throw new ArgumentNullException("actorType");
+            if (actorType == null) throw new ArgumentNullException(nameof(actorType));
 
             ActorType = actorType;
         }

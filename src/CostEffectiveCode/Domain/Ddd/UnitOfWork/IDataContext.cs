@@ -8,10 +8,11 @@ namespace CostEffectiveCode.Domain.Ddd.UnitOfWork
     public interface IDataContext : ILinqProvider, IUnitOfWork
     {
         [CanBeNull]
-        T FindById<T, TPrimaryKey>(TPrimaryKey id)
-            where T : IEntityBase<TPrimaryKey>;
+        TEntity FindById<TEntity, TPrimaryKey>(TPrimaryKey id)
+            where TEntity : class, IEntityBase<TPrimaryKey>
+            where TPrimaryKey : struct, IComparable<TPrimaryKey>;
 
-        [CanBeNull]
-        object FindById(Type type, object id);
+        //[CanBeNull]
+        //object FindById(Type entityType, object id);
     }
 }

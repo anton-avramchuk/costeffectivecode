@@ -6,7 +6,6 @@ using Akka.Actor;
 using Akka.DI.Core;
 using CostEffectiveCode.Akka.Actors;
 using CostEffectiveCode.Akka.Messages;
-// ReSharper disable UseNameofExpression
 
 namespace CostEffectiveCode.Akka.Helpers
 {
@@ -21,11 +20,7 @@ namespace CostEffectiveCode.Akka.Helpers
             _coordinator = null;
         }
 
-        public ActorSystem System
-        {
-            // ReSharper disable once ConvertPropertyToExpressionBody
-            get { return _system; }
-        }
+        public ActorSystem System => _system;
 
         public void Initialize()
         {

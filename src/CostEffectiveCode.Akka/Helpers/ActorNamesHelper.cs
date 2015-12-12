@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Akka.Actor;
-using CostEffectiveCode.Akka.Actors;
-using CostEffectiveCode.Messaging.Process;
+using CostEffectiveCode.Processes.EventArgs;
 
 namespace CostEffectiveCode.Akka.Helpers
 {

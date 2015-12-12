@@ -1,10 +1,7 @@
-﻿using System;
-using Akka.Actor;
-using CostEffectiveCode.Messaging.Process;
+﻿using Akka.Actor;
 using CostEffectiveCode.Domain.Cqrs.Commands;
+using CostEffectiveCode.Processes.EventArgs;
 using JetBrains.Annotations;
-
-// ReSharper disable UseNameofExpression
 
 namespace CostEffectiveCode.Akka.Cqrs
 {

@@ -1,6 +1,6 @@
 ﻿{
   "version": "2.0.3",
-  "description": "Library for integration of CostEffectiveCode general-purpose framework with Akka.net",
+  "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and Akka.net",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
@@ -10,13 +10,12 @@
     "Akka.DI.Core": "1.0.5",
     "Akka.Remote": "1.0.5",
     "CostEffectiveCode": "2.0.3",
+    "CostEffectiveCode.Processes": "",
     "JetBrains.Annotations": "10.0.0"
   },
 
   "frameworks": {
-    "dnx451": {
-    },
-    "net451": {
-    }
+    "net451": { },
+    "dnx451" : { }
   }
 }

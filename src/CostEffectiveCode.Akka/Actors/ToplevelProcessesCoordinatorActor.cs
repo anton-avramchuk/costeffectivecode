@@ -4,8 +4,6 @@ using Akka.DI.Core;
 using CostEffectiveCode.Akka.Helpers;
 using CostEffectiveCode.Akka.Messages;
 
-// ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
-
 namespace CostEffectiveCode.Akka.Actors
 {
     public class ToplevelProcessesCoordinatorActor : ReceiveActor

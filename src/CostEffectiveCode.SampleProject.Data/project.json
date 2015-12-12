@@ -1,21 +1,26 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "CostEffectiveCode.SampleProject.Data Class Library",
-  "authors": [ "Andrey" ],
+  "version": "2.0.3",
+  "description": "CostEffectiveCode.SampleProject - data class library. Used for integration with ORM, providing db schema, data context.",
+  "authors": [ "HighTech" ],
   "tags": [ "" ],
-  "projectUrl": "",
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
+
+  "dependencies": {
+    "CostEffectiveCode.SampleProject.Domain": "2.0.3",
+    "CostEffectiveCode": "2.0.3",
+    "CostEffectiveCode.EntityFramework7": "2.0.3",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
+  },
 
   "frameworks": {
     "net451": { },
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
-    }
+    "dnx451" : { }
+  },
+
+  "commands": {
+    "ef": "EntityFramework.Commands"
   }
+
 }

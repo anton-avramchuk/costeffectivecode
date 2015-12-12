@@ -4,7 +4,6 @@ using CostEffectiveCode.Akka.Messages;
 using CostEffectiveCode.Messaging;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
-// ReSharper disable UseNameofExpression
 
 namespace CostEffectiveCode.Akka.PubSub
 {
@@ -23,7 +22,7 @@ namespace CostEffectiveCode.Akka.PubSub
         /// <param name="pubSubCoordinator">A reference to PubSubCoordinator&lt;T&gt; actor in your system (IActorRef or ActorSelection)</param>
         public AkkaBroker([NotNull] ICanTell pubSubCoordinator)
         {
-            if (pubSubCoordinator == null) throw new ArgumentNullException("pubSubCoordinator");
+            if (pubSubCoordinator == null) throw new ArgumentNullException(nameof(pubSubCoordinator));
 
             // TODO: implement an arbitrage and error checking -- need to ensure that provided pubSubCoordinator is really handled by PubSubCoordinatorActor class
             _pubSubCoordinator = pubSubCoordinator;
@@ -31,8 +30,8 @@ namespace CostEffectiveCode.Akka.PubSub
 
         public AkkaBroker([NotNull] ActorSystem system, [NotNull] string actorPath, bool deferred = false)
         {
-            if (system == null) throw new ArgumentNullException("system");
-            if (actorPath == null) throw new ArgumentNullException("actorPath");
+            if (system == null) throw new ArgumentNullException(nameof(system));
+            if (actorPath == null) throw new ArgumentNullException(nameof(actorPath));
 
             if (!deferred)
             {
@@ -50,7 +49,7 @@ namespace CostEffectiveCode.Akka.PubSub
             var coordinatorSelection = system.ActorSelection(actorPath);
 
             if (coordinatorSelection == null)
-                throw new ArgumentException("Wrong actor path provided: " + actorPath, "actorPath");
+                throw new ArgumentException("Wrong actor path provided: " + actorPath, nameof(actorPath));
 
             return coordinatorSelection;
         }

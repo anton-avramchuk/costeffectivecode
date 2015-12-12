@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CostEffectiveCode.SampleProject.Data;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,7 +7,6 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CostEffectiveCode.SampleProject.Web.Models;
 using CostEffectiveCode.SampleProject.Web.Services;
 
 namespace CostEffectiveCode.SampleProject.Web
@@ -41,11 +38,11 @@ namespace CostEffectiveCode.SampleProject.Web
             // Add framework services.
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>(options =>
+                .AddDbContext<SampleProjectDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<SampleProjectDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
@@ -77,11 +74,14 @@ namespace CostEffectiveCode.SampleProject.Web
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        serviceScope.ServiceProvider.GetService<SampleProjectDbContext>()
                              .Database.Migrate();
                     }
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
