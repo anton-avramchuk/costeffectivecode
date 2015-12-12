@@ -1,16 +1,16 @@
 ﻿{
-  "version": "2.0.0-*",
+  "version": "2.0.3",
   "description": "Library for integration of CostEffectiveCode general-purpose framework with Akka.net",
-  "authors": [ "HighTech.today" ],
+  "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "CostEffectiveCode": "2.0.0-*",
-    "JetBrains.Annotations": "9.2.0",
-    "Akka": "1.0.4",
-    "Akka.DI.Core": "1.0.4",
-    "Akka.Remote": "1.0.4"
+    "Akka": "1.0.5",
+    "Akka.DI.Core": "1.0.5",
+    "Akka.Remote": "1.0.5",
+    "CostEffectiveCode": "2.0.3",
+    "JetBrains.Annotations": "10.0.0"
   },
 
   "frameworks": {

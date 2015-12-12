@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Migrations
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

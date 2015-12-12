@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.ViewModels.Manage
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.ViewModels.Manage
 {
     public class IndexViewModel
     {

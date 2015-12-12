@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Services
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Services
 {
     // This class is used by the application to send Email and SMS
     // when you turn on two-factor authentication in ASP.NET Identity.

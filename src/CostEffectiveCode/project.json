@@ -1,24 +1,24 @@
 ﻿{
-    "version": "2.0.3-*",
-    "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
-    "authors": [ "HighTech.today" ],
-    "tags": [ "" ],
-    "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
-    "licenseUrl": "",
-    "dependencies": {
-        "JetBrains.Annotations": "9.2.0",
-        "System.Configuration.Abstractions": "2.0.2.3"
+  "version": "2.0.3",
+  "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
+  "authors": [ "HighTech" ],
+  "tags": [ "" ],
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+  "licenseUrl": "",
+  "dependencies": {
+    "JetBrains.Annotations": "10.0.0",
+    "System.Configuration.Abstractions": "2.0.2.26"
+  },
+  "frameworks": {
+    "net451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0"
+      }
     },
-    "frameworks": {
-        "net451": {
-            "frameworkAssemblies": {
-                "System.ComponentModel.DataAnnotations": "4.0.0.0"
-            }
-        },
-        "dnx451": {
-            "dependencies": {
-                "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-beta7"
-            }
-        }
+    "dnx451": {
+      "dependencies": {
+        "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-rc1-final"
+      }
     }
+  }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.Services
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.Services
 {
     public interface ISmsSender
     {

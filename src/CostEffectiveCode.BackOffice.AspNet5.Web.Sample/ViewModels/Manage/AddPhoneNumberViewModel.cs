@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CostEffectiveCode.Backoffice.AspNet5.Web.Sample.ViewModels.Manage
+namespace CostEffectiveCode.BackOffice.AspNet5.Web.Sample.ViewModels.Manage
 {
     public class AddPhoneNumberViewModel
     {

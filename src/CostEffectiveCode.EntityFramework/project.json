@@ -1,13 +1,13 @@
 ﻿{
-  "version": "2.0.2-*",
+  "version": "2.0.3",
   "description": "Library for integration of CostEffectiveCode general-purpose framework with EntityFramework",
-  "authors": [ "HighTech.today" ],
+  "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "CostEffectiveCode": "2.0.0-*",
-    "JetBrains.Annotations": "9.2.0"
+    "CostEffectiveCode": "2.0.3",
+    "JetBrains.Annotations": "10.0.0"
   },
 
   "frameworks": {
@@ -18,8 +18,8 @@
     },
     "dnx451": {
       "dependencies": {
-        "EntityFramework.Commands": "7.0.0-beta8",
-        "EntityFramework.SqlServer": "7.0.0-beta8"
+        "EntityFramework.Commands": "7.0.0-rc1-final",
+        "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
       }
     }
   }

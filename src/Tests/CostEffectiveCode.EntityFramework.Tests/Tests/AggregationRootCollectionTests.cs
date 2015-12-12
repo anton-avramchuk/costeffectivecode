@@ -21,13 +21,15 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
                     .ToArray());
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        //[Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Constructor_FirstGuard()
         {
             _collection = new AggregationRootCollection<Category, Product>(null, null);
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        //[Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Constructor_SecondGuard()
         {
             _collection = new AggregationRootCollection<Category, Product>(DataContext.Category, null);
@@ -44,7 +46,8 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
             Assert.AreEqual(category, product.Category);
         }
 
-        [Test, ExpectedException(typeof (InvalidOperationException))]
+        //[Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Remove_ProductCategoryGuard()
         {
             var first = _collection.First();
@@ -90,7 +93,8 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
             Assert.IsTrue(actual);
         }
 
-        [Test, ExpectedException(typeof(InvalidOperationException))]
+        //[Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Clear_DecoratorksWorksAsExpected()
         {
             _collection.Clear();

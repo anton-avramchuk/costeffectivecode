@@ -46,7 +46,7 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
+        //[Test, ExpectedException(typeof(ConfigurationErrorsException))]
         public void CreateMapping_PatterMatching_ConfigurationException()
         {
             _dispatcher.CreateMapping<StringEventArgs, string>(
