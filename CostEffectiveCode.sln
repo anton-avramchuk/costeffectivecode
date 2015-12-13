@@ -37,6 +37,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.SamplePro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.BackOffice", "src\CostEffectiveCode.BackOffice\CostEffectiveCode.BackOffice\CostEffectiveCode.BackOffice.csproj", "{7ACD7F11-ADFC-4AC3-B486-5F1CCB91A233}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CoreClrSampleProject.Web", "src\CoreClrSampleProject.Web\CoreClrSampleProject.Web.xproj", "{101AB4A3-38BC-4B2D-A297-EA1958DE900A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{7ACD7F11-ADFC-4AC3-B486-5F1CCB91A233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ACD7F11-ADFC-4AC3-B486-5F1CCB91A233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ACD7F11-ADFC-4AC3-B486-5F1CCB91A233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{101AB4A3-38BC-4B2D-A297-EA1958DE900A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{101AB4A3-38BC-4B2D-A297-EA1958DE900A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{101AB4A3-38BC-4B2D-A297-EA1958DE900A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{101AB4A3-38BC-4B2D-A297-EA1958DE900A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +104,6 @@ Global
 		{FC429B07-B5BB-4194-97E3-272D250BEFFA} = {F6E1AC3F-1C65-406C-B358-6EF3554C3FB4}
 		{9C88CB3A-F9FE-4A83-B2FC-25F2955AFF4B} = {D2C6B9EB-AEA3-4938-BAD0-BF5CC3DAC349}
 		{7ACD7F11-ADFC-4AC3-B486-5F1CCB91A233} = {61AE54F5-AC47-49E4-B62D-29B677D597B7}
+		{101AB4A3-38BC-4B2D-A297-EA1958DE900A} = {D2C6B9EB-AEA3-4938-BAD0-BF5CC3DAC349}
 	EndGlobalSection
 EndGlobal
