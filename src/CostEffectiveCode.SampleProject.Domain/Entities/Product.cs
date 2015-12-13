@@ -40,7 +40,8 @@ namespace CostEffectiveCode.SampleProject.Domain.Entities
             return this.Is(ActiveRule);
         }
 
-        internal Product()
+        [Obsolete("Use for tests only")]
+        public Product()
         {
             
         }

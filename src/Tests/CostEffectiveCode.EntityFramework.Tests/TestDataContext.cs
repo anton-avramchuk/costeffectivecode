@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
-using CostEffectiveCode.EntityFramework.Tests.Entities;
 using CostEffectiveCode.Extensions;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 
 namespace CostEffectiveCode.EntityFramework.Tests
 {

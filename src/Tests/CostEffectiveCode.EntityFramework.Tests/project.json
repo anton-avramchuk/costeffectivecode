@@ -8,6 +8,7 @@
   "dependencies": {
     "CostEffectiveCode": "2.0.3",
     "CostEffectiveCode.EntityFramework": "2.0.3",
+    "CostEffectiveCode.SampleProject.Domain": "2.0.3",
     "Jetbrains.Annotations": "10.0.0",
     "EntityFramework": "6.1.3",
     "Newtonsoft.Json": "7.0.1",

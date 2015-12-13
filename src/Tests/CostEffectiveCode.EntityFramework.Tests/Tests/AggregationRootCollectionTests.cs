@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using CostEffectiveCode.Domain.Ddd;
-using CostEffectiveCode.EntityFramework.Tests.Entities;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 using NUnit.Framework;
 
 namespace CostEffectiveCode.EntityFramework.Tests.Tests

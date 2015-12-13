@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.EntityFramework.Tests.Entities;
+using CostEffectiveCode.SampleProject.Domain.Entities;
 using NUnit.Framework;
 
 namespace CostEffectiveCode.EntityFramework.Tests.Tests
