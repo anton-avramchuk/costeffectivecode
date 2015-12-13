@@ -1,4 +1,5 @@
-﻿using CostEffectiveCode.SampleProject.Data;
+﻿using System;
+using CostEffectiveCode.SampleProject.Data;
 using CostEffectiveCode.SampleProject.Domain.Entities;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -36,14 +37,28 @@ namespace CostEffectiveCode.SampleProject.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<SampleProjectDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            var connection = Configuration["Data:Connection"];
+            var entityFrameworkServicesBuilder = services.AddEntityFramework();
+
+            if (string.Equals(connection, "PostgreSQL", StringComparison.CurrentCultureIgnoreCase))
+            {
+                entityFrameworkServicesBuilder
+                    .AddNpgsql()
+                    .AddDbContext<SampleProjectDbContext>(options =>
+                        options.UseNpgsql(Configuration["Data:ConnectionStrings:PostgreSQL"]));
+            }
+            else
+            {
+                entityFrameworkServicesBuilder
+                    .AddSqlServer()
+                    .AddDbContext<SampleProjectDbContext>(options =>
+                        options.UseSqlServer(Configuration["Data:ConnectionStrings:LocalDB"]));
+            }
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<SampleProjectDbContext>()
-                .AddDefaultTokenProviders();
+                 .AddEntityFrameworkStores<SampleProjectDbContext>()
+                 .AddDefaultTokenProviders();
 
             services.AddMvc();
 

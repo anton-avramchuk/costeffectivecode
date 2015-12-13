@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.UnitOfWork;
-using CostEffectiveCode.EntityFramework7;
+﻿using CostEffectiveCode.EntityFramework7;
 using CostEffectiveCode.SampleProject.Domain.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 
 namespace CostEffectiveCode.SampleProject.Data
