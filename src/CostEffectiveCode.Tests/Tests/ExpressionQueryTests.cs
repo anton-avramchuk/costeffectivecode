@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.SampleProject.Domain.Entities;
-using NUnit.Framework;
+using CostEffectiveCode.Tests;
+using Xunit;
 
 namespace CostEffectiveCode.EntityFramework.Tests.Tests
 {
@@ -10,13 +12,12 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
     {
         private ExpressionQuery<Product> _query;
 
-        public override void SetUp()
+        public ExpressionQueryTests() : base(new TestDataContext())
         {
-            base.SetUp();
             _query = new ExpressionQuery<Product>(DataContext.Provider);
         }
 
-        [Test]
+        [Fact]
         public void Single_EntityFetched()
         {
             var expected = DataContext.Provider
@@ -24,44 +25,44 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
                 .Single(p => p.Id == 1);
 
             var single = _query.ById(1);
-          
-            Assert.AreEqual(expected, single);
+
+            Assert.Equal(expected, single);
         }
 
-        [Test]
+        [Fact]
         public void All_AllEntitiesFetched()
         {
             var all = _query.All();
 
-            Assert.AreEqual(
+            Assert.Equal(
                 DataContext.Provider.Query<Product>().Count(),
                 all.Count());
         }
 
-        [Test]
+        [Fact]
         public void Paged_AllEntitiesFetched()
         {
             var expectedTotal = DataContext.Provider.Query<Product>().Count();
 
             var paged = _query.Paged(0, 10);
-            Assert.AreEqual(
+            Assert.Equal(
                 expectedTotal,
                 paged.TotalCount);
 
-            Assert.LessOrEqual(paged.Count(), expectedTotal);
+            Assert.True(paged.Count() <= expectedTotal);
         }
 
-        [Test]
+        [Fact]
         public void First_EntitуFetched()
         {
             var first = _query.FirstOrDefault();
 
-            Assert.AreEqual(
+            Assert.Equal(
                 DataContext.Provider.Query<Product>().First(),
                 first);
         }
 
-        [Test]
+        [Fact]
         public void OrderByPaged_Desc_OrderedAndFetched()
         {
             var expexted = DataContext.Provider
@@ -73,10 +74,10 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
                 .OrderBy(p => p.Id, SortOrder.Desc)
                 .Paged(0, 20);
 
-            Assert.AreEqual(expexted, paged.First().Id);
+            Assert.Equal(expexted, paged.First().Id);
         }
 
-        [Test]
+        [Fact]
         public void OrderByPaged_Asc_OrderedAndFetched()
         {
             var expexted = DataContext.Provider
@@ -88,17 +89,17 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
                 .OrderBy(p => p.Id)
                 .Paged(0, 20);
 
-            Assert.AreEqual(expexted, paged.First().Id);
+            Assert.Equal(expexted, paged.First().Id);
         }
 
-        //[Test, ExpectedException(typeof(ArgumentNullException))]
-        [Test]
-        public void OrderBy_EmptyExpression_ArgumentExcpetion()
+        [Fact]
+        public void OrderBy_EmptyExpression_ArgumentNullException()
         {
-            _query.OrderBy<string>(null);
+            Assert.Throws<ArgumentNullException>(
+                () => _query.OrderBy<string>(null));
         }
 
-        [Test]
+        [Fact]
         public void OrderBy_Multiple_Ordered()
         {
             var last = _query
@@ -107,39 +108,39 @@ namespace CostEffectiveCode.EntityFramework.Tests.Tests
                 .All()
                 .Last();
 
-            Assert.AreEqual("Transformer", last.Name);
+            Assert.Equal("Transformer", last.Name);
         }
-                
 
-        //[Test, ExpectedException(typeof(ArgumentNullException))]
-        [Test]
-        public void Where_EmptySpecification_ArgumentException()
+
+        [Fact]
+        public void Where_EmptySpecification_ArgumentNullException()
         {
-            _query.Where(null);
+            Assert.Throws<ArgumentNullException>(
+                () => _query.Where(null));
         }
 
 
-        //[Test, ExpectedException(typeof(ArgumentNullException))]
-        [Test]
-        public void Constructor_EmptyLinqProvider_ArgumentException()
+        [Fact]
+        public void Constructor_EmptyLinqProvider_ArgumentNullException()
         {
-            _query = new ExpressionQuery<Product>(null);
+            Assert.Throws<ArgumentNullException>(
+                () => _query = new ExpressionQuery<Product>(null));
         }
 
-        [Test]
+        [Fact]
         public void Include_CategoryIncluded()
         {
             _query.Include(p => p.Category);
             var product = _query.FirstOrDefault();
 
-            Assert.AreEqual(DataContext.Category, product.Category);
+            Assert.Equal(DataContext.Category, product.Category);
         }
 
-        //[Test, ExpectedException(typeof(ArgumentNullException))]
-        [Test]
-        public void Include_EmptyExpression_ArgumentException()
+        [Fact]
+        public void Include_EmptyExpression_ArgumentNullException()
         {
-            _query.Include<string>(null);
+            Assert.Throws<ArgumentNullException>(
+                () => _query.Include<string>(null));
         }
     }
 }

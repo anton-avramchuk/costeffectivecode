@@ -5,7 +5,7 @@ using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
-namespace CostEffectiveCode.EntityFramework.Tests
+namespace CostEffectiveCode.Tests
 {
     public class TestLinqProvider : ILinqProvider
     {

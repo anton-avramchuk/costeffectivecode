@@ -6,7 +6,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
 using CostEffectiveCode.SampleProject.Domain.Entities;
 
-namespace CostEffectiveCode.EntityFramework.Tests
+namespace CostEffectiveCode.Tests
 {
     public class TestDataContext : IUnitOfWork
     {
