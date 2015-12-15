@@ -3,6 +3,7 @@ using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity.Infrastructure;
 
 namespace CostEffectiveCode.EntityFramework7
 {
@@ -11,6 +12,24 @@ namespace CostEffectiveCode.EntityFramework7
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
     {
+        #region ctors
+        public IdentityDbContextBase(DbContextOptions options) : base(options)
+        {
+        }
+
+        public IdentityDbContextBase(IServiceProvider serviceProvider) : base(serviceProvider)
+        {
+        }
+
+        public IdentityDbContextBase(IServiceProvider serviceProvider, DbContextOptions options) : base(serviceProvider, options)
+        {
+        }
+
+        protected IdentityDbContextBase()
+        {
+        }
+        #endregion
+
         public IQueryable<TEntity> Query<TEntity>()
             where TEntity : class, IEntity
         {

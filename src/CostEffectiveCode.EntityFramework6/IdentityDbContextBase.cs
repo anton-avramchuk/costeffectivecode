@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
@@ -14,6 +16,34 @@ namespace CostEffectiveCode.EntityFramework6
         where TUserRole : IdentityUserRole<TKey>
         where TUserClaim : IdentityUserClaim<TKey>
     {
+        #region ctors
+
+        public IdentityDbContextBase()
+        {
+        }
+
+        public IdentityDbContextBase(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+        }
+
+        public IdentityDbContextBase(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection) : base(existingConnection, model, contextOwnsConnection)
+        {
+        }
+
+        public IdentityDbContextBase(DbCompiledModel model) : base(model)
+        {
+        }
+
+        public IdentityDbContextBase(DbConnection existingConnection, bool contextOwnsConnection) : base(existingConnection, contextOwnsConnection)
+        {
+        }
+
+        public IdentityDbContextBase(string nameOrConnectionString, DbCompiledModel model) : base(nameOrConnectionString, model)
+        {
+        }
+
+        #endregion
+
         public IQueryable<TEntity> Query<TEntity>()
             where TEntity : class, IEntity
         {
