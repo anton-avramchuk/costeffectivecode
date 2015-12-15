@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.0.3",
+  "version": "1.0.0-*",
   "description": "CostEffectiveCode.SampleProject - data class library. Used for integration with ORM, providing db schema, data context.",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
@@ -7,9 +7,9 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "CostEffectiveCode.SampleProject.Domain": "2.0.3",
-    "CostEffectiveCode": "2.0.3",
-    "CostEffectiveCode.EntityFramework7": "2.0.3",
+    "CostEffectiveCode.SampleProject.Domain": "",
+    "CostEffectiveCode": "",
+    "CostEffectiveCode.EntityFramework7": "",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
     "Npgsql": "3.1.0-alpha6",

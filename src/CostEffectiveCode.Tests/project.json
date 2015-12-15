@@ -7,9 +7,9 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "CostEffectiveCode": "2.0.3",
-    "CostEffectiveCode.SampleProject.Domain": "2.0.3",
-    "CostEffectiveCode.EntityFramework6": "2.0.3",
+    "CostEffectiveCode": "",
+    "CostEffectiveCode.SampleProject.Domain": "",
+    "CostEffectiveCode.EntityFramework6": "",
     "Moq": "4.2.1510.2205",
     "xunit": "2.1.0"
   },

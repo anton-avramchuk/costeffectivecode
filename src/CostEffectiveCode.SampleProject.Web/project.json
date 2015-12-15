@@ -1,14 +1,14 @@
 ﻿{
   "userSecretsId": "aspnet5-CostEffectiveCode.SampleProject.Web-6bc21639-e985-4523-b9ba-330f4213bbcc",
-  "version": "2.0.3",
+  "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "CostEffectiveCode": "2.0.3",
-    "CostEffectiveCode.SampleProject.Domain": "2.0.3",
-    "CostEffectiveCode.SampleProject.Data": "2.0.3",
+    "CostEffectiveCode": "",
+    "CostEffectiveCode.SampleProject.Domain": "",
+    "CostEffectiveCode.SampleProject.Data": "",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
