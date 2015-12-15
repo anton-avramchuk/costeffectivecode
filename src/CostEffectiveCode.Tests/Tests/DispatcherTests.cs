@@ -32,8 +32,6 @@ namespace CostEffectiveCode.Tests.Tests
         [Fact]
         public void CreateMapping_PatterMatching_MapsWell()
         {
-            Assert.True(false);
-
             _dispatcher.CreateMapping<StringEventArgs, string>(
                 x => x.Str + "456",
                 x => _rePublisherMock.Object,
