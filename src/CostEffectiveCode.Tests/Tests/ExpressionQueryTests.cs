@@ -2,11 +2,11 @@
 using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
+using CostEffectiveCode.EntityFramework;
 using CostEffectiveCode.SampleProject.Domain.Entities;
-using CostEffectiveCode.Tests;
 using Xunit;
 
-namespace CostEffectiveCode.EntityFramework.Tests.Tests
+namespace CostEffectiveCode.Tests.Tests
 {
     public class ExpressionQueryTests : DataTestsBase
     {
