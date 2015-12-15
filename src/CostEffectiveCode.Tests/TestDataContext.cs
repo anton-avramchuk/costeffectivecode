@@ -34,7 +34,7 @@ namespace CostEffectiveCode.Tests
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // pass-through
         }
 
         public void Commit()
