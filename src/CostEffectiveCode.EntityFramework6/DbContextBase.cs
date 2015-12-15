@@ -4,7 +4,7 @@ using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
-namespace CostEffectiveCode.EntityFramework
+namespace CostEffectiveCode.EntityFramework6
 {
     public abstract class DbContextBase : DbContext, IDataContext
     {

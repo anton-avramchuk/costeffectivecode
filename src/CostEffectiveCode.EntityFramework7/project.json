@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and 7-th version of EntityFramework",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "CostEffectiveCode": "2.1.0",
+    "CostEffectiveCode": "2.1.1",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
   },

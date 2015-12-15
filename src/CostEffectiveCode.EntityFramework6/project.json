@@ -1,12 +1,12 @@
 ﻿{
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and 6-th version of EntityFramework",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "CostEffectiveCode": "2.1.0",
+    "CostEffectiveCode": "2.1.1",
     "JetBrains.Annotations": "10.0.0",
     "EntityFramework": "6.1.3",
     "Microsoft.AspNet.Identity.EntityFramework": "2.2.1"

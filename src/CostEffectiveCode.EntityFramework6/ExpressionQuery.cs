@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq.Expressions;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
-using System.Data.Entity;
 
-namespace CostEffectiveCode.EntityFramework
+namespace CostEffectiveCode.EntityFramework6
 {
     public class ExpressionQuery<TEntity> : ExpressionQueryBase<TEntity>
         where TEntity : class, IEntity

@@ -4,7 +4,7 @@ using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace CostEffectiveCode.EntityFramework
+namespace CostEffectiveCode.EntityFramework6
 {
     public class IdentityDbContextBase<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim>
         : IdentityDbContext<TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim>, IDataContext

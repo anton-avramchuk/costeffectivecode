@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 
-namespace CostEffectiveCode.EntityFramework
+namespace CostEffectiveCode.EntityFramework6
 {
     public static class DbContextExtensions
     {

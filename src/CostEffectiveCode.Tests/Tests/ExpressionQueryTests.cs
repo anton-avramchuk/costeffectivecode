@@ -2,7 +2,7 @@
 using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.EntityFramework;
+using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.SampleProject.Domain.Entities;
 using Xunit;
 
