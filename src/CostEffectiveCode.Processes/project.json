@@ -6,15 +6,14 @@
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "CostEffectiveCode": "2.1.1",
+    "CostEffectiveCode": "2.2.1",
     "JetBrains.Annotations": "10.0.0"
   },
 
   "frameworks": {
-    "net451": {
+    "net45": {
     },
-    "dnx451": {
-
+    "dnx45": {
     }
   }
 }

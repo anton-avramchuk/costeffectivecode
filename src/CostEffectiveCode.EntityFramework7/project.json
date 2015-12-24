@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "CostEffectiveCode": "2.1.1",
+    "CostEffectiveCode": "2.2.1",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
   },

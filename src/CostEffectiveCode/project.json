@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.1.1",
+  "version": "2.2.1",
   "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
@@ -10,12 +10,12 @@
     "System.Configuration.Abstractions": "2.0.2.26"
   },
   "frameworks": {
-    "net451": {
+    "net45": {
       "frameworkAssemblies": {
         "System.ComponentModel.DataAnnotations": "4.0.0.0"
       }
     },
-    "dnx451": {
+    "dnx45": {
       "frameworkAssemblies": {
         "System.ComponentModel.DataAnnotations": "4.0.0.0"
       }
