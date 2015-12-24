@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.2.1",
+  "version": "2.2.0",
   "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and Akka.net",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
@@ -9,8 +9,8 @@
     "Akka": "1.0.5",
     "Akka.DI.Core": "1.0.5",
     "Akka.Remote": "1.0.5",
-    "CostEffectiveCode": "2.2.1",
-    "CostEffectiveCode.Processes": "2.2.1",
+    "CostEffectiveCode": "2.2.0",
+    "CostEffectiveCode.Processes": "2.2.0",
     "JetBrains.Annotations": "10.0.0"
   },
 
