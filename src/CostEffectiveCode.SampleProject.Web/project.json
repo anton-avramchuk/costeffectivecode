@@ -7,8 +7,8 @@
 
   "dependencies": {
     "CostEffectiveCode": "",
-    "CostEffectiveCode.SampleProject.Domain": "",
-    "CostEffectiveCode.SampleProject.Data": "",
+    "CostEffectiveCode.SampleProject.Data.EntityFramework7": "",
+    "CostEffectiveCode.SampleProject.Domain.AspNet5" : "",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
@@ -11,6 +11,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using CostEffectiveCode.SampleProject.Web.Services;
 using CostEffectiveCode.SampleProject.Web.ViewModels.Account;
+using CostEffectiveCode.SampleProject.Domain.AspNet5.Entities;
 
 namespace CostEffectiveCode.SampleProject.Web.Controllers
 {

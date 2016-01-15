@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 using CostEffectiveCode.Domain.Ddd;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 using Xunit;
 
 namespace CostEffectiveCode.Tests.Tests

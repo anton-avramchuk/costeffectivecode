@@ -1,27 +1,31 @@
-﻿{
-  "version": "1.0.0-*",
-  "description": "",
-  "authors": [ "" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+{
+    "version": "1.0.0-*",
+    "description": "",
+    "authors": [ "" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
 
-  "dependencies": {
-    "CostEffectiveCode": "",
-    "CostEffectiveCode.SampleProject.Domain": "",
-    "CostEffectiveCode.EntityFramework6": "",
-    "Moq": "4.2.1510.2205",
-    "xunit": "2.1.0"
-  },
-  "commands": {
-    "test": "xunit.runner.dnx"
-  },
+    "dependencies": {
+        "CostEffectiveCode": "",
+        "CostEffectiveCode.EntityFramework7": "2.1.4",
+        "CostEffectiveCode.SampleProject.Domain.AspNet5": "",
+        "Moq": "4.2.1510.2205",
+        "xunit": "2.1.0"
+    },
+    "commands": {
+        "test": "xunit.runner.dnx"
+    },
 
-  "frameworks": {
-    "dnx451": {
-      "dependencies": {
-        "xunit.runner.dnx": "2.1.0-rc1-build204"
-      }
+    "frameworks": {
+        "dnx451": {
+            "dependencies": {
+                "CostEffectiveCode.SampleProject.Domain.Core": "1.0.0-*",
+                "xunit.runner.dnx": "2.1.0-rc1-build204"
+            },
+            "frameworkAssemblies": {
+                "System.Configuration": "4.0.0.0"
+            }
+        }
     }
-  }
 }

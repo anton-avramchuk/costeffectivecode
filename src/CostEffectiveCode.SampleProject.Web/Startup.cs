@@ -1,6 +1,6 @@
 ﻿using System;
 using CostEffectiveCode.SampleProject.Data;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CostEffectiveCode.SampleProject.Web.Services;
+using CostEffectiveCode.SampleProject.Domain.AspNet5.Entities;
+using CostEffectiveCode.SampleProject.Data.EntityFramework7;
 
 namespace CostEffectiveCode.SampleProject.Web
 {

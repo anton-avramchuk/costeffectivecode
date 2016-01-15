@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using CostEffectiveCode.SampleProject.Web.Services;
 using CostEffectiveCode.SampleProject.Web.ViewModels.Manage;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.SampleProject.Domain.AspNet5.Entities;
 
 namespace CostEffectiveCode.SampleProject.Web.Controllers
 {

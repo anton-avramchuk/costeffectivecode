@@ -2,8 +2,8 @@
 using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.EntityFramework6;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.EntityFramework7;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 using Xunit;
 
 namespace CostEffectiveCode.Tests.Tests

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
-using CostEffectiveCode.SampleProject.Domain.Entities;
+using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
 
 namespace CostEffectiveCode.Tests
 {
