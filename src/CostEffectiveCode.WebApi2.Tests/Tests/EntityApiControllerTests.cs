@@ -8,20 +8,30 @@ using Xunit;
 
 namespace CostEffectiveCode.WebApi2.Tests.Tests
 {
-    public class EntityApiControllerTests
+    public class EntityApiControllerTests : IDisposable
     {
+        private readonly IDisposable _webApp;
         private const string Uri = "http://localhost:7777/";
+
+        public EntityApiControllerTests()
+        {
+            _webApp = WebApp.Start<Startup>(Uri);
+        }
+
+        public void Dispose()
+        {
+            _webApp.Dispose();
+        }
+
 
         [Fact]
         public void TestConsole_Test()
         {
-            using (WebApp.Start<Startup>(Uri))
-            {
-                var client = new HttpClient();
+            var client = new HttpClient();
 
-                var response = client.GetAsync($"{Uri}products").Result;
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-            }
+            var response = client.GetAsync($"{Uri}products").Result;
+            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
         }
+
     }
 }

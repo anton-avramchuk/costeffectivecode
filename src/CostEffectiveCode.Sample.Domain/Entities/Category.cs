@@ -2,6 +2,7 @@
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Ddd;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 
 namespace CostEffectiveCode.Sample.Domain.Entities
 {
@@ -19,6 +20,7 @@ namespace CostEffectiveCode.Sample.Domain.Entities
         }
 
 
+        [JsonIgnore]
         public AggregationRootCollection<Category, Product> Products =>
             _products ?? (_products = new AggregationRootCollection<Category, Product>(this, LazyProducts));
 
