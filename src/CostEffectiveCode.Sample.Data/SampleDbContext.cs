@@ -1,13 +1,23 @@
 ﻿using System.Data.Entity;
-using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Domain.Entities;
 
 namespace CostEffectiveCode.Sample.Data 
 {
-    public class SampleDbContext : DbContextBase
+    public class SampleDbContext : DbContext
     {
-        public DbSet<Product> Products;
+        public SampleDbContext()
+            : base("Name=ctx")
+        {
+            Database.SetInitializer(new DropCreateDatabaseAlways<SampleDbContext>());
+        }
 
-        public DbSet<Category> Categories;
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
