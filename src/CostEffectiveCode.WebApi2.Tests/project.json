@@ -19,7 +19,8 @@
         "xunit": "2.1.0"
     },
   "commands": {
-    "test": "xunit.runner.dnx"
+    "test": "xunit.runner.dnx",
+    "CostEffectiveCode.WebApi2.Tests": "CostEffectiveCode.WebApi2.Tests"
   },
 
   "frameworks": {

@@ -1,0 +1,26 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "",
+  "authors": [ "" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "CostEffectiveCode.WebApi2.Tests": "1.0.0-*",
+    "Microsoft.AspNet.WebApi.OwinSelfHost": "5.2.3",
+    "Microsoft.CSharp": "4.0.0"
+  },
+  "commands": {
+    "CostEffectiveCode.WebApi2.Tests.Console": "CostEffectiveCode.WebApi2.Tests.Console"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "net451": { }
+  }
+}
