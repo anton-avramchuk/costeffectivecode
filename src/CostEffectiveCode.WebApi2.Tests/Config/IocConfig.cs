@@ -43,8 +43,8 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
         {
             builder
                 //.Register(x => new SampleProjectDbContext(ConnectionString))
-                .RegisterType<SampleProjectDbContext>()
-                .As<SampleProjectDbContext>()
+                .RegisterType<SampleDbContext>()
+                .As<SampleDbContext>()
                 .As<DbContext>()
                 .As<IDataContext>()
                 .As<IUnitOfWork>()
