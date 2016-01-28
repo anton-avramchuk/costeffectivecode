@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
+using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Domain.Entities;
 
 namespace CostEffectiveCode.Sample.Data 
 {
-    public class SampleDbContext : DbContext
+    public class SampleDbContext : DbContextBase
     {
         public SampleDbContext()
             : base("Name=ctx")

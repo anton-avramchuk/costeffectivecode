@@ -11,7 +11,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Console
         {
             System.Console.WriteLine("Starting WebApi Self-Host server");
 
-            using (WebApp.Start<CostEffectiveCode.WebApi2.Tests.Startup>(Uri))
+            using (WebApp.Start<Startup>(Uri))
             {
                 var client = new HttpClient();
 
