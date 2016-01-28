@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
+using CostEffectiveCode.Sample.Domain.Entities;
 using Microsoft.Owin.Hosting;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace CostEffectiveCode.WebApi2.Tests.Tests
@@ -11,27 +11,42 @@ namespace CostEffectiveCode.WebApi2.Tests.Tests
     public class EntityApiControllerTests : IDisposable
     {
         private readonly IDisposable _webApp;
-        private const string Uri = "http://localhost:7777/";
+        private readonly HttpClient _httpClient;
+        private const string BaseUri = "http://localhost:7777";
 
         public EntityApiControllerTests()
         {
-            _webApp = WebApp.Start<Startup>(Uri);
+            _httpClient = new HttpClient();
+            _webApp = WebApp.Start<Startup>(BaseUri);
         }
 
         public void Dispose()
         {
             _webApp.Dispose();
+            _httpClient.Dispose();
         }
 
 
         [Fact]
-        public void TestConsole_Test()
+        public void AllProductsRequested_AllProductsFetched()
         {
-            var client = new HttpClient();
+            var message = _httpClient.GetAsync($"{BaseUri}/api/products").Result;
+            var json = message.Content.ReadAsStringAsync().Result;
 
-            var response = client.GetAsync($"{Uri}products").Result;
-            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+            var products = JsonConvert.DeserializeObject<List<Product>>(json);
+
+            // several entities should present in seed!
+            Assert.True(products.Count > 1);
         }
 
+        [Fact]
+        public void OneProductRequested_OneProductFetched()
+        {
+            var json = _httpClient.GetAsync($"{BaseUri}/api/products/1").Result.Content.ReadAsStringAsync().Result;
+
+            var product = JsonConvert.DeserializeObject<Product>(json);
+
+            Assert.True(!string.IsNullOrEmpty(product.Name));
+        }
     }
 }

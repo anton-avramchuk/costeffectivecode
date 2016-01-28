@@ -5,17 +5,17 @@ namespace CostEffectiveCode.WebApi2.Tests.Console
 {
     public class Program
     {
-        private const string Uri = "http://localhost:7777/";
+        private const string BaseUri = "http://localhost:7777/";
 
         public static void Main(string[] args)
         {
             System.Console.WriteLine("Starting WebApi Self-Host server");
 
-            using (WebApp.Start<Startup>(Uri))
+            using (WebApp.Start<Startup>(BaseUri))
             {
                 var client = new HttpClient();
 
-                var response = client.GetAsync($"{Uri}api/products").Result;
+                var response = client.GetAsync($"{BaseUri}api/products/1").Result;
 
                 System.Console.WriteLine("\n" + response);
                 System.Console.WriteLine(response.Content.ReadAsStringAsync().Result);
