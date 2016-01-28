@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net451": {
+      "wrappedProject": "../../src/CostEffectiveCode.Sample.Domain/CostEffectiveCode.Sample.Domain.csproj",
+      "bin": {
+        "assembly": "../../src/CostEffectiveCode.Sample.Domain/obj/{configuration}/CostEffectiveCode.SampleProject.Domain.Shared.dll",
+        "pdb": "../../src/CostEffectiveCode.Sample.Domain/obj/{configuration}/CostEffectiveCode.SampleProject.Domain.Shared.pdb"
+      },
+      "dependencies": {
+        "CostEffectiveCode": "2.2.0",
+        "JetBrains.Annotations": "10.0.0",
+        "System.Configuration.Abstractions": "2.0.2.26"
+      }
+    }
+  }
+}

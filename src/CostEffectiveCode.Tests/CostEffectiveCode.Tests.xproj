@@ -18,6 +18,7 @@
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CostEffectiveCode.Sample.Domain\CostEffectiveCode.Sample.Domain.csproj" />
     <ProjectReference Include="..\CostEffectiveCode.SampleProject.Domain.Core\CostEffectiveCode.SampleProject.Domain.Core.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
