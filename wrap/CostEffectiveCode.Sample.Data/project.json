@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net451": {
+      "wrappedProject": "../../src/CostEffectiveCode.Sample.Data/CostEffectiveCode.Sample.Data.csproj",
+      "bin": {
+        "assembly": "../../src/CostEffectiveCode.Sample.Data/obj/{configuration}/CostEffectiveCode.Sample.Data.dll",
+        "pdb": "../../src/CostEffectiveCode.Sample.Data/obj/{configuration}/CostEffectiveCode.Sample.Data.pdb"
+      },
+      "dependencies": {
+        "CostEffectiveCode": "2.2.0",
+        "CostEffectiveCode.EntityFramework6": "2.2.0",
+        "EntityFramework": "6.1.3",
+        "JetBrains.Annotations": "10.0.0",
+        "Microsoft.AspNet.Identity.Core": "2.2.1",
+        "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
+        "System.Configuration.Abstractions": "2.0.2.26",
+        "CostEffectiveCode.Sample.Domain": "1.0.0-*"
+      }
+    }
+  }
+}

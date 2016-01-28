@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using CostEffectiveCode.EntityFramework6;
-using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
+using CostEffectiveCode.Sample.Domain.Entities;
 
 namespace CostEffectiveCode.SampleProject.Data.EntityFramework6 
 {

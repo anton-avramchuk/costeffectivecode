@@ -7,8 +7,8 @@
     <ProjectGuid>{CDE05B6C-A5A2-4F45-B2B4-6FA29E4F4BD6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CostEffectiveCode.SampleProject.Data.EntityFramework6</RootNamespace>
-    <AssemblyName>CostEffectiveCode.SampleProject.Data.EntityFramework6</AssemblyName>
+    <RootNamespace>CostEffectiveCode.Sample.Data</RootNamespace>
+    <AssemblyName>CostEffectiveCode.Sample.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

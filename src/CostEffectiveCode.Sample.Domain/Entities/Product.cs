@@ -5,7 +5,7 @@ using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Ddd;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.SampleProject.Domain.Shared.Entities
+namespace CostEffectiveCode.Sample.Domain.Entities
 {
     public class Product : NamedEntityBase
     {

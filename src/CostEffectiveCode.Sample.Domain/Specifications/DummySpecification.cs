@@ -1,7 +1,7 @@
 ﻿using CostEffectiveCode.Domain.Ddd.Specifications;
-using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
+using CostEffectiveCode.Sample.Domain.Entities;
 
-namespace CostEffectiveCode.SampleProject.Domain.Shared.Specifications
+namespace CostEffectiveCode.Sample.Domain.Specifications
 {
     class DummySpecification : ISpecification<Product>
     {

@@ -25,15 +25,15 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "CostEffectiveCode.SampleProject.Data.EntityFramework6": "1.0.0-*",
-        "CostEffectiveCode.SampleProject.Domain.Shared": "1.0.0-*",
+        "CostEffectiveCode.Sample.Data": "1.0.0-*",
+        "CostEffectiveCode.Sample.Domain": "1.0.0-*",
         "xunit.runner.dnx": "2.1.0-rc1-build204"
       }
     },
     "net451": {
       "dependencies": {
-        "CostEffectiveCode.SampleProject.Data.EntityFramework6": "1.0.0-*",
-        "CostEffectiveCode.SampleProject.Domain.Shared": "1.0.0-*",
+        "CostEffectiveCode.Sample.Data": "1.0.0-*",
+        "CostEffectiveCode.Sample.Domain": "1.0.0-*",
         "xunit.runner.console": "2.1.0"
       },
         "frameworkAssemblies": {

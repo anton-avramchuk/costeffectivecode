@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Web.Http;
-using CostEffectiveCode.Common;
+﻿using CostEffectiveCode.Common;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
+using CostEffectiveCode.Sample.Domain.Entities;
 using CostEffectiveCode.WebApi2.WebApi.Controller;
-using Microsoft.Owin;
 
 namespace CostEffectiveCode.WebApi2.Tests.Controllers
 {

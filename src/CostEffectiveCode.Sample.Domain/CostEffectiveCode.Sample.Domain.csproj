@@ -7,8 +7,8 @@
     <ProjectGuid>{1F3C6C46-4428-4F60-9E22-00E1C049114A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CostEffectiveCode.SampleProject.Domain.Shared</RootNamespace>
-    <AssemblyName>CostEffectiveCode.SampleProject.Domain.Shared</AssemblyName>
+    <RootNamespace>CostEffectiveCode.Sample.Domain</RootNamespace>
+    <AssemblyName>CostEffectiveCode.Sample.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

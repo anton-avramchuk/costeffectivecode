@@ -3,7 +3,7 @@ using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.EntityFramework7;
-using CostEffectiveCode.SampleProject.Domain.Shared.Entities;
+using CostEffectiveCode.Sample.Domain.Entities;
 using Xunit;
 
 namespace CostEffectiveCode.Tests.Tests

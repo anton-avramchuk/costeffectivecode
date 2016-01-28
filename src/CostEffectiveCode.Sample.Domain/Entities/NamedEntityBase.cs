@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.SampleProject.Domain.Shared.Entities
+namespace CostEffectiveCode.Sample.Domain.Entities
 {
     public abstract class NamedEntityBase : EntityBase<long>
     {
