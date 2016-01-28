@@ -2,7 +2,7 @@
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Domain.Entities;
 
-namespace CostEffectiveCode.SampleProject.Data.EntityFramework6 
+namespace CostEffectiveCode.Sample.Data 
 {
     public class SampleDbContext : DbContextBase
     {

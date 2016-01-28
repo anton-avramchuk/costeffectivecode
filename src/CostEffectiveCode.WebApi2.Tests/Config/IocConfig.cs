@@ -8,8 +8,8 @@ using CostEffectiveCode.Domain.Cqrs;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
+using CostEffectiveCode.Sample.Data;
 using CostEffectiveCode.WebApi2.Tests.Loggers;
-using CostEffectiveCode.SampleProject.Data.EntityFramework6;
 
 namespace CostEffectiveCode.WebApi2.Tests.Config
 {
