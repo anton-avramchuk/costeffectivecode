@@ -15,7 +15,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
 {
     public class IocConfig
     {
-        public static string ConnectionString = @"Data Source=.;Initial Catalog=CostEffectiveCode_WebApi2_Tests;Integrated Security=True;MultipleActiveResultSets=True";
+        public static string ConnectionString = @"Data Source=.;Initial Catalog=sample;Integrated Security=True;MultipleActiveResultSets=True;";
 
         public static IContainer Configure()
         {
@@ -42,8 +42,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
         private static void DbContext(ContainerBuilder builder)
         {
             builder
-                //.Register(x => new SampleProjectDbContext(ConnectionString))
-                .RegisterType<SampleDbContext>()
+                .Register(x => new SampleDbContext(ConnectionString))
                 .As<SampleDbContext>()
                 .As<DbContext>()
                 .As<IDataContext>()
