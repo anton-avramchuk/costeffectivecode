@@ -10,13 +10,13 @@ namespace CostEffectiveCode.Sample.Data
         public SampleDbContext()
             : base("Name=ctx")
         {
-            //Database.SetInitializer(new DropCreateDatabaseAlways<SampleDbContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<SampleDbContext>());
         }
 
         public SampleDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
-            //Database.SetInitializer(new DropCreateDatabaseAlways<SampleDbContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<SampleDbContext>());
         }
 
         public DbSet<Product> Products { get; set; }

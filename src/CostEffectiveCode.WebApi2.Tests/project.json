@@ -6,21 +6,20 @@
   "projectUrl": "",
   "licenseUrl": "",
 
-    "dependencies": {
-        "Autofac": "3.5.2",
-        "Autofac.Owin": "3.1.0",
-        "Autofac.WebApi2": "3.4.0",
-        "Autofac.WebApi2.Owin": "3.3.0",
-        "CostEffectiveCode": "2.2.0",
-        "CostEffectiveCode.AutoMapper": "",
-        "CostEffectiveCode.WebApi2": "2.2.0",
-        "Microsoft.AspNet.WebApi.OwinSelfHost": "5.2.3",
-        "Microsoft.CSharp": "4.0.0",
-        "xunit": "2.1.0"
-    },
+  "dependencies": {
+    "Autofac": "3.5.2",
+    "Autofac.Owin": "3.1.0",
+    "Autofac.WebApi2": "3.4.0",
+    "Autofac.WebApi2.Owin": "3.3.0",
+    "CostEffectiveCode": "2.2.0",
+    "CostEffectiveCode.AutoMapper": "",
+    "CostEffectiveCode.WebApi2": "2.2.0",
+    "Microsoft.AspNet.WebApi.OwinSelfHost": "5.2.3",
+    "Microsoft.CSharp": "4.0.0",
+    "xunit": "2.1.0"
+  },
   "commands": {
-    "test": "xunit.runner.dnx",
-    "CostEffectiveCode.WebApi2.Tests": "CostEffectiveCode.WebApi2.Tests"
+    "test": "xunit.runner.dnx"
   },
 
   "frameworks": {
@@ -29,6 +28,10 @@
         "CostEffectiveCode.Sample.Data": "1.0.0-*",
         "CostEffectiveCode.Sample.Domain": "1.0.0-*",
         "xunit.runner.dnx": "2.1.0-rc1-build204"
+      },
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0",
+        "System.Data": "4.0.0.0"
       }
     },
     "net451": {
@@ -37,9 +40,10 @@
         "CostEffectiveCode.Sample.Domain": "1.0.0-*",
         "xunit.runner.console": "2.1.0"
       },
-        "frameworkAssemblies": {
-            "System.Runtime": "4.0.10.0"
-        }
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0",
+        "System.Data": "4.0.0.0"
+      }
     }
   }
 }

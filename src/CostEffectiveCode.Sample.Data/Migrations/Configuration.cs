@@ -1,3 +1,5 @@
+using CostEffectiveCode.Sample.Domain.Entities;
+
 namespace CostEffectiveCode.Sample.Data.Migrations
 {
     using System;
@@ -25,7 +27,20 @@ namespace CostEffectiveCode.Sample.Data.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+
+            var carsCategory = new Category("Cars");
+            var toysCategory = new Category("Toys");
+
+            context.Categories.AddOrUpdate(x => x.Name, carsCategory, toysCategory);
+
+            context.Products.AddOrUpdate(x => x.Name, new Product("Ferrari", carsCategory, 1000));
+            context.Products.AddOrUpdate(x => x.Name, new Product("Mazeratti", carsCategory, 2000));
+            context.Products.AddOrUpdate(x => x.Name, new Product("Lada", carsCategory, 5));
+
+            context.Products.AddOrUpdate(x => x.Name, new Product("PS3", toysCategory, 100));
+            context.Products.AddOrUpdate(x => x.Name, new Product("Xbox", toysCategory, 200));
+            context.Products.AddOrUpdate(x => x.Name, new Product("PC", toysCategory, 300));
+
         }
     }
 }
