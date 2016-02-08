@@ -1,22 +1,18 @@
 ﻿{
-  "version": "1.0.0",
-  "description": "Autofac mapper",
-  "authors": [ "HighTech" ],
-  "tags": [ "" ],
-  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
-  "licenseUrl": "",
-  "frameworks": {
-    "net45": {
+    "version": "1.0.0",
+    "description": "CostEffectiveCode and AutoMapper integration project",
+    "authors": [ "HighTech" ],
+    "tags": [ "" ],
+    "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+    "licenseUrl": "",
+    "dependencies": {
+        "CostEffectiveCode": "2.2.0",
+        "AutoMapper": "4.1.1"
     },
-    "dnx45": {
+    "frameworks": {
+        "net45": {
+        },
+        "dnx45": {
+        }
     }
-  },
-  "dependencies": {
-    "CostEffectiveCode": "2.2.0",
-    "EntityFramework": "6.1.3",
-    "AutoMapper": "4.1.1"
-  },
-  "commands": {
-    "ef": "EntityFramework.Commands"
-  }
 }
