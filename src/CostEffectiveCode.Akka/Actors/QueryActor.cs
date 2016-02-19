@@ -34,23 +34,24 @@ namespace CostEffectiveCode.Akka.Actors
 
         private void Fetch(FetchRequestMessage requestMessage)
         {
+            _logger.Debug("Received fetch-message");
+
             var dest = _receiver ?? Context.Sender;
 
             FetchResponseMessage<TEntity> responseMessage;
 
             if (requestMessage.Single)
-            {
-                responseMessage = new FetchResponseMessage<TEntity>(_query.Single());
-            } else if (requestMessage.Limit != null && requestMessage.Page != null)
-            {
+                responseMessage = new FetchResponseMessage<TEntity>(
+                    _query.Single());
+            else if (requestMessage.Limit != null && requestMessage.Page != null)
                 responseMessage =
-                    new FetchResponseMessage<TEntity>(_query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
-            }
+                    new FetchResponseMessage<TEntity>(
+                        _query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
             else
-            {
-                responseMessage = new FetchResponseMessage<TEntity>(_query.All());
-            }
+                responseMessage = new FetchResponseMessage<TEntity>(
+                    _query.All());
 
+            _logger.Debug($"Told the response to {dest}");
             dest.Tell(responseMessage, Context.Self);
         }
     }
