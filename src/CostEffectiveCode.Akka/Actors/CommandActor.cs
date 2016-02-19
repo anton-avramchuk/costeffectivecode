@@ -24,7 +24,7 @@ namespace CostEffectiveCode.Akka.Actors
 
         public void Handle(TMessage message)
         {
-            _logger?.Debug(message.ToString());
+            _logger?.Debug($"CommandActor received message of type {message.GetType()} with value of {message}");
             _command.Execute(message);
         }
     }
