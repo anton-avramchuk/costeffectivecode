@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "CostEffectiveCode and NLog integration project",
     "authors": [ "HighTech" ],
     "tags": [ "" ],
@@ -7,7 +7,7 @@
     "licenseUrl": "",
 
     "dependencies": {
-        "CostEffectiveCode": "2.2.0",
+        "CostEffectiveCode": "2.4.0",
         "JetBrains.Annotations" : "10.0.0",
         "NLog": "4.2.3"
     },
