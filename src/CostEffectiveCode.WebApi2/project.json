@@ -1,12 +1,12 @@
 ﻿{
-  "version": "2.2.0",
-  "description": "Provides web api crud for entities",
+  "version": "1.0.0",
+  "description": "Generic backend (web api) controller",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "CostEffectiveCode": "2.2.0",
+    "CostEffectiveCode": "2.4.0",
     "JetBrains.Annotations": "10.0.0",
     "Microsoft.AspNet.WebApi.Owin": "5.2.3",
     "Microsoft.CSharp": "4.0.0"
