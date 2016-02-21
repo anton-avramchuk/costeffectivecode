@@ -1,7 +1,7 @@
 using System;
-using CostEffectiveCode.Akka.Actors;
+using CostEffectiveCode.Processes.Akka.Actors;
 
-namespace CostEffectiveCode.Akka.Helpers
+namespace CostEffectiveCode.Processes.Akka.Helpers
 {
     public class ActorTypesHelper
     {

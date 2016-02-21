@@ -1,10 +1,10 @@
 ﻿using System;
 using Akka.Actor;
 using Akka.DI.Core;
-using CostEffectiveCode.Akka.Helpers;
-using CostEffectiveCode.Akka.Messages;
+using CostEffectiveCode.Processes.Akka.Helpers;
+using CostEffectiveCode.Processes.Akka.Messages;
 
-namespace CostEffectiveCode.Akka.Actors
+namespace CostEffectiveCode.Processes.Akka.Actors
 {
     public class ToplevelProcessesCoordinatorActor : ReceiveActor
     {

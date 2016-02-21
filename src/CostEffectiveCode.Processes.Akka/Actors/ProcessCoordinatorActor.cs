@@ -2,12 +2,12 @@
 using Akka.DI.Core;
 using Akka.Routing;
 using CostEffectiveCode.Akka.Cqrs;
-using CostEffectiveCode.Akka.Helpers;
+using CostEffectiveCode.Processes.Akka.Helpers;
 using CostEffectiveCode.Processes.EventArgs;
 using CostEffectiveCode.Processes.PubSubProcProtocol;
 using CostEffectiveCode.Processes.State;
 
-namespace CostEffectiveCode.Akka.Actors
+namespace CostEffectiveCode.Processes.Akka.Actors
 {
     public class ProcessCoordinatorActor<TProcessActor, TProcessOptions, TProcessState, TProcessException, TProcessResult> : ReceiveActor
         where TProcessActor : ProcessActorBase<TProcessOptions, TProcessState, TProcessException, TProcessResult>

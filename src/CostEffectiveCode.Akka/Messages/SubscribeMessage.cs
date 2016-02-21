@@ -2,7 +2,7 @@
 
 namespace CostEffectiveCode.Akka.Messages
 {
-    public class SubscribeMessage<T> : HasCommandMessageBase<T>
+    public class SubscribeMessage<T> : MessageWithCommandBase<T>
     {
         public SubscribeMessage(ICommand<T> command)
             : base(command)

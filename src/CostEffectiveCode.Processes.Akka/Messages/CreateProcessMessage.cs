@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
-namespace CostEffectiveCode.Akka.Messages
+
+namespace CostEffectiveCode.Processes.Akka.Messages
 {
     public class CreateProcessMessage
     {

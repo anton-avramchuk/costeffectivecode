@@ -1,24 +1,20 @@
 ﻿using Akka.Actor;
-using CostEffectiveCode.Akka.Helpers;
+using CostEffectiveCode.Akka.Actors;
+using CostEffectiveCode.Processes.Akka.Helpers;
 using CostEffectiveCode.Processes.EventArgs;
 using CostEffectiveCode.Processes.State;
 
-namespace CostEffectiveCode.Akka.Actors
+namespace CostEffectiveCode.Processes.Akka.Actors
 {
     public class PubSubProcProtocolCoordinator<TProcessOptions, TProcessState, TProcessException, TProcessResult> : ReceiveActor
         where TProcessState : ProcessState
         where TProcessException : ProcessExceptionBase, new()     {
-        private readonly IActorRef _startCoordinator;
-        private readonly IActorRef _stateChangedCoordinator;
-        private readonly IActorRef _failedCoordinator;
-        private readonly IActorRef _finishedCoordinator;
-
         public PubSubProcProtocolCoordinator()
         {
-            _startCoordinator = CreatePubSubCoordinator<StartProcessEventArgs<TProcessOptions>>();
-            _stateChangedCoordinator = CreatePubSubCoordinator<ProcessStateChangedEventArgs<TProcessState>>();
-            _failedCoordinator = CreatePubSubCoordinator<ProcessFailedEventArgs<TProcessException>>();
-            _finishedCoordinator = CreatePubSubCoordinator<ProcessFinishedEventArgs<TProcessResult>>();
+            CreatePubSubCoordinator<StartProcessEventArgs<TProcessOptions>>();
+            CreatePubSubCoordinator<ProcessStateChangedEventArgs<TProcessState>>();
+            CreatePubSubCoordinator<ProcessFailedEventArgs<TProcessException>>();
+            CreatePubSubCoordinator<ProcessFinishedEventArgs<TProcessResult>>();
         }
 
         private IActorRef CreatePubSubCoordinator<TProcessEventArgs>()

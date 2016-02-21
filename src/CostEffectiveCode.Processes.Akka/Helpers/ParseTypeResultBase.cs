@@ -1,4 +1,4 @@
-﻿namespace CostEffectiveCode.Akka.Helpers
+﻿namespace CostEffectiveCode.Processes.Akka.Helpers
 {
     public abstract class ParseTypeResultBase
     {

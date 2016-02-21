@@ -1,12 +1,10 @@
 ﻿using Akka.Actor;
 using CostEffectiveCode.Domain.Cqrs.Commands;
-using CostEffectiveCode.Processes.EventArgs;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Cqrs
 {
-    public class TellCommand<TProcessEventArgs> : ICommand<TProcessEventArgs>
-        where TProcessEventArgs: ProcessEventArgsBase
+    public class TellCommand<T> : ICommand<T>
     {
         private readonly ICanTell _dest;
         private readonly IActorRef _sender;
@@ -24,7 +22,7 @@ namespace CostEffectiveCode.Akka.Cqrs
             _sender = sender;
         }
 
-        public void Execute(TProcessEventArgs message)
+        public void Execute(T message)
         {
             _dest.Tell(message, _sender);
         }

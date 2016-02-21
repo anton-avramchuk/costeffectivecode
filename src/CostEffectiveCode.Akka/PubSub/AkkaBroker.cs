@@ -17,7 +17,7 @@ namespace CostEffectiveCode.Akka.PubSub
         private readonly string _actorPath;
 
         /// <summary>
-        /// CEC Pub/sub broker implementation working on top of Akka.net actor system
+        /// CEC Pub/Sub broker implementation working on top of Akka.net actor system
         /// </summary>
         /// <param name="pubSubCoordinator">A reference to PubSubCoordinator&lt;T&gt; actor in your system (IActorRef or ActorSelection)</param>
         public AkkaBroker([NotNull] ICanTell pubSubCoordinator)
@@ -34,9 +34,7 @@ namespace CostEffectiveCode.Akka.PubSub
             if (actorPath == null) throw new ArgumentNullException(nameof(actorPath));
 
             if (!deferred)
-            {
                 _pubSubCoordinator = LoadPubSubCoordinator(system, actorPath);
-            }
             else
             {
                 _system = system;
@@ -54,6 +52,7 @@ namespace CostEffectiveCode.Akka.PubSub
             return coordinatorSelection;
         }
 
+        #region Pub/Sub methods
         public void Publish(T message)
         {
             if (_pubSubCoordinator == null)
@@ -78,6 +77,7 @@ namespace CostEffectiveCode.Akka.PubSub
             _pubSubCoordinator.Tell(new UnsubscribeMessage<T>(handler), null);
         }
 
-        public bool IsSelfControlled { get { return true; } }
+        public bool IsSelfControlled => true;
+        #endregion
     }
 }

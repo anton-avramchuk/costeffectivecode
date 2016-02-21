@@ -4,7 +4,7 @@ using CostEffectiveCode.Processes.EventArgs;
 using CostEffectiveCode.Processes.PubSubProcProtocol;
 using CostEffectiveCode.Processes.State;
 
-namespace CostEffectiveCode.Akka.Actors
+namespace CostEffectiveCode.Processes.Akka.Actors
 {
     public abstract class ProcessActorBase<TProcessOptions, TProcessState, TProcessException, TProcessResult>
         : ReceiveActor, IWithUnboundedStash

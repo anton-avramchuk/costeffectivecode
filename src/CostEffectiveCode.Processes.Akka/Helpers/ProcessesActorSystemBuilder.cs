@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using Akka.Actor;
 using Akka.DI.Core;
-using CostEffectiveCode.Akka.Actors;
-using CostEffectiveCode.Akka.Messages;
+using CostEffectiveCode.Processes.Akka.Actors;
+using CostEffectiveCode.Processes.Akka.Messages;
 
-namespace CostEffectiveCode.Akka.Helpers
+namespace CostEffectiveCode.Processes.Akka.Helpers
 {
     public class ProcessesActorSystemBuilder
     {

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Akka.Actor;
 using CostEffectiveCode.Processes.EventArgs;
 
-namespace CostEffectiveCode.Akka.Helpers
+namespace CostEffectiveCode.Processes.Akka.Helpers
 {
     /// <summary>
     /// A helper class to work with naming conventions of Process-based Actor system with support of PSPP

@@ -2,9 +2,9 @@ using CostEffectiveCode.Domain.Cqrs.Commands;
 
 namespace CostEffectiveCode.Akka.Messages
 {
-    public abstract class HasCommandMessageBase<T>
+    public abstract class MessageWithCommandBase<T>
     {
-        protected HasCommandMessageBase(ICommand<T> command)
+        protected MessageWithCommandBase(ICommand<T> command)
         {
             Command = command;
         }

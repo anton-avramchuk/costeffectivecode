@@ -2,7 +2,7 @@
 
 namespace CostEffectiveCode.Akka.Messages
 {
-    public class UnsubscribeMessage<T> : HasCommandMessageBase<T>
+    public class UnsubscribeMessage<T> : MessageWithCommandBase<T>
     {
         public UnsubscribeMessage(ICommand<T> command)
             : base(command)

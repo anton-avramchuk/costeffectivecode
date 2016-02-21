@@ -1,6 +1,6 @@
 using System;
 
-namespace CostEffectiveCode.Akka.Helpers
+namespace CostEffectiveCode.Processes.Akka.Helpers
 {
     public class ParseProcessCoordinatorActorTypeResult: ParseProcessActorTypeResult
     {
