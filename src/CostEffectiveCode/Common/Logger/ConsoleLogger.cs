@@ -1,7 +1,6 @@
 ﻿using System;
-using CostEffectiveCode.Common;
 
-namespace CostEffectiveCode.WebApi2.Tests.Loggers
+namespace CostEffectiveCode.Common.Logger
 {
     public class ConsoleLogger : ILogger
     {

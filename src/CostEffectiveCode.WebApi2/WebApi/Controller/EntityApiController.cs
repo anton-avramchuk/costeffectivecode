@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;

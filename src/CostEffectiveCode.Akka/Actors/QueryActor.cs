@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Akka.Actor;
 using CostEffectiveCode.Akka.Messages;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;

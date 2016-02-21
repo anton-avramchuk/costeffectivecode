@@ -2,14 +2,15 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
-using CostEffectiveCode.AutoMapper;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.AutoMapper;
+using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain.Cqrs;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
-using CostEffectiveCode.WebApi2.Tests.Loggers;
+using Microsoft.Owin.Logging;
 
 namespace CostEffectiveCode.WebApi2.Tests.Config
 {
@@ -35,7 +36,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
         private static void Logging(ContainerBuilder builder)
         {
             builder.RegisterType<ConsoleLogger>()
-                .As<ILogger>()
+                .As<CostEffectiveCode.Common.Logger.ILogger>()
                 .InstancePerRequest();
         }
 

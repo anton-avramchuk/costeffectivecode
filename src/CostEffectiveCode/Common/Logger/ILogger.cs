@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common
+namespace CostEffectiveCode.Common.Logger
 {
     [PublicAPI]
     public interface ILogger

@@ -3,7 +3,6 @@ using System.Linq;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 
 namespace CostEffectiveCode.EntityFramework7

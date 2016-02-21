@@ -4,7 +4,7 @@ using NLog;
 
 namespace CostEffectiveCode.NLog
 {
-    public class NLogLogger : Common.ILogger
+    public class NLogLogger : Common.Logger.ILogger
     {
         private readonly ILogger _logger;
 

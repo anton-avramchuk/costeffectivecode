@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 

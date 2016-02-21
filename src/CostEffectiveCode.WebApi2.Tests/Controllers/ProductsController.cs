@@ -1,4 +1,5 @@
 ﻿using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Sample.Domain.Entities;
