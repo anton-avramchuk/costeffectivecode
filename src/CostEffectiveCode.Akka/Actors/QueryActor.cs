@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Akka.Actor;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Common;
 using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
@@ -11,12 +9,12 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Actors
 {
-
     public class QueryActor<TEntity, TSpecification> : ReceiveActor
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
-        private readonly IQuery<TEntity, TSpecification> _query;
+        private IQuery<TEntity, TSpecification> _query;
+        private readonly IQueryFactory _queryFactory;
         private readonly ICanTell _receiver;
         private readonly ILogger _logger;
 
@@ -26,6 +24,7 @@ namespace CostEffectiveCode.Akka.Actors
             if (query == null) throw new ArgumentNullException(nameof(query));
 
             _query = query;
+            _queryFactory = null;
 
             _receiver = receiver;
             _logger = logger;
@@ -33,13 +32,31 @@ namespace CostEffectiveCode.Akka.Actors
             Receive<FetchRequestMessage>(x => Fetch(x));
         }
 
-        private void Fetch(FetchRequestMessage requestMessage)
+        public QueryActor([NotNull] IQueryFactory queryFactory, [CanBeNull] ICanTell receiver,
+            [CanBeNull] ILogger logger)
+        {
+            if (queryFactory == null) throw new ArgumentNullException(nameof(queryFactory));
+
+            _queryFactory = queryFactory;
+            _query = null;
+
+            _receiver = receiver;
+            _logger = logger;
+
+            Receive<FetchRequestMessage>(x => Fetch(x));
+        }
+
+
+        protected virtual void Fetch(FetchRequestMessage requestMessage)
         {
             _logger.Debug("Received fetch-message");
 
             var dest = _receiver ?? Context.Sender;
 
             FetchResponseMessage<TEntity> responseMessage;
+
+            if (_queryFactory != null)
+                _query = _queryFactory.GetQuery<TEntity, TSpecification>();
 
             if (requestMessage.Single)
                 responseMessage = new FetchResponseMessage<TEntity>(
