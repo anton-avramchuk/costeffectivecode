@@ -2,6 +2,20 @@
 {
     public class FetchRequestMessage
     {
+        public FetchRequestMessage(bool single)
+        {
+            Single = single;
+            Page = null;
+            Limit = null;
+        }
+
+        public FetchRequestMessage(int page, int limit)
+        {
+            Single = false;
+            Page = page;
+            Limit = limit;
+        }
+
         public bool Single { get; set; }
 
         public int? Page { get; set; }
