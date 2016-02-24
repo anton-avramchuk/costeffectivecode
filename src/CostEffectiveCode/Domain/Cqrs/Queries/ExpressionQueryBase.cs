@@ -124,7 +124,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public IEnumerable<TEntity> Take(int count)
         {
-            return GetQueryable().Take(count);
+            return GetQueryable().Take(count).ToArray();
         }
 
         public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)
