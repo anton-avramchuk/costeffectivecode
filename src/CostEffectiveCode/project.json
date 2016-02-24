@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],
   "tags": [ "" ],

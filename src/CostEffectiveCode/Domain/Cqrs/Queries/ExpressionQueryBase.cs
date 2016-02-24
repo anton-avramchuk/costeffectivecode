@@ -86,7 +86,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public abstract IQuery<TEntity, IExpressionSpecification<TEntity>> Include<TProperty>(
             Expression<Func<TEntity, TProperty>> expression);
-        
+
         public TEntity Single()
         {
             return GetQueryable().Single();
@@ -109,16 +109,22 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public IPagedEnumerable<TEntity> Paged(int pageNumber, int take)
         {
-            GetQueryable();
-            var res = new PagedList<TEntity>(_queryable.Count());
+            _queryable = GetQueryable();
+
+            var result = new PagedList<TEntity>(_queryable.Count());
             var raw = _queryable
                 .Skip(pageNumber * take)
                 .Take(take)
                 .ToArray();
 
-            res.AddRange(raw);
+            result.AddRange(raw);
 
-            return res;
+            return result;
+        }
+
+        public IEnumerable<TEntity> Take(int count)
+        {
+            return GetQueryable().Take(count);
         }
 
         public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)

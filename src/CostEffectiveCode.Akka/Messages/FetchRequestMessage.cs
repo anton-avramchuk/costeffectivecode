@@ -16,6 +16,13 @@
             Limit = limit;
         }
 
+        public FetchRequestMessage(int limit)
+        {
+            Single = false;
+            Page = null;
+            Limit = limit;
+        }
+
         public bool Single { get; set; }
 
         public int? Page { get; set; }

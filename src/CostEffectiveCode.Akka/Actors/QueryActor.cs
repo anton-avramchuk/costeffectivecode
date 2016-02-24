@@ -51,12 +51,17 @@ namespace CostEffectiveCode.Akka.Actors
         {
             _logger.Debug("Received fetch-message");
 
+            if (_queryFactory != null)
+                _query = _queryFactory.GetQuery<TEntity, TSpecification>();
+
+            if (_query == null)
+                throw new InvalidOperationException("Query is unavailable");
+
+            // TODO: construct query here using FetchRequestMessage's data
+
             var dest = _receiver ?? Context.Sender;
 
             FetchResponseMessage<TEntity> responseMessage;
-
-            if (_queryFactory != null)
-                _query = _queryFactory.GetQuery<TEntity, TSpecification>();
 
             if (requestMessage.Single)
                 responseMessage = new FetchResponseMessage<TEntity>(
@@ -65,12 +70,16 @@ namespace CostEffectiveCode.Akka.Actors
                 responseMessage =
                     new FetchResponseMessage<TEntity>(
                         _query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
+            else if (requestMessage.Limit != null)
+                responseMessage =
+                    new FetchResponseMessage<TEntity>(
+                        _query.Take(requestMessage.Limit.Value));
             else
                 responseMessage = new FetchResponseMessage<TEntity>(
                     _query.All());
 
-            _logger.Debug($"Told the response to {dest}");
             dest.Tell(responseMessage, Context.Self);
+            _logger.Debug($"Told the response to {dest}");
         }
     }
 }

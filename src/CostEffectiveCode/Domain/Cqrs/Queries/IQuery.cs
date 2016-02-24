@@ -36,7 +36,10 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 		/// <param name="take"></param>
 		/// <returns></returns>
         [NotNull]
-        IPagedEnumerable<TEntity> Paged(int pageNumber, int take);       
+        IPagedEnumerable<TEntity> Paged(int pageNumber, int take);
+
+        [NotNull]
+        IEnumerable<TEntity> Take(int count); 
 
 	    long Count();
     }

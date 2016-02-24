@@ -7,6 +7,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
+    [Obsolete("Use IQueryFactory instead")]
     public class ScopedExpressionQueryBase<TEntity, TLinqProvider> : IQuery<TEntity, IExpressionSpecification<TEntity>>
         where TEntity : class, IEntity
         where TLinqProvider: ILinqProvider, IDisposable
@@ -39,6 +40,11 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         public IPagedEnumerable<TEntity> Paged(int pageNumber, int take)
         {
             return WithQueryInsideDbContext(x => x.Paged(pageNumber, take));
+        }
+
+        public IEnumerable<TEntity> Take(int count)
+        {
+            return WithQueryInsideDbContext(x => x.Take(count));
         }
 
         public bool Any()

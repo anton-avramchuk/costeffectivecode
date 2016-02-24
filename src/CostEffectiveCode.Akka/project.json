@@ -7,7 +7,7 @@
   "licenseUrl": "",
   "dependencies": {
     "Akka": "1.0.5",
-    "CostEffectiveCode": "2.4.1",
+    "CostEffectiveCode": "2.4.2",
     "JetBrains.Annotations": "10.0.0"
   },
 
