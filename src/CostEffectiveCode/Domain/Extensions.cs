@@ -32,6 +32,21 @@ namespace CostEffectiveCode.Domain
             return AsFunc(entity, expr).Invoke(entity);
         }
 
+        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+        {
+            var parameter = Expression.Parameter(typeof(T));
+
+            var leftVisitor = new ReplaceExpressionVisitor(left.Parameters[0], parameter);
+            var visitedLeft = leftVisitor.Visit(left.Body);
+
+            var rightVisitor = new ReplaceExpressionVisitor(right.Parameters[0], parameter);
+            var visitedRight = rightVisitor.Visit(right.Body);
+
+            return Expression.Lambda<Func<T, bool>>(
+                Expression.AndAlso(visitedLeft, visitedRight), parameter);
+        }
+
+
         #endregion
 
         #region Validation
