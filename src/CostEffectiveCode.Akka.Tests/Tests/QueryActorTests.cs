@@ -4,6 +4,7 @@ using Akka.Actor;
 using Akka.TestKit.Xunit2;
 using CostEffectiveCode.Akka.Actors;
 using CostEffectiveCode.Akka.Messages;
+using CostEffectiveCode.Common;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
@@ -36,10 +37,12 @@ namespace CostEffectiveCode.Akka.Tests.Tests
                 () => new SampleDbContext(_configuration["Data:DefaultConnection:ConnectionString"]), x => true);
 
             var queryActor = Sys.ActorOf(
-                Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(scopedExpressionQuery, null, null)), "queryActorProduct");
+                Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(
+                    new PassThroughScope<ScopedExpressionQuery<Product, SampleDbContext>>(scopedExpressionQuery),
+                    null, null)), "queryActorProduct");
 
             // act
-            queryActor.Tell(new FetchRequestMessage(10));
+            queryActor.Tell(new FetchRequestMessageBase(10));
 
             // assert
             var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 30));

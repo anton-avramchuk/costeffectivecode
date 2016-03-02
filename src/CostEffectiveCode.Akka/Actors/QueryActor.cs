@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Akka.Actor;
 using CostEffectiveCode.Akka.Messages;
 using CostEffectiveCode.Common;
@@ -10,8 +12,8 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Actors
 {
-    public class QueryActor<TQuery, TEntity, TSpecification> : ReceiveActor
-        where TQuery: class, IQuery<TEntity, TSpecification>
+    public class QueryActor<TEntity, TSpecification, TQuery> : ReceiveActor
+        where TQuery : class, IQuery<TEntity, TSpecification>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
@@ -59,19 +61,34 @@ namespace CostEffectiveCode.Akka.Actors
             Receive<FetchRequestMessage<TEntity, TSpecification>>(x => Fetch(x));
         }
 
-
         protected virtual void Fetch(FetchRequestMessage<TEntity, TSpecification> requestMessage)
         {
             _logger?.Debug("Received fetch-message");
 
-            IQuery<TEntity, TSpecification> query =
-                _queryFactory != null
-                ? _queryFactory.GetQuery<TEntity, TSpecification, TQuery>()
-                : _queryScope.Instance;
-
+            var query = ResolveQuery();
             if (query == null)
                 throw new InvalidOperationException("Query is unavailable");
 
+            query = AddConstraints(query, requestMessage);
+
+            FetchDataAndTellResponse(requestMessage, query);
+        }
+
+        protected virtual void Fetch(FetchRequestMessageBase requestMessage)
+        {
+            _logger?.Debug("Received fetch-message");
+
+            var query = ResolveQuery();
+            if (query == null)
+                throw new InvalidOperationException("Query is unavailable");
+
+            // no constraints, Caaarl!
+
+            FetchDataAndTellResponse(requestMessage, query);
+        }
+
+        private void FetchDataAndTellResponse(FetchRequestMessageBase requestMessage, IQuery<TEntity, TSpecification> query)
+        {
             var dest = _receiver ?? Context.Sender;
 
             FetchResponseMessage<TEntity> responseMessage;
@@ -93,6 +110,97 @@ namespace CostEffectiveCode.Akka.Actors
 
             dest.Tell(responseMessage, Context.Self);
             _logger?.Debug($"Told the response to {dest}");
+        }
+
+        private IQuery<TEntity, TSpecification> ResolveQuery()
+        {
+            IQuery<TEntity, TSpecification> query =
+                _queryFactory != null
+                    ? ResolveQueryFromFactory()
+                    : _queryScope.Instance;
+            return query;
+        }
+
+        private IQuery<TEntity, TSpecification> AddConstraints(IQuery<TEntity, TSpecification> query, FetchRequestMessage<TEntity, TSpecification> requestMessage)
+        {
+            if (requestMessage.IncludeConstraints != null
+                && requestMessage.IncludeConstraints.Any())
+            {
+                foreach (var include in requestMessage.IncludeConstraints)
+                    AddIncludeConstraint(query, include);
+            }
+
+            if (requestMessage.WhereSpecificationConstraints != null
+                && requestMessage.WhereSpecificationConstraints.Any())
+            {
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (var where in requestMessage.WhereSpecificationConstraints)
+                    query = query.Where(where);
+            }
+
+            if (requestMessage.OrderByConstraints != null
+                && requestMessage.OrderByConstraints.Count > 0)
+            {
+                foreach (var orderBy in requestMessage.OrderByConstraints)
+                    AddOrderByConstraint(query, orderBy);
+            }
+
+            return query;
+        }
+
+        #region BEWARE! ANGRY REFLECTIONS!
+        private void AddOrderByConstraint(IQuery<TEntity, TSpecification> query, object orderByConstraint)
+        {
+            var constraintType = orderByConstraint.GetType();
+            var constraintGenericType = constraintType.GetGenericTypeDefinition();
+
+            if (constraintGenericType != typeof(OrderByConstraint<,>) || constraintType.GenericTypeArguments.Length != 2)
+                throw new InvalidMessageException("Wrong OrderByConstraint specified in FetchRequestMessage<,>");
+
+            var propertyType = constraintType.GetGenericArguments().ElementAt(1);
+
+            var expression = constraintType
+                .GetProperty("Expression")
+                .GetGetMethod()
+                .Invoke(orderByConstraint, new object[] { });
+
+            var sortOrder = constraintType
+                .GetProperty("SortOrder")
+                .GetGetMethod()
+                .Invoke(orderByConstraint, new object[] { });
+
+            var queryOrderByGenericMethodInfo = typeof(IQueryConstraints<,,>)
+                .GetMethod("OrderBy")
+                .MakeGenericMethod(propertyType);
+
+            queryOrderByGenericMethodInfo.Invoke(query, new[] { expression, sortOrder });
+        }
+
+        private void AddIncludeConstraint(IQuery<TEntity, TSpecification> query, LambdaExpression includeExpression)
+        {
+            var constraintType = includeExpression.GetType();
+            var constraintGenericType = constraintType.GetGenericTypeDefinition();
+
+            if (constraintGenericType != typeof(Expression<>) || constraintType.GenericTypeArguments.Length != 1)
+                throw new InvalidMessageException("Wrong IncludeConstraint specified in FetchRequestMessage<,>");
+
+            var funcType = constraintType.GenericTypeArguments.Single();
+            if (funcType.GetGenericTypeDefinition() != typeof(Func<,>) && funcType.GenericTypeArguments.Length != 2)
+                throw new InvalidMessageException("Wrong delegate type in underlying Expression<> of IncludeConstraint specified in FetchRequestMessage<,>");
+
+            var propertyType = funcType.GenericTypeArguments[1];
+
+            var queryIncludeGenericMethodInfo = typeof(IQueryConstraints<,,>)
+                .GetMethod("Include")
+                .MakeGenericMethod(propertyType);
+
+            queryIncludeGenericMethodInfo.Invoke(query, new object[] { includeExpression });
+        }
+        #endregion
+
+        protected virtual TQuery ResolveQueryFromFactory()
+        {
+            return _queryFactory.GetQuery<TEntity, TSpecification, TQuery>();
         }
     }
 }

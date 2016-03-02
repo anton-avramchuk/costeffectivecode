@@ -5,10 +5,10 @@ using CostEffectiveCode.Domain.Ddd.Entities;
 
 namespace CostEffectiveCode.Akka.Messages
 {
-    public class OrderBySpecification<TEntity, TProperty>
+    public class OrderByConstraint<TEntity, TProperty>
         where TEntity : IEntity
     {
-        public OrderBySpecification(
+        public OrderByConstraint(
             Expression<Func<TEntity, TProperty>> expression,
             SortOrder sortOrder = SortOrder.Asc)
         {

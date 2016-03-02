@@ -8,43 +8,32 @@ using CostEffectiveCode.Domain.Ddd.Specifications;
 
 namespace CostEffectiveCode.Akka.Messages
 {
-    public class FetchRequestMessage<TEntity, TSpecification> : IQueryConstraints<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>>
+    public class FetchRequestMessage<TEntity, TSpecification>
+        : FetchRequestMessageBase, IQueryConstraints<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
-        public FetchRequestMessage(bool single)
+        public FetchRequestMessage(bool single) : base(single)
         {
-            Single = single;
-            Page = null;
-            Limit = null;
         }
 
-        public FetchRequestMessage(int page, int limit)
+        public FetchRequestMessage(int page, int limit) : base(page, limit)
         {
-            Single = false;
-            Page = page;
-            Limit = limit;
         }
 
-        public FetchRequestMessage(int limit)
+        public FetchRequestMessage(int limit) : base(limit)
         {
-            Single = false;
-            Page = null;
-            Limit = limit;
         }
-
-        public bool Single { get; set; }
-
-        public int? Page { get; set; }
-
-        public int? Limit { get; set; }
 
 
         public ICollection<TSpecification> WhereSpecificationConstraints { get; protected set; }
+            = new List<TSpecification>();
 
         public IList OrderByConstraints { get; protected set; }
+            = new ArrayList();
 
         public ICollection<LambdaExpression> IncludeConstraints { get; protected set; }
+            = new List<LambdaExpression>();
 
         public FetchRequestMessage<TEntity, TSpecification> Where(TSpecification specification)
         {
@@ -60,7 +49,7 @@ namespace CostEffectiveCode.Akka.Messages
             if (expression == null) throw new ArgumentNullException(nameof(expression));
 
             OrderByConstraints.Add(
-                new OrderBySpecification<TEntity, TProperty>(expression, sortOrder));
+                new OrderByConstraint<TEntity, TProperty>(expression, sortOrder));
 
             return this;
         }
@@ -73,5 +62,7 @@ namespace CostEffectiveCode.Akka.Messages
 
             return this;
         }
+
+
     }
 }
