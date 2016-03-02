@@ -42,7 +42,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
             queryActor.Tell(new FetchRequestMessage(10));
 
             // assert
-            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>();
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 30));
 
             Assert.NotNull(responseMessage.Entities);
             Assert.True(responseMessage.Entities.Count() > 1);
