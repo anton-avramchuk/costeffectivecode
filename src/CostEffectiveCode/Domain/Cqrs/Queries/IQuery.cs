@@ -9,17 +9,10 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
     [PublicAPI]
     public interface IQuery<TEntity, in TSpecification>
+        : IQueryConstraints<TEntity, TSpecification, IQuery<TEntity, TSpecification>>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
-        IQuery<TEntity, TSpecification> Where([NotNull] TSpecification specification);
-
-        IQuery<TEntity, TSpecification> OrderBy<TProperty>(
-           [NotNull] Expression<Func<TEntity, TProperty>> expression,
-           SortOrder sortOrder = SortOrder.Asc);
-
-        IQuery<TEntity, TSpecification> Include<TProperty>(
-            [NotNull] Expression<Func<TEntity, TProperty>> expression);
 
         [NotNull]
         TEntity Single();
