@@ -23,6 +23,15 @@
             Limit = limit;
         }
 
+        public FetchRequestMessageBase()
+        {
+            // Fetch all
+
+            Single = false;
+            Page = null;
+            Limit = null;
+        }
+
         public bool Single { get; set; }
 
         public int? Page { get; set; }

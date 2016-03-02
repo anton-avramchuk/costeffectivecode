@@ -16,6 +16,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
 {
     public class QueryActorTests : TestKit
     {
+        private const int MaxProducts = 6;
         private readonly IConfigurationRoot _configuration;
 
         public QueryActorTests()
@@ -30,9 +31,59 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         }
 
         [Fact]
-        public void FetchRequestMessageTold_FetchResponseMessageReceived()
+        public void RequestedAll_ResponsedAllEntities()
         {
-            // arrange
+            GeneralCase(new FetchRequestMessageBase(), x => x.Entities.Count() >= MaxProducts);
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(1)]
+        [InlineData(0)]
+        public void RequestedLimitedNumber_ToldLimitedNumber(int limit)
+        {
+            GeneralCase(new FetchRequestMessageBase(limit), x => x.Entities.Count() == limit);
+        }
+        
+        [Fact]
+        public void RequestedSingle_ResponsedFailure()
+        {
+            // assert
+            var queryActor = GeneralCaseArrange();
+
+            // act
+            GeneralCaseAct(new FetchRequestMessageBase(true), queryActor);
+
+            // assert
+            var failureMessage = ExpectMsg<Failure>(new TimeSpan(0, 0, 10));
+            Assert.NotNull(failureMessage.Exception);
+            Assert.NotNull(failureMessage.Timestamp);
+        }
+
+
+        private void GeneralCase(FetchRequestMessageBase request, Func<FetchResponseMessage<Product>, bool> assertFunc)
+        {
+            // assert
+            var queryActor = GeneralCaseArrange();
+
+            // act
+            GeneralCaseAct(request, queryActor);
+
+            // assert
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 10));
+
+            Assert.NotNull(responseMessage.Entities);
+            Assert.True(assertFunc(responseMessage)); // magic number assumed to present in db at least
+        }
+
+        private static void GeneralCaseAct(FetchRequestMessageBase request, IActorRef queryActor)
+        {
+            queryActor.Tell(request);
+        }
+
+        private IActorRef GeneralCaseArrange()
+        {
+// arrange
             var scopedExpressionQuery = new ScopedExpressionQuery<Product, SampleDbContext>(
                 () => new SampleDbContext(_configuration["Data:DefaultConnection:ConnectionString"]), x => true);
 
@@ -40,15 +91,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
                 Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(
                     new PassThroughScope<ScopedExpressionQuery<Product, SampleDbContext>>(scopedExpressionQuery),
                     null, null)), "queryActorProduct");
-
-            // act
-            queryActor.Tell(new FetchRequestMessageBase(10));
-
-            // assert
-            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 30));
-
-            Assert.NotNull(responseMessage.Entities);
-            Assert.True(responseMessage.Entities.Count() > 1);
+            return queryActor;
         }
     }
 }

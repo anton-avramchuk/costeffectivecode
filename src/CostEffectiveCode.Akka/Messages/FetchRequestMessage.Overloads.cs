@@ -17,5 +17,9 @@ namespace CostEffectiveCode.Akka.Messages
         public FetchRequestMessage(int limit) : base(limit)
         {
         }
+
+        public FetchRequestMessage() : base()
+        {
+        }
     }
 }

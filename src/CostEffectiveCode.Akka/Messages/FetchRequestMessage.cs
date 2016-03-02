@@ -25,6 +25,9 @@ namespace CostEffectiveCode.Akka.Messages
         {
         }
 
+        public FetchRequestMessage() : base()
+        {
+        }
 
         public ICollection<TSpecification> WhereSpecificationConstraints { get; protected set; }
             = new List<TSpecification>();

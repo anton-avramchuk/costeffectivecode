@@ -1,20 +1,17 @@
 using CostEffectiveCode.Sample.Domain.Entities;
+using System.Data.Entity.Migrations;
 
 namespace CostEffectiveCode.Sample.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CostEffectiveCode.Sample.Data.SampleDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SampleDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(CostEffectiveCode.Sample.Data.SampleDbContext context)
+        protected override void Seed(SampleDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

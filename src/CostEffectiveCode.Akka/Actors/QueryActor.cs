@@ -45,6 +45,7 @@ namespace CostEffectiveCode.Akka.Actors
             _logger = logger;
 
             Receive<FetchRequestMessage<TEntity, TSpecification>>(x => Fetch(x));
+            Receive<FetchRequestMessageBase>(x => FetchBase(x));
         }
 
         public QueryActor([NotNull] IQueryFactory queryFactory, [CanBeNull] ICanTell receiver,
@@ -71,10 +72,10 @@ namespace CostEffectiveCode.Akka.Actors
 
             query = AddConstraints(query, requestMessage);
 
-            FetchDataAndTellResponse(requestMessage, query);
+            FetchInner(requestMessage, query);
         }
 
-        protected virtual void Fetch(FetchRequestMessageBase requestMessage)
+        protected virtual void FetchBase(FetchRequestMessageBase requestMessage)
         {
             _logger?.Debug("Received fetch-message");
 
@@ -84,39 +85,48 @@ namespace CostEffectiveCode.Akka.Actors
 
             // no constraints, Caaarl!
 
-            FetchDataAndTellResponse(requestMessage, query);
+            FetchInner(requestMessage, query);
         }
 
-        private void FetchDataAndTellResponse(FetchRequestMessageBase requestMessage, IQuery<TEntity, TSpecification> query)
+        private void FetchInner(FetchRequestMessageBase requestMessage, IQuery<TEntity, TSpecification> query)
         {
             var dest = _receiver ?? Context.Sender;
 
-            FetchResponseMessage<TEntity> responseMessage;
+            try
+            {
 
-            if (requestMessage.Single)
-                responseMessage = new FetchResponseMessage<TEntity>(
-                    query.Single());
-            else if (requestMessage.Limit != null && requestMessage.Page != null)
-                responseMessage =
-                    new FetchResponseMessage<TEntity>(
-                        query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
-            else if (requestMessage.Limit != null)
-                responseMessage =
-                    new FetchResponseMessage<TEntity>(
-                        query.Take(requestMessage.Limit.Value));
-            else
-                responseMessage = new FetchResponseMessage<TEntity>(
-                    query.All());
+                FetchResponseMessage<TEntity> responseMessage;
 
-            dest.Tell(responseMessage, Context.Self);
-            _logger?.Debug($"Told the response to {dest}");
+                if (requestMessage.Single)
+                    responseMessage = new FetchResponseMessage<TEntity>(
+                        query.Single());
+                else if (requestMessage.Limit != null && requestMessage.Page != null)
+                    responseMessage =
+                        new FetchResponseMessage<TEntity>(
+                            query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
+                else if (requestMessage.Limit != null)
+                    responseMessage =
+                        new FetchResponseMessage<TEntity>(
+                            query.Take(requestMessage.Limit.Value));
+                else
+                    responseMessage = new FetchResponseMessage<TEntity>(
+                        query.All());
+
+                dest.Tell(responseMessage, Context.Self);
+                _logger?.Debug($"Told the response to {dest}");
+            }
+            catch (Exception e)
+            {
+                dest.Tell(new Failure { Exception = e, Timestamp = DateTime.Now }, Context.Self);
+                throw;
+            }
         }
 
         private IQuery<TEntity, TSpecification> ResolveQuery()
         {
             IQuery<TEntity, TSpecification> query =
                 _queryFactory != null
-                    ? ResolveQueryFromFactory()
+                    ? ResolveQueryFromFactory(_queryFactory)
                     : _queryScope.Instance;
             return query;
         }
@@ -198,7 +208,7 @@ namespace CostEffectiveCode.Akka.Actors
         }
         #endregion
 
-        protected virtual TQuery ResolveQueryFromFactory()
+        protected virtual TQuery ResolveQueryFromFactory(IQueryFactory queryFactory)
         {
             return _queryFactory.GetQuery<TEntity, TSpecification, TQuery>();
         }

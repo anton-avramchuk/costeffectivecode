@@ -37,6 +37,11 @@ namespace CostEffectiveCode.Akka.Actors
         {
             Receive<FetchRequestMessage<TEntity>>(x => Fetch(x));
         }
+
+        protected override IQuery<TEntity, IExpressionSpecification<TEntity>> ResolveQueryFromFactory(IQueryFactory queryFactory)
+        {
+            return queryFactory.GetQuery<TEntity>();
+        }
     }
 
     public class QueryActor<TEntity, TSpecification> :
@@ -69,6 +74,10 @@ namespace CostEffectiveCode.Akka.Actors
             Receive<FetchRequestMessage<TEntity, TSpecification>>(x => Fetch(x));
         }
 
+        protected override IQuery<TEntity, TSpecification> ResolveQueryFromFactory(IQueryFactory queryFactory)
+        {
+            return queryFactory.GetQuery<TEntity, TSpecification>();
+        }
     }
 
 }
