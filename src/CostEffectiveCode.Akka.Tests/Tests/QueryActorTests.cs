@@ -8,17 +8,24 @@ using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
 using CostEffectiveCode.Sample.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace CostEffectiveCode.Akka.Tests.Tests
 {
-    public class QueryActorTest : TestKit
+    public class QueryActorTests : TestKit
     {
-        public static string ConnectionString = @"Data Source=.;Initial Catalog=CostEffectiveCode_Sample_Data_Tests;Integrated Security=False;MultipleActiveResultSets=True;User ID=superuser;Password=Devpas123";
+        private readonly IConfigurationRoot _configuration;
 
-        public QueryActorTest()
+        public QueryActorTests()
             : base(@"akka.loglevel = DEBUG")
         {
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json");
+
+            //builder.AddEnvironmentVariables();
+
+            _configuration = builder.Build();
         }
 
         [Fact]
@@ -26,7 +33,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         {
             // arrange
             var scopedExpressionQuery = new ScopedExpressionQuery<Product, SampleDbContext>(
-                () => new SampleDbContext(ConnectionString), x => true);
+                () => new SampleDbContext(_configuration["Data:DefaultConnection:ConnectionString"]), x => true);
 
             var queryActor = Sys.ActorOf(
                 Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(scopedExpressionQuery, null, null)), "queryActorProduct");

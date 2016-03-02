@@ -13,7 +13,9 @@
     "xunit": "2.1.0",
     "CostEffectiveCode.EntityFramework6": "2.4.0",
     "CostEffectiveCode.Sample.Data": "1.0.0-*",
-    "CostEffectiveCode.Sample.Domain": "1.0.0-*"
+    "CostEffectiveCode.Sample.Domain": "1.0.0-*",
+    "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final"
   },
   "commands": {
     "test": "xunit.runner.dnx"
