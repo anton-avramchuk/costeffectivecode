@@ -50,7 +50,7 @@ namespace CostEffectiveCode.Akka.Actors
 
         protected virtual void Fetch(FetchRequestMessage requestMessage)
         {
-            _logger.Debug("Received fetch-message");
+            _logger?.Debug("Received fetch-message");
 
             if (_queryFactory != null)
                 _query = _queryFactory.GetQuery<TEntity, TSpecification>();
@@ -80,7 +80,7 @@ namespace CostEffectiveCode.Akka.Actors
                     _query.All());
 
             dest.Tell(responseMessage, Context.Self);
-            _logger.Debug($"Told the response to {dest}");
+            _logger?.Debug($"Told the response to {dest}");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
 {
     public class IocConfig
     {
-        public static string ConnectionString = @"Data Source=.;Initial Catalog=CostEffectiveCode_WebApi2_Tests;Integrated Security=False;MultipleActiveResultSets=True;User ID=superuser;Password=Devpas123";
+        public static string ConnectionString = @"Data Source=.;Initial Catalog=CostEffectiveCode_Sample_Data_Tests;Integrated Security=False;MultipleActiveResultSets=True;User ID=superuser;Password=Devpas123";
 
         public static IContainer Configure()
         {
