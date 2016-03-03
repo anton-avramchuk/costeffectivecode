@@ -95,7 +95,6 @@ namespace CostEffectiveCode.Akka.Actors
 
             try
             {
-
                 FetchResponseMessage<TEntity> responseMessage;
 
                 if (requestMessage.Single)

@@ -16,7 +16,11 @@ namespace CostEffectiveCode.Akka.Tests
     public class ContainerConfig
     {
         public IContainer AutofacContainer { get; private set; }
-        public IDiContainer Container { get; private set; }
+
+        private IDiContainer _container;
+        public IDiContainer Container =>
+            _container ?? (_container = new AutofacDiContainer(AutofacContainer));
+
         public IConfigurationRoot Configuration { get; private set; }
 
         public void Configure()
@@ -35,7 +39,7 @@ namespace CostEffectiveCode.Akka.Tests
         {
             var builder = new ContainerBuilder();
             builder
-                .Register(ResolveDiContainer)
+                .Register(x => Container)
                 .As<IDiContainer>()
                 .SingleInstance();
 
@@ -69,12 +73,6 @@ namespace CostEffectiveCode.Akka.Tests
                 .As<IDataContext>();
 
             return builder.Build();
-        }
-
-
-        private IDiContainer ResolveDiContainer(IComponentContext context)
-        {
-            return Container ?? (Container = new AutofacDiContainer(AutofacContainer));
         }
     }
 }
