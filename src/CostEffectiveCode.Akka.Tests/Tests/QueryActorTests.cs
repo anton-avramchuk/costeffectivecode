@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Akka.Actor;
+using Akka.DI.AutoFac;
+using Akka.DI.Core;
 using Akka.TestKit.Xunit2;
 using CostEffectiveCode.Akka.Actors;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Common;
-using CostEffectiveCode.Common.Scope;
-using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.Domain.Ddd.Specifications;
-using CostEffectiveCode.EntityFramework6;
-using CostEffectiveCode.Sample.Data;
 using CostEffectiveCode.Sample.Domain.Entities;
-using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace CostEffectiveCode.Akka.Tests.Tests
@@ -19,21 +14,17 @@ namespace CostEffectiveCode.Akka.Tests.Tests
     public class QueryActorTests : TestKit
     {
         private const int MaxProducts = 6;
-        private readonly IConfigurationRoot _configuration;
-        private IDiContainer _container;
 
         public QueryActorTests()
             : base(@"akka.loglevel = DEBUG")
         {
-            
+            var containerConfig = new ContainerConfig();
+            containerConfig.Configure();
 
-            var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appsettings.json");
-
-            //builder.AddEnvironmentVariables();
-
-            _configuration = builder.Build();
+            // ReSharper disable once ObjectCreationAsStatement
+            new AutoFacDependencyResolver(containerConfig.AutofacContainer, Sys);
         }
+
 
         [Fact]
         public void RequestedAll_ResponsedAllEntities()
@@ -49,7 +40,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         {
             GeneralCase(new FetchRequestMessageBase(limit), x => x.Entities.Count() == limit);
         }
-        
+
         [Fact]
         public void RequestedSingle_ResponsedFailure()
         {
@@ -88,15 +79,9 @@ namespace CostEffectiveCode.Akka.Tests.Tests
 
         private IActorRef GeneralCaseArrange()
         {
-            var scopedExpressionQuery = new ScopedExpressionQuery<Product, SampleDbContext>(
-                () => new SampleDbContext(_configuration["Data:DefaultConnection:ConnectionString"]), x => true);
+            var queryActorProps = Sys.DI().Props<QueryActor<Product>>();
 
-            var queryActor = Sys.ActorOf(
-                Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(
-                    new DiContainerScope<IQuery<Product, ExpressionSpecification<Product>>>(_container),
-                    new PassThroughScope<ScopedExpressionQuery<Product, SampleDbContext>>(scopedExpressionQuery),
-                    null, null)), "queryActorProduct");
-            return queryActor;
+            return Sys.ActorOf(queryActorProps, "queryActorProduct");
         }
     }
 }

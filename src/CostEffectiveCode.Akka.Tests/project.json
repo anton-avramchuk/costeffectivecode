@@ -7,7 +7,10 @@
   "licenseUrl": "",
   "dependencies": {
     "CostEffectiveCode.Akka": { },
+    "CostEffectiveCode.Autofac": { },
+    "Autofac": "3.5.2",
     "Akka": "1.0.6",
+    "Akka.DI.AutoFac": "1.0.6",
     "Akka.TestKit": "1.0.6",
     "Akka.TestKit.Xunit2": "1.0.6",
     "xunit": "2.1.0",
