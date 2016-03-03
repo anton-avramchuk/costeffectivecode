@@ -10,10 +10,8 @@ namespace CostEffectiveCode.Akka.Messages
     {
         public IEnumerable<TEntity> Entities { get; }
 
-        public FetchResponseMessage([NotNull] TEntity entity)
+        public FetchResponseMessage([CanBeNull] TEntity entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-
             Entities = new List<TEntity> { entity };
         }
 

@@ -6,7 +6,7 @@ namespace CostEffectiveCode.Akka.Messages
     public class FetchRequestMessage<TEntity> : FetchRequestMessage<TEntity, IExpressionSpecification<TEntity>>
         where TEntity : class, IEntity
     {
-        public FetchRequestMessage(bool single) : base(single)
+        public FetchRequestMessage(bool single, bool firstOrDefault) : base(single, firstOrDefault)
         {
         }
 

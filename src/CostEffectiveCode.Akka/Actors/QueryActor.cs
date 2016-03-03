@@ -100,6 +100,9 @@ namespace CostEffectiveCode.Akka.Actors
                 if (requestMessage.Single)
                     responseMessage = new FetchResponseMessage<TEntity>(
                         query.Single());
+                else if (requestMessage.FirstOrDefault)
+                    responseMessage = new FetchResponseMessage<TEntity>(
+                        query.FirstOrDefault());
                 else if (requestMessage.Limit != null && requestMessage.Page != null)
                     responseMessage =
                         new FetchResponseMessage<TEntity>(

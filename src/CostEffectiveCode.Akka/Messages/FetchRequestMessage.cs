@@ -13,7 +13,7 @@ namespace CostEffectiveCode.Akka.Messages
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
-        public FetchRequestMessage(bool single) : base(single)
+        public FetchRequestMessage(bool single, bool firstOrDefault) : base(single, firstOrDefault)
         {
         }
 

@@ -52,7 +52,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
             var queryActor = GeneralArrange();
 
             // act
-            GeneralAct(new FetchRequestMessageBase(true), queryActor);
+            GeneralAct(new FetchRequestMessageBase(true, false), queryActor);
 
             // assert
             var failureMessage = ExpectMsg<Failure>(new TimeSpan(0, 0, 10));
