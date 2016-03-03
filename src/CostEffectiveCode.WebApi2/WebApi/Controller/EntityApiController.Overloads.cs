@@ -7,17 +7,6 @@ using CostEffectiveCode.Domain.Ddd.Entities;
 
 namespace CostEffectiveCode.WebApi2.WebApi.Controller
 {
-    public class EntityApiController<TEntity, TPrimaryKey, TViewModel> : EntityApiController<TEntity, TPrimaryKey, TViewModel, TViewModel>
-        where TEntity : class, IEntityBase<TPrimaryKey>
-        where TPrimaryKey : struct, IComparable<TPrimaryKey>
-    {
-        public EntityApiController(IQueryFactory queryFactory, ICommandFactory commandFactory, IMapper mapper, ILogger logger)
-            : base(queryFactory, commandFactory, mapper, logger)
-        {
-        }
-
-    }
-
     public class EntityApiController<TEntity, TPrimaryKey> : EntityApiController<TEntity, TPrimaryKey, TEntity>
         where TEntity : class, IEntityBase<TPrimaryKey>
         where TPrimaryKey : struct, IComparable<TPrimaryKey>
@@ -26,6 +15,17 @@ namespace CostEffectiveCode.WebApi2.WebApi.Controller
             : base(queryFactory, commandFactory, mapper, logger)
         {
         }
+    }
+
+    public class EntityApiController<TEntity, TPrimaryKey, TViewModel> : EntityApiController<TEntity, TPrimaryKey, TViewModel, TViewModel>
+    where TEntity : class, IEntityBase<TPrimaryKey>
+    where TPrimaryKey : struct, IComparable<TPrimaryKey>
+    {
+        public EntityApiController(IQueryFactory queryFactory, ICommandFactory commandFactory, IMapper mapper, ILogger logger)
+            : base(queryFactory, commandFactory, mapper, logger)
+        {
+        }
 
     }
+
 }

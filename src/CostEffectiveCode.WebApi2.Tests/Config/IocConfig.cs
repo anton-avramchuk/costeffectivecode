@@ -8,9 +8,12 @@ using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Cqrs;
 using CostEffectiveCode.Domain.Cqrs.Commands;
+using CostEffectiveCode.Domain.Cqrs.Queries;
+using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
+using CostEffectiveCode.Sample.Domain.Entities;
 using Microsoft.Owin.Logging;
 
 namespace CostEffectiveCode.WebApi2.Tests.Config
@@ -50,7 +53,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
                 .As<IDataContext>()
                 .As<IUnitOfWork>()
                 .As<ILinqProvider>()
-                .InstancePerLifetimeScope();                ;
+                .InstancePerLifetimeScope(); ;
         }
 
         private static void Mapping(ContainerBuilder builder)
@@ -78,22 +81,31 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
 
         private static void Cqrs(ContainerBuilder builder)
         {
-            builder.RegisterType<CommandQueryFactory>()
+            builder
+                .RegisterType<CommandQueryFactory>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            builder.RegisterGeneric(typeof (CreateEntityCommand<>))
+            builder
+                .RegisterGeneric(typeof(CreateEntityCommand<>))
                 .InstancePerDependency();
 
-            builder.RegisterGeneric(typeof (DeleteEntityCommand<>))
+            builder
+                .RegisterGeneric(typeof(DeleteEntityCommand<>))
                 .InstancePerDependency();
 
-            builder.RegisterType<CommitCommand>()
+            builder
+                .RegisterType<CommitCommand>()
                 .InstancePerDependency();
 
-            builder.RegisterGeneric(typeof (ExpressionQuery<>))
-                .AsImplementedInterfaces()
+            builder
+                .RegisterType<ExpressionQuery<Product>>()
+                .As<IQuery<Product, IExpressionSpecification<Product>>>()
                 .InstancePerDependency();
+
+            builder
+                .RegisterGeneric(typeof(ExpressionSpecification<>))
+                .As(typeof(IExpressionSpecification<>));
         }
     }
 }

@@ -189,10 +189,9 @@ namespace CostEffectiveCode.WebApi2.WebApi.Controller
 
             if (Include != null)
             {
+                // ReSharper disable once LoopCanBeConvertedToQuery
                 foreach (var expression in Include)
-                {
                     query = query.Include(expression);
-                }
             }
 
             return query;
