@@ -1,20 +1,8 @@
-﻿using System;
+using System;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common
+namespace CostEffectiveCode.Common.Scope
 {
-    /// <summary>
-    /// Represents object lifetime scope
-    /// </summary>
-    /// <typeparam name="T">instance type</typeparam>
-    [PublicAPI]
-    public interface IScope<out T>
-    {
-        T Instance { get; }
-
-        // TODO: Possibly, BeginScope/EndScope methods should be added
-    }
-
     /// <summary>
     /// Pass-through implementation of IScope&lt;&gt;
     /// Does nothing more than encapsulates given object's instance

@@ -5,6 +5,7 @@ using Autofac.Integration.WebApi;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.AutoMapper;
 using CostEffectiveCode.Common.Logger;
+using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Cqrs;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;

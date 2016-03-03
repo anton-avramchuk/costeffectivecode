@@ -1,6 +1,4 @@
-﻿using CostEffectiveCode.Common;
-
-namespace CostEffectiveCode.WebApi2.Tests
+﻿namespace CostEffectiveCode.Common.Scope
 {
     public class DiContainerScope<T> : IScope<T>
     {

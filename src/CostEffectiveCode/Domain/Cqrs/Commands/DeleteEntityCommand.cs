@@ -1,4 +1,5 @@
 ﻿using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;

@@ -5,6 +5,8 @@ using Akka.TestKit.Xunit2;
 using CostEffectiveCode.Akka.Actors;
 using CostEffectiveCode.Akka.Messages;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Scope;
+using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
@@ -18,10 +20,13 @@ namespace CostEffectiveCode.Akka.Tests.Tests
     {
         private const int MaxProducts = 6;
         private readonly IConfigurationRoot _configuration;
+        private IDiContainer _container;
 
         public QueryActorTests()
             : base(@"akka.loglevel = DEBUG")
         {
+            
+
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile("appsettings.json");
 
@@ -63,7 +68,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
 
         private void GeneralCase(FetchRequestMessageBase request, Func<FetchResponseMessage<Product>, bool> assertFunc)
         {
-            // assert
+            // arrange
             var queryActor = GeneralCaseArrange();
 
             // act
@@ -83,12 +88,12 @@ namespace CostEffectiveCode.Akka.Tests.Tests
 
         private IActorRef GeneralCaseArrange()
         {
-// arrange
             var scopedExpressionQuery = new ScopedExpressionQuery<Product, SampleDbContext>(
                 () => new SampleDbContext(_configuration["Data:DefaultConnection:ConnectionString"]), x => true);
 
             var queryActor = Sys.ActorOf(
                 Props.Create(() => new QueryActor<Product, ExpressionSpecification<Product>>(
+                    new DiContainerScope<IQuery<Product, ExpressionSpecification<Product>>>(_container),
                     new PassThroughScope<ScopedExpressionQuery<Product, SampleDbContext>>(scopedExpressionQuery),
                     null, null)), "queryActorProduct");
             return queryActor;

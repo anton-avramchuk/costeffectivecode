@@ -1,4 +1,5 @@
 ﻿using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.Domain.Cqrs.Commands

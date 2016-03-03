@@ -1,5 +1,6 @@
 ﻿using System;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
