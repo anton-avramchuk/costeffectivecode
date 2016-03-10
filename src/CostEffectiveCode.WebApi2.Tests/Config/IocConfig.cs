@@ -40,7 +40,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
         private static void Logging(ContainerBuilder builder)
         {
             builder.RegisterType<ConsoleLogger>()
-                .As<CostEffectiveCode.Common.Logger.ILogger>()
+                .As<Common.Logger.ILogger>()
                 .InstancePerRequest();
         }
 
