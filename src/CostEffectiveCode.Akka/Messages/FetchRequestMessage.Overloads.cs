@@ -1,4 +1,6 @@
-﻿using CostEffectiveCode.Domain.Ddd.Entities;
+﻿using System;
+using System.Linq.Expressions;
+using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 
 namespace CostEffectiveCode.Akka.Messages
@@ -20,6 +22,13 @@ namespace CostEffectiveCode.Akka.Messages
 
         public FetchRequestMessage() : base()
         {
+        }
+
+        public FetchRequestMessage<TEntity> Where(Expression<Func<TEntity, bool>> expression)
+        {
+            var specification = new ExpressionSpecification<TEntity>(expression);
+
+            return (FetchRequestMessage<TEntity>)Where(specification);
         }
     }
 }
