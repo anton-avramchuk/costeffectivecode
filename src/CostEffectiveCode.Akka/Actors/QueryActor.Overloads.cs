@@ -29,6 +29,12 @@ namespace CostEffectiveCode.Akka.Actors
             ReceiveAdditional();
         }
 
+        public QueryActor([NotNull] IQuery<TEntity, IExpressionSpecification<TEntity>> query)
+            : base(query)
+        {
+            ReceiveAdditional();
+        }
+
         public QueryActor([NotNull] IQueryFactory queryFactory, [CanBeNull] ICanTell receiver, [CanBeNull] ILogger logger) : base(queryFactory, receiver, logger)
         {
             ReceiveAdditional();
@@ -56,6 +62,12 @@ namespace CostEffectiveCode.Akka.Actors
         }
 
         public QueryActor([NotNull] IQueryFactory query) : base(query)
+        {
+            ReceiveAdditional();
+        }
+
+        public QueryActor([NotNull] IQuery<TEntity, TSpecification> query)
+            : base(query)
         {
             ReceiveAdditional();
         }

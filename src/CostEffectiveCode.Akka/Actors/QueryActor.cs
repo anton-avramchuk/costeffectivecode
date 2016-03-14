@@ -29,6 +29,11 @@ namespace CostEffectiveCode.Akka.Actors
         {
         }
 
+        public QueryActor([NotNull] TQuery query)
+            : this(new PassThroughScope<TQuery>(query))
+        {
+        }
+
         public QueryActor([NotNull] IQueryFactory query)
             : this(query, null, null)
         {
