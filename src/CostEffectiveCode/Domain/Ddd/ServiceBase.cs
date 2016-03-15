@@ -7,7 +7,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.Domain.Ddd
 {
-    public abstract class ServiceBase
+    public abstract class ServiceBase : IService
     {
         protected readonly ICommandFactory CommandFactory;
         protected readonly IQueryFactory QueryFactory;
@@ -22,10 +22,10 @@ namespace CostEffectiveCode.Domain.Ddd
                 throw new ArgumentNullException(nameof(commandFactory));
             if (queryFactory == null)
                 throw new ArgumentNullException(nameof(queryFactory));
-            this.CommandFactory = commandFactory;
-            this.QueryFactory = queryFactory;
-            this.Logger = logger;
-            this.UowScope = uowScope;
+            CommandFactory = commandFactory;
+            QueryFactory = queryFactory;
+            Logger = logger;
+            UowScope = uowScope;
         }
     }
 }
