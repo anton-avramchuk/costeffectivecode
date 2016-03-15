@@ -48,11 +48,11 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         [Fact]
         public void RequestedSingle_ResponsedFailure()
         {
-            // assert
-            var queryActor = GeneralArrange();
+            // arrange
+            var queryActor = GetEmptyQueryActor();
 
             // act
-            GeneralAct(new FetchRequestMessageBase(true, false), queryActor);
+            queryActor.Tell(new FetchRequestMessageBase(true, false));
 
             // assert
             var failureMessage = ExpectMsg<Failure>(new TimeSpan(0, 0, 10));
@@ -72,10 +72,13 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         [Fact]
         public void WithBaseQuery_RequestedAll_ResponsedAll()
         {
+            // arrange
             var queryActor = GetBaseQueryActor();
 
-            GeneralAct(new FetchRequestMessageBase(), queryActor);
+            // act
+            queryActor.Tell(new FetchRequestMessageBase());
 
+            // assert
             GeneralAssert(x => x.Entities.Count() >= MaxEntities);
         }
 
@@ -84,8 +87,9 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         {
             var queryActor = GetBaseQueryActor();
 
-            GeneralAct(new FetchRequestMessage<Product>()
-                    .Where(new ExpressionSpecification<Product>(x => x.Price >= 1000)), queryActor);
+            queryActor.Tell(
+                new FetchRequestMessage<Product>()
+                    .Where(new ExpressionSpecification<Product>(x => x.Price >= 1000)));
 
             GeneralAssert(x => x.Entities.Count() < MaxEntities && x.Entities.All(y => y.Price >= 1000));
         }
@@ -96,34 +100,29 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         [InlineData(0)]
         public void WithBaseQuery_RequestedLimited_ResponsedLimitedNumber(int limit)
         {
+            // arrange
             var queryActor = Sys.ActorOf(Props.Create(() =>
                 new QueryActor<Product>(
                     new DelegateScope<IQuery<Product, IExpressionSpecification<Product>>>(GetBaseQuery)
                 )));
 
-            GeneralAct(new FetchRequestMessageBase(3), queryActor);
+            // act
+            queryActor.Tell(new FetchRequestMessageBase(3));
 
+            // assert
             GeneralAssert(x => x.Entities.Count() == 3);
         }
 
-
-
-
-        private void GeneralCase(FetchRequestMessageBase request, Func<FetchResponseMessage<Product>, bool> assertFunc)
+        private void GeneralCase(FetchRequestMessageBase requestMessage, Func<FetchResponseMessage<Product>, bool> assertFunc)
         {
             // arrange
-            var queryActor = GeneralArrange();
+            var queryActor = GetEmptyQueryActor();
 
             // act
-            GeneralAct(request, queryActor);
+            queryActor.Tell(requestMessage);
 
             // assert
             GeneralAssert(assertFunc);
-        }
-
-        private IActorRef GeneralArrange()
-        {
-            return GetEmptyQueryActor();
         }
 
         private IActorRef GetEmptyQueryActor()
@@ -142,18 +141,16 @@ namespace CostEffectiveCode.Akka.Tests.Tests
             return queryActor;
         }
 
-        private IQuery<Product, IExpressionSpecification<Product>> GetBaseQuery()
-        {
-            return _containerConfig
+        private IQuery<Product, IExpressionSpecification<Product>> GetBaseQuery() =>
+            _containerConfig
                 .Container
                 .Resolve<IQuery<Product, IExpressionSpecification<Product>>>()
                 .Where(x => x.Active);
-        }
 
-        private static void GeneralAct(FetchRequestMessageBase request, IActorRef queryActor)
-        {
-            queryActor.Tell(request);
-        }
+        //private static void GeneralAct(FetchRequestMessageBase request, IActorRef queryActor)
+        //{
+        //    queryActor.Tell(request);
+        //}
 
         private void GeneralAssert(Func<FetchResponseMessage<Product>, bool> assertFunc)
         {
