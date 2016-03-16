@@ -31,7 +31,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         }
 
         [Fact]
-        public void RequestedAll_ResponsedAllEntities()
+        public void AskedForAllProducts_GotAllProducts()
         {
             GeneralCase(new FetchRequestMessageBase(), x => x.Entities.Count() >= MaxEntities);
         }
@@ -40,13 +40,13 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         [InlineData(3)]
         [InlineData(1)]
         [InlineData(0)]
-        public void RequestedLimitedNumber_ToldLimitedNumber(int limit)
+        public void AskedForSeveralProducts_GotSeveralProducts(int limit)
         {
             GeneralCase(new FetchRequestMessageBase(limit), x => x.Entities.Count() == limit);
         }
 
         [Fact]
-        public void RequestedSingle_ResponsedFailure()
+        public void AskedForSingleProduct_GotFailure()
         {
             // arrange
             var queryActor = GetEmptyQueryActor();
@@ -61,7 +61,74 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         }
 
         [Fact]
-        public void RequestedFiltered_ResponsedFiltered()
+        public void AskedForFirstProductWithCategory_GotOneProductWithCategory()
+        {
+            // arrange
+            var queryActor = GetEmptyQueryActor();
+
+            // act
+            queryActor.Tell(new FetchRequestMessage<Product>(false, true)
+                .Include(x => x.Category));
+
+            // assert
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 10));
+
+            Assert.NotNull(responseMessage.Entities);
+            Assert.NotNull(responseMessage.Entities.Single());
+            Assert.NotNull(responseMessage.Entities.Single().Category);
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(1)]
+        [InlineData(0)]
+        public void AskedForSeveralProductsWithCategories_GotSeveralProductsWithCategories(int limit)
+        {
+            // arrange
+            var queryActor = GetEmptyQueryActor();
+
+            // act
+            queryActor.Tell(new FetchRequestMessage<Product>(limit)
+                .Include(x => x.Category));
+
+            // assert
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 10));
+
+            Assert.NotNull(responseMessage.Entities);
+            Assert.NotNull(responseMessage.Entities.Count() == limit);
+
+            foreach (var product in responseMessage.Entities)
+            {
+                Assert.NotNull(product.Category);
+                Assert.NotNull(product.Category.Products.SingleOrDefault(x => x.Id == product.Id));
+            }
+        }
+
+        [Fact(Skip = "not supported yet for some reason. TODO: investigate!")]
+        public void AskedForFirstProductWithCategoryAndAllItsProducts_GotOneProductWithCategoryAndAllItsProducts()
+        {
+            // arrange
+            var queryActor = GetEmptyQueryActor();
+
+            // act
+            queryActor.Tell(new FetchRequestMessage<Product>(false, true)
+                .Include(x => x.Category.Products));
+                // Hint: does not work: .Include(x => x.Category.Products));
+
+            // assert
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(1, 0, 10));
+
+            Assert.NotNull(responseMessage.Entities);
+            Assert.NotNull(responseMessage.Entities.Single());
+            Assert.NotNull(responseMessage.Entities.Single().Category);
+            Assert.NotNull(responseMessage.Entities.Single().Category.Products);
+            Assert.True(responseMessage.Entities.Single().Category.Products.Count > 1);
+        }
+
+
+
+        [Fact]
+        public void AskedForExpensiveProducts_GotOnlyExpensiveProducts()
         {
             GeneralCase(
                 new FetchRequestMessage<Product>()
@@ -70,7 +137,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         }
 
         [Fact]
-        public void WithBaseQuery_RequestedAll_ResponsedAll()
+        public void BaseQueryActiveProducts_AskedForAllProducts_GotAllProducts()
         {
             // arrange
             var queryActor = GetBaseQueryActor();
@@ -83,7 +150,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         }
 
         [Fact]
-        public void WithBaseQuery_RequestedFiltered_ResponsedFiltered()
+        public void BaseQueryActiveProducts_AskedForExpensiveProducts_GotOnlyActiveExpensiveProducts()
         {
             var queryActor = GetBaseQueryActor();
 
@@ -91,19 +158,20 @@ namespace CostEffectiveCode.Akka.Tests.Tests
                 new FetchRequestMessage<Product>()
                     .Where(new ExpressionSpecification<Product>(x => x.Price >= 1000)));
 
-            GeneralAssert(x => x.Entities.Count() < MaxEntities && x.Entities.All(y => y.Price >= 1000));
+            GeneralAssert(x => x.Entities.Count() < MaxEntities
+                && x.Entities.All(y => y.Active && y.Price >= 1000));
         }
 
         [Theory]
         [InlineData(3)]
         [InlineData(1)]
         [InlineData(0)]
-        public void WithBaseQuery_RequestedLimited_ResponsedLimitedNumber(int limit)
+        public void BaseQueryActiveProducts_AskedForSeveralProducts_GotSeveralProducts(int limit)
         {
             // arrange
             var queryActor = Sys.ActorOf(Props.Create(() =>
                 new QueryActor<Product>(
-                    new DelegateScope<IQuery<Product, IExpressionSpecification<Product>>>(GetBaseQuery)
+                    new DelegateScope<IQuery<Product, IExpressionSpecification<Product>>>(() => BaseActiveProductsQuery)
                 )));
 
             // act
@@ -136,21 +204,16 @@ namespace CostEffectiveCode.Akka.Tests.Tests
         {
             var queryActor = Sys.ActorOf(Props.Create(() =>
                 new QueryActor<Product>(
-                    new DelegateScope<IQuery<Product, IExpressionSpecification<Product>>>(GetBaseQuery)
+                    new DelegateScope<IQuery<Product, IExpressionSpecification<Product>>>(() => BaseActiveProductsQuery)
                     )), "testedQueryActor");
             return queryActor;
         }
 
-        private IQuery<Product, IExpressionSpecification<Product>> GetBaseQuery() =>
+        private IQuery<Product, IExpressionSpecification<Product>> BaseActiveProductsQuery =>
             _containerConfig
                 .Container
                 .Resolve<IQuery<Product, IExpressionSpecification<Product>>>()
-                .Where(x => x.Active);
-
-        //private static void GeneralAct(FetchRequestMessageBase request, IActorRef queryActor)
-        //{
-        //    queryActor.Tell(request);
-        //}
+                .Where(Product.ActiveRule);
 
         private void GeneralAssert(Func<FetchResponseMessage<Product>, bool> assertFunc)
         {

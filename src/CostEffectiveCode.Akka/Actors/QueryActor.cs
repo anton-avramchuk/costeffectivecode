@@ -187,7 +187,7 @@ namespace CostEffectiveCode.Akka.Actors
                 .GetGetMethod()
                 .Invoke(orderByConstraint, new object[] { });
 
-            var queryOrderByGenericMethodInfo = typeof(IQueryConstraints<,,>)
+            var queryOrderByGenericMethodInfo = typeof(IQueryConstraints<TEntity, TSpecification, IQuery<TEntity, TSpecification>>)
                 .GetMethod("OrderBy")
                 .MakeGenericMethod(propertyType);
 
@@ -208,7 +208,7 @@ namespace CostEffectiveCode.Akka.Actors
 
             var propertyType = funcType.GenericTypeArguments[1];
 
-            var queryIncludeGenericMethodInfo = typeof(IQueryConstraints<,,>)
+            var queryIncludeGenericMethodInfo = typeof(IQueryConstraints<TEntity, TSpecification, IQuery<TEntity, TSpecification>>)
                 .GetMethod("Include")
                 .MakeGenericMethod(propertyType);
 

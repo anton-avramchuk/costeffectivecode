@@ -3,6 +3,7 @@ using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.EntityFramework7;
+using CostEffectiveCode.Extensions;
 using CostEffectiveCode.Sample.Domain.Entities;
 using Xunit;
 
@@ -27,6 +28,20 @@ namespace CostEffectiveCode.Tests.Tests
             var single = _query.ById(1);
 
             Assert.Equal(expected, single);
+        }
+
+        [Fact]
+        public void SingleWithIncluded_EntityFetchedWithIncluded()
+        {
+            var expected = DataContext.Provider
+                .Query<Product>()
+                .Single(p => p.Id == 1);
+
+            var single = _query.Include(x => x.Category.Products).Where(x => x.Id == 1).Single();
+
+            Assert.Equal(expected, single);
+            Assert.NotNull(single.Category);
+            Assert.NotNull(single.Category.Products);
         }
 
         [Fact]
