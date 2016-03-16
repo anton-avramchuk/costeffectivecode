@@ -8,22 +8,19 @@ namespace CostEffectiveCode.Sample.Data
     public class SampleDbContext : DbContextBase
     {
         public SampleDbContext()
-            : base("Name=ctx")
+            : this("Name=ctx")
         {
         }
 
         public SampleDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
+            Configuration.LazyLoadingEnabled = true;
+            Configuration.ProxyCreationEnabled = true;
         }
 
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
