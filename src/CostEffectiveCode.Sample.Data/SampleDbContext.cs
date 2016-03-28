@@ -15,6 +15,8 @@ namespace CostEffectiveCode.Sample.Data
         public SampleDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<SampleDbContext>());
+
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = true;
         }
