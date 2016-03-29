@@ -48,13 +48,15 @@ namespace CostEffectiveCode.Akka.Helpers
         }
 
         public static IActorRef QueryActorOf<TEntity>(
-            this IActorRefFactory factory,
-            IDiContainer diContainer,
-            Expression<Func<TEntity, bool>> baseFetchFilter = null,
+            this IActorRefFactory factory, [NotNull] IDiContainer diContainer,
+            [NotNull]Expression<Func<TEntity, bool>> baseFetchFilter,
             string actorName = null,
             [CanBeNull]ILogger logger = null)
             where TEntity : class, IEntityBase<long>
         {
+            if (diContainer == null) throw new ArgumentNullException(nameof(diContainer));
+            if (baseFetchFilter == null) throw new ArgumentNullException(nameof(baseFetchFilter));
+
             var queryScope = new DelegateScope<IQuery<TEntity, IExpressionSpecification<TEntity>>>(
                 () => ResolveQuery(diContainer, baseFetchFilter));
 
@@ -64,16 +66,15 @@ namespace CostEffectiveCode.Akka.Helpers
         }
 
         private static IQuery<TEntity, IExpressionSpecification<TEntity>> ResolveQuery<TEntity>(
-            IDiContainer diContainer, Expression<Func<TEntity, bool>> baseFetchFilter = null)
+            [NotNull] IDiContainer diContainer, [NotNull] Expression<Func<TEntity, bool>> baseFetchFilter)
             where TEntity : class, IEntityBase<long>
         {
-            var query = diContainer
-                .Resolve<IQuery<TEntity, IExpressionSpecification<TEntity>>>();
+            if (diContainer == null) throw new ArgumentNullException(nameof(diContainer));
+            if (baseFetchFilter == null) throw new ArgumentNullException(nameof(baseFetchFilter));
 
-            if (baseFetchFilter != null)
-                query = query.Where(baseFetchFilter);
-
-            return query;
+            return diContainer
+                .Resolve<IQuery<TEntity, IExpressionSpecification<TEntity>>>()
+                .Where(baseFetchFilter);
         }
     }
 }
