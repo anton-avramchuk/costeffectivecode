@@ -19,7 +19,8 @@ namespace CostEffectiveCode.EntityFramework6
             Expression<Func<TEntity, TProperty>> expression)
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));
-            GetQueryable().Include(expression);
+            Queryable = GetQueryable().Include(expression);
+            
             return this;
         }
     }

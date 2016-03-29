@@ -17,7 +17,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         private readonly ILinqProvider _linqProvider;
 
-        private IQueryable<TEntity> _queryable;
+        protected IQueryable<TEntity> Queryable;
 
         private bool _isOrdered;
         #endregion
@@ -36,17 +36,17 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         protected IQueryable<TEntity> GetQueryable(IExpressionSpecification<TEntity> spec = null)
         {
-            if (_queryable == null)
+            if (Queryable == null)
             {
-                _queryable = _linqProvider.Query<TEntity>();
+                Queryable = _linqProvider.Query<TEntity>();
             }
 
             if (spec != null)
             {
-                _queryable = _queryable.Where(spec.Expression);
+                Queryable = Queryable.Where(spec.Expression);
             }
 
-            return _queryable;
+            return Queryable;
         }
 
         public IQuery<TEntity, IExpressionSpecification<TEntity>> Where(
@@ -67,16 +67,16 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
             if (_isOrdered)
             {
-                var entities = (IOrderedQueryable<TEntity>)_queryable;
-                _queryable = sorting.SortOrder == SortOrder.Asc
+                var entities = (IOrderedQueryable<TEntity>)Queryable;
+                Queryable = sorting.SortOrder == SortOrder.Asc
                     ? entities.ThenBy(sorting.Expression)
                     : entities.ThenByDescending(sorting.Expression);
             }
             else
             {
-                _queryable = sorting.SortOrder == SortOrder.Asc
-                    ? _queryable.OrderBy(sorting.Expression)
-                    : _queryable.OrderByDescending(sorting.Expression);
+                Queryable = sorting.SortOrder == SortOrder.Asc
+                    ? Queryable.OrderBy(sorting.Expression)
+                    : Queryable.OrderByDescending(sorting.Expression);
             }
 
             _isOrdered = true;
@@ -109,10 +109,10 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public IPagedEnumerable<TEntity> Paged(int pageNumber, int take)
         {
-            _queryable = GetQueryable();
+            Queryable = GetQueryable();
 
-            var result = new PagedList<TEntity>(_queryable.Count());
-            var raw = _queryable
+            var result = new PagedList<TEntity>(Queryable.Count());
+            var raw = Queryable
                 .Skip(pageNumber * take)
                 .Take(take)
                 .ToArray();

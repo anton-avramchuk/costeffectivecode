@@ -50,7 +50,7 @@ namespace CostEffectiveCode.Tests.Tests
             var first = _collection.First();
             Assert.Equal(DataContext.Category, first.Category);
 
-            Assert.Throws<InvalidOperationException>(
+            Assert.Throws<ArgumentNullException>(
                 () => _collection.Remove(first));
         }
 

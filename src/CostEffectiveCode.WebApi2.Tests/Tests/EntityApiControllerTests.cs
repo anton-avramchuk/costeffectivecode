@@ -33,7 +33,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Tests
             var message = _httpClient.GetAsync($"{BaseUri}/api/products").Result;
             var json = message.Content.ReadAsStringAsync().Result;
 
-            var products = JsonConvert.DeserializeObject<List<Product>>(json);
+            var products = JsonConvert.DeserializeObject<List<Product>>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             // several entities should present in seed!
             Assert.True(products.Count > 1);
@@ -44,7 +44,7 @@ namespace CostEffectiveCode.WebApi2.Tests.Tests
         {
             var json = _httpClient.GetAsync($"{BaseUri}/api/products/1").Result.Content.ReadAsStringAsync().Result;
 
-            var product = JsonConvert.DeserializeObject<Product>(json);
+            var product = JsonConvert.DeserializeObject<Product>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             Assert.True(!string.IsNullOrEmpty(product.Name));
         }

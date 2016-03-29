@@ -145,7 +145,7 @@ namespace CostEffectiveCode.Akka.Actors
                 && requestMessage.IncludeConstraints.Any())
             {
                 foreach (var include in requestMessage.IncludeConstraints)
-                    AddIncludeConstraint(query, include);
+                    query = AddIncludeConstraint(query, include);
             }
 
             if (requestMessage.WhereSpecificationConstraints != null
@@ -160,14 +160,14 @@ namespace CostEffectiveCode.Akka.Actors
                 && requestMessage.OrderByConstraints.Count > 0)
             {
                 foreach (var orderBy in requestMessage.OrderByConstraints)
-                    AddOrderByConstraint(query, orderBy);
+                    query = AddOrderByConstraint(query, orderBy);
             }
 
             return query;
         }
 
         #region BEWARE! ANGRY REFLECTIONS!
-        private void AddOrderByConstraint(IQuery<TEntity, TSpecification> query, object orderByConstraint)
+        private IQuery<TEntity, TSpecification> AddOrderByConstraint(IQuery<TEntity, TSpecification> query, object orderByConstraint)
         {
             var constraintType = orderByConstraint.GetType();
             var constraintGenericType = constraintType.GetGenericTypeDefinition();
@@ -191,10 +191,11 @@ namespace CostEffectiveCode.Akka.Actors
                 .GetMethod("OrderBy")
                 .MakeGenericMethod(propertyType);
 
-            queryOrderByGenericMethodInfo.Invoke(query, new[] { expression, sortOrder });
+            return (IQuery<TEntity, TSpecification>)queryOrderByGenericMethodInfo
+                .Invoke(query, new[] { expression, sortOrder });
         }
 
-        private void AddIncludeConstraint(IQuery<TEntity, TSpecification> query, LambdaExpression includeExpression)
+        private IQuery<TEntity, TSpecification> AddIncludeConstraint(IQuery<TEntity, TSpecification> query, LambdaExpression includeExpression)
         {
             var constraintType = includeExpression.GetType();
             var constraintGenericType = constraintType.GetGenericTypeDefinition();
@@ -212,7 +213,9 @@ namespace CostEffectiveCode.Akka.Actors
                 .GetMethod("Include")
                 .MakeGenericMethod(propertyType);
 
-            queryIncludeGenericMethodInfo.Invoke(query, new object[] { includeExpression });
+            query = (IQuery<TEntity, TSpecification>)queryIncludeGenericMethodInfo.Invoke(query, new object[] { includeExpression });
+
+            return query;
         }
         #endregion
 

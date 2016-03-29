@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Domain.Entities;
 
@@ -17,8 +16,8 @@ namespace CostEffectiveCode.Sample.Data
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<SampleDbContext>());
 
-            Configuration.LazyLoadingEnabled = true;
-            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Product> Products { get; set; }

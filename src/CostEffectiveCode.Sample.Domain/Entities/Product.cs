@@ -23,7 +23,7 @@ namespace CostEffectiveCode.Sample.Domain.Entities
             {
                 if (value == null)
                 {
-                    throw new InvalidOperationException();
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 _category = value;

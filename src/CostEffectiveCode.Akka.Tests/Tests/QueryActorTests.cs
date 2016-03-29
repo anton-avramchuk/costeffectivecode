@@ -71,7 +71,7 @@ namespace CostEffectiveCode.Akka.Tests.Tests
                 .Include(x => x.Category));
 
             // assert
-            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(0, 0, 10));
+            var responseMessage = ExpectMsg<FetchResponseMessage<Product>>(new TimeSpan(1, 0, 10));
 
             Assert.NotNull(responseMessage.Entities);
             Assert.NotNull(responseMessage.Entities.Single());

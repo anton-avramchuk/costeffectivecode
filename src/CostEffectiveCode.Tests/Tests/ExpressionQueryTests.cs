@@ -2,8 +2,8 @@
 using System.Linq;
 using CostEffectiveCode.Domain;
 using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.EntityFramework7;
-using CostEffectiveCode.Extensions;
+using CostEffectiveCode.Domain.Ddd.Specifications;
+using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Domain.Entities;
 using Xunit;
 
@@ -11,7 +11,7 @@ namespace CostEffectiveCode.Tests.Tests
 {
     public class ExpressionQueryTests : DataTestsBase
     {
-        private ExpressionQuery<Product> _query;
+        private IQuery<Product, IExpressionSpecification<Product>> _query;
 
         public ExpressionQueryTests() : base(new TestDataContext())
         {
