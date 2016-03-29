@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Reflection;
+using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CostEffectiveCode.Common;
@@ -14,6 +15,7 @@ using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using CostEffectiveCode.EntityFramework6;
 using CostEffectiveCode.Sample.Data;
 using CostEffectiveCode.Sample.Domain.Entities;
+using CostEffectiveCode.WebApi2.DI;
 using Microsoft.Owin.Logging;
 
 namespace CostEffectiveCode.WebApi2.Tests.Config
@@ -74,9 +76,16 @@ namespace CostEffectiveCode.WebApi2.Tests.Config
                 .As<IScope<IDataContext>>()
                 .SingleInstance();
 
-            builder.RegisterType<DependencyResolverDiContainer>()
+            builder
+                .Register(x => GetDependencyResolverDiContainer())
                 .As<IDiContainer>()
                 .SingleInstance();
+        }
+
+        private static DependencyResolverDiContainer GetDependencyResolverDiContainer()
+        {
+            return new DependencyResolverDiContainer(
+                Startup.HttpConfiguration.DependencyResolver);
         }
 
         private static void Cqrs(ContainerBuilder builder)
