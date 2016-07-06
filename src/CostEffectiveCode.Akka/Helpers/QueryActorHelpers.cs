@@ -25,6 +25,17 @@ namespace CostEffectiveCode.Akka.Helpers
                 .ActorOf(Props.Create(() => new QueryActor<TEntity>(query)), name);
         }
 
+        public static IActorRef QueryActorOf<TEntity, TSpecification>(
+            this IActorRefFactory factory,
+            IQuery<TEntity, TSpecification> query,
+            string name = null)
+            where TEntity : class, IEntity
+            where TSpecification : ISpecification<TEntity>
+        {
+            return factory
+                .ActorOf(Props.Create(() => new QueryActor<TEntity, TSpecification>(query)), name);
+        }
+
         public static IActorRef QueryActorOf<TEntity>(
             this IActorRefFactory factory,
             IScope<IQuery<TEntity, IExpressionSpecification<TEntity>>> queryScope,

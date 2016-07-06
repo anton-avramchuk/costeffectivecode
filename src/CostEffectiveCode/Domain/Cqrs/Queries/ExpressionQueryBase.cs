@@ -34,17 +34,13 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         #endregion
 
-        protected IQueryable<TEntity> GetQueryable(IExpressionSpecification<TEntity> spec = null)
+        protected IQueryable<TEntity> LoadQueryable(IExpressionSpecification<TEntity> spec = null)
         {
             if (Queryable == null)
-            {
                 Queryable = _linqProvider.Query<TEntity>();
-            }
 
             if (spec != null)
-            {
                 Queryable = Queryable.Where(spec.Expression);
-            }
 
             return Queryable;
         }
@@ -53,7 +49,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
             IExpressionSpecification<TEntity> specification)
         {
             if (specification == null) throw new ArgumentNullException(nameof(specification));
-            GetQueryable(specification);
+            LoadQueryable(specification);
             return this;
         }
 
@@ -63,7 +59,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             var sorting = new Sorting<TEntity, TProperty>(expression, sortOrder);
-            GetQueryable();
+            LoadQueryable();
 
             if (_isOrdered)
             {
@@ -89,27 +85,27 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public TEntity Single()
         {
-            return GetQueryable().Single();
+            return LoadQueryable().Single();
         }
 
         public TEntity FirstOrDefault()
         {
-            return GetQueryable().FirstOrDefault();
+            return LoadQueryable().FirstOrDefault();
         }
 
         public IEnumerable<TEntity> All()
         {
-            return GetQueryable().ToArray();
+            return LoadQueryable().ToArray();
         }
 
         public bool Any()
         {
-            return GetQueryable().Any();
+            return LoadQueryable().Any();
         }
 
         public IPagedEnumerable<TEntity> Paged(int pageNumber, int take)
         {
-            Queryable = GetQueryable();
+            Queryable = LoadQueryable();
 
             var result = new PagedList<TEntity>(Queryable.Count());
             var raw = Queryable
@@ -124,18 +120,18 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         public IEnumerable<TEntity> Take(int count)
         {
-            return GetQueryable().Take(count).ToArray();
+            return LoadQueryable().Take(count).ToArray();
         }
 
         public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)
         {
-            return GetQueryable().Select(i => selector(i));
+            return LoadQueryable().Select(i => selector(i));
         }
 
 
         public long Count()
         {
-            return GetQueryable().Count();
+            return LoadQueryable().Count();
         }
     }
 }
