@@ -18,11 +18,8 @@
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CostEffectiveCode.SampleProject.Domain.Core\CostEffectiveCode.SampleProject.Domain.Core.csproj" />
     <ProjectReference Include="..\CostEffectiveCode.Sample.Data\CostEffectiveCode.Sample.Data.csproj" />
     <ProjectReference Include="..\CostEffectiveCode.Sample.Domain\CostEffectiveCode.Sample.Domain.csproj" />
-    <ProjectReference Include="..\CostEffectiveCode.SampleProject.Data.EntityFramework6\CostEffectiveCode.SampleProject.Data.EntityFramework6.csproj" />
-    <ProjectReference Include="..\CostEffectiveCode.SampleProject.Domain.AspNet45\CostEffectiveCode.SampleProject.Domain.AspNet45.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
