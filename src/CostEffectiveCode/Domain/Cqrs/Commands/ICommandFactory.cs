@@ -6,9 +6,12 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
     [PublicAPI]
     public interface ICommandFactory
     {
-        TCommand GetCommand<TEntity, TCommand>()
-            where TCommand : ICommand<TEntity>
-            where TEntity: IEntity;
+        TCommand GetCommand<T, TCommand>()
+            where TCommand : ICommand<T>;
+
+        TCommand GetCommand<T, TResult, TCommand>()
+            where TCommand : ICommand<T, TResult>
+            where TResult : struct;
 
         T GetCommand<T>()
             where T : ICommand;

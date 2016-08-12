@@ -10,7 +10,5 @@ namespace CostEffectiveCode.Common.Scope
     public interface IScope<out T>
     {
         T Instance { get; }
-
-        // TODO: Possibly, BeginScope/EndScope methods should be added
     }
 }

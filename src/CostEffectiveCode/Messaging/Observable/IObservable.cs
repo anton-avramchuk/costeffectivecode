@@ -12,7 +12,6 @@ namespace CostEffectiveCode.Messaging.Observable
     {
         void AddHandler(ICommand<T> handler);
 
-        // TODO: check the need in RemoveHandler methods
         void RemoveHandler(ICommand<T> handler);
 
         void HandleMessage(T message);

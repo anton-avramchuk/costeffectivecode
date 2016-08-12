@@ -12,6 +12,6 @@ namespace CostEffectiveCode.Domain.Ddd.Entities
         /// Hint: Please avoid using for calculations!
         /// </summary>
         /// <returns>String representation of entity's primary key</returns>
-        string GetId();
+        object Id { get; }
     }
 }

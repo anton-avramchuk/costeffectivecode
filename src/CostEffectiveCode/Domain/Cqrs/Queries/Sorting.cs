@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
     /// <summary>
-    ///     Sort order enumeration
+    /// Sort order enumeration
     /// </summary>
     [PublicAPI]
     public enum SortOrder

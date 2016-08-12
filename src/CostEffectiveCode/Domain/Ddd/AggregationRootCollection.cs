@@ -22,6 +22,7 @@ namespace CostEffectiveCode.Domain.Ddd
 
         #region Static Reflection Optimization
 
+        // ReSharper disable once StaticMemberInGenericType
         private static readonly Dictionary<string, PropertyInfo> AggreagationRootProperties =
             new Dictionary<string, PropertyInfo>();
 
@@ -31,7 +32,7 @@ namespace CostEffectiveCode.Domain.Ddd
             if (!AggreagationRootProperties.ContainsKey(key))
             {
                 AggreagationRootProperties[key] = typeof(TChild)
-                    .GetProperties()
+                    .GetRuntimeProperties()
                     .Single(p => p.PropertyType == typeof(TAggregationRoot) && p.CanWrite);
             }
 

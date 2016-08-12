@@ -14,14 +14,14 @@ namespace CostEffectiveCode.Domain.Ddd.Entities
 
             var entity = x as IEntity;
             if (entity != null && y is IEntity)
-                return entity.GetId() == ((IEntity)y).GetId();
+                return entity.Id == ((IEntity) y).Id;
 
             return x.Equals(y);
         }
 
         public int GetHashCode(object obj)
         {
-            return ((IEntity)obj).GetId().GetHashCode();
+            return ((IEntity)obj).Id.GetHashCode();
         }
     }
 
@@ -34,12 +34,12 @@ namespace CostEffectiveCode.Domain.Ddd.Entities
             if (x == null || y == null)
                 return false;
 
-            return x.GetId() == y.GetId();
+            return x.Id == y.Id;
         }
 
         public int GetHashCode(TEntity obj)
         {
-            return obj.GetId().GetHashCode();
+            return obj.Id.GetHashCode();
         }
     }
 }

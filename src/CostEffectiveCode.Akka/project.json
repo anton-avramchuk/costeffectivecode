@@ -1,18 +1,22 @@
 ﻿{
-  "version": "3.1.6",
+  "version": "3.3",
   "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and Akka.net",
   "authors": [ "HighTech" ],
   "tags": [ "" ],
   "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
   "licenseUrl": "",
   "dependencies": {
-    "Akka": "1.0.6",
-    "CostEffectiveCode": "2.5.3",
-    "JetBrains.Annotations": "10.0.0"
+    "CosteffectiveCode": "3.0.0",
+    "JetBrains.Annotations": "10.1.5",
+    "NETStandard.Library": "1.6.0",
+    "System.Linq.Queryable": "4.0.1"
   },
 
   "frameworks": {
-    "net45": { },
-    "dnx45" : { }
+    "net45": {
+      "dependencies": {
+        "Akka": "1.1.1"
+      }
+    }
   }
 }

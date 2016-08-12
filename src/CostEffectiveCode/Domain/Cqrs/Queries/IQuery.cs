@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
 using JetBrains.Annotations;
@@ -8,32 +6,38 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
     [PublicAPI]
-    public interface IQuery<TEntity, in TSpecification>
-        : IQueryConstraints<TEntity, TSpecification, IQuery<TEntity, TSpecification>>
+    public interface IQuery<out TResult>
+    {
+        TResult Get();
+    }
+
+    [PublicAPI]
+    public interface ISpecificationQuery<TSource, in TSpecification, out TResult> : IQuery<TResult>
+        where TSpecification: ISpecification<TSource>
+    {
+        ISpecificationQuery<TSource, TSpecification, TResult> Where([NotNull] TSpecification specification);
+    }
+
+    [PublicAPI]
+    public interface IEntityQuery<TEntity, in TSpecification, out TResult>
+        : ISpecificationQuery<TEntity, TSpecification, IEnumerable<TResult>>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
-
         [NotNull]
-        TEntity Single();
+        TResult Single();
 
         [CanBeNull]
-        TEntity FirstOrDefault();
-
-        [NotNull]
-        IEnumerable<TEntity> All();
+        TResult FirstOrDefault();
 
         bool Any();
 
-		/// <param name="pageNumber">starting 0</param>
-		/// <param name="take"></param>
-		/// <returns></returns>
+        /// <param name="pageNumber">starting 0</param>
+        /// <param name="take"></param>
+        /// <returns></returns>
         [NotNull]
-        IPagedEnumerable<TEntity> Paged(int pageNumber, int take);
+        IPagedEnumerable<TResult> Paged(int pageNumber, int take);
 
-        [NotNull]
-        IEnumerable<TEntity> Take(int count); 
-
-	    long Count();
+        long Count();
     }
 }

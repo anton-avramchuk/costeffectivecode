@@ -1,18 +1,20 @@
 ﻿{
-    "version": "1.0.0",
-    "description": "CostEffectiveCode and AutoMapper integration project",
-    "authors": [ "HighTech" ],
-    "tags": [ "" ],
-    "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
-    "licenseUrl": "",
-    "dependencies": {
-        "CostEffectiveCode": "2.2.0",
-        "AutoMapper": "4.1.1"
-    },
-    "frameworks": {
-        "net45": {
-        },
-        "dnx45": {
-        }
+  "version": "3.0.0",
+  "description": "AutoMapper IMapper implementation for CostEffectiveCode",
+  "authors": [ "HighTech" ],
+  "tags": [ "" ],
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+  "licenseUrl": "",
+  "dependencies": {
+    "JetBrains.Annotations": "10.1.5",
+    "NETStandard.Library": "1.6.0",
+    "System.Linq.Queryable": "4.0.1"
+  },
+
+  "frameworks": {
+    "net45": {},
+    "netstandard1.6": {
+      "imports": "dnxcore50"
     }
+  }
 }

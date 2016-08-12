@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using CostEffectiveCode.Domain.Cqrs.Queries;
 using CostEffectiveCode.Domain.Ddd.Entities;
@@ -22,8 +21,8 @@ namespace CostEffectiveCode.Domain
             where TEntity : class, IEntity
         {
             //@see http://sergeyteplyakov.blogspot.ru/2015/06/lazy-trick-with-concurrentdictionary.html
-            return (Func<TEntity, bool>)Cache.GetOrAdd(expr, id => new Lazy<object>(
-                    () => Cache.GetOrAdd(id, expr.Compile())));
+            return ((Lazy<Func<TEntity, bool>>)Cache.GetOrAdd(expr, id => new Lazy<object>(
+                    () => Cache.GetOrAdd(id, expr.Compile())))).Value;
         }
 
         public static bool Is<TEntity>(this TEntity entity, Expression<Func<TEntity, bool>> expr)
@@ -32,65 +31,18 @@ namespace CostEffectiveCode.Domain
             return AsFunc(entity, expr).Invoke(entity);
         }
 
-        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
-        {
-            var parameter = Expression.Parameter(typeof(T));
-
-            var leftVisitor = new ReplaceExpressionVisitor(left.Parameters[0], parameter);
-            var visitedLeft = leftVisitor.Visit(left.Body);
-
-            var rightVisitor = new ReplaceExpressionVisitor(right.Parameters[0], parameter);
-            var visitedRight = rightVisitor.Visit(right.Body);
-
-            return Expression.Lambda<Func<T, bool>>(
-                Expression.AndAlso(visitedLeft, visitedRight), parameter);
-        }
-
-
         #endregion
 
-        #region Validation
-
-        public static void ValidateSelf([NotNull] this object obj, [CanBeNull]string memberName = null)
-        {
-            var context = new ValidationContext(obj);
-            if (memberName != null)
-            {
-                context.MemberName = memberName;
-            }
-
-            Validator.ValidateObject(obj, context, true);
-        }
-
-        #endregion
 
         #region Specifications
 
-        public static bool Decide<T>(
-            this ISpecification<T> specification,
-            T subject, [NotNull] Action<T> positive,
-            Action<T> negative = null)
-            where T : IEntity
-        {
-            if (positive == null) throw new ArgumentNullException(nameof(positive));
-            if (specification.IsSatisfiedBy(subject))
-            {
-                positive.Invoke(subject);
-                return true;
-            }
-
-            negative.Do(n => n.Invoke(subject));
-            return false;
-        }
-
-
-        public static IQuery<T, ExpressionSpecification<T>> WhereIf<T>(
-            this IQuery<T, ExpressionSpecification<T>> query, Func<bool> condition, Expression<Func<T, bool>> expression)
-                where T : class, IEntity
+        public static ISpecificationQuery<TSource, TSpecification, TResult> WhereIf<TSource, TSpecification, TResult>(
+            this ISpecificationQuery<TSource, TSpecification, TResult> query, Func<bool> condition, TSpecification spec)
+            where TSpecification: ISpecification<TSource>
         {
             if (condition.Invoke())
             {
-                query.Where(new ExpressionSpecification<T>(expression));
+                query = query.Where(spec);
             }
 
             return query;
@@ -100,35 +52,13 @@ namespace CostEffectiveCode.Domain
 
         #region Query
 
-        public static IQuery<TEntity, TSpecification> By<TEntity, TSpecification>(
-            this IQuery<TEntity, TSpecification> query,
-            TSpecification spec)
-
-            where TEntity : EntityBase<int>
-            where TSpecification : ISpecification<TEntity>
+        public static ISpecificationQuery<TSource, IExpressionSpecification<TSource>, TResult> Where<TSource, TResult>(
+            this ISpecificationQuery<TSource, IExpressionSpecification<TSource>, TResult> query,
+            Expression<Func<TSource, bool>> expression)
         {
-            return query.Where(spec);
+            return query.Where(new ExpressionSpecification<TSource>(expression));
         }
 
-        public static IQuery<TEntity, IExpressionSpecification<TEntity>> Where<TEntity>(
-            this IQuery<TEntity, IExpressionSpecification<TEntity>> query,
-            Expression<Func<TEntity, bool>> expression)
-            where TEntity : class, IEntity
-        {
-            return query
-                .Where(new ExpressionSpecification<TEntity>(expression));
-        }
-
-        [CanBeNull]
-        public static TEntity ById<TEntity>(
-            this IQuery<TEntity, IExpressionSpecification<TEntity>> query,
-            long id)
-            where TEntity : class, IEntityBase<long>
-        {
-            return query
-                .Where(new IdSpecification<TEntity>(id))
-                .FirstOrDefault();
-        }
 
         #endregion
 

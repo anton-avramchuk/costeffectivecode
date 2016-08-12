@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions
@@ -7,20 +6,6 @@ namespace CostEffectiveCode.Extensions
     [PublicAPI]
     public static class Maybe
     {
-        [NotNull]
-        public static T CheckNotNull<T>(this T obj)
-        {
-            if (obj == null) throw new ConfigurationErrorsException($"instance of type \"{typeof (T)}\" is null");
-
-            return obj;
-        }
-
-        public static TResult With<TInput, TResult>(this TInput o, Func<TInput, TResult> evaluator)
-            where TResult : class where TInput : class
-        {
-            return o == null ? null : evaluator(o);
-        }
-
         public static TResult Return<TInput, TResult>(this TInput o,
             Func<TInput, TResult> evaluator, TResult failureValue) where TInput : class
         {

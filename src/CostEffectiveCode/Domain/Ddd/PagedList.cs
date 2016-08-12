@@ -12,5 +12,11 @@ namespace CostEffectiveCode.Domain.Ddd
         {
             TotalCount = totalCount;
         }
+
+        public PagedList(int totalCount, params T[] values) : base(totalCount)
+        {
+            AddRange(values);
+        }
+
     }
 }

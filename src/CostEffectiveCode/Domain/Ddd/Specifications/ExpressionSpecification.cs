@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
-using CostEffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain.Ddd.Specifications
 {
     [PublicAPI]
     public class ExpressionSpecification<T> : IExpressionSpecification<T>
-        where T:class,IEntity
     {
         public Expression<Func<T, bool>> Expression { get; private set; }
 

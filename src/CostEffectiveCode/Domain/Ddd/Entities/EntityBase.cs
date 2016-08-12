@@ -1,22 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CostEffectiveCode.Domain.Ddd.Entities
+﻿namespace CostEffectiveCode.Domain.Ddd.Entities
 {
     public interface IEntityBase<out T> : IEntity
     {
-        T Id { get; }
+        new T Id { get; }       
     }
 
     public abstract class EntityBase<T> : IEntityBase<T>
     {
-        /// <summary>
-        /// To force derived types define proper constructors and keep invariant
-        /// </summary>
-        protected EntityBase()
-        {
-        }
-
-        [Key, Required]
         public T Id { get; set; }
 
         public string GetId()
@@ -31,5 +21,7 @@ namespace CostEffectiveCode.Domain.Ddd.Entities
         {
             return !string.IsNullOrEmpty(GetId());
         }
+
+        object IEntity.Id => Id;
     }
 }

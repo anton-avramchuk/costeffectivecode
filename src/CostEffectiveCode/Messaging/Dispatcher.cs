@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using CostEffectiveCode.Common;
 using JetBrains.Annotations;
@@ -75,7 +74,7 @@ namespace CostEffectiveCode.Messaging
                 var publisher = _outterPublisherFunc.Invoke(args);
                 if (publisher == null)
                 {
-                    throw new ConfigurationErrorsException($"Publisher for args \"{domainEventArgs}\" is not found");    
+                    throw new InvalidOperationException($"Publisher for args \"{domainEventArgs}\" is not found");    
                 }
 
                 publisher.Publish(_func.Invoke(args));
@@ -113,7 +112,7 @@ namespace CostEffectiveCode.Messaging
         {
             if (_mapper == null)
             {
-                throw new ConfigurationErrorsException("Mapper is not set");
+                throw new InvalidOperationException("Mapper is not set");
             }
         }
 
@@ -176,7 +175,7 @@ namespace CostEffectiveCode.Messaging
             var key = message.GetType();
             if (!Publishers.ContainsKey(key))
             {
-                throw new ConfigurationErrorsException($"Key of type \"{key}\" is not found in mapping");
+                throw new InvalidOperationException($"Key of type \"{key}\" is not found in mapping");
             }
 
             foreach (var p in Publishers[key])

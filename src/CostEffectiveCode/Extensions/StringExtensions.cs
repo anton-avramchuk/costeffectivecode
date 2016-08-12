@@ -24,18 +24,6 @@ namespace CostEffectiveCode.Extensions
             return string.Join(separator, source);
         }
 
-        ///<summary>
-        /// Объединяет коллекцию строк в одну строку использую разделитель
-        ///</summary>
-        ///<param name="source"></param>
-        ///<param name="separator"></param>
-        ///<returns></returns>
-        [PublicAPI]
-        public static string Join(this StringCollection source, string separator)
-        {
-            return string.Join(separator, source.Cast<string>());
-        }
-
         [PublicAPI]
         public static bool Contains(this string input, string value, StringComparison comparisonType)
         {
@@ -49,7 +37,7 @@ namespace CostEffectiveCode.Extensions
         [PublicAPI]
         public static bool LikewiseContains(this string input, string value)
         {
-            return Contains(input, value, StringComparison.InvariantCultureIgnoreCase);
+            return Contains(input, value, StringComparison.CurrentCulture);
         }
 
         [PublicAPI]

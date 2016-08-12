@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Akka.Actor;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Common;
 using CostEffectiveCode.Common.Logger;
 using CostEffectiveCode.Common.Scope;
 using CostEffectiveCode.Domain.Cqrs.Queries;
@@ -13,8 +12,8 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Actors
 {
-    public class QueryActor<TEntity, TSpecification, TQuery> : ReceiveActor
-        where TQuery : class, IQuery<TEntity, TSpecification>
+    public class QueryActor<TEntity, TSpecification, TResult, TQuery> : ReceiveActor
+        where TQuery : class, IEntityQuery<TEntity, TSpecification,  TResult>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
@@ -94,7 +93,7 @@ namespace CostEffectiveCode.Akka.Actors
             FetchInner(requestMessage, query);
         }
 
-        private void FetchInner(FetchRequestMessageBase requestMessage, IQuery<TEntity, TSpecification> query)
+        private void FetchInner(FetchRequestMessageBase requestMessage, IEntityQuery<TEntity, TSpecification, TResult> query)
         {
             var dest = _receiver ?? Context.Sender;
 
@@ -103,22 +102,32 @@ namespace CostEffectiveCode.Akka.Actors
                 FetchResponseMessage<TEntity> responseMessage;
 
                 if (requestMessage.Single)
+                {
                     responseMessage = new FetchResponseMessage<TEntity>(
                         query.Single());
+                }
                 else if (requestMessage.FirstOrDefault)
+                {
                     responseMessage = new FetchResponseMessage<TEntity>(
                         query.FirstOrDefault());
+                }
                 else if (requestMessage.Limit != null && requestMessage.Page != null)
+                {
                     responseMessage =
                         new FetchResponseMessage<TEntity>(
                             query.Paged(requestMessage.Page.Value, requestMessage.Limit.Value));
+                }
                 else if (requestMessage.Limit != null)
+                {
                     responseMessage =
                         new FetchResponseMessage<TEntity>(
                             query.Take(requestMessage.Limit.Value));
+                }
                 else
+                {
                     responseMessage = new FetchResponseMessage<TEntity>(
                         query.All());
+                }
 
                 dest.Tell(responseMessage, Context.Self);
                 _logger?.Debug($"Told the response to {dest}");
@@ -130,16 +139,17 @@ namespace CostEffectiveCode.Akka.Actors
             }
         }
 
-        private IQuery<TEntity, TSpecification> ResolveQuery()
+        private IEntityQuery<TEntity, TSpecification,TResult> ResolveQuery()
         {
-            IQuery<TEntity, TSpecification> query =
-                _queryFactory != null
+            IEntityQuery<TEntity, TSpecification, TResult> query = _queryFactory != null
                     ? ResolveQueryFromFactory(_queryFactory)
                     : _queryScope.Instance;
             return query;
         }
 
-        private IQuery<TEntity, TSpecification> AddConstraints(IQuery<TEntity, TSpecification> query, FetchRequestMessage<TEntity, TSpecification> requestMessage)
+        private IEntityQuery<TEntity, TSpecification, TResult> AddConstraints(
+            IEntityQuery<TEntity, TSpecification, TResult> query,
+            FetchRequestMessage<TEntity, TSpecification> requestMessage)
         {
             if (requestMessage.IncludeConstraints != null
                 && requestMessage.IncludeConstraints.Any())
@@ -167,8 +177,10 @@ namespace CostEffectiveCode.Akka.Actors
         }
 
         #region BEWARE! ANGRY REFLECTIONS!
-        private IQuery<TEntity, TSpecification> AddOrderByConstraint(IQuery<TEntity, TSpecification> query, object orderByConstraint)
+        private IEntityQuery<TEntity, TSpecification, TResult> AddOrderByConstraint(
+            IEntityQuery<TEntity, TSpecification,TResult> query, object orderByConstraint)
         {
+            /*
             var constraintType = orderByConstraint.GetType();
             var constraintGenericType = constraintType.GetGenericTypeDefinition();
 
@@ -191,8 +203,9 @@ namespace CostEffectiveCode.Akka.Actors
                 .GetMethod("OrderBy")
                 .MakeGenericMethod(propertyType);
 
-            return (IQuery<TEntity, TSpecification>)queryOrderByGenericMethodInfo
+            return (IEntityQuery<TEntity, TSpecification>)queryOrderByGenericMethodInfo
                 .Invoke(query, new[] { expression, sortOrder });
+                */
         }
 
         private IQuery<TEntity, TSpecification> AddIncludeConstraint(IQuery<TEntity, TSpecification> query, LambdaExpression includeExpression)

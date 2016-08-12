@@ -10,19 +10,21 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
-    public abstract class ExpressionQueryBase<TEntity> : IQuery<TEntity, IExpressionSpecification<TEntity>>
+    public abstract class ExpressionQueryBase<TEntity, TResult>
+        : IEntityQuery<TEntity, IExpressionSpecification<TEntity>, TResult>
         where TEntity : class, IEntity
     {
-        #region Vars
+        #region Props
 
         private readonly ILinqProvider _linqProvider;
 
         protected IQueryable<TEntity> Queryable;
 
         private bool _isOrdered;
+
         #endregion
 
-        #region ctor
+        #region Ctor
 
         protected ExpressionQueryBase(
             [NotNull] ILinqProvider linqProvider)
@@ -37,101 +39,47 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         protected IQueryable<TEntity> LoadQueryable(IExpressionSpecification<TEntity> spec = null)
         {
             if (Queryable == null)
+            {
                 Queryable = _linqProvider.Query<TEntity>();
+            }
 
             if (spec != null)
+            {
                 Queryable = Queryable.Where(spec.Expression);
+            }
 
             return Queryable;
         }
 
-        public IQuery<TEntity, IExpressionSpecification<TEntity>> Where(
-            IExpressionSpecification<TEntity> specification)
+        protected abstract IQueryable<TResult> Project(IQueryable<TEntity> queryable);
+
+        public IEnumerable<TResult> Get()
         {
-            if (specification == null) throw new ArgumentNullException(nameof(specification));
-            LoadQueryable(specification);
+            return Project(Queryable).ToArray();
+        }
+
+        public ISpecificationQuery<TEntity, IExpressionSpecification<TEntity>, IEnumerable<TResult>> Where(IExpressionSpecification<TEntity> specification)
+        {
+            Queryable = Queryable.Where(specification.Expression);
             return this;
         }
 
-        public IQuery<TEntity, IExpressionSpecification<TEntity>> OrderBy<TProperty>(
-            Expression<Func<TEntity, TProperty>> expression,
-            SortOrder sortOrder = SortOrder.Asc)
+        public TResult Single() => Project(Queryable).Single();
+       
+        public TResult FirstOrDefault() => Project(Queryable).FirstOrDefault();
+
+        public bool Any() => Queryable.Any();
+
+        public IPagedEnumerable<TResult> Paged(int pageNumber, int take)
         {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-            var sorting = new Sorting<TEntity, TProperty>(expression, sortOrder);
-            LoadQueryable();
-
-            if (_isOrdered)
-            {
-                var entities = (IOrderedQueryable<TEntity>)Queryable;
-                Queryable = sorting.SortOrder == SortOrder.Asc
-                    ? entities.ThenBy(sorting.Expression)
-                    : entities.ThenByDescending(sorting.Expression);
-            }
-            else
-            {
-                Queryable = sorting.SortOrder == SortOrder.Asc
-                    ? Queryable.OrderBy(sorting.Expression)
-                    : Queryable.OrderByDescending(sorting.Expression);
-            }
-
-            _isOrdered = true;
-
-            return this;
-        }
-
-        public abstract IQuery<TEntity, IExpressionSpecification<TEntity>> Include<TProperty>(
-            Expression<Func<TEntity, TProperty>> expression);
-
-        public TEntity Single()
-        {
-            return LoadQueryable().Single();
-        }
-
-        public TEntity FirstOrDefault()
-        {
-            return LoadQueryable().FirstOrDefault();
-        }
-
-        public IEnumerable<TEntity> All()
-        {
-            return LoadQueryable().ToArray();
-        }
-
-        public bool Any()
-        {
-            return LoadQueryable().Any();
-        }
-
-        public IPagedEnumerable<TEntity> Paged(int pageNumber, int take)
-        {
-            Queryable = LoadQueryable();
-
-            var result = new PagedList<TEntity>(Queryable.Count());
-            var raw = Queryable
-                .Skip(pageNumber * take)
-                .Take(take)
-                .ToArray();
-
-            result.AddRange(raw);
-
-            return result;
-        }
-
-        public IEnumerable<TEntity> Take(int count)
-        {
-            return LoadQueryable().Take(count).ToArray();
-        }
-
-        public IQueryable<TResult> SelectTo<TResult>(Func<TEntity, TResult> selector)
-        {
-            return LoadQueryable().Select(i => selector(i));
-        }
-
+            var projection = Project(Queryable);
+            var total = projection.Count();
+            return new PagedList<TResult>(total, projection.Skip(pageNumber*take).Take(take).ToArray());
+        } 
 
         public long Count()
         {
-            return LoadQueryable().Count();
+            return Queryable.Count();
         }
     }
 }
