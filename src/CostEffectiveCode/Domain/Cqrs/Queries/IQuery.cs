@@ -8,7 +8,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
     [PublicAPI]
     public interface IQuery<out TResult>
     {
-        TResult Get();
+        TResult Execute();
     }
 
     [PublicAPI]

@@ -1,22 +1,26 @@
-﻿using CostEffectiveCode.Common.Scope;
+﻿using System;
+using CosteffectiveCode.Common;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Domain.Cqrs.Commands
 {
-    public class DeleteEntityCommand<T> : UnitOfWorkScopeCommand<T>
+    public class DeleteEntityCommand<T> : CommandBase<T>
         where T: class, IEntity
     {
+        private readonly IScope<IUnitOfWork> _unitOfWorkScope;
+
         public DeleteEntityCommand([NotNull] IScope<IUnitOfWork> unitOfWorkScope)
-            : base(unitOfWorkScope)
         {
+            if (unitOfWorkScope == null) throw new ArgumentNullException(nameof(unitOfWorkScope));
+            _unitOfWorkScope = unitOfWorkScope;
         }
 
-        public override void Execute(T context)
+        protected override void DoExecute(T context)
         {
-            UnitOfWorkScope.Instance.Delete(context);
-            UnitOfWorkScope.Instance.Commit();
+            _unitOfWorkScope.Instance.Delete(context);
+            _unitOfWorkScope.Instance.Commit();
         }
     }
 }

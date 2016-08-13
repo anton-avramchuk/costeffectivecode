@@ -2,19 +2,21 @@
   "version": "3.0.0",
   "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],
-  "tags": [ "" ],
-  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
-  "licenseUrl": "",
+  "packOptions": {
+    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
+  },
   "dependencies": {
     "JetBrains.Annotations": "10.1.5",
-    "NETStandard.Library": "1.6.0",
-    "System.Linq.Queryable": "4.0.1"
+    "NETStandard.Library": "1.6.0"
   },
 
   "frameworks": {
     "net45": { },
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Linq.Queryable": "4.0.1"
+      }
     }
   }
 }

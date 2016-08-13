@@ -1,9 +1,10 @@
 ﻿using System;
 using JetBrains.Annotations;
+using Void = CosteffectiveCode.Metadata.Void;
 
 namespace CostEffectiveCode.Domain.Cqrs.Commands
 {
-    public class ActionCommand<T> : ICommand<T>
+    public class ActionCommand<T> : CommandBase<T>
     {
         private readonly Action<T> _action;
 
@@ -13,9 +14,9 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
             _action = action;
         }
 
-        public void Execute(T context)
+        protected override void DoExecute(T input)
         {
-            _action.Invoke(context);
+            _action.Invoke(input);
         }
     }
 }

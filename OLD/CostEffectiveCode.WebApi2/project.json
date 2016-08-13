@@ -1,0 +1,21 @@
+﻿{
+  "version": "1.0.1",
+  "description": "Generic backend (web api) controller",
+  "authors": [ "HighTech" ],
+  "tags": [ "" ],
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+  "licenseUrl": "",
+  "dependencies": {
+    "CostEffectiveCode": "2.5.3",
+    "JetBrains.Annotations": "10.0.0",
+    "Microsoft.AspNet.WebApi.Owin": "5.2.3",
+    "Microsoft.CSharp": "4.0.0"
+  },
+
+  "frameworks": {
+    "net45": {
+    },
+    "dnx45": {
+    }
+  }
+}

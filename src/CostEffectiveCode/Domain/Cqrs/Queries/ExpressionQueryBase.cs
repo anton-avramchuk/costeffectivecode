@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using CostEffectiveCode.Domain.Ddd;
 using CostEffectiveCode.Domain.Ddd.Entities;
 using CostEffectiveCode.Domain.Ddd.Specifications;
-using CostEffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
+using Void = CosteffectiveCode.Metadata.Void;
 
 namespace CostEffectiveCode.Domain.Cqrs.Queries
 {
@@ -15,8 +14,6 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         where TEntity : class, IEntity
     {
         #region Props
-
-        private readonly ILinqProvider _linqProvider;
 
         protected IQueryable<TEntity> Queryable;
 
@@ -27,22 +24,16 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         #region Ctor
 
         protected ExpressionQueryBase(
-            [NotNull] ILinqProvider linqProvider)
+            [NotNull] IQueryable<TEntity> queryable)
         {
-            if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
-
-            _linqProvider = linqProvider;
+            if (queryable == null) throw new ArgumentNullException(nameof(queryable));
+            Queryable = queryable;
         }
 
         #endregion
 
         protected IQueryable<TEntity> LoadQueryable(IExpressionSpecification<TEntity> spec = null)
-        {
-            if (Queryable == null)
-            {
-                Queryable = _linqProvider.Query<TEntity>();
-            }
-
+        {        
             if (spec != null)
             {
                 Queryable = Queryable.Where(spec.Expression);
@@ -52,11 +43,6 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         }
 
         protected abstract IQueryable<TResult> Project(IQueryable<TEntity> queryable);
-
-        public IEnumerable<TResult> Get()
-        {
-            return Project(Queryable).ToArray();
-        }
 
         public ISpecificationQuery<TEntity, IExpressionSpecification<TEntity>, IEnumerable<TResult>> Where(IExpressionSpecification<TEntity> specification)
         {
@@ -80,6 +66,16 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
         public long Count()
         {
             return Queryable.Count();
+        }
+
+        public IEnumerable<TResult> Execute()
+        {
+            return Project(Queryable).ToArray();
+        }
+
+        public IEnumerable<TResult> Execute(Void input)
+        {
+            return Execute();
         }
     }
 }

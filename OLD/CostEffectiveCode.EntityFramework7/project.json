@@ -1,0 +1,27 @@
+﻿{
+  "version": "2.3.2",
+  "description": "Provides integration-layer for CostEffectiveCode general-purpose framework and 7-th version of EntityFramework",
+  "authors": [ "HighTech" ],
+  "tags": [ "" ],
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "CostEffectiveCode": "2.4.0",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final"
+  },
+
+  "frameworks": {
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0"
+      }
+    },
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0"
+      }
+    }
+  }
+}

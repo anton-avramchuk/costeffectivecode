@@ -5,8 +5,8 @@ namespace CostEffectiveCode.Common
     [PublicAPI]
     public interface IMapper
     {
-        TReturn Map<TReturn>(object obj);
+        TReturn Map<TReturn>(object src);
 
-        TReturn Map<TReturn>(object obj, TReturn ret);
+        TReturn Map<TReturn>(object src, TReturn dest);
     }
 }

@@ -1,0 +1,19 @@
+﻿{
+  "version": "2.2.0",
+  "description": "Introduces an abstraction layer of asynchronious non-blocking processes for CostEffectiveCode general-purpose framework",
+  "authors": [ "HighTech" ],
+  "tags": [ "" ],
+  "projectUrl": "http://github.com/hightechtoday/costeffectivecode",
+  "licenseUrl": "",
+  "dependencies": {
+    "CostEffectiveCode": "2.2.0",
+    "JetBrains.Annotations": "10.0.0"
+  },
+
+  "frameworks": {
+    "net45": {
+    },
+    "dnx45": {
+    }
+  }
+}

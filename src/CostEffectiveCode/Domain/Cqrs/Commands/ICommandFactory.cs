@@ -6,22 +6,21 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
     [PublicAPI]
     public interface ICommandFactory
     {
-        TCommand GetCommand<T, TCommand>()
-            where TCommand : ICommand<T>;
+        TCommand GetCommand<TInput, TCommand>()
+            where TCommand : ICommand<TInput>;
 
-        TCommand GetCommand<T, TResult, TCommand>()
-            where TCommand : ICommand<T, TResult>
+        TCommand GetCommand<TInput, TResult, TCommand>()
+            where TCommand : ICommand<TInput, TResult>
             where TResult : struct;
 
-        T GetCommand<T>()
-            where T : ICommand;
+        TCommand GetCommand<TCommand>()
+            where TCommand : ICommand;
 
-        CreateEntityCommand<TEntity> GetCreateCommand<TEntity>()
-            where TEntity : class, IEntity;
+        SaveEntityCommand<TKey, TEntity> GetCreateCommand<TKey, TEntity>()
+            where TKey: struct
+            where TEntity : EntityBase<TKey>;
 
         DeleteEntityCommand<T> GetDeleteCommand<T>()
             where T : class, IEntity;
-
-        CommitCommand GetCommitCommand();
     }
 }
