@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using CostEffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Ddd.Specifications
+namespace CosteffectiveCode.Domain.Ddd.Specifications
 {
     [PublicAPI]
-    public class IdSpecification<T> : ExpressionSpecification<T>, IEqualsSpecification
+    public class IdSpecification<T> : ExpressionSpecification<T>
         where T : class, IEntityBase<long>
     {
         public long Id { get; private set; }

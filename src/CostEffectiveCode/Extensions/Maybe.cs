@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Extensions
+namespace CosteffectiveCode.Extensions
 {
     [PublicAPI]
     public static class Maybe

@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging
+namespace CosteffectiveCode.Messaging
 {
     [PublicAPI]
     public interface IBroker : IPublisher, ISubscriber

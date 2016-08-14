@@ -1,8 +1,8 @@
 ﻿using System;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging
+namespace CosteffectiveCode.Messaging
 {
     [PublicAPI]
     public interface ISubscriber

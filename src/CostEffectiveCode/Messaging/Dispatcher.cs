@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CostEffectiveCode.Common;
+using CosteffectiveCode.Common;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging
+namespace CosteffectiveCode.Messaging
 {
     [PublicAPI]
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global

@@ -1,7 +1,7 @@
-using CosteffectiveCode.Metadata;
-using Void = CosteffectiveCode.Metadata.Void;
+using CosteffectiveCode.FunctionalProgramming;
+using Void = CosteffectiveCode.FunctionalProgramming.Void;
 
-namespace CostEffectiveCode.Domain.Cqrs.Commands
+namespace CosteffectiveCode.Domain.Cqrs.Commands
 {
     public abstract class CommandBase<TInput> : ICommand<TInput>
     {
@@ -19,14 +19,10 @@ namespace CostEffectiveCode.Domain.Cqrs.Commands
         }
     }
 
-    public abstract class CommandBase<TInput, TResult> : ICommand<TInput, TResult>, IOperation<TInput, TResult>
+    public abstract class CommandBase<TInput, TResult> : ICommand<TInput, TResult>, IMorphism<TInput, TResult>
         where TResult: struct
     {
         protected abstract TResult DoExecute(TInput input);
-
-        public abstract string Name { get; }
-
-        public abstract string Description { get; }
 
         public TResult Execute(TInput input)
         {

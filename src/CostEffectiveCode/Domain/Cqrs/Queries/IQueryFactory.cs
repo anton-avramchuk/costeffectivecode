@@ -1,8 +1,8 @@
-﻿using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.Specifications;
+﻿using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Specifications;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Cqrs.Queries
+namespace CosteffectiveCode.Domain.Cqrs.Queries
 {
     [PublicAPI]
     public interface IQueryFactory

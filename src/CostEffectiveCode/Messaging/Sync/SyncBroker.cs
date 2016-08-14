@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CostEffectiveCode.Domain.Cqrs.Commands;
-using CostEffectiveCode.Messaging.Observable;
+using CosteffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Messaging.Observable;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging.Sync
+namespace CosteffectiveCode.Messaging.Sync
 {
     [PublicAPI]
     public class SyncBroker<T> : IBroker<T>

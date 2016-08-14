@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Common
+namespace CosteffectiveCode.Common
 {
     [PublicAPI]
     public interface IMapper

@@ -1,4 +1,4 @@
-﻿namespace CostEffectiveCode.Domain.Ddd.Entities
+﻿namespace CosteffectiveCode.Domain.Ddd.Entities
 {
     public interface IEntityBase<out T> : IEntity
     {

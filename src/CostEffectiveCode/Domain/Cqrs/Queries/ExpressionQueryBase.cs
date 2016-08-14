@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CostEffectiveCode.Domain.Ddd;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.Specifications;
+using CosteffectiveCode.Domain.Ddd;
+using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Specifications;
 using JetBrains.Annotations;
-using Void = CosteffectiveCode.Metadata.Void;
+using Void = CosteffectiveCode.FunctionalProgramming.Void;
 
-namespace CostEffectiveCode.Domain.Cqrs.Queries
+namespace CosteffectiveCode.Domain.Cqrs.Queries
 {
     public abstract class ExpressionQueryBase<TEntity, TResult>
-        : IEntityQuery<TEntity, IExpressionSpecification<TEntity>, TResult>
+        : IEntityQuery<TEntity, ExpressionSpecification<TEntity>, TResult>
         where TEntity : class, IEntity
     {
         #region Props
 
         protected IQueryable<TEntity> Queryable;
-
-        private bool _isOrdered;
 
         #endregion
 
@@ -32,7 +30,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         #endregion
 
-        protected IQueryable<TEntity> LoadQueryable(IExpressionSpecification<TEntity> spec = null)
+        protected IQueryable<TEntity> LoadQueryable(ExpressionSpecification<TEntity> spec = null)
         {        
             if (spec != null)
             {
@@ -44,7 +42,7 @@ namespace CostEffectiveCode.Domain.Cqrs.Queries
 
         protected abstract IQueryable<TResult> Project(IQueryable<TEntity> queryable);
 
-        public ISpecificationQuery<TEntity, IExpressionSpecification<TEntity>, IEnumerable<TResult>> Where(IExpressionSpecification<TEntity> specification)
+        public ISpecificationQuery<TEntity, ExpressionSpecification<TEntity>, IEnumerable<TResult>> Where(ExpressionSpecification<TEntity> specification)
         {
             Queryable = Queryable.Where(specification.Expression);
             return this;

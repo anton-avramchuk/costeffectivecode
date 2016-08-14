@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Extensions
+namespace CosteffectiveCode.Extensions
 {
     ///<summary>
     /// Класс свойств расширений для коллекций строк

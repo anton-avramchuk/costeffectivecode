@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using CostEffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Ddd
+namespace CosteffectiveCode.Domain.Ddd
 {
     [PublicAPI]
     public class AggregationRootCollection<TAggregationRoot, TChild> : ICollection<TChild>

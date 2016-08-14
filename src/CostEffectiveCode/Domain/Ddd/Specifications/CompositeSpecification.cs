@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using CostEffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Ddd.Specifications
+namespace CosteffectiveCode.Domain.Ddd.Specifications
 {
     public abstract class CompositeSpecification<T> : ISpecification<T>
         where T:IEntity
@@ -67,42 +67,6 @@ namespace CostEffectiveCode.Domain.Ddd.Specifications
         {
             return !_specification.IsSatisfiedBy(o);
         }
-    }
-
-    public class ExpressionAndSpecification<T> : AndSpecification<T>, IExpressionSpecification<T>
-        where T :class, IEntity
-    {
-        // Don't alt+enter with r# refactoring here
-        public ExpressionAndSpecification(
-            [NotNull] IExpressionSpecification<T> left,
-            [NotNull] IExpressionSpecification<T> right)
-            : base(left, right)
-        {
-        }
-
-
-        public Expression<Func<T, bool>> Expression => System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(
-            System.Linq.Expressions.Expression.And(
-                ((IExpressionSpecification<T>) Left).Expression,
-                ((IExpressionSpecification<T>) Right).Expression));
-    }
-
-    public class ExpressionOrSpecification<T> : OrSpecification<T>, IExpressionSpecification<T>
-        where T : class, IEntity
-    {
-        // Don't alt+enter with r# refactoring here
-        public ExpressionOrSpecification(
-            [NotNull] IExpressionSpecification<T> left,
-            [NotNull] IExpressionSpecification<T> right)
-            : base(left, right)
-        {
-        }
-
-
-        public Expression<Func<T, bool>> Expression => System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(
-            System.Linq.Expressions.Expression.Or(
-                ((IExpressionSpecification<T>)Left).Expression,
-                ((IExpressionSpecification<T>)Right).Expression));
     }
 
 }

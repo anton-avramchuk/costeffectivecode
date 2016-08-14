@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Cqrs.Commands
+namespace CosteffectiveCode.Domain.Cqrs.Commands
 {
     [PublicAPI]
     public interface ICommand

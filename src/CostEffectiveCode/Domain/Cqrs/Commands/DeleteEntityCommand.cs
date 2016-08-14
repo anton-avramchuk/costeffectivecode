@@ -1,10 +1,10 @@
 ﻿using System;
 using CosteffectiveCode.Common;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.UnitOfWork;
+using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Cqrs.Commands
+namespace CosteffectiveCode.Domain.Cqrs.Commands
 {
     public class DeleteEntityCommand<T> : CommandBase<T>
         where T: class, IEntity

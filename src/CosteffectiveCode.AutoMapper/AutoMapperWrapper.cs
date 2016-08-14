@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using CosteffectiveCode.Common;
 using AM = AutoMapper;
 namespace CosteffectiveCode.AutoMapper
 {
-    public class AutoMapperWrapper : CostEffectiveCode.Common.IMapper
+    public class AutoMapperWrapper : IMapper
     {
         public TReturn Map<TReturn>(object src) => AM.Mapper.Map<TReturn>(src);
 
@@ -12,7 +13,7 @@ namespace CosteffectiveCode.AutoMapper
         internal static ConcurrentDictionary<Type, ConcurrentDictionary<Type, Action<AM.IMapperConfigurationExpression>>> TypeMap
             = new ConcurrentDictionary<Type, ConcurrentDictionary<Type, Action<AM.IMapperConfigurationExpression>>>();
 
-        static AutoMapperWrapper()
+        public static void Init()
         {
             AM.Mapper.Initialize(InitMappings);
             AM.Mapper.AssertConfigurationIsValid();
@@ -27,6 +28,8 @@ namespace CosteffectiveCode.AutoMapper
                     destType.Value.Invoke(c);
                 }                  
             }
+
+            c.CreateMissingTypeMaps = true;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CosteffectiveCode.Metadata
+﻿namespace CosteffectiveCode.FunctionalProgramming
 {
     public sealed class Void
     {

@@ -1,7 +1,7 @@
-﻿using CostEffectiveCode.Domain.Cqrs.Commands;
+﻿using CosteffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging.Observable
+namespace CosteffectiveCode.Messaging.Observable
 {
     /// <summary>
     /// This interface provides API over standard .NET events mechanism

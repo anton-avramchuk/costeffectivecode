@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
-using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.Specifications;
-using CostEffectiveCode.Extensions;
+using CosteffectiveCode.Domain.Cqrs.Queries;
+using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Specifications;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain
+namespace CosteffectiveCode.Domain
 {
     [PublicAPI]
     public static class Extensions
@@ -33,7 +32,6 @@ namespace CostEffectiveCode.Domain
 
         #endregion
 
-
         #region Specifications
 
         public static ISpecificationQuery<TSource, TSpecification, TResult> WhereIf<TSource, TSpecification, TResult>(
@@ -52,8 +50,8 @@ namespace CostEffectiveCode.Domain
 
         #region Query
 
-        public static ISpecificationQuery<TSource, IExpressionSpecification<TSource>, TResult> Where<TSource, TResult>(
-            this ISpecificationQuery<TSource, IExpressionSpecification<TSource>, TResult> query,
+        public static ISpecificationQuery<TSource, ExpressionSpecification<TSource>, TResult> Where<TSource, TResult>(
+            this ISpecificationQuery<TSource, ExpressionSpecification<TSource>, TResult> query,
             Expression<Func<TSource, bool>> expression)
         {
             return query.Where(new ExpressionSpecification<TSource>(expression));

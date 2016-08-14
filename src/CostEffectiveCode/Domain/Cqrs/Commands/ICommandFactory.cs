@@ -1,7 +1,7 @@
-﻿using CostEffectiveCode.Domain.Ddd.Entities;
+﻿using CosteffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Cqrs.Commands
+namespace CosteffectiveCode.Domain.Cqrs.Commands
 {
     [PublicAPI]
     public interface ICommandFactory

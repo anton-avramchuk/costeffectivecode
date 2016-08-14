@@ -2,12 +2,12 @@
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Ddd.Specifications
+namespace CosteffectiveCode.Domain.Ddd.Specifications
 {
     [PublicAPI]
-    public class ExpressionSpecification<T> : IExpressionSpecification<T>
+    public class ExpressionSpecification<T> : ISpecification<T>
     {
-        public Expression<Func<T, bool>> Expression { get; private set; }
+        public virtual Expression<Func<T, bool>> Expression { get; private set; }
 
         private Func<T, bool> _func;
 

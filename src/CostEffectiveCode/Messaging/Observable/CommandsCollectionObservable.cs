@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging.Observable
+namespace CosteffectiveCode.Messaging.Observable
 {
     /// <summary>
     /// Based on the collection of ICommand&lt;T&gt; implementation of IObservable&lt;T&gt;

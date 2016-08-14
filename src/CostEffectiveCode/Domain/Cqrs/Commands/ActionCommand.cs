@@ -1,8 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Void = CosteffectiveCode.Metadata.Void;
 
-namespace CostEffectiveCode.Domain.Cqrs.Commands
+namespace CosteffectiveCode.Domain.Cqrs.Commands
 {
     public class ActionCommand<T> : CommandBase<T>
     {

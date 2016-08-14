@@ -2,10 +2,10 @@
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Messaging.Async
+namespace CosteffectiveCode.Messaging.Async
 {
     public class CollectionBroker<T> : IBroker<T>
     {

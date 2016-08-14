@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Domain.Ddd.Entities
+namespace CosteffectiveCode.Domain.Ddd.Entities
 {
     [PublicAPI]
     public class EntityEqualityComparer : IEqualityComparer
