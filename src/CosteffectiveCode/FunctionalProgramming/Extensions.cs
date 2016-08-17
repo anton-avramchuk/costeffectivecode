@@ -2,18 +2,13 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using CosteffectiveCode.Domain.Ddd.Entities;
-using CosteffectiveCode.Domain.Ddd.Specifications;
+using CosteffectiveCode.Ddd.Entities;
+using CosteffectiveCode.Ddd.Specifications;
 
 namespace CosteffectiveCode.FunctionalProgramming
 {
     public static class Extensions
     {
-        public static Type[] GetMorphismTypes(this Assembly assembly) => GetMorphismTypes(assembly, x => true);
-
-        public static Type[] GetMorphismTypes(this Assembly assembly, Func<Type, bool> func)
-            => GetMorphismTypes(assembly, new FuncSpecification<Type>(func));
-
         public static Type[] GetMorphismTypes(this Assembly assembly, ISpecification<Type> spec) =>
             assembly
                 .ExportedTypes
@@ -28,7 +23,7 @@ namespace CosteffectiveCode.FunctionalProgramming
                 })
                 .ToArray();
 
-        public static void DefineSpec<TEntity, TDto, TMorphism>(this Category category)
+        public static void DefineList<TEntity, TDto, TMorphism>(this Category category)
             where TEntity: IEntity
             where TMorphism: IMorphism<ExpressionSpecification<TEntity>, TDto[]>
         {

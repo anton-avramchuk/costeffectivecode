@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "description": "General-purpose .NET framework built around CQRS, DDD and EventSourcing patterns",
+  "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CosteffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Cqrs.Commands;
 using CosteffectiveCode.Messaging.Observable;
 using JetBrains.Annotations;
 

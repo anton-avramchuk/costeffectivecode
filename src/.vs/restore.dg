@@ -1,2 +1,6 @@
-#:C:\work\costeffectivecode\src\CosteffectiveCode.SimpleInjector\CosteffectiveCode.SimpleInjector.xproj
-C:\work\costeffectivecode\src\CosteffectiveCode.SimpleInjector\CosteffectiveCode.SimpleInjector.xproj|c:\work\costeffectivecode\src\CosteffectiveCode\CosteffectiveCode.xproj
+#:c:\work\costeffectivecode\src\Costeffectivecode.WebApi2\Costeffectivecode.WebApi2.xproj
+c:\work\costeffectivecode\src\Costeffectivecode.WebApi2\Costeffectivecode.WebApi2.xproj|c:\work\costeffectivecode\src\CosteffectiveCode\CosteffectiveCode.xproj
+c:\work\costeffectivecode\src\Costeffectivecode.WebApi2\Costeffectivecode.WebApi2.xproj|c:\work\costeffectivecode\src\CosteffectiveCode.SimpleInjector\CosteffectiveCode.SimpleInjector.xproj
+c:\work\costeffectivecode\src\Costeffectivecode.WebApi2\Costeffectivecode.WebApi2.xproj|c:\work\costeffectivecode\src\CosteffectiveCode.AutoMapper\CosteffectiveCode.AutoMapper.xproj
+c:\work\costeffectivecode\src\CosteffectiveCode.SimpleInjector\CosteffectiveCode.SimpleInjector.xproj|c:\work\costeffectivecode\src\CosteffectiveCode\CosteffectiveCode.xproj
+c:\work\costeffectivecode\src\CosteffectiveCode.AutoMapper\CosteffectiveCode.AutoMapper.xproj|c:\work\costeffectivecode\src\CosteffectiveCode\CosteffectiveCode.xproj

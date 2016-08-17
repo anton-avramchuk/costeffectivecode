@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Akka.Actor;
+using CosteffectiveCode.Common;
+using CosteffectiveCode.Domain.Cqrs.Queries;
+using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Specifications;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Common.Logger;
-using CostEffectiveCode.Common.Scope;
-using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.Specifications;
+
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Actors
@@ -25,11 +25,6 @@ namespace CostEffectiveCode.Akka.Actors
 
         public QueryActor([NotNull] IScope<TQuery> queryScope)
             : this(queryScope, null, null)
-        {
-        }
-
-        public QueryActor([NotNull] TQuery query)
-            : this(new PassThroughScope<TQuery>(query))
         {
         }
 

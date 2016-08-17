@@ -1,9 +1,8 @@
 ﻿using System;
 using Akka.Actor;
+using CosteffectiveCode.Common;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Common.Logger;
-using CostEffectiveCode.Common.Scope;
-using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Actors
@@ -53,11 +52,6 @@ namespace CostEffectiveCode.Akka.Actors
 
             // in order to receive null-messages
             Receive<ExecuteCommandMessage<TMessage>>(x => Handle(x));
-        }
-
-        public CommandActor([NotNull] ICommand<TMessage> command, [CanBeNull] ILogger logger)
-            : this(new PassThroughScope<ICommand<TMessage>>(command), logger)
-        {
         }
 
         private void Handle(ExecuteCommandMessage<TMessage> message)

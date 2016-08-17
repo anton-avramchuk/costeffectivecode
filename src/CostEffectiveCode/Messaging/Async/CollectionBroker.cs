@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using CosteffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Cqrs.Commands;
 using JetBrains.Annotations;
 
 namespace CosteffectiveCode.Messaging.Async

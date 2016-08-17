@@ -1,5 +1,5 @@
 ﻿using Akka.Actor;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Cqrs

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Cqrs.Queries;
+using CosteffectiveCode.Domain.Ddd.Entities;
 
 namespace CostEffectiveCode.Akka.Messages
 {

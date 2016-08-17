@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CostEffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.Messages

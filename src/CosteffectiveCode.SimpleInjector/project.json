@@ -1,6 +1,6 @@
 ﻿{
   "version": "3.0.0",
-  "description": "SimpleInjector extensions for CostEffectiveCode",
+  "description": "SimpleInjector extensions for CosteffectiveCode",
   "authors": [ "HighTech" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using CosteffectiveCode.Domain.Ddd.Specifications;
+using CosteffectiveCode.Ddd.Specifications;
 using CosteffectiveCode.FunctionalProgramming;
 using SI = SimpleInjector;
 namespace CosteffectiveCode.SimpleInjector

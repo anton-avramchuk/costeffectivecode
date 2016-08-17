@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CosteffectiveCode.FunctionalProgramming

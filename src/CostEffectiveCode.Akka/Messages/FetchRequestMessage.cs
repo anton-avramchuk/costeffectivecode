@@ -2,14 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using CostEffectiveCode.Domain.Cqrs.Queries;
-using CostEffectiveCode.Domain.Ddd.Entities;
-using CostEffectiveCode.Domain.Ddd.Specifications;
+using CosteffectiveCode.Domain.Cqrs.Queries;
+using CosteffectiveCode.Domain.Ddd.Entities;
+using CosteffectiveCode.Domain.Ddd.Specifications;
+
 
 namespace CostEffectiveCode.Akka.Messages
 {
     public class FetchRequestMessage<TEntity, TSpecification>
-        : FetchRequestMessageBase, IQueryConstraints<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>>
+        : FetchRequestMessageBase, ISpecificationQuery<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>>
         where TEntity : class, IEntity
         where TSpecification : ISpecification<TEntity>
     {
@@ -47,15 +48,15 @@ namespace CostEffectiveCode.Akka.Messages
             return this;
         }
 
-        public FetchRequestMessage<TEntity, TSpecification> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> expression, SortOrder sortOrder = SortOrder.Asc)
-        {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
+        //public FetchRequestMessage<TEntity, TSpecification> OrderBy<TProperty>(Expression<Func<TEntity, TProperty>> expression, SortOrder sortOrder = SortOrder.Asc)
+        //{
+        //    if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-            OrderByConstraints.Add(
-                new OrderByConstraint<TEntity, TProperty>(expression, sortOrder));
+        //    OrderByConstraints.Add(
+        //        new OrderByConstraint<TEntity, TProperty>(expression, sortOrder));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         public FetchRequestMessage<TEntity, TSpecification> Include<TProperty>(Expression<Func<TEntity, TProperty>> expression)
         {
@@ -67,5 +68,14 @@ namespace CostEffectiveCode.Akka.Messages
         }
 
 
+        public FetchRequestMessage<TEntity, TSpecification> Execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        ISpecificationQuery<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>> ISpecificationQuery<TEntity, TSpecification, FetchRequestMessage<TEntity, TSpecification>>.Where(TSpecification specification)
+        {
+            return Where(specification);
+        }
     }
 }

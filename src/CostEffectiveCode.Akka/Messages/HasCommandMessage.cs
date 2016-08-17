@@ -1,4 +1,4 @@
-using CostEffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 
 namespace CostEffectiveCode.Akka.Messages
 {

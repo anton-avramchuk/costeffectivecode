@@ -1,4 +1,4 @@
-﻿using CosteffectiveCode.Domain.Cqrs.Commands;
+﻿using CosteffectiveCode.Cqrs.Commands;
 using JetBrains.Annotations;
 
 namespace CosteffectiveCode.Messaging.Observable

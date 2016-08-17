@@ -1,6 +1,6 @@
 ﻿{
   "version": "3.0.0",
-  "description": "AutoMapper IMapper implementation for CostEffectiveCode",
+  "description": "AutoMapper IMapper implementation for CosteffectiveCode",
   "authors": [ "HighTech" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"

@@ -1,8 +1,8 @@
 ﻿using System;
 using Akka.Actor;
+using CosteffectiveCode.Domain.Cqrs.Commands;
+using CosteffectiveCode.Messaging;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Messaging;
-using CostEffectiveCode.Domain.Cqrs.Commands;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Akka.PubSub

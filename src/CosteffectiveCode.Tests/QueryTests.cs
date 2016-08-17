@@ -14,7 +14,7 @@ namespace CosteffectiveCode.Tests
 
             var data = new[] {new Foo() {Bar = new Bar() {Name = "Super Bar"} } };
             var q = new EntityToDtoQuery<Foo,FooDto>(data.AsQueryable());
-            var result = q.FirstOrDefault();
+            var result = q.Execute(x => x.Id > 1).FirstOrDefault();
             Assert.Equal(data[0].Bar.Name, result?.BarName);
         }
     }

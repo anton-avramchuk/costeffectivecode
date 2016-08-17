@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Domain.Ddd.Entities;
+﻿using CosteffectiveCode.Ddd.Entities;
 
 
 namespace CosteffectiveCode.Tests

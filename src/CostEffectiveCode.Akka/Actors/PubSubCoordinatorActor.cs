@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Akka.Actor;
+using CosteffectiveCode.Domain.Cqrs.Commands;
 using CostEffectiveCode.Akka.Messages;
-using CostEffectiveCode.Domain.Cqrs.Commands;
+
 
 namespace CostEffectiveCode.Akka.Actors
 {

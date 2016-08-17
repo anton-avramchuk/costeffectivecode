@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System.Diagnostics;
+using System.Linq;
+using JetBrains.Annotations;
 
 namespace CosteffectiveCode.Common
 {
@@ -8,5 +10,7 @@ namespace CosteffectiveCode.Common
         TReturn Map<TReturn>(object src);
 
         TReturn Map<TReturn>(object src, TReturn dest);
+
+        IQueryable<TReturn> Project<TSource, TReturn>(IQueryable<TSource> queryable);
     }
 }

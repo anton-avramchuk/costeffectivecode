@@ -1,0 +1,25 @@
+﻿{
+  "version": "3.0.0",
+  "description": "CQRS implementations for CosteffectiveCode",
+  "authors": [ "HighTech" ],
+  "packOptions": {
+    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
+  },
+  "dependencies": {
+    "CosteffectiveCode": "3.0.0",
+    "JetBrains.Annotations": "10.1.5",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "net45": {},
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Linq.Queryable": "4.0.1",
+        "System.Reflection": "4.0.10",
+        "System.Reflection.Extensions": "4.0.0"
+      }
+    }
+  }
+}

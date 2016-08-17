@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Domain.Ddd.Entities;
-using CosteffectiveCode.Domain.Ddd.Specifications;
+using CosteffectiveCode.Ddd.Entities;
+using CosteffectiveCode.Ddd.Specifications;
 using CosteffectiveCode.FunctionalProgramming;
 using CosteffectiveCode.SimpleInjector;
 using Xunit;
@@ -17,7 +17,11 @@ namespace CosteffectiveCode.Tests
         {
         }
 
-        public TDto[] Execute(ExpressionSpecification<TEntity> input) => Where(input).Execute().ToArray();
+
+        public TDto[] Execute(ExpressionSpecification<TEntity> input)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public class IocTests
@@ -30,14 +34,14 @@ namespace CosteffectiveCode.Tests
 
             // Объявляем "категорию"
             // @see https://habrahabr.ru/post/133277/
-            var category = new Category("ExpressionSpecification<TEntity> -> TDto[]");
+            var category = new Category("ExpressionSpecification<TDto> -> TDto[]");
 
             // Объявляем морфизмы типа IMporphism<ExpressionSpecification<TEntity>, TDto[]>>
             // Читается как: дай мне функцию преобразования, которая по заданому через Expression условию
             // вернет подходящие сущности Foo и трансформирует их в FooDto
             // Работает это через Automapper и Linq. Automapper налету создает экспрешны для .Select
             // https://github.com/AutoMapper/AutoMapper/wiki/Queryable-Extensions
-            category.DefineSpec<Foo, FooDto, SimpleListMorphism<Foo, FooDto>>();
+            category.DefineList<Foo, FooDto, SimpleListMorphism<Foo, FooDto>>();          
 
             // Регистрируем категорию в контейнере вместе с еще одной пустой
             // Все категории будут зарегистрированы в контейнере и метаинформацию
