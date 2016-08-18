@@ -12,14 +12,45 @@ namespace CosteffectiveCode.Tests
         public void Pipe_Func()
         {
             var point = Pipeline
-                .Start(10, x => x + 6)
-                .Next(x => x.ToString())
-                .Next(int.Parse)
-                .Next(x => Math.Sqrt(x))
-                .Next(x => x*5)
-                .Next(x => new Point((int)Math.Round(x), 120))
-                .Finish();
+                .Pipe(10, x => x + 6)
+                .Pipe(x => x.ToString())
+                .Pipe(int.Parse)
+                .Pipe(x => Math.Sqrt(x))
+                .Pipe(x => x*5)
+                .Pipe(x => new Point((int)Math.Round(x), 120))
+                .Execute();
+            Assert.Equal(20, point.X);
+            Assert.Equal(120, point.Y);
+        }
 
+        [Fact]
+        public void Pipe_Start()
+        {
+            var point = Pipeline
+                .Start(() => 10, x => x + 6)
+                .Pipe(x => x.ToString())
+                .Pipe(int.Parse)
+                .Pipe(x => Math.Sqrt(x))
+                .Pipe(x => x * 5)
+                .Pipe(x => new Point((int)Math.Round(x), 120))
+                .Execute();
+
+            Assert.Equal(20, point.X);
+            Assert.Equal(120, point.Y);
+        }
+
+        [Fact]
+        public void Pipe_Compose_Func()
+        {
+            var composition = Pipeline
+                .Pipe(10, x => x + 6)
+                .Pipe(x => x.ToString())
+                .Pipe(int.Parse)
+                .Pipe(x => Math.Sqrt(x))
+                .Pipe(x => x*5)
+                .Pipe(x => new Point((int) Math.Round(x), 120));
+
+            var point = composition.Execute();
             Assert.Equal(20, point.X);
             Assert.Equal(120, point.Y);
         }
@@ -29,11 +60,11 @@ namespace CosteffectiveCode.Tests
         [Fact]
         public void Pipe_Action()
         {
-            Pipeline
-                .Start(() => Debug.WriteLine("HoHo"))
-                .Next(() => Abc = "Abc")
-                .Finish();
+            var composition = Pipeline
+                .Do(() => Debug.WriteLine("HoHo"))
+                .Do(() => Abc = "Abc");
 
+            composition.Execute();
             Assert.Equal("Abc", Abc);
         }
 
@@ -41,11 +72,12 @@ namespace CosteffectiveCode.Tests
         public void Pipe_Mix()
         {
             Pipeline
-                .Start(10, x => x + 6)
-                .Next(x => x.ToString())
-                .Next(int.Parse)
-                .Next(() => Debug.WriteLine("HoHo"))
-                .Finish();
+                .Pipe(10, x => x + 6)
+                .Pipe(x => x.ToString())
+                .Pipe(int.Parse)
+                .Finish((int x) => Debug.WriteLine(x.ToString()))
+                .Do(() => Debug.WriteLine("HoHo"))
+                .Execute();
         }
     }
 }
