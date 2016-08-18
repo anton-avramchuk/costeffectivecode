@@ -7,6 +7,7 @@ namespace CosteffectiveCode.FunctionalProgramming
     public class Pipeline
     {
         private readonly object _firstArg;
+
         private object _arg;
 
         private readonly List<IInvokable> _steps = new List<IInvokable>();
@@ -59,13 +60,7 @@ namespace CosteffectiveCode.FunctionalProgramming
             {
                 if (action == null) throw new ArgumentNullException(nameof(action));
                 return new Step(Pipeline, action);
-            }
-
-            public Step<TInput> Finish<TInput>([NotNull] Action<TInput> action)
-            {
-                if (action == null) throw new ArgumentNullException(nameof(action));
-                return new Step<TInput>(Pipeline, action);
-            }            
+            }         
         }
 
         public class Step : StepBase, IInvokable
@@ -110,7 +105,6 @@ namespace CosteffectiveCode.FunctionalProgramming
             public void Execute() => Pipeline.Execute();
         }
 
-
         public class Step<TInput, TOutput> : StepBase, IInvokable
         {
             private readonly Pipeline _pipe;
@@ -130,6 +124,12 @@ namespace CosteffectiveCode.FunctionalProgramming
             {
                 if (func == null) throw new ArgumentNullException(nameof(func));
                 return new Step<TOutput, TNext>(_pipe, func);
+            }
+
+            public Step<TOutput> Finish([NotNull] Action<TOutput> action)
+            {
+                if (action == null) throw new ArgumentNullException(nameof(action));
+                return new Step<TOutput>(Pipeline, action);
             }
 
             public TOutput Execute() => (TOutput)_pipe.Execute();

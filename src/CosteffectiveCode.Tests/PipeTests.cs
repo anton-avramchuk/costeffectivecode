@@ -71,13 +71,18 @@ namespace CosteffectiveCode.Tests
         [Fact]
         public void Pipe_Mix()
         {
-            Pipeline
-                .Pipe(10, x => x + 6)
+            var pipeline = Pipeline
+                .Start(() => 10, x => x + 6)
                 .Pipe(x => x.ToString())
                 .Pipe(int.Parse)
-                .Finish((int x) => Debug.WriteLine(x.ToString()))
-                .Do(() => Debug.WriteLine("HoHo"))
-                .Execute();
+                .Pipe(x => Math.Sqrt(x))
+                .Pipe(x => x*5)
+                .Pipe(x => new Point((int) Math.Round(x), 120))
+                .Finish(x => Debug.WriteLine($"{x.X}{x.Y}"))
+                .Do(() => Debug.WriteLine("Point is so cool"));
+
+            // do something else
+            pipeline.Execute();
         }
     }
 }
