@@ -20,5 +20,11 @@
         "System.Reflection.Extensions": "4.0.1"
       }
     }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
   }
 }
