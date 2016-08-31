@@ -81,3 +81,4 @@ node_modules
 project.lock.json
 *.DotSettings.user
 *.lock.json
+/src/.vs
