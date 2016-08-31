@@ -1,5 +1,5 @@
 ﻿{
-  "version": "3.0.0",
+  "version": "3.0.0-alpha",
   "description": "AutoMapper IMapper implementation for CosteffectiveCode",
   "authors": [ "HighTech" ],
   "packOptions": {

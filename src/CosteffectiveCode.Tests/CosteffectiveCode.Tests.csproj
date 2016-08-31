@@ -73,9 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IocTests.cs" />
     <Compile Include="Fakes.cs" />
-    <Compile Include="PipeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryTests.cs" />
   </ItemGroup>
