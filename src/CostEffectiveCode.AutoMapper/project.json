@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "AutoMapper": "5.1.1",
-    "CosteffectiveCode": "3.0.0-alpha",
+    "CostEffectiveCode": "3.0.0-alpha",
     "JetBrains.Annotations": "10.1.5",
     "NETStandard.Library": "1.6.0"
   },
