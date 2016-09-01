@@ -1,6 +1,6 @@
 {
-  "copyright": "HighTech",
-  "version": "3.0.0-alpha",
+  "copyright": "HighTech.Today",
+  "version": "3.0.0-alpha1",
   "title": "CostEffectiveCode",
   "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],
@@ -8,8 +8,7 @@
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
-    "JetBrains.Annotations": "10.1.5",
-    "NETStandard.Library": "1.6.0"
+    "JetBrains.Annotations": "10.1.5"
   },
 
   "frameworks": {
@@ -17,6 +16,7 @@
     "netstandard1.6": {
       "imports": "dnxcore50",
       "dependencies": {
+        "NETStandard.Library": "1.6.0",
         "System.Linq.Queryable": "4.0.1",
         "System.Reflection": "4.1.0",
         "System.Reflection.Extensions": "4.0.1"
