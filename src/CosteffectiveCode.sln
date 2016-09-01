@@ -5,15 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode", "CostEffectiveCode\CostEffectiveCode.xproj", "{A0481FEE-FE52-40D8-B9A6-323B466E57B7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{839D92F9-6C9B-47DC-88C6-0FCCF8A3CFC6}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.AutoMapper", "CostEffectiveCode.AutoMapper\CostEffectiveCode.AutoMapper.xproj", "{EE9B12DC-F5CB-4674-99AF-428BFCEED36E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Tests", "CostEffectiveCode.Tests\CostEffectiveCode.Tests.csproj", "{20574EA3-93AB-458E-9B8E-87CD49F92EDD}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.WebApi2", "CostEffectiveCode.WebApi2\CostEffectiveCode.WebApi2.xproj", "{B97F5C00-B322-4A0E-9D9F-1C46B800BA8C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.WebApi2.Example", "CostEffectiveCode.WebApi2.Example\CostEffectiveCode.WebApi2.Example.csproj", "{A28C9E20-46A7-4ADF-B29E-9F0D317A5182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,23 +23,12 @@ Global
 		{EE9B12DC-F5CB-4674-99AF-428BFCEED36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE9B12DC-F5CB-4674-99AF-428BFCEED36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE9B12DC-F5CB-4674-99AF-428BFCEED36E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20574EA3-93AB-458E-9B8E-87CD49F92EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20574EA3-93AB-458E-9B8E-87CD49F92EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20574EA3-93AB-458E-9B8E-87CD49F92EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20574EA3-93AB-458E-9B8E-87CD49F92EDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B97F5C00-B322-4A0E-9D9F-1C46B800BA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B97F5C00-B322-4A0E-9D9F-1C46B800BA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97F5C00-B322-4A0E-9D9F-1C46B800BA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97F5C00-B322-4A0E-9D9F-1C46B800BA8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A28C9E20-46A7-4ADF-B29E-9F0D317A5182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A28C9E20-46A7-4ADF-B29E-9F0D317A5182}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A28C9E20-46A7-4ADF-B29E-9F0D317A5182}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A28C9E20-46A7-4ADF-B29E-9F0D317A5182}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{20574EA3-93AB-458E-9B8E-87CD49F92EDD} = {839D92F9-6C9B-47DC-88C6-0FCCF8A3CFC6}
 	EndGlobalSection
 EndGlobal
