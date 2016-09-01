@@ -2,9 +2,10 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using AutoMapper.QueryableExtensions;
-using CosteffectiveCode.Common;
 using AM = AutoMapper;
-namespace CosteffectiveCode.AutoMapper
+using IMapper = CostEffectiveCode.Common.IMapper;
+
+namespace CostEffectiveCode.AutoMapper
 {
     public class AutoMapperWrapper : IMapper
     {

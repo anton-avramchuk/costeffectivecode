@@ -1,8 +1,8 @@
-﻿using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+﻿using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Cqrs.Commands
+namespace CostEffectiveCode.Cqrs.Commands
 {
     public class DeleteCommand<TEntity> : UowBased, ICommand<TEntity>
         where TEntity : class, IEntity

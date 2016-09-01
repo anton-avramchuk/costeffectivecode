@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using CosteffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Cqrs.Queries
+namespace CostEffectiveCode.Ddd
 {
     /// <summary>
     /// Sort order enumeration

@@ -1,6 +1,6 @@
 {
   "copyright": "HighTech.Today",
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0-alpha2",
   "title": "CostEffectiveCode",
   "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
   "authors": [ "HighTech" ],

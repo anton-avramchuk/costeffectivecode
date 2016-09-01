@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd
+namespace CostEffectiveCode.Ddd
 {
     [PublicAPI]
     public class BusinessRuleAttribute : Attribute

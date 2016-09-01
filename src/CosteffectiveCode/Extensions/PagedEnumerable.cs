@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Extensions
+namespace CostEffectiveCode.Extensions
 {
     [PublicAPI]
     public interface IPagedEnumerable<out T> : IEnumerable<T>

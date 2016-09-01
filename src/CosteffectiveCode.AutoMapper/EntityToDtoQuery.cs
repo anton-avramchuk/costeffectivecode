@@ -3,13 +3,13 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper.QueryableExtensions;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.Cqrs.Queries;
+using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications;
 using JetBrains.Annotations;
 using AM = AutoMapper;
 
-namespace CosteffectiveCode.AutoMapper
+namespace CostEffectiveCode.AutoMapper
 {
     public class PagedEntityToDtoQuery<TEntity, TResult> :
         PagedEntityToDtoQuery<PagedExpressionSpecification<TResult>, TEntity, TResult>

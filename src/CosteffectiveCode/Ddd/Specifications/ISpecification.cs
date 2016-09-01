@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Specifications
+namespace CostEffectiveCode.Ddd.Specifications
 {
     public interface ISpecification<in T>
     {

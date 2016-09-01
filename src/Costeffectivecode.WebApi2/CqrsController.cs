@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
-using CosteffectiveCode.Cqrs.Commands;
-using CosteffectiveCode.Cqrs.Queries;
+using CostEffectiveCode.Cqrs.Commands;
+using CostEffectiveCode.Cqrs.Queries;
 
-namespace Costeffectivecode.WebApi2
+namespace CostEffectiveCode.WebApi2
 {
     public abstract class CqrsController : ApiController
     {

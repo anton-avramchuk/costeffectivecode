@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Specifications
+namespace CostEffectiveCode.Ddd.Specifications
 {
     [PublicAPI]
     public class ExpressionSpecification<T> : ISpecification<T>

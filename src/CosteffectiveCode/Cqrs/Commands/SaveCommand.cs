@@ -1,8 +1,8 @@
-﻿using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+﻿using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Cqrs.Commands
+namespace CostEffectiveCode.Cqrs.Commands
 {
     public class SaveCommand<TEntity, TKey> : UowBased, ICommand<TEntity, TKey>
         where TKey: struct

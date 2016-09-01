@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Messaging
+namespace CostEffectiveCode.Messaging
 {
     [PublicAPI]
     public interface IPublisher

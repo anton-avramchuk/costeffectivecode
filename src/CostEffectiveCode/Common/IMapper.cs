@@ -1,8 +1,7 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Common
+namespace CostEffectiveCode.Common
 {
     [PublicAPI]
     public interface IMapper

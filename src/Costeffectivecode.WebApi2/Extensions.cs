@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Http.Results;
-using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.AutoMapper;
+using CostEffectiveCode.Cqrs.Queries;
+using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications;
 
-namespace Costeffectivecode.WebApi2
+namespace CostEffectiveCode.WebApi2
 {
     public static class Extensions
     {

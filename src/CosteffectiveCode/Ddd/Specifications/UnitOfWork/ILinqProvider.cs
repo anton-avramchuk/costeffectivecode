@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using CosteffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Specifications.UnitOfWork
+namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
 {
     [PublicAPI]
     public interface ILinqProvider

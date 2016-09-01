@@ -1,8 +1,8 @@
 ﻿using System;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Cqrs
+namespace CostEffectiveCode.Cqrs
 {
     public abstract class UowBased
     {
