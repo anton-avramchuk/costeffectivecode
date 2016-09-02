@@ -6,8 +6,8 @@
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
-    "CostEffectiveCode": "3.0.0-alpha2",
-    "CostEffectiveCode.AutoMapper": "3.0.0-alpha2",
+    "CostEffectiveCode": "3.0.0-*",
+    "CostEffectiveCode.AutoMapper": "3.0.0-*",
     "JetBrains.Annotations": "10.1.5",
     "Microsoft.AspNet.WebApi": "5.2.3"
   },
