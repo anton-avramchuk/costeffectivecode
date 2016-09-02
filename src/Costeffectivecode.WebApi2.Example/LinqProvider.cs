@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 
 namespace Costeffectivecode.WebApi2.Example
 {

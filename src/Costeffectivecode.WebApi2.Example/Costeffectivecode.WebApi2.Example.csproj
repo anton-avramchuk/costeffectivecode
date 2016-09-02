@@ -52,9 +52,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Costeffectivecode.WebApi2\bin\Debug\net45\CosteffectiveCode.AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="CosteffectiveCode.SimpleInjector">
-      <HintPath>..\Costeffectivecode.WebApi2\bin\Debug\net45\CosteffectiveCode.SimpleInjector.dll</HintPath>
-    </Reference>
     <Reference Include="Costeffectivecode.WebApi2, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Costeffectivecode.WebApi2\bin\Debug\net45\Costeffectivecode.WebApi2.dll</HintPath>
@@ -180,7 +177,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="ComandQueryFactory.cs" />
+    <Compile Include="CommandQueryFactory.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

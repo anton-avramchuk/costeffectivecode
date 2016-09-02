@@ -1,4 +1,4 @@
-﻿using CosteffectiveCode.Ddd.Entities;
+﻿using CostEffectiveCode.Ddd.Entities;
 
 namespace Costeffectivecode.WebApi2.Example.Models
 {

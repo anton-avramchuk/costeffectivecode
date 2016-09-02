@@ -1,11 +1,9 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
-using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Cqrs.Commands;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.AutoMapper;
+using CostEffectiveCode.Cqrs.Commands;
+using CostEffectiveCode.Cqrs.Queries;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 
@@ -26,7 +24,7 @@ namespace Costeffectivecode.WebApi2.Example
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
-            var registration = Lifestyle.Scoped.CreateRegistration<ComandQueryFactory>(container);
+            var registration = Lifestyle.Scoped.CreateRegistration<CommandQueryFactory>(container);
 
 
             container.AddRegistration(typeof(IQueryFactory), registration);
