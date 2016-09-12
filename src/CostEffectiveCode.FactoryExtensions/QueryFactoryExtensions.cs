@@ -1,24 +1,10 @@
-﻿using System;
-using System.Web.Http;
-using System.Web.Http.Results;
-using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Cqrs.Commands;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications;
-
-namespace Costeffectivecode.WebApi2
+﻿namespace CostEffectiveCode.FactoryExtensions
 {
-    public abstract class CqrsController : ApiController
+    public static class QueryFactoryExtensions
     {
-        public readonly ICommandFactory CommandFactory;
-
-        public readonly IQueryFactory QueryFactory;
-
-        protected CqrsController(ICommandFactory commandFactory, IQueryFactory queryFactory)
+        public static TResult Execute<TSpecification, TResult, TQuery>()
         {
-            CommandFactory = commandFactory;
-            QueryFactory = queryFactory;
+            
         }
 
         public OkNegotiatedContentResult<TResult> Ok<TSpecification, TResult, TQuery>(
