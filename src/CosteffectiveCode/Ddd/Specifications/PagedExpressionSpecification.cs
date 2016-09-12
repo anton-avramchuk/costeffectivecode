@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Specifications
+namespace CostEffectiveCode.Ddd.Specifications
 {
     public class PagedExpressionSpecification<TEntity> : ExpressionSpecification<TEntity>, IPagedSpecification<TEntity>
     {

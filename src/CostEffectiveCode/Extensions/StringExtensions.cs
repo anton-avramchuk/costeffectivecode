@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Extensions
+namespace CostEffectiveCode.Extensions
 {
     ///<summary>
     /// Класс свойств расширений для коллекций строк

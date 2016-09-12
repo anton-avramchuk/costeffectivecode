@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using CosteffectiveCode.Extensions;
+using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd
+namespace CostEffectiveCode.Ddd
 {
     [PublicAPI]
     public class PagedList<T> : List<T>, IPagedEnumerable<T>

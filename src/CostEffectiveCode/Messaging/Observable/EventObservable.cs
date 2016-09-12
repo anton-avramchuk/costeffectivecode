@@ -1,8 +1,8 @@
 ﻿using System;
-using CosteffectiveCode.Cqrs.Commands;
+using CostEffectiveCode.Cqrs.Commands;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Messaging.Observable
+namespace CostEffectiveCode.Messaging.Observable
 {
     /// <summary>
     /// Event-based implementation of IObservable&lt;T&gt;

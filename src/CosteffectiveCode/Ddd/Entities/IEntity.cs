@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Entities
+namespace CostEffectiveCode.Ddd.Entities
 {
     [PublicAPI]
     public interface IEntity

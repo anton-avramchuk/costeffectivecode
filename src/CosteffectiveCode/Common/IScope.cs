@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Common
+namespace CostEffectiveCode.Common
 {
     /// <summary>
     /// Represents object lifetime scope

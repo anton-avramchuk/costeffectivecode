@@ -1,15 +1,14 @@
 ﻿{
-  "version": "3.0.0-alpha",
-  "description": "AutoMapper IMapper implementation for CosteffectiveCode",
-  "authors": [ "HighTech" ],
+  "version": "3.0.0-alpha3",
+  "description": "AutoMapper IMapper implementation for CostEffectiveCode",
+  "authors": [ "HighTech.Today" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
     "AutoMapper": "5.1.1",
-    "CostEffectiveCode": "3.0.0-alpha",
-    "JetBrains.Annotations": "10.1.5",
-    "NETStandard.Library": "1.6.0"
+    "CostEffectiveCode": "3.0.0-*",
+    "JetBrains.Annotations": "10.1.5"
   },
 
   "frameworks": {
@@ -17,6 +16,7 @@
     "netstandard1.6": {
       "imports": "dnxcore50",
       "dependencies": {
+        "NETStandard.Library": "1.6.0",
         "System.Linq.Queryable": "4.0.1"
       }
     }

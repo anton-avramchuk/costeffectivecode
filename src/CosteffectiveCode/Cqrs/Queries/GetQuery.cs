@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CosteffectiveCode.Common;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Common;
+using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Cqrs.Queries
+namespace CostEffectiveCode.Cqrs.Queries
 {
     public class GetQuery<TKey, TEntity, TResult> : IQuery<TKey, TResult>
         where TKey : struct

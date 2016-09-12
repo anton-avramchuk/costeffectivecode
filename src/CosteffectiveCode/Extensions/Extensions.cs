@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Entities;
-using CosteffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Extensions
+namespace CostEffectiveCode.Extensions
 {
     [PublicAPI]
     public static class Extensions

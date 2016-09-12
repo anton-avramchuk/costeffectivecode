@@ -1,8 +1,8 @@
 ﻿using System;
-using CosteffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CosteffectiveCode.Ddd.Specifications
+namespace CostEffectiveCode.Ddd.Specifications
 {
     public abstract class CompositeSpecification<T> : ISpecification<T>
         where T:IEntity
