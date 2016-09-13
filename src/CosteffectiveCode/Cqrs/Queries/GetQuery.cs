@@ -8,25 +8,26 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Cqrs.Queries
 {
     public class GetQuery<TKey, TEntity, TResult> : IQuery<TKey, TResult>
-        where TKey : struct
+        where TKey : struct, IComparable, IComparable<TKey>, IEquatable<TKey>
         where TEntity : class, IEntityBase<TKey>
         where TResult : IEntityBase<TKey>
     {
         private readonly ILinqProvider _linqProvider;
 
-        private readonly IMapper _mapper;
+        private readonly IProjector _projector;
 
-        public GetQuery([NotNull] ILinqProvider linqProvider, [NotNull] IMapper mapper)
+        public GetQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
         {
             if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
-            if (mapper == null) throw new ArgumentNullException(nameof(mapper));
+            if (projector == null) throw new ArgumentNullException(nameof(projector));
             _linqProvider = linqProvider;
-            _mapper = mapper;
+            _projector = projector;
         }
 
         public TResult Execute(TKey specification) =>
-            _mapper.Project<TEntity, TResult>(_linqProvider
-                .GetQueryable<TEntity>())
-                .SingleOrDefault(x => x.Id.Equals(specification));
+            _projector.Project<TEntity, TResult>(_linqProvider
+                .GetQueryable<TEntity>()
+                .Where(x => specification.Equals(x.Id)))
+            .SingleOrDefault();
     }
 }

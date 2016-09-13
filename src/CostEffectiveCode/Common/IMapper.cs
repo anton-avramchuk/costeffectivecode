@@ -9,7 +9,5 @@ namespace CostEffectiveCode.Common
         TReturn Map<TReturn>(object src);
 
         TReturn Map<TReturn>(object src, TReturn dest);
-
-        IQueryable<TReturn> Project<TSource, TReturn>(IQueryable<TSource> queryable);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
@@ -17,5 +18,7 @@ namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
         IQueryable<TEntity> GetQueryable<TEntity>()
             where TEntity : class, IEntity;
 
+
+        IQueryable GetQueryable(Type t);
     }
 }

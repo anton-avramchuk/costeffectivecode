@@ -1,13 +1,16 @@
-{
+﻿{
   "copyright": "HighTech.Today",
-  "title": "CostEffectiveCode",
-  "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
+  "version": "3.0.0-alpha3",
+  "title": "CostEffectiveCode.Conventions",
+  "description": "Conventions for rapid development",
   "authors": [ "HighTech" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
-    "JetBrains.Annotations": "10.1.5"
+    "JetBrains.Annotations": "10.1.5",
+    "CostEffectiveCode": "3.0.0-*",
+    "SimpleInjector": "3.2.2"
   },
 
   "frameworks": {

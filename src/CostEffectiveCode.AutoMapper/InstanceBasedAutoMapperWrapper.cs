@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Linq;
+﻿using System.Linq;
 using AutoMapper.QueryableExtensions;
 using AM = AutoMapper;
 using IMapper = CostEffectiveCode.Common.IMapper;
@@ -17,7 +15,9 @@ namespace CostEffectiveCode.AutoMapper
             Configuration = configuration;
 
             if (!skipValidnessAssertation)
+            {
                 configuration.AssertConfigurationIsValid();
+            }
 
             Instance = configuration.CreateMapper();
         }

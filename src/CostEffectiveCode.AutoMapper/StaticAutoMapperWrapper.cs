@@ -7,7 +7,7 @@ using IMapper = CostEffectiveCode.Common.IMapper;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class AutoMapperWrapper : IMapper
+    public class StaticAutoMapperWrapper : IMapper
     {
         public TReturn Map<TReturn>(object src) => AM.Mapper.Map<TReturn>(src);
 

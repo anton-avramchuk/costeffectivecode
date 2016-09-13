@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Linq.Expressions;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
@@ -50,5 +51,10 @@ namespace CostEffectiveCode.Extensions
         }
 
         #endregion
+
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> queryable, bool cnd, Expression<Func<T, bool>>  expr)
+            => cnd
+                ? queryable.Where(expr)
+                : queryable;
     }
 }
