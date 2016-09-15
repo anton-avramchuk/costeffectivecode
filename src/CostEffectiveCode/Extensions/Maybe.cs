@@ -26,12 +26,31 @@ namespace CostEffectiveCode.Extensions
             return evaluator(o) ? null : o;
         }
 
-        public static TInput Do<TInput>(this TInput o, Action<TInput> action)
+        public static TInput Do<TInput>(this TInput o, Action<TInput> action, [CanBeNull]Func<Exception> ifNull = null)
             where TInput : class
         {
-            if (o == null) return null;
+            if (o == null)
+            {
+                if (ifNull != null)
+                {
+                    throw ifNull.Invoke();
+                }
+
+                return null;
+            }
             action(o);
             return o;
+        }
+
+
+        public static TOutput Do<TInput, TOutput>(this TInput o, Func<TInput, TOutput> func, Func<Exception> ifNull)
+        {
+            if (o == null)
+            {
+                throw ifNull.Invoke();
+            }
+
+            return func.Invoke(o);
         }
     }
 }

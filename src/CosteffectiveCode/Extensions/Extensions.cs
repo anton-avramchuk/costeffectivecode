@@ -2,8 +2,10 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Linq.Expressions;
+using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions
@@ -56,5 +58,18 @@ namespace CostEffectiveCode.Extensions
             => cnd
                 ? queryable.Where(expr)
                 : queryable;
+
+        public static TEntity ById<TEntity>(this ILinqProvider linqProvider, int id)
+            where TEntity : class, IEntityBase<int>
+            => linqProvider.GetQueryable<TEntity>().ById(id);
+
+        public static TEntity ById<TEntity>(this IQueryable<TEntity> queryable, int id)
+            where TEntity : class, IEntityBase<int>
+            => queryable.SingleOrDefault(x => x.Id == id);
+        public static TProjection ById<TEntity, TProjection>(this IQueryable<TEntity> queryable, int id, IProjector projector)
+            where TEntity : class, IEntityBase<int>
+            => projector
+                .Project<TEntity, TProjection>(queryable.Where(x => x.Id == id))
+                .SingleOrDefault();
     }
 }

@@ -12,22 +12,24 @@ namespace CostEffectiveCode.Cqrs.Queries
         where TEntity : class, IEntityBase<TKey>
         where TResult : IEntityBase<TKey>
     {
-        private readonly ILinqProvider _linqProvider;
+        protected readonly ILinqProvider LinqProvider;
 
-        private readonly IProjector _projector;
+        protected readonly IProjector Projector;
 
         public GetQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
         {
             if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
             if (projector == null) throw new ArgumentNullException(nameof(projector));
-            _linqProvider = linqProvider;
-            _projector = projector;
+
+            LinqProvider = linqProvider;
+            Projector = projector;
         }
 
-        public TResult Execute(TKey specification) =>
-            _projector.Project<TEntity, TResult>(_linqProvider
+        public virtual TResult Execute(TKey specification) =>
+            Projector.Project<TEntity, TResult>(LinqProvider
                 .GetQueryable<TEntity>()
                 .Where(x => specification.Equals(x.Id)))
+
             .SingleOrDefault();
     }
 }
