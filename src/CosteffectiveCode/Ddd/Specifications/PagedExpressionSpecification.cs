@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using CostEffectiveCode.Cqrs.Queries;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Ddd.Specifications
 {
-    public class PagedExpressionSpecification<TEntity> : ExpressionSpecification<TEntity>, IPagedSpecification<TEntity>
+    public class PagedExpressionSpecification<TEntity> : ExpressionSpecification<TEntity>,
+        IPagedSpecification<TEntity>, ILinqSpecification<TEntity>
+        where TEntity : IEntity
     {
         // ReSharper disable once StaticMemberInGenericType
         public static int DefaultTake { set; get; } = 20;
@@ -24,5 +29,7 @@ namespace CostEffectiveCode.Ddd.Specifications
             Page = page;
             Take = take;
         }
+
+        public IQueryable<TEntity> Apply(IQueryable<TEntity> query) => query.Where(Expression);
     }
 }

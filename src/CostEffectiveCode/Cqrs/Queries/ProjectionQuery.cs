@@ -9,15 +9,14 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public abstract class EntityToDtoQuery<TSpecification, TEntity, TDto>
-        : IQuery<TSpecification, IEnumerable<TDto>>, IQuery<TSpecification, int>
-        where TEntity : class, IEntity
+    public abstract class ProjectionQuery<TSpecification, TSource, TDest>
+        : IQuery<TSpecification, IEnumerable<TDest>>, IQuery<TSpecification, int>
+        where TSource : class, IEntity
     {
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
 
-
-        protected EntityToDtoQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
+        protected ProjectionQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
         {
             if (linqProvier == null) throw new ArgumentNullException(nameof(linqProvier));
             if (projector == null) throw new ArgumentNullException(nameof(projector));
@@ -26,19 +25,19 @@ namespace CostEffectiveCode.Cqrs.Queries
             Projector = projector;
         }
 
-        protected abstract IQueryable<TDto> GetQueryable(TSpecification specification);
+        protected abstract IQueryable<TDest> GetQueryable(TSpecification specification);
 
-        protected IQueryable<TDto> Project(IQueryable<TEntity> queryable) => Projector.Project<TEntity, TDto>(queryable);
+        protected IQueryable<TDest> Project(IQueryable<TSource> queryable) => Projector.Project<TSource, TDest>(queryable);
 
-        public IEnumerable<TDto> Execute(TSpecification specification) => GetQueryable(specification).ToArray();
+        public IEnumerable<TDest> Execute(TSpecification specification) => GetQueryable(specification).ToArray();
 
         int IQuery<TSpecification, int>.Execute(TSpecification specification) => GetQueryable(specification).Count();
     }
 
-    public class EntityToDtoQuery<TEntity, TResult> : EntityToDtoQuery<Expression<Func<TResult, bool>>, TEntity, TResult>
+    public class ProjectionQuery<TEntity, TResult> : ProjectionQuery<Expression<Func<TResult, bool>>, TEntity, TResult>
         where TEntity : class, IEntity
     {
-        public EntityToDtoQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
+        public ProjectionQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
             : base(linqProvier, projector)
         {
         }
