@@ -3,8 +3,14 @@
 namespace CostEffectiveCode.Cqrs.Queries
 {
     [PublicAPI]
-    public interface IQuery<in TSpecification, out TResult>
+    public interface IQuery<out TOutput>
     {
-        TResult Execute([NotNull] TSpecification specification);
+        TOutput Execute();
+    }
+
+    [PublicAPI]
+    public interface IQuery<in TSpecification, out TOutput>
+    {
+        TOutput Execute([NotNull] TSpecification specification);
     }
 }

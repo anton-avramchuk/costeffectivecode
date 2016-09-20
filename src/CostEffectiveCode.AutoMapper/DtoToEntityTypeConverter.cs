@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using CostEffectiveCode.Ddd.Entities;
@@ -7,13 +8,16 @@ using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 namespace CostEffectiveCode.AutoMapper
 {
     public class DtoEntityTypeConverter<TDto, TEntity> : ITypeConverter<TDto, TEntity>
-            where TEntity : class, IEntity, new()     
+            where TEntity : class, IEntity<int>, new()     
     {
         private readonly ILinqProvider _linqProvider;
 
-        public DtoEntityTypeConverter(ILinqProvider linqProvider)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public DtoEntityTypeConverter(ILinqProvider linqProvider, IUnitOfWork unitOfWork)
         {
             _linqProvider = linqProvider;
+            _unitOfWork = unitOfWork;
         }
 
         public TEntity Convert(TDto source, TEntity destination, ResolutionContext context)
@@ -46,14 +50,23 @@ namespace CostEffectiveCode.AutoMapper
                     ? propertyInfo.Name.ToUpper() + "ID"
                     : propertyInfo.Name.ToUpper();
 
-                if (sp.ContainsKey(key))
+                if (!sp.ContainsKey(key)) continue;
+
+                // маппим один к одному примитивы, связанные сущности тащим из контекста
+                if (key.EndsWith("ID")
+                    && typeof(IEntity).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType))
                 {
-                    // маппим один к одному примитивы, связанные сущности тащим из контекста
-                    propertyInfo.SetValue(dest, key.EndsWith("ID")
-                        && typeof(IEntity).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType)
-#warning FIX IT!
-                            ? null
-                            : sp[key].GetValue(source));
+                    propertyInfo.SetValue(dest, _unitOfWork.Get(propertyInfo.PropertyType, sp[key].GetValue(source)));
+                }
+                else
+                {
+                    if (propertyInfo.PropertyType != sp[key].PropertyType)
+                    {
+                        throw new InvalidOperationException($"Can't map Property {propertyInfo.Name} because of type mismatch:" +
+                                                            $"{sp[key].PropertyType.Name} -> {propertyInfo.PropertyType.Name}");    
+                    }
+
+                    propertyInfo.SetValue(dest, sp[key].GetValue(source));
                 }
             }
 

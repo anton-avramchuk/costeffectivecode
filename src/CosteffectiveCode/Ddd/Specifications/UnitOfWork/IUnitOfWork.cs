@@ -13,6 +13,10 @@ namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
         void Delete<TEntity>(TEntity entity)
             where TEntity : class, IEntity;
 
+        TEntity Get<TEntity>(object id);
+
+        IEntity Get(Type entityType, object id);
+
         void Commit();
     }
 

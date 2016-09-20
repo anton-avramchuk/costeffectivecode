@@ -16,9 +16,9 @@ namespace CostEffectiveCode.Cqrs.Commands
         TCommand GetCommand<TCommand>()
             where TCommand : ICommand;
 
-        SaveCommand<TEntity, TKey> GetCreateCommand<TKey, TEntity>()
+        CreateCommand<TKey, TDto, TEntity> GetCreateCommand<TKey, TDto, TEntity>()
             where TKey: struct
-            where TEntity : EntityBase<TKey>;
+            where TEntity : Entity<TKey>;
 
         DeleteCommand<T> GetDeleteCommand<T>()
             where T : class, IEntity;

@@ -14,4 +14,10 @@ namespace CostEffectiveCode.Ddd.Entities
         /// <returns>Representation of entity's primary key</returns>
         object Id { get; }
     }
+
+    public interface IEntity<out T> : IEntity
+    {
+        new T Id { get; }
+    }
+
 }

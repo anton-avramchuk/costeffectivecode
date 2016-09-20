@@ -7,8 +7,8 @@ using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 namespace CostEffectiveCode.Cqrs.Queries
 {
     public class PagedQueryBase<TSpec, TEntity, TDto> : PagedEntityToDtoQuery<TSpec, TEntity, TDto>
-        where TEntity : class, IEntityBase<int>
-        where TDto : class, IEntityBase<int>
+        where TEntity : class, IEntity<int>
+        where TDto : class, IEntity<int>
         where TSpec : IApplyable<TDto>, IPagedSpecification<TDto>
     {
         public PagedQueryBase(ILinqProvider linqProvier, IProjector projector)

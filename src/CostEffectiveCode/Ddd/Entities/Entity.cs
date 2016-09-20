@@ -1,11 +1,6 @@
 ﻿namespace CostEffectiveCode.Ddd.Entities
 {
-    public interface IEntityBase<out T> : IEntity
-    {
-        new T Id { get; }       
-    }
-
-    public abstract class EntityBase<T> : IEntityBase<T>
+    public abstract class Entity<T> : IEntity<T>
     {
         public T Id { get; set; }
 
