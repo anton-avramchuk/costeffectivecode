@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Entities;
-using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Ddd.Specifications
 {
-    public class PagedExpressionSpecification<TEntity> : ExpressionSpecification<TEntity>,
-        IPagedSpecification<TEntity>, ILinqSpecification<TEntity>
-        where TEntity : class, IEntity
+    public class SimplePagedSpecification<TEntity> :
+        IPagedSpecification<TEntity>,
+        ILinqSpecification<TEntity> where TEntity : class, IEntity
     {
-        // ReSharper disable once StaticMemberInGenericType
-        public static int DefaultTake { set; get; } = 20;
-
-        public int Page { get; protected set; }
-
-        public int Take { get; protected set; }
-
-        public PagedExpressionSpecification([NotNull] Expression<Func<TEntity, bool>> expression, int page, int take)
-            : base(expression)
+        public SimplePagedSpecification(int page, int take)
         {
             if (take <= 0)
             {
@@ -35,8 +25,19 @@ namespace CostEffectiveCode.Ddd.Specifications
             Take = take;
         }
 
+        [Obsolete("For Binding Only", true)]
+        public SimplePagedSpecification()
+        {
+
+        }
+
+        public bool IsSatisfiedBy(TEntity o) => true;
+
+        public int Page { get; }
+        public int Take { get; }
+
         public IQueryable<TEntity> Apply(IQueryable<TEntity> query)
-            => query.Where(Expression)
+            => query
             .OrderByDescending(x => x.Id)
             .Skip(Page * Take)
             .Take(Take);

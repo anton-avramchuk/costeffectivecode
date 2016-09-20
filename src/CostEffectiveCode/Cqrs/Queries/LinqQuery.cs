@@ -10,7 +10,7 @@ namespace CostEffectiveCode.Cqrs.Queries
     public class LinqQuery<TSpecification, TEntity, TDto> : ProjectionQuery<TSpecification, TEntity, TDto>
         where TEntity : class, IEntity
         where TSpecification : ILinqSpecification<TDto>
-        where TDto : IEntity
+        where TDto : class, IEntity
     {
         protected LinqQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
             : base(linqProvider, projector) {}
