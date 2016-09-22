@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>eb9255ef-e24a-4f81-9526-c2508c035eb2</ProjectGuid>
-    <RootNamespace>CostEffectiveCode.FactoryExtensions</RootNamespace>
+    <ProjectGuid>f348da75-b126-430f-9985-2477086bae46</ProjectGuid>
+    <RootNamespace>CostEffectiveCode.Components</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

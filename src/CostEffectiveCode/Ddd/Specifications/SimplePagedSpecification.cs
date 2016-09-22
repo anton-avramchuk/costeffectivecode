@@ -25,10 +25,9 @@ namespace CostEffectiveCode.Ddd.Specifications
             Take = take;
         }
 
-        [Obsolete("For Binding Only", true)]
         public SimplePagedSpecification()
         {
-
+            Take = 30;
         }
 
         public bool IsSatisfiedBy(TEntity o) => true;

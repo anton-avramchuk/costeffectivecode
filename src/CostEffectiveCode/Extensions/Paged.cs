@@ -15,7 +15,7 @@ namespace CostEffectiveCode.Extensions
     }
 
     [PublicAPI]
-    public static class PagedEnumerable
+    public static class Paged
     {
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace CostEffectiveCode.Extensions
         /// <returns></returns>
         public static IPagedEnumerable<T> From<T>(IEnumerable<T> inner, int totalCount)
         {
-            return new PagedEnumerableImpl<T>(inner, totalCount);
+            return new PagedEnumerable<T>(inner, totalCount);
         }
 
         /// <summary>
@@ -38,29 +38,29 @@ namespace CostEffectiveCode.Extensions
         {
             return From(Enumerable.Empty<T>(), 0);
         }
+    }
 
-        private class PagedEnumerableImpl<T> : IPagedEnumerable<T>
+    public class PagedEnumerable<T> : IPagedEnumerable<T>
+    {
+        private readonly IEnumerable<T> _inner;
+        private readonly int _totalCount;
+
+        public PagedEnumerable(IEnumerable<T> inner, int totalCount)
         {
-            private readonly IEnumerable<T> _inner;
-            private readonly int _totalCount;
-
-            public PagedEnumerableImpl(IEnumerable<T> inner, int totalCount)
-            {
-                _inner = inner;
-                _totalCount = totalCount;
-            }
-
-            public IEnumerator<T> GetEnumerator()
-            {
-                return _inner.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
-
-            public long TotalCount => _totalCount;
+            _inner = inner;
+            _totalCount = totalCount;
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _inner.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public long TotalCount => _totalCount;
     }
 }

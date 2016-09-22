@@ -1,16 +1,13 @@
 ﻿{
-  "copyright": "HighTech.Today",
-  "version": "3.0.0-alpha3",
-  "title": "CostEffectiveCode.Conventions",
-  "description": "Conventions for rapid development",
-  "authors": [ "HighTech" ],
+  "version": "3.0.0-alpha4",
+  "description": "Component structure for CostEffectiveCode",
+  "authors": [ "HighTech.Today" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
-    "JetBrains.Annotations": "10.1.5",
     "CostEffectiveCode": "3.0.0-*",
-    "SimpleInjector": "3.2.2"
+    "JetBrains.Annotations": "10.1.5"
   },
 
   "frameworks": {
@@ -19,9 +16,7 @@
       "imports": "dnxcore50",
       "dependencies": {
         "NETStandard.Library": "1.6.0",
-        "System.Linq.Queryable": "4.0.1",
-        "System.Reflection": "4.1.0",
-        "System.Reflection.Extensions": "4.0.1"
+        "System.Linq.Queryable": "4.0.1"
       }
     }
   },

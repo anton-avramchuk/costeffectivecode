@@ -1,6 +1,6 @@
 ﻿namespace CostEffectiveCode.Ddd.Specifications
 {
-    public interface IPagedSpecification<in T> : ISpecification<T>
+    public interface IPagedSpecification<in T>
     {
         int Page { get; }
 
