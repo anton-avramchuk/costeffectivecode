@@ -1,6 +1,6 @@
 ﻿{
-  "version": "3.0.0-alpha4",
-  "description": "AutoMapper IMapper, IProjector implementations for CostEffectiveCode",
+  "version": "3.0.0-alpha5",
+  "description": "AutoMapper-based CostEffectiveCode's IMapper and IProjector implementations",
   "authors": [ "HighTech.Today" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"

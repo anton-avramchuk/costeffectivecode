@@ -1,21 +1,23 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "CostEffectiveCode.NLog Class Library",
-  "authors": [ "Administrator" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "version": "3.0.0-alpha1",
+  "description": "NLog-based CostEffectiveCode's ILogger implementation",
+  "authors": [ "HighTech.Today" ],
+  "packOptions": {
+    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
+  },
+
+  "dependencies": {
+    "CostEffectiveCode": "3.0.0-*",
+    "NLog" : "4.3.8" 
+  },
 
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
-    }
+    "net45": {}
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
   }
 }
