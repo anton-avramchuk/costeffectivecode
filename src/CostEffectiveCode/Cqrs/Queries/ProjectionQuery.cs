@@ -12,7 +12,8 @@ namespace CostEffectiveCode.Cqrs.Queries
 {
     public class ProjectionQuery<TSpecification, TSource, TDest>
         : IQuery<TSpecification, IEnumerable<TDest>>, IQuery<TSpecification, int>
-        where TSource : class, IHasId where TDest : class
+        where TSource : class, IHasId
+        where TDest : class
     {
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
@@ -27,12 +28,11 @@ namespace CostEffectiveCode.Cqrs.Queries
         }
 
         protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
-             => Project(LinqProvider
-                    .GetQueryable<TSource>()
-                    .Match<TSource, ILinqSpecification<TSource>>(spec))
-                .Match<TDest, ILinqSpecification<TDest>>(spec);
-
-        protected virtual IQueryable<TDest> Project(IQueryable<TSource> queryable) => Projector.Project<TSource, TDest>(queryable);
+        => LinqProvider
+            .GetQueryable<TSource>()
+            .Match(spec)
+            .Project<TSource, TDest>(Projector)
+            .Match(spec);
 
         public IEnumerable<TDest> Execute(TSpecification specification) => GetQueryable(specification).ToArray();
 

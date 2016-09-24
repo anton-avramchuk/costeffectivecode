@@ -66,12 +66,14 @@ namespace CostEffectiveCode.Extensions
                 ? evaluator.Invoke(source, (TPattern) pattern)
                 : source;
 
-        public static IQueryable<T> Match<T, TSpecifcation>(this IQueryable<T> source, object pattern)
+        public static IQueryable<T> Match<T>(this IQueryable<T> source, object spec)
             where T : class
-            where TSpecifcation : ILinqSpecification<T>
-            => pattern is TSpecifcation
-                ? ((ILinqSpecification<T>)pattern).Apply(source)
+            => spec is ILinqSpecification<T>
+                ? ((ILinqSpecification<T>)spec).Apply(source)
                 : source;
+
+        public static IQueryable<TDest> Project<TSource, TDest>(this IQueryable<TSource> source, IProjector projector)
+            => projector.Project<TSource, TDest>(source);
 
         public static TEntity ById<TEntity>(this ILinqProvider linqProvider, int id)
             where TEntity : class, IHasId<int>
