@@ -8,7 +8,7 @@ namespace CostEffectiveCode.Cqrs.Commands
 {
     public class CreateCommand<TKey, TDto, TEntity> : UowBased, ICommand<TDto, TKey>
         where TKey: struct
-        where TEntity : Entity<TKey>
+        where TEntity : HasIdBase<TKey>
     {
         private readonly IMapper _mapper;
 

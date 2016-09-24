@@ -7,11 +7,11 @@ using CostEffectiveCode.Extensions;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public class PagedQuery<TSpec, TEntity, TDto> : LinqQuery<TSpec, TEntity, TDto>,
+    public class PagedQuery<TSpec, TEntity, TDto, TSortKey> : ProjectionQuery<TSpec, TEntity, TDto>,
         IQuery<TSpec, IPagedEnumerable<TDto>> 
-        where TEntity : class, IEntity<int>
-        where TDto : class, IEntity<int>
-        where TSpec : ILinqSpecification<TDto>, IPagedSpecification<TDto>
+        where TEntity : class, IHasId
+        where TDto : class, IHasId
+        where TSpec : IPaging<TDto, TSortKey>
     {
         public PagedQuery(ILinqProvider linqProvier, IProjector projector)
             : base(linqProvier, projector)
@@ -19,7 +19,7 @@ namespace CostEffectiveCode.Cqrs.Queries
         }
 
         protected override IQueryable<TDto> GetQueryable(TSpec spec)
-            => spec.Apply(Project(LinqProvider.GetQueryable<TEntity>())).OrderByDescending(x => x.Id);
+            => base.GetQueryable(spec).Paginate(spec);
 
         IPagedEnumerable<TDto> IQuery<TSpec, IPagedEnumerable<TDto>>.Execute(TSpec specification)
             => Paged.From(Execute(specification), GetQueryable(specification).Count());

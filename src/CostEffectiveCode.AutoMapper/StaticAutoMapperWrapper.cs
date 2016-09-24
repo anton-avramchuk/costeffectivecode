@@ -2,12 +2,13 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using AutoMapper.QueryableExtensions;
+using CostEffectiveCode.Common;
 using AM = AutoMapper;
 using IMapper = CostEffectiveCode.Common.IMapper;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class StaticAutoMapperWrapper : IMapper
+    public class StaticAutoMapperWrapper : IMapper, IProjector
     {
         public TReturn Map<TReturn>(object src) => AM.Mapper.Map<TReturn>(src);
 
@@ -24,6 +25,7 @@ namespace CostEffectiveCode.AutoMapper
             AM.Mapper.Initialize(InitMappings);
             AM.Mapper.AssertConfigurationIsValid();
         }
+
 
         private static void InitMappings(AM.IMapperConfigurationExpression c)
         {

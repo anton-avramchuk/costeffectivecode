@@ -17,7 +17,7 @@ namespace CostEffectiveCode.Ddd
 
     [PublicAPI]
     public class Sorting<TEntity, TKey>
-        where TEntity: class, IEntity
+        where TEntity: class
     {
         public Expression<Func<TEntity, TKey>> Expression { get; private set; }
 

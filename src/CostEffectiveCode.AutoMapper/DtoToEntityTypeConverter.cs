@@ -8,7 +8,7 @@ using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 namespace CostEffectiveCode.AutoMapper
 {
     public class DtoEntityTypeConverter<TDto, TEntity> : ITypeConverter<TDto, TEntity>
-            where TEntity : class, IEntity<int>, new()     
+            where TEntity : class, IHasId, new()     
     {
         private readonly ILinqProvider _linqProvider;
 
@@ -22,7 +22,7 @@ namespace CostEffectiveCode.AutoMapper
 
         public TEntity Convert(TDto source, TEntity destination, ResolutionContext context)
         {
-            var sourceId = (source as IEntity)?.Id;
+            var sourceId = (source as IHasId)?.Id;
 
             var dest = destination ?? (sourceId != null
                 ? _linqProvider.GetQueryable<TEntity>().SingleOrDefault(x => x.Id.Equals(sourceId))
@@ -46,7 +46,7 @@ namespace CostEffectiveCode.AutoMapper
             // проходимся по всем свойствам целевого объекта
             foreach (var propertyInfo in dp)
             {
-                var key = typeof(IEntity).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType)
+                var key = typeof(IHasId).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType)
                     ? propertyInfo.Name.ToUpper() + "ID"
                     : propertyInfo.Name.ToUpper();
 
@@ -54,7 +54,7 @@ namespace CostEffectiveCode.AutoMapper
 
                 // маппим один к одному примитивы, связанные сущности тащим из контекста
                 if (key.EndsWith("ID")
-                    && typeof(IEntity).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType))
+                    && typeof(IHasId).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType))
                 {
                     propertyInfo.SetValue(dest, _unitOfWork.Get(propertyInfo.PropertyType, sp[key].GetValue(source)));
                 }

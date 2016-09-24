@@ -5,11 +5,11 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.Ddd.Specifications
 {
-    public class SimplePagedSpecification<TEntity> :
-        IPagedSpecification<TEntity>,
-        ILinqSpecification<TEntity> where TEntity : class, IEntity
+    public class Paging<TEntity, TOrderKey> :
+        IPaging<TEntity, TOrderKey>
+        where TEntity : class, IHasId
     {
-        public SimplePagedSpecification(int page, int take)
+        public Paging(int page, int take, Sorting<TEntity, TOrderKey> orderBy)
         {
             if (take <= 0)
             {
@@ -23,22 +23,18 @@ namespace CostEffectiveCode.Ddd.Specifications
 
             Page = page;
             Take = take;
+            OrderBy = orderBy;
         }
 
-        public SimplePagedSpecification()
+        public Paging()
         {
             Take = 30;
         }
 
-        public bool IsSatisfiedBy(TEntity o) => true;
 
         public int Page { get; }
         public int Take { get; }
 
-        public IQueryable<TEntity> Apply(IQueryable<TEntity> query)
-            => query
-            .OrderByDescending(x => x.Id)
-            .Skip(Page * Take)
-            .Take(Take);
+        public Sorting<TEntity, TOrderKey> OrderBy { get; set; }
     }
 }

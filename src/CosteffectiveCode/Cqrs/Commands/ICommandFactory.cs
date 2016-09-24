@@ -18,9 +18,9 @@ namespace CostEffectiveCode.Cqrs.Commands
 
         CreateCommand<TKey, TDto, TEntity> GetCreateCommand<TKey, TDto, TEntity>()
             where TKey: struct
-            where TEntity : Entity<TKey>;
+            where TEntity : HasIdBase<TKey>;
 
         DeleteCommand<T> GetDeleteCommand<T>()
-            where T : class, IEntity;
+            where T : class, IHasId;
     }
 }

@@ -4,14 +4,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Extensions;
 using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public abstract class ProjectionQuery<TSpecification, TSource, TDest>
+    public class ProjectionQuery<TSpecification, TSource, TDest>
         : IQuery<TSpecification, IEnumerable<TDest>>, IQuery<TSpecification, int>
-        where TSource : class, IEntity
+        where TSource : class, IHasId where TDest : class
     {
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
@@ -25,24 +26,16 @@ namespace CostEffectiveCode.Cqrs.Queries
             Projector = projector;
         }
 
-        protected abstract IQueryable<TDest> GetQueryable(TSpecification specification);
+        protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
+             => Project(LinqProvider
+                    .GetQueryable<TSource>()
+                    .Match<TSource, ILinqSpecification<TSource>>(spec))
+                .Match<TDest, ILinqSpecification<TDest>>(spec);
 
-        protected IQueryable<TDest> Project(IQueryable<TSource> queryable) => Projector.Project<TSource, TDest>(queryable);
+        protected virtual IQueryable<TDest> Project(IQueryable<TSource> queryable) => Projector.Project<TSource, TDest>(queryable);
 
         public IEnumerable<TDest> Execute(TSpecification specification) => GetQueryable(specification).ToArray();
 
         int IQuery<TSpecification, int>.Execute(TSpecification specification) => GetQueryable(specification).Count();
-    }
-
-    public class ProjectionQuery<TEntity, TResult> : ProjectionQuery<Expression<Func<TResult, bool>>, TEntity, TResult>
-        where TEntity : class, IEntity
-    {
-        public ProjectionQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
-            : base(linqProvier, projector)
-        {
-        }
-
-        protected override IQueryable<TResult> GetQueryable(Expression<Func<TResult, bool>> specification)
-            => Project(LinqProvider.GetQueryable<TEntity>()).Where(specification);
     }
 }

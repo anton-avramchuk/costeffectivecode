@@ -10,8 +10,8 @@ namespace CostEffectiveCode.Ddd
 {
     [PublicAPI]
     public class AggregationRootCollection<TAggregationRoot, TChild> : ICollection<TChild>
-        where TChild: class, IEntity
-        where TAggregationRoot: class, IEntity
+        where TChild: class, IHasId
+        where TAggregationRoot: class, IHasId
     {
         #region Fields
 

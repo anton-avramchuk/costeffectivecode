@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Ddd.Specifications
 {
     public abstract class CompositeSpecification<T> : ISpecification<T>
-        where T:IEntity
+        where T:IHasId
     {
         protected readonly ISpecification<T> Left;
         protected readonly ISpecification<T> Right;
@@ -23,7 +23,7 @@ namespace CostEffectiveCode.Ddd.Specifications
     }
 
     public class AndSpecification<T> : CompositeSpecification<T>
-        where T : IEntity
+        where T : IHasId
     {
         public override bool IsSatisfiedBy(T o)
         {
@@ -38,7 +38,7 @@ namespace CostEffectiveCode.Ddd.Specifications
     }
 
     public class OrSpecification<T> : CompositeSpecification<T>
-        where T : IEntity
+        where T : IHasId
     {
         public override bool IsSatisfiedBy(T o)
         {
@@ -53,7 +53,7 @@ namespace CostEffectiveCode.Ddd.Specifications
     }
 
     public class NotSpecification<T> : ISpecification<T>
-        where T : IEntity
+        where T : IHasId
     {
         private readonly ISpecification<T> _specification;
 

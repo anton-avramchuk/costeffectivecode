@@ -9,8 +9,8 @@ namespace CostEffectiveCode.Cqrs.Queries
 {
     public class GetQuery<TKey, TEntity, TResult> : IQuery<TKey, TResult>
         where TKey : struct, IComparable, IComparable<TKey>, IEquatable<TKey>
-        where TEntity : class, IEntity<TKey>
-        where TResult : IEntity<TKey>
+        where TEntity : class, IHasId<TKey>
+        where TResult : IHasId<TKey>
     {
         protected readonly ILinqProvider LinqProvider;
 

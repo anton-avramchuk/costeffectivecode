@@ -7,8 +7,8 @@ using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 namespace CostEffectiveCode.Components.Cqrs
 {
     public class DictionaryQuery<TKey, TEntity, TDto> : IDictionaryQuery<TKey, TEntity, TDto>
-        where TEntity : class, IEntity<TKey>
-        where TDto : class, IEntity<TKey>
+        where TEntity : class, IHasId<TKey>
+        where TDto : class, IHasId<TKey>
     {
         private readonly ILinqProvider _linqProvider;
 
@@ -27,8 +27,8 @@ namespace CostEffectiveCode.Components.Cqrs
     }
 
     public interface IDictionaryQuery<TKey, TEntity, TDto> : IQuery<TDto[]>
-        where TEntity : class, IEntity<TKey>
-        where TDto : class, IEntity<TKey>
+        where TEntity : class, IHasId<TKey>
+        where TDto : class, IHasId<TKey>
     {
     }
 }

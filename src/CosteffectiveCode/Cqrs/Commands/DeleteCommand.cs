@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Cqrs.Commands
 {
     public class DeleteCommand<TEntity> : UowBased, ICommand<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class, IHasId
     {
         public DeleteCommand([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)
         {

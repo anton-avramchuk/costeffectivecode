@@ -3,7 +3,7 @@
 namespace CostEffectiveCode.Ddd.Entities
 {
     [PublicAPI]
-    public interface IEntity
+    public interface IHasId
     {
         /// <summary>
         /// Basic read-only method to get the string value of primary key.
@@ -15,7 +15,7 @@ namespace CostEffectiveCode.Ddd.Entities
         object Id { get; }
     }
 
-    public interface IEntity<out T> : IEntity
+    public interface IHasId<out T> : IHasId
     {
         new T Id { get; }
     }

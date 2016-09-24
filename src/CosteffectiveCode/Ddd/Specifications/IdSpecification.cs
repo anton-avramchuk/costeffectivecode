@@ -5,7 +5,7 @@ namespace CostEffectiveCode.Ddd.Specifications
 {
     [PublicAPI]
     public class IdSpecification<TKey,T> : ExpressionSpecification<T>
-        where T : IEntity<TKey>
+        where T : IHasId<TKey>
     {
         public TKey Id { get; private set; }
 

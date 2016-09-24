@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Specifications;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions
@@ -17,27 +19,17 @@ namespace CostEffectiveCode.Extensions
     [PublicAPI]
     public static class Paged
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="inner"></param>
-        /// <param name="totalCount"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static IPagedEnumerable<T> From<T>(IEnumerable<T> inner, int totalCount)
-        {
-            return new PagedEnumerable<T>(inner, totalCount);
-        }
+        public static IOrderedQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
+            where T : class
+            => paging.OrderBy.SortOrder == SortOrder.Asc
+                ? queryable.OrderBy(paging.OrderBy.Expression)
+                : queryable.OrderByDescending(paging.OrderBy.Expression);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        public static IPagedEnumerable<T> From<T>(IEnumerable<T> inner, int totalCount)
+            =>  new PagedEnumerable<T>(inner, totalCount);
+
         public static IPagedEnumerable<T> Empty<T>()
-        {
-            return From(Enumerable.Empty<T>(), 0);
-        }
+             =>  From(Enumerable.Empty<T>(), 0);
     }
 
     public class PagedEnumerable<T> : IPagedEnumerable<T>

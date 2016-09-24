@@ -10,13 +10,13 @@ namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
 
     {
         /// <summary>
-        ///     Query object for concrete <see cref="IEntity" />
+        ///     Query object for concrete <see cref="IHasId" />
         /// </summary>
         /// <typeparam name="TEntity">
-        ///     <see cref="IEntity" />
+        ///     <see cref="IHasId" />
         /// </typeparam>
         IQueryable<TEntity> GetQueryable<TEntity>()
-            where TEntity : class, IEntity;
+            where TEntity : class, IHasId;
 
 
         IQueryable GetQueryable(Type t);

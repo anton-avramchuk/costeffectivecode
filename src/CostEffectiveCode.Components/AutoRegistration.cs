@@ -29,15 +29,15 @@ namespace CostEffectiveCode.Components
             {
                 var firstArgInterfaces = genericArgs[0].GetTypeInfo().GetInterfaces();
                 var secondArgInterface = genericArgs[1];
-
-                if (firstArgInterfaces.Any(i => ImplementsOpenGeneric(i, typeof(ILinqSpecification<>)))
-                    && firstArgInterfaces.Any(i => ImplementsOpenGeneric(i, typeof(IPagedSpecification<>)))
-                    && ImplementsOpenGeneric(secondArgInterface, typeof(IPagedEnumerable<>)))
+                var paging = firstArgInterfaces.FirstOrDefault(i => ImplementsOpenGeneric(i, typeof(IPaging<,>)));
+                if (paging != null && ImplementsOpenGeneric(secondArgInterface, typeof(IPagedEnumerable<>)))
                 {
                     var dtoType = genericArgs[1].GetTypeInfo().GetGenericArguments()[0];
                     var entityType = dtoType.GetTypeInfo().GetCustomAttribute<DtoForAttribute>()?.EntityType;
                     if (entityType == null) return null;
-                    return typeof(PagedQuery<,,>).MakeGenericType(genericArgs[0], entityType, dtoType);
+                    var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
+#warning TKey Required
+                    return typeof(PagedQuery<,,,>).MakeGenericType(genericArgs[0], entityType, dtoType, sortKey);
                 }
             }
 
@@ -83,7 +83,7 @@ namespace CostEffectiveCode.Components
                     {
                         throw new InvalidOperationException(
                             $"{attr.Implementation} can't implement {dep.ParameterType} in " +
-                            $"{dep.Member.DeclaringType?.Name}:{dep.Name} constructor parameter");
+                            $"{dep.Member.DeclaringType?.Name}:{dep.Name} constructor parameter.");
                     }
 
                     res.Add(dep.ParameterType, attr.Implementation);
@@ -111,7 +111,7 @@ namespace CostEffectiveCode.Components
                 {
                     throw new InvalidOperationException($"Can't find implementation for type {dep.ParameterType} in  " +
                                                         $"{dep.Member.DeclaringType?.Name}:{dep.Name} constructor parameter. " +
-                                                        $"Use Implementation Attribute to configure implementation explicitly");
+                                                        $"Use Implementation Attribute to configure implementation explicitly. By the way don't you forget to use [DtoFor] attribute?");
                 }
             }
 

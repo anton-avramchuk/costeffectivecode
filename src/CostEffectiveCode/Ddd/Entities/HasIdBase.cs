@@ -1,6 +1,6 @@
 ﻿namespace CostEffectiveCode.Ddd.Entities
 {
-    public abstract class Entity<T> : IEntity<T>
+    public abstract class HasIdBase<T> : IHasId<T>
     {
         public T Id { get; set; }
 
@@ -9,6 +9,6 @@
             return !Id?.Equals(default(T)) ?? true;
         }
 
-        object IEntity.Id => Id;
+        object IHasId.Id => Id;
     }
 }
