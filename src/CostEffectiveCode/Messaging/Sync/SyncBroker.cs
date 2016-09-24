@@ -31,12 +31,12 @@ namespace CostEffectiveCode.Messaging.Sync
             _observable.HandleMessage(message);
         }
 
-        public void Subscribe(ICommand<T> handler)
+        public void Subscribe(ICommandHandler<T> handler)
         {
             _observable.AddHandler(handler);
         }
 
-        public void Unsubscribe(ICommand<T> handler)
+        public void Unsubscribe(ICommandHandler<T> handler)
         {
             _observable.RemoveHandler(handler);
         }

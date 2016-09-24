@@ -2,7 +2,10 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Cqrs;
+using CostEffectiveCode.Cqrs.Commands;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
@@ -60,13 +63,35 @@ namespace CostEffectiveCode.Extensions
                 ? queryable.Where(expr)
                 : queryable;
 
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IQuery<TIn, TOut> query)
+            => x => query.Ask(x);
+
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this ICommandHandler<TIn, TOut> query)
+            where TOut : struct
+            => x => query.Handle(x);
+
+        public static async Task<T> ToAsync<T>(Func<T> func)
+            => await Task.Run(() => func.Invoke()).ConfigureAwait(false);
+
+        public static async Task<TOut> ToAsync<TIn, TOut>(this IQuery<TIn, TOut> query, TIn message)
+            => await Task.Run(() => query.Ask(message)).ConfigureAwait(false);
+
+        public static async Task<TOut> ToAsync<TIn, TOut>(this ICommandHandler<TIn, TOut> handler, TIn message)
+            where TOut : struct
+            => await Task.Run(() => handler.Handle(message)).ConfigureAwait(false);
+
+
         public static IQueryable<T> Match<T, TPattern>(this IQueryable<T> source, object pattern,
             Func<IQueryable<T>, TPattern, IQueryable<T>> evaluator) where TPattern : class
             => pattern is TPattern
                 ? evaluator.Invoke(source, (TPattern) pattern)
                 : source;
 
-        public static IQueryable<T> Match<T>(this IQueryable<T> source, object spec)
+        public static IQueryable<T> Apply<T>(this IQueryable<T> source, ILinqSpecification<T> spec)
+            where T : class
+            => spec.Apply(source);
+
+        public static IQueryable<T> ApplyIfPossible<T>(this IQueryable<T> source, object spec)
             where T : class
             => spec is ILinqSpecification<T>
                 ? ((ILinqSpecification<T>)spec).Apply(source)

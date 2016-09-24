@@ -1,10 +1,14 @@
-﻿using CostEffectiveCode.Components.Cqrs;
-using CostEffectiveCode.Ddd.Entities;
-
+﻿using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Components.Cqrs;
 namespace CostEffectiveCode.Tests
 {
     public class Category : HasIdBase<int>
     {
+        public Category()
+        {
+            
+        }
+
         public Category(int rating, string name)
         {
             Rating = rating;
@@ -18,6 +22,11 @@ namespace CostEffectiveCode.Tests
 
     public class Product : HasIdBase<int>
     {
+        public Product()
+        {
+            
+        }
+
         public Product(Category category, string name, decimal price)
         {
             Category = category;

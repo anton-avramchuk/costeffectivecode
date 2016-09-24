@@ -5,12 +5,12 @@ namespace CostEffectiveCode.Cqrs.Queries
     [PublicAPI]
     public interface IQuery<out TOutput>
     {
-        TOutput Execute();
+        TOutput Ask();
     }
 
     [PublicAPI]
     public interface IQuery<in TSpecification, out TOutput>
     {
-        TOutput Execute([NotNull] TSpecification specification);
+        TOutput Ask([NotNull] TSpecification spec);
     }
 }

@@ -12,38 +12,38 @@ namespace CostEffectiveCode.Messaging.Observable
     [PublicAPI]
     public class CommandsCollectionObservable<T> : IObservable<T>
     {
-        private readonly ICollection<ICommand<T>> _handlersCollection;
+        private readonly ICollection<ICommandHandler<T>> _handlersCollection;
 
         public CommandsCollectionObservable()
         {
-            _handlersCollection = new List<ICommand<T>>();
+            _handlersCollection = new List<ICommandHandler<T>>();
         }
 
-        public CommandsCollectionObservable(IEnumerable<ICommand<T>> handlersEnumerable)
+        public CommandsCollectionObservable(IEnumerable<ICommandHandler<T>> handlersEnumerable)
         {
-            _handlersCollection = new List<ICommand<T>>(handlersEnumerable);
+            _handlersCollection = new List<ICommandHandler<T>>(handlersEnumerable);
         }
 
-        public CommandsCollectionObservable(params ICommand<T>[] handlers)
+        public CommandsCollectionObservable(params ICommandHandler<T>[] handlers)
         {
-            _handlersCollection = new List<ICommand<T>>(handlers);
+            _handlersCollection = new List<ICommandHandler<T>>(handlers);
         }
 
-        public void AddHandler(ICommand<T> handler)
+        public void AddHandler(ICommandHandler<T> handler)
         {
             _handlersCollection.Add(handler);
         }
 
-        public void RemoveHandler(ICommand<T> handler)
+        public void RemoveHandler(ICommandHandler<T> handler)
         {
             _handlersCollection.Remove(handler);
         }
 
         public void HandleMessage(T message)
         {
-            var list = _handlersCollection as List<ICommand<T>> ?? _handlersCollection.ToList();
+            var list = _handlersCollection as List<ICommandHandler<T>> ?? _handlersCollection.ToList();
 
-            list.ForEach(x => x.Execute(message));
+            list.ForEach(x => x.Handle(message));
         }
     }
 }

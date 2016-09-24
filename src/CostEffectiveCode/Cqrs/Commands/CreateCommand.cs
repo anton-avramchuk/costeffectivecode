@@ -6,19 +6,19 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class CreateCommand<TKey, TDto, TEntity> : UowBased, ICommand<TDto, TKey>
+    public class CreateCommandHandler<TKey, TDto, TEntity> : UowBased, ICommandHandler<TDto, TKey>
         where TKey: struct
         where TEntity : HasIdBase<TKey>
     {
         private readonly IMapper _mapper;
 
-        public CreateCommand([NotNull] IUnitOfWork unitOfWork, [NotNull] IMapper mapper) : base(unitOfWork)
+        public CreateCommandHandler([NotNull] IUnitOfWork unitOfWork, [NotNull] IMapper mapper) : base(unitOfWork)
         {
             if (mapper == null) throw new ArgumentNullException(nameof(mapper));
             _mapper = mapper;
         }
 
-        public TKey Execute(TDto context)
+        public TKey Handle(TDto context)
         {
             var entity = _mapper.Map<TEntity>(context);
             UnitOfWork.Add(entity);

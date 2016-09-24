@@ -20,7 +20,7 @@ namespace CostEffectiveCode.Components.Cqrs
             _projector = projector;
         }
 
-        public TDto[] Execute()
+        public TDto[] Ask()
             => _projector
                 .Project<TEntity, TDto>(_linqProvider.GetQueryable<TEntity>())
                 .ToArray();

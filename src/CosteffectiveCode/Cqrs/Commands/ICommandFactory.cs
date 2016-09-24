@@ -7,20 +7,17 @@ namespace CostEffectiveCode.Cqrs.Commands
     public interface ICommandFactory
     {
         TCommand GetCommand<TInput, TCommand>()
-            where TCommand : ICommand<TInput>;
+            where TCommand : ICommandHandler<TInput>;
 
         TCommand GetCommand<TInput, TResult, TCommand>()
-            where TCommand : ICommand<TInput, TResult>
+            where TCommand : ICommandHandler<TInput, TResult>
             where TResult : struct;
-
-        TCommand GetCommand<TCommand>()
-            where TCommand : ICommand;
-
-        CreateCommand<TKey, TDto, TEntity> GetCreateCommand<TKey, TDto, TEntity>()
+        
+        CreateCommandHandler<TKey, TDto, TEntity> GetCreateCommand<TKey, TDto, TEntity>()
             where TKey: struct
             where TEntity : HasIdBase<TKey>;
 
-        DeleteCommand<T> GetDeleteCommand<T>()
+        DeleteCommandHandler<T> GetDeleteCommand<T>()
             where T : class, IHasId;
     }
 }

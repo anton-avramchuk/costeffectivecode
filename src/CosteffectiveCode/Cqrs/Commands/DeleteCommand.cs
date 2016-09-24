@@ -4,14 +4,14 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class DeleteCommand<TEntity> : UowBased, ICommand<TEntity>
+    public class DeleteCommandHandler<TEntity> : UowBased, ICommandHandler<TEntity>
         where TEntity : class, IHasId
     {
-        public DeleteCommand([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)
+        public DeleteCommandHandler([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public void Execute(TEntity context)
+        public void Handle(TEntity context)
         {
             UnitOfWork.Delete(context);
             UnitOfWork.Commit();

@@ -32,8 +32,8 @@ namespace CostEffectiveCode.Ddd.Specifications
         }
 
 
-        public int Page { get; }
-        public int Take { get; }
+        public int Page { get; set; }
+        public int Take { get; set; }
 
         public Sorting<TEntity, TOrderKey> OrderBy { get; set; }
     }

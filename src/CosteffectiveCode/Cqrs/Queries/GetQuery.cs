@@ -25,7 +25,7 @@ namespace CostEffectiveCode.Cqrs.Queries
             Projector = projector;
         }
 
-        public virtual TResult Execute(TKey specification) =>
+        public virtual TResult Ask(TKey specification) =>
             Projector.Project<TEntity, TResult>(LinqProvider
                 .GetQueryable<TEntity>()
                 .Where(x => specification.Equals(x.Id)))

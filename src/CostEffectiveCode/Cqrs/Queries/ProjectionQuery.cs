@@ -30,12 +30,12 @@ namespace CostEffectiveCode.Cqrs.Queries
         protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
         => LinqProvider
             .GetQueryable<TSource>()
-            .Match(spec)
+            .ApplyIfPossible(spec)
             .Project<TSource, TDest>(Projector)
-            .Match(spec);
+            .ApplyIfPossible(spec);
 
-        public IEnumerable<TDest> Execute(TSpecification specification) => GetQueryable(specification).ToArray();
+        public IEnumerable<TDest> Ask(TSpecification specification) => GetQueryable(specification).ToArray();
 
-        int IQuery<TSpecification, int>.Execute(TSpecification specification) => GetQueryable(specification).Count();
+        int IQuery<TSpecification, int>.Ask(TSpecification specification) => GetQueryable(specification).Count();
     }
 }

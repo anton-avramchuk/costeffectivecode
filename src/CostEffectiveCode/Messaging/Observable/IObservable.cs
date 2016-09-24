@@ -10,9 +10,9 @@ namespace CostEffectiveCode.Messaging.Observable
     [PublicAPI]
     public interface IObservable<T>
     {
-        void AddHandler(ICommand<T> handler);
+        void AddHandler(ICommandHandler<T> handler);
 
-        void RemoveHandler(ICommand<T> handler);
+        void RemoveHandler(ICommandHandler<T> handler);
 
         void HandleMessage(T message);
     }

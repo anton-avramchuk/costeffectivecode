@@ -18,10 +18,9 @@ namespace CostEffectiveCode.Cqrs.Queries
         {
         }
 
-        protected override IQueryable<TDto> GetQueryable(TSpec spec)
-            => base.GetQueryable(spec).Paginate(spec);
+        IPagedEnumerable<TDto> IQuery<TSpec, IPagedEnumerable<TDto>>.Ask(TSpec spec)
+            => GetQueryable(spec).ToPagedEnumerable(spec);
 
-        IPagedEnumerable<TDto> IQuery<TSpec, IPagedEnumerable<TDto>>.Execute(TSpec specification)
-            => Paged.From(Execute(specification), GetQueryable(specification).Count());
+        public IQuery<TSpec, IPagedEnumerable<TDto>> AsPaged() => this as IQuery<TSpec, IPagedEnumerable<TDto>>;
     }
 }

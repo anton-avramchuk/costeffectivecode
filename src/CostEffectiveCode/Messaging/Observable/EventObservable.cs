@@ -15,9 +15,9 @@ namespace CostEffectiveCode.Messaging.Observable
 
         // TODO: Need to check if Garbage Collector won't dispose handlers passed there.
         // In other case we need to store handlers as instances
-        public void AddHandler(ICommand<T> handler)
+        public void AddHandler(ICommandHandler<T> handler)
         {
-            Event += handler.Execute;
+            Event += handler.Handle;
         }
 
         public void AddHandler(Action<T> handler)
@@ -25,9 +25,9 @@ namespace CostEffectiveCode.Messaging.Observable
             Event += handler;
         }
 
-        public void RemoveHandler(ICommand<T> handler)
+        public void RemoveHandler(ICommandHandler<T> handler)
         {
-            Event -= handler.Execute;
+            Event -= handler.Handle;
         }
 
         public void RemoveHandler(Action<T> handler)

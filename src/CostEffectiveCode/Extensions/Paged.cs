@@ -19,11 +19,18 @@ namespace CostEffectiveCode.Extensions
     [PublicAPI]
     public static class Paged
     {
-        public static IOrderedQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
+        public static IQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
             where T : class
-            => paging.OrderBy.SortOrder == SortOrder.Asc
+            => (paging.OrderBy.SortOrder == SortOrder.Asc
                 ? queryable.OrderBy(paging.OrderBy.Expression)
-                : queryable.OrderByDescending(paging.OrderBy.Expression);
+                : queryable.OrderByDescending(paging.OrderBy.Expression))
+                .Skip((paging.Page - 1) * paging.Take)
+                .Take(paging.Take);
+
+        public static IPagedEnumerable<T> ToPagedEnumerable<T, TKey>(this IQueryable<T> queryable,
+            IPaging<T, TKey> paging)
+            where T : class
+            => From(queryable.Paginate(paging).ToArray(), queryable.Count());
 
         public static IPagedEnumerable<T> From<T>(IEnumerable<T> inner, int totalCount)
             =>  new PagedEnumerable<T>(inner, totalCount);
