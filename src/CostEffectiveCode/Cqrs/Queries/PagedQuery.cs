@@ -3,7 +3,7 @@ using System.Linq;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
 
 namespace CostEffectiveCode.Cqrs.Queries

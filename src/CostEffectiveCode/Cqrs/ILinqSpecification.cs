@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace CostEffectiveCode.Cqrs.Queries
+namespace CostEffectiveCode.Cqrs
 {
     public interface ILinqSpecification<T>
         where T: class 

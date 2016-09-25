@@ -34,20 +34,21 @@
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CostEffectiveCode, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CostEffectiveCode.AutoMapper\bin\Debug\net45\CostEffectiveCode.dll</HintPath>
+    <Reference Include="CostEffectiveCode">
+      <HintPath>..\CostEffectiveCode\bin\Debug\net45\CostEffectiveCode.dll</HintPath>
     </Reference>
-    <Reference Include="CostEffectiveCode.AutoMapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="CostEffectiveCode.AutoMapper">
       <HintPath>..\CostEffectiveCode.AutoMapper\bin\Debug\net45\CostEffectiveCode.AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="CostEffectiveCode.Components, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="CostEffectiveCode.Components">
       <HintPath>..\CostEffectiveCode.Components\bin\Debug\net45\CostEffectiveCode.Components.dll</HintPath>
     </Reference>
-    <Reference Include="Dapper, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper-Async.1.03\lib\net45\Dapper.dll</HintPath>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.50.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.50.0\lib\net45\Dapper.Contrib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="dotMemory.Unit, Version=103.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
@@ -74,6 +75,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -98,11 +100,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateProductDto.cs" />
     <Compile Include="Migrations\201609242012168_Initial.cs" />
     <Compile Include="Migrations\201609242012168_Initial.Designer.cs">
       <DependentUpon>201609242012168_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OptimizedCommnadHadler.cs" />
     <Compile Include="TestDbContext.cs" />
     <Compile Include="InMemoryLinqProvider.cs" />
     <Compile Include="OptimizedQuery.cs" />

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries

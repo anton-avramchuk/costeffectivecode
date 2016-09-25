@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using CostEffectiveCode.Cqrs.Queries;
-using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
+using CostEffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.Cqrs;
 
 namespace CostEffectiveCode.Tests
 {

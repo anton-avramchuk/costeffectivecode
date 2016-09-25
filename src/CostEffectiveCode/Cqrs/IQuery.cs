@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Cqrs.Queries
+namespace CostEffectiveCode.Cqrs
 {
     [PublicAPI]
     public interface IQuery<out TOutput>

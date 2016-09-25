@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CostEffectiveCode.Components.Cqrs;
+using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
@@ -20,11 +21,6 @@ namespace CostEffectiveCode.Components
             var generic = type.GetGenericTypeDefinition();
             var genericArgs = ti.GetGenericArguments();
 
-            if (generic == typeof(IDictionaryQuery<,,>))
-            {
-                return typeof(DictionaryQuery<,,>).MakeGenericType(genericArgs);
-            }
-
             if (generic == typeof(IQuery<,>))
             {
                 var firstArgInterfaces = genericArgs[0].GetTypeInfo().GetInterfaces();
@@ -36,7 +32,6 @@ namespace CostEffectiveCode.Components
                     var entityType = dtoType.GetTypeInfo().GetCustomAttribute<DtoForAttribute>()?.EntityType;
                     if (entityType == null) return null;
                     var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
-#warning TKey Required
                     return typeof(PagedQuery<,,,>).MakeGenericType(genericArgs[0], entityType, dtoType, sortKey);
                 }
             }

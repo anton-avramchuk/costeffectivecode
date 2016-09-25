@@ -4,10 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Commands;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions

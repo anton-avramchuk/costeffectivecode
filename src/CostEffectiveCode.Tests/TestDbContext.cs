@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.UnitOfWork;
+using System;
 using System.Data.Entity;
 using System.Linq;
-using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
+
 
 namespace CostEffectiveCode.Tests
 {

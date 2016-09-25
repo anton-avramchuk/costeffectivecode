@@ -1,5 +1,4 @@
 ﻿using System;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using CostEffectiveCode.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 

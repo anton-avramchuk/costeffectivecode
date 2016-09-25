@@ -11,8 +11,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.Component
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostEffectiveCode.Tests", "CostEffectiveCode.Tests\CostEffectiveCode.Tests.csproj", "{D7DC9CB3-A108-45FA-9252-EDD8BA3374C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwait", "AsyncAwait\AsyncAwait.csproj", "{29AF8DA3-FE4F-43FB-9C8E-E99BC633B4D5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{D7DC9CB3-A108-45FA-9252-EDD8BA3374C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7DC9CB3-A108-45FA-9252-EDD8BA3374C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7DC9CB3-A108-45FA-9252-EDD8BA3374C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29AF8DA3-FE4F-43FB-9C8E-E99BC633B4D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29AF8DA3-FE4F-43FB-9C8E-E99BC633B4D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29AF8DA3-FE4F-43FB-9C8E-E99BC633B4D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29AF8DA3-FE4F-43FB-9C8E-E99BC633B4D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

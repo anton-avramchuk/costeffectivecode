@@ -3,7 +3,7 @@ using System.Linq;
 using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
+namespace CostEffectiveCode.Ddd.UnitOfWork
 {
     [PublicAPI]
     public interface ILinqProvider

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
 using CostEffectiveCode.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.AutoMapper
