@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Ddd.Specifications
@@ -9,9 +10,7 @@ namespace CostEffectiveCode.Ddd.Specifications
     {
         public virtual Expression<Func<T, bool>> Expression { get; private set; }
 
-        private Func<T, bool> _func;
-
-        private Func<T, bool> Func => _func ?? (_func = Expression.Compile());
+        private Func<T, bool> Func => Expression.AsFunc();
 
         public ExpressionSpecification([NotNull] Expression<Func<T, bool>> expression)
         {

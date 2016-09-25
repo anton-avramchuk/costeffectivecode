@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
@@ -17,6 +18,9 @@ namespace CostEffectiveCode.Cqrs.Queries
             : base(linqProvier, projector)
         {
         }
+
+        public override IEnumerable<TDto> Ask(TSpec spec)
+            => GetQueryable(spec).Paginate(spec).ToArray();
 
         IPagedEnumerable<TDto> IQuery<TSpec, IPagedEnumerable<TDto>>.Ask(TSpec spec)
             => GetQueryable(spec).ToPagedEnumerable(spec);

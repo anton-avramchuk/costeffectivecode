@@ -2,7 +2,7 @@
 using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
+namespace CostEffectiveCode.Ddd.UnitOfWork
 {
     [PublicAPI]
     public interface IUnitOfWork: IDisposable
@@ -13,9 +13,9 @@ namespace CostEffectiveCode.Ddd.Specifications.UnitOfWork
         void Delete<TEntity>(TEntity entity)
             where TEntity : class, IHasId;
 
-        TEntity Get<TEntity>(object id);
+        TEntity Find<TEntity>(object id);
 
-        IHasId Get(Type entityType, object id);
+        IHasId Find(Type entityType, object id);
 
         void Commit();
     }

@@ -4,6 +4,7 @@ using System.Reflection;
 using AutoMapper;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications.UnitOfWork;
+using CostEffectiveCode.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.AutoMapper
 {
@@ -56,7 +57,7 @@ namespace CostEffectiveCode.AutoMapper
                 if (key.EndsWith("ID")
                     && typeof(IHasId).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType))
                 {
-                    propertyInfo.SetValue(dest, _unitOfWork.Get(propertyInfo.PropertyType, sp[key].GetValue(source)));
+                    propertyInfo.SetValue(dest, _unitOfWork.Find(propertyInfo.PropertyType, sp[key].GetValue(source)));
                 }
                 else
                 {

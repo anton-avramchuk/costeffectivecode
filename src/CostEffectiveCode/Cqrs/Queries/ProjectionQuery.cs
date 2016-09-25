@@ -34,7 +34,7 @@ namespace CostEffectiveCode.Cqrs.Queries
             .Project<TSource, TDest>(Projector)
             .ApplyIfPossible(spec);
 
-        public IEnumerable<TDest> Ask(TSpecification specification) => GetQueryable(specification).ToArray();
+        public virtual IEnumerable<TDest> Ask(TSpecification specification) => GetQueryable(specification).ToArray();
 
         int IQuery<TSpecification, int>.Ask(TSpecification specification) => GetQueryable(specification).Count();
     }

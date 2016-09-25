@@ -4,18 +4,18 @@ using CostEffectiveCode.Ddd.Specifications;
 
 namespace CostEffectiveCode.Tests
 {
-    public class ProductUberProductSpecification
+    public class UberProductSpec
         : IdPaging<ProductDto>
         , ILinqSpecification<Product>
         , ILinqSpecification<ProductDto>
     {
         public decimal Price = 5;
 
-        public ProductUberProductSpecification(int page, int take) : base(page, take)
+        public UberProductSpec(int page, int take) : base(page, take)
         {
         }
 
-        public ProductUberProductSpecification()
+        public UberProductSpec()
         {
         }
 

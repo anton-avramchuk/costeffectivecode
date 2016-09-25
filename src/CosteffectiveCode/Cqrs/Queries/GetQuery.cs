@@ -29,7 +29,6 @@ namespace CostEffectiveCode.Cqrs.Queries
             Projector.Project<TEntity, TResult>(LinqProvider
                 .GetQueryable<TEntity>()
                 .Where(x => specification.Equals(x.Id)))
-
             .SingleOrDefault();
     }
 }
