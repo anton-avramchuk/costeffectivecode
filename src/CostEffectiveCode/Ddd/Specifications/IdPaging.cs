@@ -1,4 +1,5 @@
 ﻿using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Pagination;
 
 namespace CostEffectiveCode.Ddd.Specifications
 {

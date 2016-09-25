@@ -1,4 +1,4 @@
-﻿namespace CostEffectiveCode.Ddd.Specifications
+﻿namespace CostEffectiveCode.Ddd.Pagination
 {
     public interface IPaging<TEntity, TSortKey>
         where TEntity : class

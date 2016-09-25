@@ -1,7 +1,7 @@
 ﻿using System;
 using CostEffectiveCode.Ddd.Entities;
 
-namespace CostEffectiveCode.Ddd.Specifications
+namespace CostEffectiveCode.Ddd.Pagination
 {
     public class Paging<TEntity, TOrderKey> :
         IPaging<TEntity, TOrderKey>

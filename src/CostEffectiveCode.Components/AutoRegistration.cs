@@ -6,6 +6,7 @@ using CostEffectiveCode.Components.Cqrs;
 using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Pagination;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
