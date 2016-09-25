@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Specifications;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Extensions
+namespace CostEffectiveCode.Ddd
 {
     [PublicAPI]
     public interface IPagedEnumerable<out T> : IEnumerable<T>

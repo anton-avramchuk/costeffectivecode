@@ -10,7 +10,8 @@ using JetBrains.Annotations;
 namespace CostEffectiveCode.Cqrs.Queries
 {
     public class ProjectionQuery<TSpecification, TSource, TDest>
-        : IQuery<TSpecification, IEnumerable<TDest>>, IQuery<TSpecification, int>
+        : IQuery<TSpecification, IEnumerable<TDest>>
+        , IQuery<TSpecification, int>
         where TSource : class, IHasId
         where TDest : class
     {

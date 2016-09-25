@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.Ddd.Specifications
@@ -30,7 +28,6 @@ namespace CostEffectiveCode.Ddd.Specifications
         {
             Take = 30;
         }
-
 
         public int Page { get; set; }
         public int Take { get; set; }
