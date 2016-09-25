@@ -17,14 +17,14 @@ namespace CostEffectiveCode.Cqrs
 
     [PublicAPI]
     public interface IAsyncQuery<TOutput>
+        : IQuery<Task<TOutput>>
     {
-        Task<TOutput> Ask();
     }
 
 
     [PublicAPI]
     public interface IAsyncQuery<in TSpecification, TOutput>
+        : IQuery<TSpecification, Task<TOutput>>
     {
-        Task<TOutput> Ask([NotNull] TSpecification spec);
     }
 }

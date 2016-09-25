@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -57,9 +58,7 @@ namespace CostEffectiveCode.Extensions
 
         public static TResult Forward<TSource, TResult>(
             this TSource source, Func<TSource, TResult> func)
-        {
-            return func(source);
-        }
+            => func(source);
 
         public static TReturn Match<TReturn, TPattern>(this TReturn source, object pattern,
             Func<TReturn, TPattern, TReturn> evaluator) where TPattern : class
@@ -155,8 +154,27 @@ namespace CostEffectiveCode.Extensions
             => Task.Run(() => func.Invoke());
 
 
-        public static TOut AskSync<TIn, TOut>(this IAsyncQuery<TIn, TOut> asyncQuery, TIn spec)
+        public static TOut AskSync<TIn, TOut>(this IQuery<TIn, Task<TOut>> asyncQuery, TIn spec)
             => asyncQuery.Ask(spec).Result;
+
+        #endregion
+
+        #region Cqrs
+        public static TResult Forward<TSource, TResult>(
+            this TSource source, IQuery<TSource, TResult> query)
+            => query.Ask(source);
+
+        public static Task<TResult> Forward<TSource, TResult>(
+            this TSource source, IQuery<TSource, Task<TResult>> query)
+            => query.Ask(source);
+
+        public static TResult Forward<TSource, TResult>(
+            this TSource source, ICommandHandler<TSource, TResult> query)
+            => query.Handle(source);
+
+        public static void Forward<TSource>(
+            this TSource source, ICommandHandler<TSource> query)
+            => query.Handle(source);
 
         #endregion
     }

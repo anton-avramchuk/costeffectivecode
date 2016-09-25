@@ -10,22 +10,20 @@ namespace CostEffectiveCode.Cqrs
     }
 
     [PublicAPI]
-    public interface ICommandHandler<in TInput, out TResult>
-        where TResult : struct
+    public interface ICommandHandler<in TInput, out TOutput>
     {
-         TResult Handle(TInput input);
+        TOutput Handle(TInput input);
     }
 
     [PublicAPI]
     public interface IAsyncCommandHandler<in TInput>
+        : ICommandHandler<TInput, Task>
     {
-        Task Handle(TInput input);
     }
 
     [PublicAPI]
-    public interface IAsyncCommandHandler<in TInput, TResult>
-        where TResult : struct
+    public interface IAsyncCommandHandler<in TInput, TOutput>
+        : ICommandHandler<TInput, Task>
     {
-         Task<TResult> Handle(TInput input);
     }
 }
