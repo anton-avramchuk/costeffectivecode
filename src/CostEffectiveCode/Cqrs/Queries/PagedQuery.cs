@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
-using CostEffectiveCode.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
 
 namespace CostEffectiveCode.Cqrs.Queries

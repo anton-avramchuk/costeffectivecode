@@ -1,5 +1,5 @@
 ﻿using System;
-using CostEffectiveCode.Ddd.UnitOfWork;
+using CostEffectiveCode.Ddd;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs

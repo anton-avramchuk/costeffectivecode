@@ -1,5 +1,5 @@
-﻿using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
+﻿using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands

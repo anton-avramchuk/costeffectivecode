@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
 
 namespace CostEffectiveCode.AutoMapper
 {

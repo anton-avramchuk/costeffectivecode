@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using AutoMapper.QueryableExtensions;
+using CostEffectiveCode.Common;
 using AM = AutoMapper;
 using IMapper = CostEffectiveCode.Common.IMapper;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class InstanceBasedAutoMapperWrapper : IMapper
+    public class InstanceBasedAutoMapperWrapper : IMapper, IProjector
     {
         public AM.IConfigurationProvider Configuration { get; private set; }
         public AM.IMapper Instance { get; private set; }

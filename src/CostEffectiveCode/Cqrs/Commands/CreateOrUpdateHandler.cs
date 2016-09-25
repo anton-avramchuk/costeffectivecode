@@ -1,7 +1,7 @@
 ﻿using System;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands

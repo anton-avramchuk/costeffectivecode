@@ -1,24 +1,18 @@
 ﻿{
-  "version": "3.0.0-alpha6",
-  "description": "Component structure for CostEffectiveCode",
+  "version": "3.0.0-alpha1",
+  "description": "NLog-based CostEffectiveCode's ILogger implementation",
   "authors": [ "HighTech.Today" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
+
   "dependencies": {
     "CostEffectiveCode": "3.0.0-*",
-    "JetBrains.Annotations": "10.1.5"
+    "NLog" : "4.3.8" 
   },
 
   "frameworks": {
-    "net45": {},
-    "netstandard1.6": {
-      "imports": "dnxcore50",
-      "dependencies": {
-        "NETStandard.Library": "1.6.0",
-        "System.Linq.Queryable": "4.0.1"
-      }
-    }
+    "net45": {}
   },
 
   "scripts": {

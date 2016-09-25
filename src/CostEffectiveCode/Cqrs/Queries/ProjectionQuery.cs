@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using CostEffectiveCode.Common;
+using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
 using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
