@@ -7,8 +7,8 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class DtoEntityTypeConverter<TDto, TEntity> : ITypeConverter<TDto, TEntity>
-            where TEntity : class, IHasId, new()     
+    public class DtoEntityTypeConverter<TKey, TDto, TEntity> : ITypeConverter<TDto, TEntity>
+            where TEntity : class, IHasId<TKey>, new()     
     {
         private readonly ILinqProvider _linqProvider;
 
