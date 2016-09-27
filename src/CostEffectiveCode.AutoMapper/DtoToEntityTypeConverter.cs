@@ -10,13 +10,10 @@ namespace CostEffectiveCode.AutoMapper
     public class DtoEntityTypeConverter<TKey, TDto, TEntity> : ITypeConverter<TDto, TEntity>
             where TEntity : class, IHasId<TKey>, new()     
     {
-        private readonly ILinqProvider _linqProvider;
-
         private readonly IUnitOfWork _unitOfWork;
 
-        public DtoEntityTypeConverter(ILinqProvider linqProvider, IUnitOfWork unitOfWork)
+        public DtoEntityTypeConverter(IUnitOfWork unitOfWork)
         {
-            _linqProvider = linqProvider;
             _unitOfWork = unitOfWork;
         }
 
@@ -25,7 +22,7 @@ namespace CostEffectiveCode.AutoMapper
             var sourceId = (source as IHasId)?.Id;
 
             var dest = destination ?? (sourceId != null
-                ? _linqProvider.GetQueryable<TEntity>().SingleOrDefault(x => x.Id.Equals(sourceId))
+                ? _unitOfWork.Find<TEntity>(sourceId) ?? new TEntity()
                 : new TEntity());
 
             // Да, reflection, да медленно и может привести к ошибкам в рантайме.
@@ -63,7 +60,7 @@ namespace CostEffectiveCode.AutoMapper
                     if (propertyInfo.PropertyType != sp[key].PropertyType)
                     {
                         throw new InvalidOperationException($"Can't map Property {propertyInfo.Name} because of type mismatch:" +
-                                                            $"{sp[key].PropertyType.Name} -> {propertyInfo.PropertyType.Name}");    
+                                                            $"{sp[key].PropertyType.Name} -> {propertyInfo.PropertyType.Name}");
                     }
 
                     propertyInfo.SetValue(dest, sp[key].GetValue(source));

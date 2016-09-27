@@ -27,7 +27,7 @@ namespace CostEffectiveCode.Cqrs.Commands
         public TKey Handle(TDto context)
         {
             var id = (context as IHasId)?.Id;
-            var entity = !default(TKey).Equals(id)
+            var entity = id != null && !default(TKey).Equals(id)
                 ? _mapper.Map(context, _unitOfWork.Find<TEntity>(id))
                 : _mapper.Map<TEntity>(context);
 
@@ -39,6 +39,5 @@ namespace CostEffectiveCode.Cqrs.Commands
             UnitOfWork.Commit();
             return entity.Id;
         }
-
     }
 }

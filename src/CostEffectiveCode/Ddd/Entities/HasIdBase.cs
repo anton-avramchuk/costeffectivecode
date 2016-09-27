@@ -6,7 +6,7 @@
 
         public bool IsNew()
         {
-            return !Id?.Equals(default(T)) ?? true;
+            return Id != null && !Id.Equals(default(T));
         }
 
         object IHasId.Id => Id;
