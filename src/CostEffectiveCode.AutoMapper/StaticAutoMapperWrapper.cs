@@ -20,24 +20,10 @@ namespace CostEffectiveCode.AutoMapper
         internal static ConcurrentDictionary<Type, ConcurrentDictionary<Type, Action<AM.IMapperConfigurationExpression>>> TypeMap
             = new ConcurrentDictionary<Type, ConcurrentDictionary<Type, Action<AM.IMapperConfigurationExpression>>>();
 
-        public static void Init()
+        public static void Init(Action<AM.IMapperConfigurationExpression> cfg)
         {
-            AM.Mapper.Initialize(InitMappings);
+            AM.Mapper.Initialize(cfg);
             AM.Mapper.AssertConfigurationIsValid();
-        }
-
-
-        private static void InitMappings(AM.IMapperConfigurationExpression c)
-        {
-            foreach (var sourceType in TypeMap)
-            {
-                foreach (var destType in sourceType.Value)
-                {
-                    destType.Value.Invoke(c);
-                }                  
-            }
-
-            c.CreateMissingTypeMaps = true;
         }
     }
 }

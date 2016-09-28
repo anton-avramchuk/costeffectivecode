@@ -1,11 +1,11 @@
-﻿using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Entities;
 
-namespace CostEffectiveCode.Tests
+namespace CostEffectiveCode.Tests.Stubs
 {
     public class InMemoryLinqProvider : ILinqProvider
     {

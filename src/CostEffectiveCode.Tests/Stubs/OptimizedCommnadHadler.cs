@@ -10,10 +10,9 @@ namespace CostEffectiveCode.Tests
     public class OptimizedCommnadHadler
         : IAsyncCommandHandler<CreateProductDto, int>
     {
-        private readonly SqlConnection _sqlConnection;
-
 
         public int Price { get; set; } = 5;
+
 
         public async Task<int> Handle(CreateProductDto input)
         {
@@ -23,11 +22,11 @@ namespace CostEffectiveCode.Tests
                 await sqlConnection.OpenAsync();
                 return await sqlConnection.ExecuteAsync("INSERT INTO Products(Category_Id, Name, Price) " +
                                            "VALUES (@CategoryId, @Name, @Price)", new
-                {
-                    CategoryId = input.CategoryId,
-                    Name = input.Name,
-                    Price = input.Price
-                });
+                                           {
+                                               CategoryId = input.CategoryId,
+                                               Name = input.Name,
+                                               Price = input.Price
+                                           });
             }
         }
     }

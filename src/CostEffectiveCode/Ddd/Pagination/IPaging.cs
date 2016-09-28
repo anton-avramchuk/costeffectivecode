@@ -7,6 +7,6 @@
 
         int Take { get; }
 
-        Sorting<TEntity, TSortKey> OrderBy { get; set; }
+        Sorting<TEntity, TSortKey> OrderBy { get; }
     }
 }

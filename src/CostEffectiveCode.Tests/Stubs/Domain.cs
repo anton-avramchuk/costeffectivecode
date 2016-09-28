@@ -43,6 +43,8 @@ namespace CostEffectiveCode.Tests
     [DtoFor(typeof(Product))]
     public class ProductDto : HasIdBase<int>
     {
+        public int  CategoryId { get; set; }
+
         public string CategoryName { get; set; }
 
         public decimal Price { get; set; }

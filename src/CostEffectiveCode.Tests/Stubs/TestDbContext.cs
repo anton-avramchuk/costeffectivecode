@@ -1,11 +1,10 @@
-﻿using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.UnitOfWork;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Entities;
 
-
-namespace CostEffectiveCode.Tests
+namespace CostEffectiveCode.Tests.Stubs
 {
     public class TestDbContext : DbContext, ILinqProvider
     {

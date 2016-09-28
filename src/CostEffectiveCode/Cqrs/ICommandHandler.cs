@@ -23,7 +23,7 @@ namespace CostEffectiveCode.Cqrs
 
     [PublicAPI]
     public interface IAsyncCommandHandler<in TInput, TOutput>
-        : ICommandHandler<TInput, Task>
+        : ICommandHandler<TInput, Task<TOutput>>
     {
     }
 }

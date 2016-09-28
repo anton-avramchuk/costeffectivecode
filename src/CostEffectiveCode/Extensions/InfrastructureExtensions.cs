@@ -22,8 +22,8 @@ namespace CostEffectiveCode.Extensions
 
         public static Func<TIn, TOut> AsFunc<TIn, TOut>(this Expression<Func<TIn, TOut>> expr)
             //@see http://sergeyteplyakov.blogspot.ru/2015/06/lazy-trick-with-concurrentdictionary.html
-            => (Func<TIn, TOut>)((Lazy<object>)Cache.GetOrAdd(expr, id => new Lazy<object>(()
-                => Cache.GetOrAdd(id, expr.Compile())))).Value;
+            => (Func<TIn, TOut>)((Lazy<object>)Cache
+                .GetOrAdd(expr, id => new Lazy<object>(expr.Compile))).Value;
 
         public static bool Is<T>(this T entity, Expression<Func<T, bool>> expr)
             => AsFunc(expr).Invoke(entity);
@@ -31,22 +31,13 @@ namespace CostEffectiveCode.Extensions
         public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IQuery<TIn, TOut> query)
             => x => query.Ask(x);
 
-        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this ICommandHandler<TIn, TOut> query)
-            where TOut : struct
-            => x => query.Handle(x);
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this ICommandHandler<TIn, TOut> commandHandler)
+            => x => commandHandler.Handle(x);
 
 
         #endregion
 
         #region FP
-
-        public static Func<TArg1, Func<TArg2, Func<TArg3, TResult>>> Curry<TArg1, TArg2, TArg3, TResult>(
-            this Func<TArg1, TArg2, TArg3, TResult> func)
-            => arg1 => arg2 => arg3 => func(arg1, arg2, arg3);
-
-        public static Func<TArg2, TArg3, TResult> Apply<TArg1, TArg2, TArg3, TResult>(
-            this Func<TArg1, TArg2, TArg3, TResult> func, TArg1 arg1)
-            =>  (arg2, arg3) => func(arg1, arg2, arg3);
         
         public static Func<TSource, TResult> Compose<TSource, TIntermediate, TResult>(
             this Func<TIntermediate, TResult> func1, Func<TSource, TIntermediate> func2)
@@ -60,10 +51,20 @@ namespace CostEffectiveCode.Extensions
             this TSource source, Func<TSource, TResult> func)
             => func(source);
 
-        public static TReturn Match<TReturn, TPattern>(this TReturn source, object pattern,
-            Func<TReturn, TPattern, TReturn> evaluator) where TPattern : class
-            => pattern is TPattern
-                ? evaluator.Invoke(source, (TPattern) pattern)
+        public static T Match<T>(this T source
+            , Func<T, bool> pattern
+            , Func<T, T> evaluator)
+            where T : class
+            => pattern.Invoke(source)
+                ? evaluator.Invoke(source)
+                : source;
+
+        public static TReturn WithMatched<TReturn, TMatch>(this TReturn source
+            , object match,
+            Func<TReturn, TMatch, TReturn> evaluator)
+            where TMatch : class
+            => match is TMatch
+                ? evaluator.Invoke(source, (TMatch)match)
                 : source;
 
         public static TResult Return<TInput, TResult>(this TInput o,
@@ -71,11 +72,11 @@ namespace CostEffectiveCode.Extensions
             where TInput : class
             => o == null ? failureValue : evaluator(o);        
 
-        public static TInput If<TInput>(this TInput o, Func<TInput, bool> evaluator)
+        public static TInput If<TInput>(this TInput o, Func<TInput, bool> evaluator, Func<TInput, TInput> fallBack)
             where TInput : class
         {
             if (o == null) return null;
-            return evaluator(o) ? o : null;
+            return evaluator(o) ? o : fallBack(o);
         }
 
         public static TInput Unless<TInput>(this TInput o, Func<TInput, bool> evaluator)

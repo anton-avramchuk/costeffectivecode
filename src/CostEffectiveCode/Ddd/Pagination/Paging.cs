@@ -3,35 +3,70 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.Ddd.Pagination
 {
-    public class Paging<TEntity, TOrderKey> :
+    public abstract class Paging<TEntity, TOrderKey> :
         IPaging<TEntity, TOrderKey>
         where TEntity : class, IHasId
     {
-        public Paging(int page, int take, Sorting<TEntity, TOrderKey> orderBy)
+        private readonly Sorting<TEntity, TOrderKey> _orderBy;
+
+        private int _page;
+
+        private int _take;
+
+        protected Paging(int page, int take, Sorting<TEntity, TOrderKey> orderBy)
         {
-            if (take <= 0)
-            {
-                throw new ArgumentException("take must be > 0", nameof(take));
-            }
-
-            if (page < 0)
-            {
-                throw new ArgumentException("page must be >= 0", nameof(page));
-            }
-
             Page = page;
             Take = take;
-            OrderBy = orderBy;
+            if (orderBy == null)
+            {
+                throw new ArgumentException("OrderBy can't be null", nameof(orderBy));
+            }
+
+            _orderBy = orderBy;
         }
 
-        public Paging()
+        protected Paging()
         {
+            Page = 1;
             Take = 30;
+            // ReSharper disable once VirtualMemberCallInConstructor
+            _orderBy = BuildDefaultSorting();
+            if (_orderBy == null)
+            {
+                throw new ArgumentException("OrderBy can't be null", nameof(_orderBy));
+            }
         }
 
-        public int Page { get; set; }
-        public int Take { get; set; }
+        protected abstract Sorting<TEntity, TOrderKey> BuildDefaultSorting();
 
-        public Sorting<TEntity, TOrderKey> OrderBy { get; set; }
+        public int Page
+        {
+            get { return _page; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("page must be >= 0", nameof(value));
+                }
+
+                _page = value;
+            }
+        }
+
+        public int Take
+        {
+            get { return _take; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("take must be > 0", nameof(value));
+                }
+
+                _take = value;
+            }
+        }
+
+        public Sorting<TEntity, TOrderKey> OrderBy => _orderBy;
     }
 }

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
 using CostEffectiveCode.Cqrs;
-using CostEffectiveCode.Extensions;
+using CostEffectiveCode.Ddd.Pagination;
+using Dapper;
 
-namespace CostEffectiveCode.Tests
+namespace CostEffectiveCode.Tests.Stubs
 {
     public class OptimizedQuery
         : IAsyncQuery<UberProductSpec, IPagedEnumerable<ProductDto>>

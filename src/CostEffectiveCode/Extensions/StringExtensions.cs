@@ -26,8 +26,10 @@ namespace CostEffectiveCode.Extensions
         [PublicAPI]
         public static bool Contains(this string input, string value, StringComparison comparisonType)
         {
-            if (string.IsNullOrEmpty(input) == false)
+            if (!string.IsNullOrEmpty(input))
+            {
                 return input.IndexOf(value, comparisonType) != -1;
+            }
 
             return false;
         }
@@ -51,14 +53,14 @@ namespace CostEffectiveCode.Extensions
             switch (lastDigit)
             {
                 case 1:
-                    return $"{value} {oneForm}";
+                    return $"{oneForm}";
                 case 2:
                 case 3:
                 case 4:
-                    return $"{value} {twoForm}";
+                    return $"{twoForm}";
             }
 
-            return $"{value} {fiveForm}";
+            return $"{fiveForm}";
 
         }
 

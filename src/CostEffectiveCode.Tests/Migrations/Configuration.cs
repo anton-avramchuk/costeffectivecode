@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CostEffectiveCode.Tests.Stubs;
 
 namespace CostEffectiveCode.Tests.Migrations
 {
@@ -7,7 +8,7 @@ namespace CostEffectiveCode.Tests.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CostEffectiveCode.Tests.TestDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TestDbContext>
     {
         public Configuration()
         {
