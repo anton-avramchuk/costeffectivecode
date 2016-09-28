@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoRegistrationTests.cs" />
     <Compile Include="DtoToEntityConverterTests.cs" />
     <Compile Include="HandlerTests.cs" />
     <Compile Include="QueryTests.cs" />
@@ -133,7 +134,7 @@
     <Compile Include="Stubs\OptimizedQuery.cs" />
     <None Include="Tests.cs.bak" />
     <Compile Include="Stubs\Domain.cs" />
-    <Compile Include="Stubs\PagedQueryUser.cs" />
+    <Compile Include="Stubs\TestDependentObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stubs\UberProductSpec.cs" />
   </ItemGroup>

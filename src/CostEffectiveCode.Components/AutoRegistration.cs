@@ -1,44 +1,93 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CostEffectiveCode.Components.Cqrs;
 using CostEffectiveCode.Cqrs;
+using CostEffectiveCode.Cqrs.Commands;
 using CostEffectiveCode.Cqrs.Queries;
-using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Pagination;
-using CostEffectiveCode.Ddd.Specifications;
-using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Components
 {
     public static class AutoRegistration
     {
+        private static readonly Type[] KeyTypes = {typeof(int), typeof(long), typeof(Guid)};
+
+        public static readonly IDictionary<Type, Func<Type, Type>> TypeFallbacks
+            = new Dictionary<Type, Func<Type, Type>>()
+            {
+                {typeof(IQuery<,>), BuildQuery}
+                , {typeof(ICommandHandler<,>), BuildCommandHandler}
+            };
+
+
+        private static Type BuildCommandHandler(Type type)
+        {
+            var ti = type.GetTypeInfo();
+            var genericArgs = ti.GetGenericArguments();
+
+            // Create
+            if (KeyTypes.Contains(genericArgs[1]) && !typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(genericArgs[1]))
+            {
+                var dtoType = genericArgs[0];
+                var entityType = GetEntityType(dtoType);
+                if (entityType == null) return null;
+
+                return typeof(CreateOrUpdateHandler<,,>).MakeGenericType(genericArgs[1], dtoType, entityType);
+            }
+
+            return null;
+        }
+
+        private static Type BuildQuery(Type type)
+        {
+            var ti = type.GetTypeInfo();
+            var genericArgs = ti.GetGenericArguments();
+
+            // GetById
+            if (KeyTypes.Contains(genericArgs[0]) &&
+                !typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(genericArgs[1]))
+            {
+                var dtoType = genericArgs[1];
+                var entityType = GetEntityType(dtoType);
+                if (entityType == null) return null;
+
+                return typeof(GetByIdQuery<,,>).MakeGenericType(genericArgs[0], entityType, dtoType);
+            }
+
+            // Paged
+            var firstArgInterfaces = genericArgs[0].GetTypeInfo().GetInterfaces();
+            var secondArgInterface = genericArgs[1];
+            var paging = firstArgInterfaces.FirstOrDefault(i => ImplementsOpenGeneric(i, typeof(IPaging<,>)));
+            if (paging != null && ImplementsOpenGeneric(secondArgInterface, typeof(IPagedEnumerable<>)))
+            {
+                var dtoType = genericArgs[1].GetTypeInfo().GetGenericArguments()[0];
+                var entityType = GetEntityType(dtoType);
+                if (entityType == null) return null;
+                var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
+                return typeof(PagedQuery<,,,>).MakeGenericType(sortKey, genericArgs[0], entityType, dtoType);
+            }            
+
+            return null;
+        }
+
+        private static Type GetEntityType(Type dtoType)
+        {
+            return dtoType.GetTypeInfo().GetCustomAttribute<DtoForAttribute>()?.EntityType;
+        }
+
         [CanBeNull]
         private static Type GetFallBack(Type type)
         {
             var ti = type.GetTypeInfo();
             if (!ti.IsInterface || !ti.IsGenericType) return null;
             var generic = type.GetGenericTypeDefinition();
-            var genericArgs = ti.GetGenericArguments();
-
-            if (generic == typeof(IQuery<,>))
-            {
-                var firstArgInterfaces = genericArgs[0].GetTypeInfo().GetInterfaces();
-                var secondArgInterface = genericArgs[1];
-                var paging = firstArgInterfaces.FirstOrDefault(i => ImplementsOpenGeneric(i, typeof(IPaging<,>)));
-                if (paging != null && ImplementsOpenGeneric(secondArgInterface, typeof(IPagedEnumerable<>)))
-                {
-                    var dtoType = genericArgs[1].GetTypeInfo().GetGenericArguments()[0];
-                    var entityType = dtoType.GetTypeInfo().GetCustomAttribute<DtoForAttribute>()?.EntityType;
-                    if (entityType == null) return null;
-                    var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
-                    return typeof(PagedQuery<,,,>).MakeGenericType(genericArgs[0], entityType, dtoType, sortKey);
-                }
-            }
-
-            return null;
+            return TypeFallbacks.ContainsKey(generic)
+                ? TypeFallbacks[generic](type)
+                : null;
         }
 
         private static bool ImplementsOpenGeneric(Type i, Type checkType)

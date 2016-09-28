@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CostEffectiveCode.Ddd.Pagination;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs
