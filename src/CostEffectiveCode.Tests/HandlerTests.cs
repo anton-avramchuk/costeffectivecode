@@ -30,5 +30,19 @@ namespace CostEffectiveCode.Tests
             uow.Verify(x => x.Add(It.Is<Product>(y => y.Price == 100500)), Times.Once);
             uow.Verify(x => x.Commit(), Times.Once);
         }
+
+        [Fact]
+        public void DeleteHandler_AddAndSave()
+        {
+            var uow = new Mock<IUnitOfWork>();
+            uow.Setup(x => x.Find<Product>(1)).Returns(new Product() {Id = 1});
+            var createOrUpdateCommandHandler = new DeleteHandler<int, Product>(uow.Object);
+
+            createOrUpdateCommandHandler.Handle(1);
+
+            uow.Verify(x => x.Find<Product>(1), Times.Once);
+            uow.Verify(x => x.Delete(It.Is<Product>(y => y.Id == 1)), Times.Once);
+            uow.Verify(x => x.Commit(), Times.Once);
+        }
     }
 }

@@ -1,19 +1,28 @@
-﻿using CostEffectiveCode.Ddd;
+﻿using System;
+using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class DeleteCommandHandler<TEntity> : UowBased, ICommandHandler<TEntity>
-        where TEntity : class, IHasId
+    public class DeleteHandler<TKey, TEntity>
+        : UowBased
+        , ICommandHandler<TKey>
+        where TEntity : class, IHasId<TKey>
     {
-        public DeleteCommandHandler([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)
+        public DeleteHandler([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public void Handle(TEntity context)
+        public void Handle(TKey key)
         {
-            UnitOfWork.Delete(context);
+            var entity = UnitOfWork.Find<TEntity>(key);
+            if (entity == null)
+            {
+                throw new ArgumentException($"Entity {typeof(TEntity).Name} with id={key} doesn't exists");
+            }
+
+            UnitOfWork.Delete(entity);
             UnitOfWork.Commit();
         }
 

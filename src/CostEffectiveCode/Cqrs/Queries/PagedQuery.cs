@@ -7,7 +7,7 @@ using CostEffectiveCode.Ddd.Pagination;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public class PagedQuery<TSpec, TEntity, TDto, TSortKey> : ProjectionQuery<TSpec, TEntity, TDto>,
+    public class PagedQuery<TSortKey, TSpec, TEntity, TDto> : ProjectionQuery<TSpec, TEntity, TDto>,
         IQuery<TSpec, IPagedEnumerable<TDto>> 
         where TEntity : class, IHasId
         where TDto : class, IHasId

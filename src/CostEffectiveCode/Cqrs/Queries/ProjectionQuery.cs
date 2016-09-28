@@ -18,7 +18,7 @@ namespace CostEffectiveCode.Cqrs.Queries
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
 
-        protected ProjectionQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
+        public ProjectionQuery([NotNull] ILinqProvider linqProvier, [NotNull] IProjector projector)
         {
             if (linqProvier == null) throw new ArgumentNullException(nameof(linqProvier));
             if (projector == null) throw new ArgumentNullException(nameof(projector));

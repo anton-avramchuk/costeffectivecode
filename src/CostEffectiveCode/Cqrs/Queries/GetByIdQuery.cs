@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public class GetQuery<TKey, TEntity, TResult> : IQuery<TKey, TResult>
+    public class GetByIdQuery<TKey, TEntity, TResult> : IQuery<TKey, TResult>
         where TKey : struct, IComparable, IComparable<TKey>, IEquatable<TKey>
         where TEntity : class, IHasId<TKey>
         where TResult : IHasId<TKey>
@@ -16,7 +16,7 @@ namespace CostEffectiveCode.Cqrs.Queries
 
         protected readonly IProjector Projector;
 
-        public GetQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
+        public GetByIdQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
         {
             if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
             if (projector == null) throw new ArgumentNullException(nameof(projector));

@@ -39,7 +39,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CostEffectiveCode">
-      <HintPath>..\CostEffectiveCode.AutoMapper\bin\Debug\net45\CostEffectiveCode.dll</HintPath>
+      <HintPath>..\CostEffectiveCode\bin\Debug\net45\CostEffectiveCode.dll</HintPath>
     </Reference>
     <Reference Include="CostEffectiveCode.AutoMapper">
       <HintPath>..\CostEffectiveCode.AutoMapper\bin\Debug\net45\CostEffectiveCode.AutoMapper.dll</HintPath>
@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="DtoToEntityConverterTests.cs" />
     <Compile Include="HandlerTests.cs" />
+    <Compile Include="QueryTests.cs" />
     <Compile Include="PagingTests.cs" />
     <Compile Include="InfrastructureExtensionsTests.cs" />
     <Compile Include="SortingTests.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Stubs\HasId.cs" />
     <Compile Include="Stubs\OptimizedCommnadHadler.cs" />
+    <Compile Include="Stubs\SimpleAsyncQuery.cs" />
     <Compile Include="Stubs\SimpleCommandHandler.cs" />
     <Compile Include="Stubs\SimpleQuery.cs" />
     <Compile Include="Stubs\TestDbContext.cs" />

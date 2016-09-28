@@ -40,10 +40,6 @@ namespace CostEffectiveCode.Extensions
         #region FP
         
         public static Func<TSource, TResult> Compose<TSource, TIntermediate, TResult>(
-            this Func<TIntermediate, TResult> func1, Func<TSource, TIntermediate> func2)
-            => x => func1(func2(x));
-
-        public static Func<TSource, TResult> Compose<TSource, TIntermediate, TResult>(
             this Func<TSource, TIntermediate> func1, Func<TIntermediate, TResult> func2)
             => x => func2(func1(x));        
 
@@ -55,8 +51,8 @@ namespace CostEffectiveCode.Extensions
             , Func<T, bool> pattern
             , Func<T, T> evaluator)
             where T : class
-            => pattern.Invoke(source)
-                ? evaluator.Invoke(source)
+            => pattern(source)
+                ? evaluator(source)
                 : source;
 
         public static TReturn WithMatched<TReturn, TMatch>(this TReturn source
@@ -65,26 +61,16 @@ namespace CostEffectiveCode.Extensions
             where TMatch : class
             => match is TMatch
                 ? evaluator.Invoke(source, (TMatch)match)
-                : source;
+                : source;    
 
-        public static TResult Return<TInput, TResult>(this TInput o,
-            Func<TInput, TResult> evaluator, TResult failureValue)
-            where TInput : class
-            => o == null ? failureValue : evaluator(o);        
-
-        public static TInput If<TInput>(this TInput o, Func<TInput, bool> evaluator, Func<TInput, TInput> fallBack)
+        public static TInput If<TInput>(this TInput o, Func<TInput, bool> condition
+            , Func<TInput, TInput> ifTrue, Func<TInput, TInput> ifFalse)
             where TInput : class
         {
             if (o == null) return null;
-            return evaluator(o) ? o : fallBack(o);
+            return condition(o) ? ifTrue(o) : ifFalse(o);
         }
 
-        public static TInput Unless<TInput>(this TInput o, Func<TInput, bool> evaluator)
-            where TInput : class
-        {
-            if (o == null) return null;
-            return evaluator(o) ? null : o;
-        }
 
         public static TInput Do<TInput>(this TInput o, Action<TInput> action, [CanBeNull]Func<Exception> ifNull = null)
             where TInput : class
@@ -93,7 +79,7 @@ namespace CostEffectiveCode.Extensions
             {
                 if (ifNull != null)
                 {
-                    throw ifNull.Invoke();
+                    throw ifNull();
                 }
 
                 return null;
@@ -102,14 +88,17 @@ namespace CostEffectiveCode.Extensions
             return o;
         }
 
-        public static TOutput Do<TInput, TOutput>(this TInput o, Func<TInput, TOutput> func, Func<Exception> ifNull)
+        public static TOutput Do<TInput, TOutput>(this TInput o, Func<TInput, TOutput> func, [CanBeNull]Func<Exception> ifNull = null)
         {
             if (o == null)
             {
-                throw ifNull.Invoke();
+                if (ifNull != null)
+                {
+                    throw ifNull();
+                }
             }
 
-            return func.Invoke(o);
+            return func(o);
         }
 
         #endregion
@@ -141,18 +130,13 @@ namespace CostEffectiveCode.Extensions
         public static TEntity ById<TEntity>(this IQueryable<TEntity> queryable, int id)
             where TEntity : class, IHasId<int>
             => queryable.SingleOrDefault(x => x.Id == id);
-        public static TProjection ById<TEntity, TProjection>(this IQueryable<TEntity> queryable, int id, IProjector projector)
-            where TEntity : class, IHasId<int>
-            => projector
-                .Project<TEntity, TProjection>(queryable.Where(x => x.Id == id))
-                .SingleOrDefault();
 
         #endregion
 
         #region Async
 
         public static Task<T> RunTask<T>(this Func<T> func)
-            => Task.Run(() => func.Invoke());
+            => Task.Run(func);
 
 
         public static TOut AskSync<TIn, TOut>(this IQuery<TIn, Task<TOut>> asyncQuery, TIn spec)
