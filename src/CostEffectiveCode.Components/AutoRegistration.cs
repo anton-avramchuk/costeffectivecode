@@ -58,9 +58,21 @@ namespace CostEffectiveCode.Components
                 return typeof(GetByIdQuery<,,>).MakeGenericType(genericArgs[0], entityType, dtoType);
             }
 
-            // Paged
             var firstArgInterfaces = genericArgs[0].GetTypeInfo().GetInterfaces();
             var secondArgInterface = genericArgs[1];
+            var sti = secondArgInterface.GetTypeInfo();
+
+            // Projection
+            if (sti.IsGenericType && sti.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            {
+                var dtoType = genericArgs[1].GetTypeInfo().GetGenericArguments()[0];
+                var entityType = GetEntityType(dtoType);
+                if (entityType == null) return null;
+
+                return typeof(ProjectionQuery<,,>).MakeGenericType(genericArgs[0], entityType, dtoType);
+            }
+
+            // Paged
             var paging = firstArgInterfaces.FirstOrDefault(i => ImplementsOpenGeneric(i, typeof(IPaging<,>)));
             if (paging != null && ImplementsOpenGeneric(secondArgInterface, typeof(IPagedEnumerable<>)))
             {

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using CostEffectiveCode.Components;
 using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Commands;
@@ -19,6 +20,10 @@ namespace CostEffectiveCode.Tests
             var assembly = GetType().Assembly;
             var res = AutoRegistration.GetComponentMap(assembly, t => t == typeof(TestDependentObject), assembly, t => true);
             sw.Stop();
+
+            Assert.Equal(
+                typeof(ProjectionQuery<object, Product, ProductDto>),
+                res[typeof(IQuery<object, IEnumerable<ProductDto>>)]);
 
             Assert.Equal(
                 typeof(PagedQuery<int, IdPaging<ProductDto>, Product, ProductDto>),
