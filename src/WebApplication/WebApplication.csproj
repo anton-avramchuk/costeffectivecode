@@ -52,6 +52,10 @@
       <HintPath>..\packages\CostEffectiveCode.3.0.0-beta1\lib\net45\CostEffectiveCode.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CostEffectiveCode.AutoMapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CostEffectiveCode.AutoMapper.3.0.0-beta3\lib\net45\CostEffectiveCode.AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CostEffectiveCode.Components, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CostEffectiveCode.Components.3.0.0-beta1\lib\net45\CostEffectiveCode.Components.dll</HintPath>
       <Private>True</Private>
@@ -197,9 +201,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Components\Products.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Domain\Domain.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

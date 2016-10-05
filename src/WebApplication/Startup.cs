@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Web.Mvc;
 using CostEffectiveCode.AutoMapper;
+using CostEffectiveCode.Common;
 using CostEffectiveCode.Components;
 using CostEffectiveCode.Ddd;
 using Microsoft.Owin;
@@ -36,6 +37,10 @@ namespace WebApplication
             // init IOC-container
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+
+            var am = Lifestyle.Singleton.CreateRegistration(() => new StaticAutoMapperWrapper(), container);
+            container.AddRegistration(typeof(IProjector), am);
+            container.AddRegistration(typeof(IMapper), am);
 
             // Fake Context
             var reg = Lifestyle.Singleton.CreateRegistration(() => new FakeContext(new[] {

@@ -9,6 +9,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.AutoMappe
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CostEffectiveCode.Components", "CostEffectiveCode.Components\CostEffectiveCode.Components.xproj", "{F348DA75-B126-430F-9985-2477086BAE46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{2A016347-210D-408D-AEA4-C5449851F892}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F348DA75-B126-430F-9985-2477086BAE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F348DA75-B126-430F-9985-2477086BAE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F348DA75-B126-430F-9985-2477086BAE46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A016347-210D-408D-AEA4-C5449851F892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A016347-210D-408D-AEA4-C5449851F892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A016347-210D-408D-AEA4-C5449851F892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A016347-210D-408D-AEA4-C5449851F892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
