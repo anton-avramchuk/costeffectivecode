@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AutoMapper;
 
 namespace CostEffectiveCode.AutoMapper
@@ -39,7 +38,7 @@ namespace CostEffectiveCode.AutoMapper
                     if (attr.Direction == MapDirection.DtoToEntity || attr.Direction == MapDirection.Both)
                     {
                         CreateMap(v, kv.Key).ConvertUsing(typeof(DtoEntityTypeConverter<,,>)
-                            .MakeGenericType(kv.Key.GetTypeInfo().GetProperty("Id").GetType(), v, kv.Key));
+                            .MakeGenericType(kv.Key.GetTypeInfo().GetProperty("Id").PropertyType, v, kv.Key));
                     }
                 }
             }

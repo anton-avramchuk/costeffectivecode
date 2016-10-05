@@ -44,11 +44,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CostEffectiveCode, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CostEffectiveCode.3.0.0-beta1\lib\net45\CostEffectiveCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CostEffectiveCode.Components, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CostEffectiveCode.Components.3.0.0-beta1\lib\net45\CostEffectiveCode.Components.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.1.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleInjector, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.2.2\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.3.2.2\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.3.2.2\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -163,13 +191,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FakeContext.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Components\Products.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Domain\Domain.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
