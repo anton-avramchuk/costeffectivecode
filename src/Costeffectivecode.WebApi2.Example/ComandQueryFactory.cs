@@ -1,9 +1,9 @@
 ﻿using System;
 using Costeffectivecode.WebApi2.Example.Models;
-using CosteffectiveCode.AutoMapper;
-using CosteffectiveCode.Cqrs.Commands;
-using CosteffectiveCode.Cqrs.Queries;
-using CosteffectiveCode.Ddd.Entities;
+using CostEffectiveCode.AutoMapper;
+using CostEffectiveCode.Cqrs.Commands;
+using CostEffectiveCode.Cqrs.Queries;
+using CostEffectiveCode.Ddd.Entities;
 
 namespace Costeffectivecode.WebApi2.Example
 {

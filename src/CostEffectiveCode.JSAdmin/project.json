@@ -1,12 +1,10 @@
 ﻿{
+  "authors": [ "HighTech", "SmartHead" ],
+  "title": "CostEffectiveCode",
   "version": "3.0.0-alpha2",
   "copyright": "HighTech.Today",
-  "title": "CostEffectiveCode",
   "description": "JS admin GUI to provided RESTful API",
-  "authors": [ "HighTech", "SmartHead" ],
-  "packOptions": {
-    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
-  },
+
   "buildOptions": {
     "emitEntryPoint": true
   },
@@ -14,14 +12,22 @@
   "frameworks": {
     "net45": {},
     "netcoreapp1.0": {
-      "imports": "dnxcore50",
       "dependencies": {
+        "Microsoft.Extensions.DependencyModel": "1.0.0",
         "Microsoft.NETCore.App": {
           "type": "platform",
           "version": "1.0.0"
         }
-      }
+      },
+      "imports": "dnxcore50"
     }
+  },
+
+  "dependencies": {
+  },
+
+  "packOptions": {
+    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
 
   "scripts": {
@@ -29,4 +35,5 @@
       "dotnet pack --no-build --configuration %compile:Configuration%"
     ]
   }
+
 }
