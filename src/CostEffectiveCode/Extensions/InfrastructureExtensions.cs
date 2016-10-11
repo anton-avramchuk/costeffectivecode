@@ -34,7 +34,6 @@ namespace CostEffectiveCode.Extensions
         public static Func<TIn, TOut> ToFunc<TIn, TOut>(this ICommandHandler<TIn, TOut> commandHandler)
             => x => commandHandler.Handle(x);
 
-
         #endregion
 
         #region FP
@@ -55,21 +54,16 @@ namespace CostEffectiveCode.Extensions
                 ? evaluator(source)
                 : source;
 
-        public static TReturn WithMatched<TReturn, TMatch>(this TReturn source
-            , object match,
-            Func<TReturn, TMatch, TReturn> evaluator)
-            where TMatch : class
-            => match is TMatch
-                ? evaluator.Invoke(source, (TMatch)match)
-                : source;    
+        public static T Match<T>(this object source, Func<object, T> evaluator)
+            where T : class
+            => Match(source as T, x => x != null, x => evaluator(x));
 
-        public static TInput If<TInput>(this TInput o, Func<TInput, bool> condition
-            , Func<TInput, TInput> ifTrue, Func<TInput, TInput> ifFalse)
+        public static TOutput If<TInput, TOutput>(this TInput o
+            , Func<TInput, bool> condition
+            , Func<TInput, TOutput> ifTrue
+            , Func<TInput, TOutput> ifFalse)
             where TInput : class
-        {
-            if (o == null) return null;
-            return condition(o) ? ifTrue(o) : ifFalse(o);
-        }
+            => condition(o) ? ifTrue(o) : ifFalse(o);
 
 
         public static TInput Do<TInput>(this TInput o, Action<TInput> action, [CanBeNull]Func<Exception> ifNull = null)
@@ -145,6 +139,7 @@ namespace CostEffectiveCode.Extensions
         #endregion
 
         #region Cqrs
+
         public static TResult Forward<TSource, TResult>(
             this TSource source, IQuery<TSource, TResult> query)
             => query.Ask(source);

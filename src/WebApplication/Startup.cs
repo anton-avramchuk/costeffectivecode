@@ -46,10 +46,13 @@ namespace WebApplication
             var reg = Lifestyle.Singleton.CreateRegistration(() => new FakeContext(new[] {
                 new Product()
                 {
-                    Category = new Category(),
+                    Category = new Category()
+                    {
+                        Rating = 100500
+                    },
                     Id = 1,
                     Name = "1 Product",
-                    Price = 100500
+                    Price = 100500,                   
                 }
                 , new Product()
                 {

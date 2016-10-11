@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using CostEffectiveCode.AutoMapper;
 using CostEffectiveCode.Components.Cqrs;
 using CostEffectiveCode.Cqrs;
@@ -21,14 +22,21 @@ namespace WebApplication.Components
             _bySpec = bySpec;
         }
 
+        //[Authorize]
         public ActionResult ById(int id) => Json(_byId.Ask(id), JsonRequestBehavior.AllowGet);
 
         public ActionResult BySpec(ProductSpec spec) => Json(_bySpec.Ask(spec), JsonRequestBehavior.AllowGet);
     }
 
-    public class ProductSpec : IdPaging<ProductDto>
+    public class ProductSpec
+        : IdPaging<ProductDto>
+        , ILinqSpecification<Product>
     {
-        
+        public IQueryable<ProductDto> Apply(IQueryable<ProductDto> query) => query
+            .Where(x => x.Id > 1);
+
+        public IQueryable<Product> Apply(IQueryable<Product> query) => query
+            .Where(x => x.Category.Rating > 0);
     }
 
     [DtoFor(typeof(Product)), ConventionalMap(typeof(Product))]
@@ -37,6 +45,8 @@ namespace WebApplication.Components
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
+
+        public int CategoryRating { get; set; }
 
         public decimal Price { get; set; }
     }

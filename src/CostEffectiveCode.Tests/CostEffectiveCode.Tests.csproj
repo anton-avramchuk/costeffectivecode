@@ -84,6 +84,10 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -108,17 +112,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoRegistrationTests.cs" />
-    <Compile Include="DtoToEntityConverterTests.cs" />
-    <Compile Include="HandlerTests.cs" />
-    <Compile Include="QueryTests.cs" />
-    <Compile Include="PagingTests.cs" />
-    <Compile Include="InfrastructureExtensionsTests.cs" />
-    <Compile Include="SortingTests.cs" />
-    <Compile Include="SpecificationTests.cs" />
-    <Compile Include="StringExtensionsTests.cs" />
+    <Compile Include="Stubs\AutoFilter.cs" />
+    <Compile Include="Tests\AutoRegistrationTests.cs" />
+    <Compile Include="Tests\DtoToEntityConverterTests.cs" />
+    <Compile Include="Tests\HandlerTests.cs" />
+    <Compile Include="Tests\QueryTests.cs" />
+    <Compile Include="Tests\PagingTests.cs" />
+    <Compile Include="Tests\InfrastructureExtensionsTests.cs" />
+    <Compile Include="Tests\SortingTests.cs" />
+    <Compile Include="Tests\SpecificationTests.cs" />
+    <Compile Include="Tests\StringExtensionsTests.cs" />
     <Compile Include="Stubs\CreateProductDto.cs" />
-    <Compile Include="HasIdTests.cs" />
+    <Compile Include="Tests\HasIdTests.cs" />
     <Compile Include="Migrations\201609242012168_Initial.cs" />
     <Compile Include="Migrations\201609242012168_Initial.Designer.cs">
       <DependentUpon>201609242012168_Initial.cs</DependentUpon>
@@ -132,7 +137,7 @@
     <Compile Include="Stubs\TestDbContext.cs" />
     <Compile Include="Stubs\InMemoryLinqProvider.cs" />
     <Compile Include="Stubs\OptimizedQuery.cs" />
-    <None Include="Tests.cs.bak" />
+    <Compile Include="Tests\Tests.cs" />
     <Compile Include="Stubs\Domain.cs" />
     <Compile Include="Stubs\TestDependentObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
