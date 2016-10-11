@@ -112,7 +112,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stubs\AutoFilter.cs" />
     <Compile Include="Tests\AutoRegistrationTests.cs" />
     <Compile Include="Tests\DtoToEntityConverterTests.cs" />
     <Compile Include="Tests\HandlerTests.cs" />

@@ -3,8 +3,7 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.Ddd.Pagination
 {
-    public abstract class Paging<TEntity, TOrderKey> :
-        IPaging<TEntity, TOrderKey>
+    public abstract class Paging<TEntity, TOrderKey> : IPaging<TEntity, TOrderKey>
         where TEntity : class, IHasId
     {
         private readonly Sorting<TEntity, TOrderKey> _orderBy;

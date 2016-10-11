@@ -3,8 +3,7 @@ using CostEffectiveCode.Ddd.Pagination;
 
 namespace CostEffectiveCode.Ddd.Specifications
 {
-    public class IdPaging<TEntity>
-        : IdPaging<TEntity, int>
+    public class IdPaging<TEntity>: IdPaging<TEntity, int>
         where TEntity : class, IHasId<int>
     {
         public IdPaging(int page, int take)
@@ -17,8 +16,7 @@ namespace CostEffectiveCode.Ddd.Specifications
         }
     }
 
-    public class IdPaging<TEntity, TKey>
-        : Paging<TEntity, TKey> 
+    public class IdPaging<TEntity, TKey>: Paging<TEntity, TKey> 
         where TEntity : class, IHasId<TKey>
     {
         public IdPaging(int page, int take)
