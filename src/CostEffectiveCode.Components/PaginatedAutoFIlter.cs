@@ -27,7 +27,7 @@ namespace CostEffectiveCode.Components
             if (filter == null) throw new ArgumentNullException(nameof(filter));
             Filter = filter;
         }
-        public IQueryable<TDto> Apply(IQueryable<TDto> query)
+        public IQueryable<TDto> Where(IQueryable<TDto> query)
             => query.ApplyDictionary(Filter);
     }
 }

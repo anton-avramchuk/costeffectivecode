@@ -7,7 +7,7 @@ namespace CostEffectiveCode.Cqrs.Commands
 {
     public class DeleteHandler<TKey, TEntity>
         : UowBased
-        , ICommandHandler<TKey>
+        , IHandler<TKey>
         where TEntity : class, IHasId<TKey>
     {
         public DeleteHandler([NotNull] IUnitOfWork unitOfWork) : base(unitOfWork)

@@ -12,17 +12,26 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Components
 {
-    public static class AutoRegistration
+    public sealed class AutoRegistration
     {
         private static readonly Type[] KeyTypes = {typeof(int), typeof(long), typeof(Guid)};
 
-        public static readonly IDictionary<Type, Func<Type, Type>> TypeFallbacks
-            = new Dictionary<Type, Func<Type, Type>>()
+        private readonly IDictionary<Type, Func<Type, Type>> _typeFallbacks;
+
+        public AutoRegistration()
+        {
+            _typeFallbacks = new Dictionary<Type, Func<Type, Type>>()
             {
                 {typeof(IQuery<,>), BuildQuery}
-                , {typeof(ICommandHandler<,>), BuildCommandHandler}
+                , {typeof(IHandler<,>), BuildCommandHandler}
             };
+        }
 
+        public AutoRegistration([NotNull] Dictionary<Type, Func<Type, Type>> typeFallbacks)
+        {
+            if (typeFallbacks == null) throw new ArgumentNullException(nameof(typeFallbacks));
+            _typeFallbacks = typeFallbacks;
+        }
 
         private static Type BuildCommandHandler(Type type)
         {
@@ -62,7 +71,7 @@ namespace CostEffectiveCode.Components
             var secondArgInterface = genericArgs[1];
             var sti = secondArgInterface.GetTypeInfo();
 
-            // Projection
+            // ProjectionAttribute
             if (sti.IsGenericType && sti.GetGenericTypeDefinition() == typeof(IEnumerable<>))
             {
                 var dtoType = genericArgs[1].GetTypeInfo().GetGenericArguments()[0];
@@ -88,17 +97,17 @@ namespace CostEffectiveCode.Components
 
         private static Type GetEntityType(Type dtoType)
         {
-            return dtoType.GetTypeInfo().GetCustomAttribute<DtoForAttribute>()?.EntityType;
+            return dtoType.GetTypeInfo().GetCustomAttribute<ProjectionAttribute>()?.EntityType;
         }
 
         [CanBeNull]
-        private static Type GetFallBack(Type type)
+        private Type GetFallBack(Type type)
         {
             var ti = type.GetTypeInfo();
             if (!ti.IsInterface || !ti.IsGenericType) return null;
             var generic = type.GetGenericTypeDefinition();
-            return TypeFallbacks.ContainsKey(generic)
-                ? TypeFallbacks[generic](type)
+            return _typeFallbacks.ContainsKey(generic)
+                ? _typeFallbacks[generic](type)
                 : null;
         }
 
@@ -107,7 +116,7 @@ namespace CostEffectiveCode.Components
             return i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == checkType;
         }
 
-        public static Dictionary<Type, Type> GetComponentMap(
+        public Dictionary<Type, Type> GetComponentMap(
             Assembly dependentAssembly,
             Func<Type, bool> dependentTypeSpec,
             Assembly sourceAssembly,

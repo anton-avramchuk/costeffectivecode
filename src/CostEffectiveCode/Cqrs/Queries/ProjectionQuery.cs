@@ -29,10 +29,10 @@ namespace CostEffectiveCode.Cqrs.Queries
 
         protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
         => LinqProvider
-            .GetQueryable<TSource>()
-            .ApplyIfPossible(spec)
+            .Query<TSource>()
+            .MaybeWhere(spec)
             .Project<TSource, TDest>(Projector)
-            .ApplyIfPossible(spec);
+            .MaybeWhere(spec);
 
         public virtual IEnumerable<TDest> Ask(TSpecification specification) => GetQueryable(specification).ToArray();
 

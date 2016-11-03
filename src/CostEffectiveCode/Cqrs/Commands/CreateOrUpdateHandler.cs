@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class CreateOrUpdateHandler<TKey, TDto, TEntity> : UowBased, ICommandHandler<TDto, TKey>
+    public class CreateOrUpdateHandler<TKey, TDto, TEntity> : UowBased, IHandler<TDto, TKey>
         where TKey: struct
         where TEntity : HasIdBase<TKey>
     {

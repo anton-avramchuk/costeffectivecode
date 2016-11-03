@@ -31,8 +31,8 @@ namespace CostEffectiveCode.Extensions
         public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IQuery<TIn, TOut> query)
             => x => query.Ask(x);
 
-        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this ICommandHandler<TIn, TOut> commandHandler)
-            => x => commandHandler.Handle(x);
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IHandler<TIn, TOut> handler)
+            => x => handler.Handle(x);
 
         #endregion
 
@@ -99,19 +99,14 @@ namespace CostEffectiveCode.Extensions
 
         #region Linq
 
-        public static IQueryable<T> WhereIf<T>(this IQueryable<T> queryable, bool cnd, Expression<Func<T, bool>> expr)
-            => cnd
-                ? queryable.Where(expr)
-                : queryable;
-
-        public static IQueryable<T> Apply<T>(this IQueryable<T> source, ILinqSpecification<T> spec)
+        public static IQueryable<T> Where<T>(this IQueryable<T> source, ILinqSpecification<T> spec)
             where T : class
-            => spec.Apply(source);
+            => spec.Where(source);
 
-        public static IQueryable<T> ApplyIfPossible<T>(this IQueryable<T> source, object spec)
+        public static IQueryable<T> MaybeWhere<T>(this IQueryable<T> source, object spec)
             where T : class
             => spec is ILinqSpecification<T>
-                ? ((ILinqSpecification<T>)spec).Apply(source)
+                ? ((ILinqSpecification<T>)spec).Where(source)
                 : source;
 
         public static IQueryable<TDest> Project<TSource, TDest>(this IQueryable<TSource> source, IProjector projector)
@@ -119,7 +114,7 @@ namespace CostEffectiveCode.Extensions
 
         public static TEntity ById<TEntity>(this ILinqProvider linqProvider, int id)
             where TEntity : class, IHasId<int>
-            => linqProvider.GetQueryable<TEntity>().ById(id);
+            => linqProvider.Query<TEntity>().ById(id);
 
         public static TEntity ById<TEntity>(this IQueryable<TEntity> queryable, int id)
             where TEntity : class, IHasId<int>
@@ -149,12 +144,16 @@ namespace CostEffectiveCode.Extensions
             => query.Ask(source);
 
         public static TResult Forward<TSource, TResult>(
-            this TSource source, ICommandHandler<TSource, TResult> query)
+            this TSource source, IHandler<TSource, TResult> query)
             => query.Handle(source);
 
         public static void Forward<TSource>(
-            this TSource source, ICommandHandler<TSource> query)
+            this TSource source, IHandler<TSource> query)
             => query.Handle(source);
+
+        public static TOutput Ask<TInput, TOutput>(this IQuery<TInput, TOutput> query)
+            where TInput : new()
+            => query.Ask(new TInput());
 
         #endregion
     }

@@ -9,10 +9,10 @@ namespace CostEffectiveCode.Ddd
     public interface ILinqProvider
 
     {
-        IQueryable<TEntity> GetQueryable<TEntity>()
+        IQueryable<TEntity> Query<TEntity>()
             where TEntity : class, IHasId;
 
 
-        IQueryable GetQueryable(Type t);
+        IQueryable Query(Type t);
     }
 }
