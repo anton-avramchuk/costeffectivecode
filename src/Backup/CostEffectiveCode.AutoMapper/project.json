@@ -1,27 +1,26 @@
 ﻿{
-  "version": "3.0.0-rc1",
+  "version": "3.0.0-beta3",
   "copyright": "HighTech.Today",
-  "description": "Component structure for CostEffectiveCode",
+  "description": "AutoMapper IMapper, IProjector implementations for CostEffectiveCode",
   "authors": [ "HighTech.Today" ],
   "packOptions": {
     "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
   },
   "dependencies": {
+    "AutoMapper": "5.1.1",
     "CostEffectiveCode": "3.0.0-*",
-    "JetBrains.Annotations": "10.1.5",
-    "System.Linq.Dynamic.Core": "1.0.6.5"
+    "JetBrains.Annotations": "10.1.5"
   },
 
   "frameworks": {
-    "net45": {
-      "dependencies": {
-      }
-    },
+    "net45": {},
     "netstandard1.6": {
       "imports": "dnxcore50",
       "dependencies": {
         "NETStandard.Library": "1.6.0",
-        "System.Linq.Queryable": "4.0.1"
+        "System.Linq.Queryable": "4.0.1",
+        "System.Reflection": "4.1.0",
+        "System.Reflection.Extensions": "4.0.1"
       }
     }
   },

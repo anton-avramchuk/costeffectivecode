@@ -1,5 +1,5 @@
 ﻿{
-  "version": "3.0.0-beta3",
+  "version": "3.0.0-r1",
   "copyright": "HighTech.Today",
   "description": "AutoMapper IMapper, IProjector implementations for CostEffectiveCode",
   "authors": [ "HighTech.Today" ],
