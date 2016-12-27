@@ -17,13 +17,35 @@ namespace CostEffectiveCode.Ddd.Pagination
     [PublicAPI]
     public static class Paged
     {
+        public static IOrderedQueryable<T, TKey> OrderBy(this IQueryable<T> queryable, Sorting<TEntity, TKey> sorting)
+            => sorting.SortOrder == SortOrder.Asc
+                ? queryable.OrderBy(sorting.Expression)
+                : queryable.OrderByDescending(sorting.Expression);
+
+        public static IOrderedQueryable<T, TKey> ThenBy(this IOrderedQueryable<T> queryable, Sorting<TEntity, TKey> sorting)
+            => sorting.SortOrder == SortOrder.Asc
+                ? queryable.ThenBy(sorting.Expression)
+                : queryable.ThenByDescending(sorting.Expression);
+
         public static IQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
             where T : class
-            => (paging.OrderBy.SortOrder == SortOrder.Asc
-                ? queryable.OrderBy(paging.OrderBy.Expression)
-                : queryable.OrderByDescending(paging.OrderBy.Expression))
+        {
+            if(paging.OrderBy.Length == 0)
+            {
+                throw new ArgumentException("OrderBy can't be null or empty", nameof(paging));
+            }
+
+            var ordered = queryable.OrderBy(paging.OrderBy[0]);
+
+            for (int i = 1; i < paging.OrderBy.Length; i++)
+            {
+                ordered = ordered.ThenBy(paging.OrderBy[i]);
+            }
+
+            return ordered
                 .Skip((paging.Page - 1) * paging.Take)
                 .Take(paging.Take);
+        }                
 
         public static IPagedEnumerable<T> ToPagedEnumerable<T, TKey>(this IQueryable<T> queryable,
             IPaging<T, TKey> paging)

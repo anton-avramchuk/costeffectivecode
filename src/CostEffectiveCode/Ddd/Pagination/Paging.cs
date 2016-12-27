@@ -6,13 +6,13 @@ namespace CostEffectiveCode.Ddd.Pagination
     public abstract class Paging<TEntity, TOrderKey> : IPaging<TEntity, TOrderKey>
         where TEntity : class
     {
-        private readonly Sorting<TEntity, TOrderKey> _orderBy;
+        private readonly Sorting<TEntity, TOrderKey>[] _orderBy;
 
         private int _page;
 
         private int _take;
 
-        protected Paging(int page, int take, Sorting<TEntity, TOrderKey> orderBy)
+        protected Paging(int page, int take, params Sorting<TEntity, TOrderKey>[] orderBy)
         {
             Page = page;
             Take = take;
@@ -30,13 +30,14 @@ namespace CostEffectiveCode.Ddd.Pagination
             Take = 30;
             // ReSharper disable once VirtualMemberCallInConstructor
             _orderBy = BuildDefaultSorting();
-            if (_orderBy == null)
+            
+            if (_orderBy == null || _orderBy.Length == 0)
             {
-                throw new ArgumentException("OrderBy can't be null", nameof(_orderBy));
+                throw new ArgumentException("OrderBy can't be null or empty", nameof(_orderBy));
             }
         }
 
-        protected abstract Sorting<TEntity, TOrderKey> BuildDefaultSorting();
+        protected abstract Sorting<TEntity, TOrderKey>[] BuildDefaultSorting();
 
         public int Page
         {
@@ -66,6 +67,6 @@ namespace CostEffectiveCode.Ddd.Pagination
             }
         }
 
-        public Sorting<TEntity, TOrderKey> OrderBy => _orderBy;
+        public Sorting<TEntity, TOrderKey>[] OrderBy => _orderBy;
     }
 }
