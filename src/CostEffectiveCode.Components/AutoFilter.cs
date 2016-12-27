@@ -44,7 +44,7 @@ namespace CostEffectiveCode.Components
             Filter = filter;
         }
 
-        public IQueryable<T> Where(IQueryable<T> query)
+        public IQueryable<T> Apply(IQueryable<T> query)
             => query.ApplyDictionary(Filter);
     }
 }
