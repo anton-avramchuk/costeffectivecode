@@ -5,6 +5,6 @@ namespace CostEffectiveCode.Cqrs
     public interface ILinqSpecification<T>
         where T: class 
     {
-        IQueryable<T> Where(IQueryable<T> query);
+        IQueryable<T> Apply(IQueryable<T> query);
     }
 }

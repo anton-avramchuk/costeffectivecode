@@ -8,6 +8,7 @@ using CostEffectiveCode.Common;
 using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Ddd.Specifications;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions
@@ -28,12 +29,6 @@ namespace CostEffectiveCode.Extensions
         public static bool Is<T>(this T entity, Expression<Func<T, bool>> expr)
             => AsFunc(expr).Invoke(entity);
 
-        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IQuery<TIn, TOut> query)
-            => x => query.Ask(x);
-
-        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IHandler<TIn, TOut> handler)
-            => x => handler.Handle(x);
-
         #endregion
 
         #region FP
@@ -46,54 +41,24 @@ namespace CostEffectiveCode.Extensions
             this TSource source, Func<TSource, TResult> func)
             => func(source);
 
-        public static T Match<T>(this T source
-            , Func<T, bool> pattern
+        public static T ForwardIf<T>(this T source
+            , Func<T, bool> condition
             , Func<T, T> evaluator)
             where T : class
-            => pattern(source)
+            => condition(source)
                 ? evaluator(source)
                 : source;
 
-        public static T Match<T>(this object source, Func<object, T> evaluator)
+        public static T ForwardIfNotNull<T>(this T source, Func<object, T> evaluator)
             where T : class
-            => Match(source as T, x => x != null, x => evaluator(x));
+            => ForwardIf(source, x => x != null, x => evaluator(x));
 
-        public static TOutput If<TInput, TOutput>(this TInput o
+        public static TOutput Either<TInput, TOutput>(this TInput o
             , Func<TInput, bool> condition
             , Func<TInput, TOutput> ifTrue
             , Func<TInput, TOutput> ifFalse)
             where TInput : class
             => condition(o) ? ifTrue(o) : ifFalse(o);
-
-
-        public static TInput Do<TInput>(this TInput o, Action<TInput> action, [CanBeNull]Func<Exception> ifNull = null)
-            where TInput : class
-        {
-            if (o == null)
-            {
-                if (ifNull != null)
-                {
-                    throw ifNull();
-                }
-
-                return null;
-            }
-            action(o);
-            return o;
-        }
-
-        public static TOutput Do<TInput, TOutput>(this TInput o, Func<TInput, TOutput> func, [CanBeNull]Func<Exception> ifNull = null)
-        {
-            if (o == null)
-            {
-                if (ifNull != null)
-                {
-                    throw ifNull();
-                }
-            }
-
-            return func(o);
-        }
 
         #endregion
 
@@ -101,13 +66,30 @@ namespace CostEffectiveCode.Extensions
 
         public static IQueryable<T> Where<T>(this IQueryable<T> source, ILinqSpecification<T> spec)
             where T : class
-            => spec.Where(source);
+            => spec.Apply(source);
 
         public static IQueryable<T> MaybeWhere<T>(this IQueryable<T> source, object spec)
             where T : class
-            => spec is ILinqSpecification<T>
-                ? ((ILinqSpecification<T>)spec).Where(source)
-                : source;
+        {
+            var specification = spec as ILinqSpecification<T>;
+            if (specification != null)
+            {
+                source = specification.Apply(source);
+            }
+
+            var expr = spec as Expression<Func<T, bool>>;
+            if (expr != null)
+            {
+                source = source.Where(expr);
+            }
+
+            var exprSpec = spec as ExpressionSpecification<T>;
+            if (exprSpec != null)
+            {
+                source = source.Where(exprSpec.Expression);
+            }
+            return source;
+        }
 
         public static IQueryable<TDest> Project<TSource, TDest>(this IQueryable<TSource> source, IProjector projector)
             => projector.Project<TSource, TDest>(source);
@@ -147,13 +129,29 @@ namespace CostEffectiveCode.Extensions
             this TSource source, IHandler<TSource, TResult> query)
             => query.Handle(source);
 
-        public static void Forward<TSource>(
+        public static TSource Forward<TSource>(
             this TSource source, IHandler<TSource> query)
-            => query.Handle(source);
+        {
+            query.Handle(source);
+            return source;
+        }
 
         public static TOutput Ask<TInput, TOutput>(this IQuery<TInput, TOutput> query)
             where TInput : new()
             => query.Ask(new TInput());
+
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IQuery<TIn, TOut> query)
+            => x => query.Ask(x);
+
+        public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IHandler<TIn, TOut> handler)
+            => x => handler.Handle(x);
+
+        public static Func<TIn, TIn> ToFunc<TIn>(this IHandler<TIn, TIn> handler)
+            => x =>
+            {
+                handler.Handle(x);
+                return x;
+            };
 
         #endregion
     }
