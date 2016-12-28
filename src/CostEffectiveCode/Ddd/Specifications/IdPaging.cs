@@ -28,9 +28,9 @@ namespace CostEffectiveCode.Ddd.Specifications
         {
         }
 
-        protected override Sorting<TEntity, TKey> BuildDefaultSorting()
+        protected override Sorting<TEntity, TKey>[] BuildDefaultSorting()
         {
-            return new Sorting<TEntity, TKey>(x => x.Id, SortOrder.Desc);
+            return new [] { new Sorting<TEntity, TKey>(x => x.Id, SortOrder.Desc) };
         }
     }
 }

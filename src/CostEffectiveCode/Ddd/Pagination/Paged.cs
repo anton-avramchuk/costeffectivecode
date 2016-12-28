@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -17,12 +18,16 @@ namespace CostEffectiveCode.Ddd.Pagination
     [PublicAPI]
     public static class Paged
     {
-        public static IOrderedQueryable<T, TKey> OrderBy(this IQueryable<T> queryable, Sorting<TEntity, TKey> sorting)
+        public static IOrderedQueryable<TEntity> OrderBy<TEntity, TKey>(this IQueryable<TEntity> queryable
+            , Sorting<TEntity, TKey> sorting)
+            where TEntity : class
             => sorting.SortOrder == SortOrder.Asc
                 ? queryable.OrderBy(sorting.Expression)
                 : queryable.OrderByDescending(sorting.Expression);
 
-        public static IOrderedQueryable<T, TKey> ThenBy(this IOrderedQueryable<T> queryable, Sorting<TEntity, TKey> sorting)
+        public static IOrderedQueryable<TEntity> ThenBy<TEntity, TKey>(this IOrderedQueryable<TEntity> queryable
+            , Sorting<TEntity, TKey> sorting)
+            where TEntity : class
             => sorting.SortOrder == SortOrder.Asc
                 ? queryable.ThenBy(sorting.Expression)
                 : queryable.ThenByDescending(sorting.Expression);
