@@ -13,8 +13,8 @@ namespace CostEffectiveCode.Cqrs.Queries
         where TDto : class, IHasId
         where TSpec : IPaging<TDto, TSortKey>
     {
-        public PagedQuery(ILinqProvider linqProvier, IProjector projector)
-            : base(linqProvier, projector)
+        public PagedQuery(ILinqProvider linqProvider, IProjector projector)
+            : base(linqProvider, projector)
         {
         }
 

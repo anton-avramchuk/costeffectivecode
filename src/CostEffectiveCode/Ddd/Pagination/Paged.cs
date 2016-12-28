@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Ddd.Pagination
@@ -50,7 +51,11 @@ namespace CostEffectiveCode.Ddd.Pagination
             return ordered
                 .Skip((paging.Page - 1) * paging.Take)
                 .Take(paging.Take);
-        }                
+        }
+
+        public static IOrderedQueryable<T> Sort<T>(this IQueryable<T> queryable, ILinqSorting<T> paging)
+            where T : class
+            => paging.Apply(queryable);
 
         public static IPagedEnumerable<T> ToPagedEnumerable<T, TKey>(this IQueryable<T> queryable,
             IPaging<T, TKey> paging)

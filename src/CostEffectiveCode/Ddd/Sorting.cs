@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Ddd
@@ -32,5 +31,4 @@ namespace CostEffectiveCode.Ddd
             SortOrder = sortOrder;
         }
     }
-
 }
