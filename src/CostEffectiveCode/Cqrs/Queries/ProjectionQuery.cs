@@ -45,11 +45,6 @@ namespace CostEffectiveCode.Cqrs.Queries
 
         protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
         {
-            if (spec == null || !SpecTypes.Contains(spec.GetType()))
-            {
-                throw new ArgumentException($"Spec parameter must be one of types below: {ErrorMessage}", nameof(spec));
-            }
-
             return LinqProvider
                 .Query<TSource>()
                 .MaybeWhere(spec)
