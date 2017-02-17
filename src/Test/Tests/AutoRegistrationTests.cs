@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using CostEffectiveCode.Components;
 using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Commands;
@@ -17,8 +18,8 @@ namespace CostEffectiveCode.Tests
         {
             var sw = new Stopwatch();
             sw.Start();
-            var assembly = GetType().Assembly;
-            var res = AutoRegistration.GetComponentMap(assembly, t => t == typeof(TestDependentObject), assembly, t => true);
+            var assembly = GetType().GetTypeInfo().Assembly;
+            var res = new AutoRegistration().GetComponentMap(assembly, t => t == typeof(TestDependentObject), assembly, t => true);
             sw.Stop();
 
             Assert.Equal(
@@ -35,7 +36,7 @@ namespace CostEffectiveCode.Tests
 
             Assert.Equal(
                 typeof(CreateOrUpdateHandler<int, ProductDto, Product>),
-                res[typeof(ICommandHandler<ProductDto, int>)]);
+                res[typeof(IHandler<ProductDto, int>)]);
 
             Assert.True(sw.ElapsedMilliseconds < 50);
         }

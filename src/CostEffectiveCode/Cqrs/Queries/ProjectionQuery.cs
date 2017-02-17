@@ -49,7 +49,7 @@ namespace CostEffectiveCode.Cqrs.Queries
                 .Query<TSource>()
                 .MaybeWhere(spec)
                 .MaybeSort(spec)
-                .Project<TSource, TDest>(Projector)
+                .Project<TDest>(Projector)
                 .MaybeWhere(spec)
                 .MaybeSort(spec);
         } 

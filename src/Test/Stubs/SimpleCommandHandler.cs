@@ -2,7 +2,7 @@
 
 namespace CostEffectiveCode.Tests.Stubs
 {
-    public class SimpleCommandHandler : ICommandHandler<string, string>
+    public class SimpleCommandHandler : IHandler<string, string>
     {
         public string Handle(string input)
         {
@@ -10,7 +10,7 @@ namespace CostEffectiveCode.Tests.Stubs
         }
     }
 
-    public class SimpleCommandHandler2 : ICommandHandler<string>
+    public class SimpleCommandHandler2 : IHandler<string>
     {
         public void Handle(string input)
         {

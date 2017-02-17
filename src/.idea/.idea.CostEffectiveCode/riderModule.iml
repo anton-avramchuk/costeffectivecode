@@ -5,12 +5,15 @@
       <sourceFolder url="file://$MODULE_DIR$/../../CostEffectiveCode" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.AutoMapper" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.Components" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Test" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.AutoMapper/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.AutoMapper/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.Components/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode.Components/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../CostEffectiveCode/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Test/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Test/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../packages" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

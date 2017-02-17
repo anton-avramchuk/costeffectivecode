@@ -22,9 +22,9 @@ namespace CostEffectiveCode.Tests.Stubs
                 }, x => x.AsQueryable());
         }
 
-        public IQueryable<TEntity> GetQueryable<TEntity>() where TEntity : class, IHasId
-            => GetQueryable(typeof(TEntity)).Cast<TEntity>();   
+        public IQueryable<TEntity> Query<TEntity>() where TEntity : class, IHasId
+            => Query(typeof(TEntity)).Cast<TEntity>();
 
-        public IQueryable GetQueryable(Type t) => _queyables[t];
+        public IQueryable Query(Type t) => _queyables[t];
     }
 }

@@ -27,7 +27,7 @@ namespace CostEffectiveCode.AutoMapper
 
         public TReturn Map<TReturn>(object src, TReturn dest) => Instance.Map(src, dest);
 
-        public IQueryable<TReturn> Project<TSource, TReturn>(IQueryable<TSource> queryable)
+        public IQueryable<TReturn> Project<TReturn>(IQueryable queryable)
             => queryable.ProjectTo<TReturn>(Configuration);
     }
 }

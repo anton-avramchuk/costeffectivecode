@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -15,11 +14,10 @@ using CostEffectiveCode.Ddd.Pagination;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
 using CostEffectiveCode.Tests.Stubs;
-using JetBrains.dotMemoryUnit;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
 
 
 namespace CostEffectiveCode.Tests
@@ -175,7 +173,7 @@ namespace CostEffectiveCode.Tests
 
         private static SqlConnection GetConnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            return new SqlConnection("");
         }
 
         [Fact]
@@ -187,18 +185,18 @@ namespace CostEffectiveCode.Tests
                 , new Product() {Name = "234"}
             });
 
-            var val = lp.GetQueryable<Product>().Where("Name = \"123\"").ToArray();
+            var val = lp.Query<Product>().Where("Name = \"123\"").ToArray();
 
             var autoFilter = new AutoFilter<Product>();
             autoFilter.Filter.Add("Name", "123");
             autoFilter.Filter.Add("Id", 1);
 
-            var q = autoFilter.Apply(lp.GetQueryable<Product>());
+            var q = autoFilter.Apply(lp.Query<Product>());
 
             var res = q.ToArray();
         }
 
-        [Fact]
+        //[Fact]
         public void WriteCommand()
         {
             var optimizedHandler = new OptimizedCommnadHadler();

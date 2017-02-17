@@ -26,7 +26,7 @@ namespace CostEffectiveCode.Cqrs.Queries
         }
 
         public virtual TResult Ask(TKey specification) =>
-            Projector.Project<TEntity, TResult>(LinqProvider
+            Projector.Project<TResult>(LinqProvider
                 .Query<TEntity>()
                 .Where(x => specification.Equals(x.Id)))
             .SingleOrDefault();

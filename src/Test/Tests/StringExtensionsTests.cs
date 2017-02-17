@@ -35,7 +35,7 @@ namespace CostEffectiveCode.Tests
         {
             string nullStr = null;
             // ReSharper disable once PossibleNullReferenceException
-            Assert.False(nullStr.Contains("smth", StringComparison.InvariantCulture));
+            Assert.False(nullStr.Contains("smth", StringComparison.CurrentCultureIgnoreCase));
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace CostEffectiveCode.Tests
         {
             var str = "eklmn";
             // ReSharper disable once PossibleNullReferenceException
-            Assert.False(str.Contains("smth", StringComparison.InvariantCulture));
+            Assert.False(str.Contains("smth", StringComparison.CurrentCultureIgnoreCase));
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace CostEffectiveCode.Tests
         {
             var str = "eklmn-smth";
             // ReSharper disable once PossibleNullReferenceException
-            Assert.True(str.Contains("smth", StringComparison.InvariantCulture));
+            Assert.True(str.Contains("smth", StringComparison.CurrentCultureIgnoreCase));
         }
 
         [Fact]

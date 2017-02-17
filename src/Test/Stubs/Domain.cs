@@ -1,5 +1,7 @@
 ﻿using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Components.Cqrs;
+using CostEffectiveCode.Cqrs;
+
 namespace CostEffectiveCode.Tests
 {
     public class Category : HasIdBase<int>
@@ -40,7 +42,7 @@ namespace CostEffectiveCode.Tests
         public decimal Price { get; set; }
     }
 
-    [DtoFor(typeof(Product))]
+    [Projection(typeof(Product))]
     public class ProductDto : HasIdBase<int>
     {
         public int  CategoryId { get; set; }

@@ -37,11 +37,11 @@ namespace CostEffectiveCode.Extensions
             this Func<TSource, TIntermediate> func1, Func<TIntermediate, TResult> func2)
             => x => func2(func1(x));        
 
-        public static TResult Forward<TSource, TResult>(
+        public static TResult PipeTo<TSource, TResult>(
             this TSource source, Func<TSource, TResult> func)
             => func(source);
 
-        public static T ForwardIf<T>(this T source
+        public static T PipeToIf<T>(this T source
             , Func<T, bool> condition
             , Func<T, T> evaluator)
             where T : class
@@ -51,7 +51,7 @@ namespace CostEffectiveCode.Extensions
 
         public static T ForwardIfNotNull<T>(this T source, Func<object, T> evaluator)
             where T : class
-            => ForwardIf(source, x => x != null, x => evaluator(x));
+            => PipeToIf(source, x => x != null, x => evaluator(x));
 
         public static TOutput Either<TInput, TOutput>(this TInput o
             , Func<TInput, bool> condition
@@ -97,8 +97,14 @@ namespace CostEffectiveCode.Extensions
             return source;
         }
 
-        public static IQueryable<TDest> Project<TSource, TDest>(this IQueryable<TSource> source, IProjector projector)
-            => projector.Project<TSource, TDest>(source);
+        public static T Do<T>(T obj, Action<T> action)
+        {
+            action(obj);
+            return obj;
+        }
+
+        public static IQueryable<TDest> Project<TDest>(this IQueryable source, IProjector projector)
+            => projector.Project<TDest>(source);
 
         public static TEntity ById<TEntity>(this ILinqProvider linqProvider, int id)
             where TEntity : class, IHasId<int>
@@ -123,19 +129,19 @@ namespace CostEffectiveCode.Extensions
 
         #region Cqrs
 
-        public static TResult Forward<TSource, TResult>(
+        public static TResult PipeTo<TSource, TResult>(
             this TSource source, IQuery<TSource, TResult> query)
             => query.Ask(source);
 
-        public static Task<TResult> Forward<TSource, TResult>(
+        public static Task<TResult> PipeTo<TSource, TResult>(
             this TSource source, IQuery<TSource, Task<TResult>> query)
             => query.Ask(source);
 
-        public static TResult Forward<TSource, TResult>(
+        public static TResult PipeTo<TSource, TResult>(
             this TSource source, IHandler<TSource, TResult> query)
             => query.Handle(source);
 
-        public static TSource Forward<TSource>(
+        public static TSource PipeTo<TSource>(
             this TSource source, IHandler<TSource> query)
         {
             query.Handle(source);
@@ -151,13 +157,6 @@ namespace CostEffectiveCode.Extensions
 
         public static Func<TIn, TOut> ToFunc<TIn, TOut>(this IHandler<TIn, TOut> handler)
             => x => handler.Handle(x);
-
-        public static Func<TIn, TIn> ToFunc<TIn>(this IHandler<TIn, TIn> handler)
-            => x =>
-            {
-                handler.Handle(x);
-                return x;
-            };
 
         #endregion
     }

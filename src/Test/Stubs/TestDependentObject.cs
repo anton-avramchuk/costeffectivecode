@@ -12,7 +12,7 @@ namespace CostEffectiveCode.Tests
         public TestDependentObject(IQuery<IdPaging<ProductDto>, IPagedEnumerable<ProductDto>> pagedQuery
             , IQuery<object, IEnumerable<ProductDto>> projectionQuery
             , IQuery<int, ProductDto> getQuery
-            , ICommandHandler<ProductDto, int> createOrUpdateCommandHandler)
+            , IHandler<ProductDto, int> createOrUpdateCommandHandler)
         {
         }
     }

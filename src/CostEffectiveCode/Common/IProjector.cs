@@ -6,6 +6,6 @@ namespace CostEffectiveCode.Common
     [PublicAPI]
     public interface IProjector
     {
-        IQueryable<TReturn> Project<TSource, TReturn>(IQueryable<TSource> queryable);
+        IQueryable<TReturn> Project<TReturn>(IQueryable queryable);
     }
 }

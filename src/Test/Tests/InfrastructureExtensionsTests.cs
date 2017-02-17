@@ -29,34 +29,21 @@ namespace CostEffectiveCode.Tests
         }
 
         [Fact]
-        public void Do_123_NoException()
-        {
-            "123".Do(x => x + "!", () => new Exception("Excpetion"));
-        }
-
-        [Fact]
-        public void Do_Null_NoException()
-        {
-            string a = null;
-            Assert.Throws<Exception>(() => a.Do(x => x + "!", () => new Exception("Excpetion")));
-        }
-
-        [Fact]
         public void Forward_Func_Query_CommandSuccess()
         {
             var res = "123"
-                .Forward(x => x)
-                .Forward(new SimpleQuery())
-                .Forward(new SimpleCommandHandler());
+                .PipeTo(x => x)
+                .PipeTo(new SimpleQuery())
+                .PipeTo(new SimpleCommandHandler());
 
             Assert.Equal("123", res);
-            res.Forward(new SimpleCommandHandler2());
+            res.PipeTo(new SimpleCommandHandler2());
         }
 
         [Fact]
         public void Forward_Async()
         {
-            var res = "123".Forward(new SimpleAsyncQuery()).Result;
+            var res = "123".PipeTo(new SimpleAsyncQuery()).Result;
             Assert.Equal("123", res);
         }
         
@@ -74,12 +61,6 @@ namespace CostEffectiveCode.Tests
             var q = new SimpleCommandHandler();
             var func = q.ToFunc();
             Assert.Equal(q.Handle("123"), func("123"));
-        }
-
-        [Fact]
-        public void Match_Success()
-        {
-            Assert.Equal("123456", "123".Match(x => x.StartsWith("123"), x => x + "456"));
         }
         
         [Fact]
@@ -141,16 +122,16 @@ namespace CostEffectiveCode.Tests
         }
 
         [Fact]
-        public void If_True()
+        public void Either_True()
         {
-            var res = "123".If(x => true, x => x + "456", x => "");
+            var res = "123".Either(x => true, x => x + "456", x => "");
             Assert.Equal("123456", res);
         }
 
         [Fact]
-        public void If_False()
+        public void Either_False()
         {
-            var res = "123".If(x => false, x => x + "456", x => "");
+            var res = "123".Either(x => false, x => x + "456", x => "");
             Assert.Equal("", res);
         }
 
@@ -159,7 +140,7 @@ namespace CostEffectiveCode.Tests
         {
             var products = new[] { new Product(), new Product() {Price = 100500},  }
                 .AsQueryable()
-                .Apply(new UberProductSpec())
+                .Where(new UberProductSpec())
                 .ToArray();
 
             Assert.Equal(1, products.Length);
@@ -175,22 +156,6 @@ namespace CostEffectiveCode.Tests
             var res = func("123");
 
             Assert.Equal("123", res);
-        }
-
-        [Fact]
-        public void Do_ThrowsIfNull()
-        {
-            string a = null;
-            Assert.Throws<InvalidOperationException>(() => a.Do(x => { }, () => new InvalidOperationException()));
-            Assert.Throws<InvalidOperationException>(() => a.Do(x => "", () => new InvalidOperationException()));
-        }
-
-        [Fact]
-        public void Do_NoExceptionIfNotNull()
-        {
-            string a = "123";
-            a.Do(x => { }, () => new InvalidOperationException());
-            a.Do(x => "", () => new InvalidOperationException());
         }
     }
 }

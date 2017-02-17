@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using CostEffectiveCode.Cqrs;
@@ -16,15 +15,14 @@ namespace CostEffectiveCode.Tests.Stubs
 
         public SqlConnection OpenConnection(int i)
         {
-            var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            sqlConnection.Open();
+            var sqlConnection = new SqlConnection("");
             return sqlConnection;
         }
 
         public async Task<IPagedEnumerable<ProductDto>> Ask(UberProductSpec spec)
         {
             using (var sqlConnection
-                = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+                = new SqlConnection(""))
             {
                 await sqlConnection.OpenAsync();
                 var res1 = await sqlConnection
