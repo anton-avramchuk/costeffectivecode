@@ -74,6 +74,16 @@ namespace CostEffectiveCode.Extensions
                 : source;
         }
 
+        public static IQueryable<TDest> ApplyProjectApplyAgain<TSource, TDest>(this IQueryable<TSource> queryable, IProjector projector, object spec)
+            where TSource : class
+            where TDest : class
+            => queryable
+            .MaybeWhere(spec)
+            .MaybeSort(spec)
+            .Project<TDest>(projector)
+            .MaybeWhere(spec)
+            .MaybeSort(spec);
+
         public static IQueryable<T> MaybeWhere<T>(this IQueryable<T> source, object spec)
             where T : class
         {

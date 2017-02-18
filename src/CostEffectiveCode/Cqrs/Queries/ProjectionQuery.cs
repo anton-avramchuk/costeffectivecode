@@ -36,15 +36,9 @@ namespace CostEffectiveCode.Cqrs.Queries
         }
 
         protected virtual IQueryable<TDest> Query(object spec)
-        {
-            return LinqProvider
+            => LinqProvider
                 .Query<TSource>()
-                .MaybeWhere(spec)
-                .MaybeSort(spec)
-                .Project<TDest>(Projector)
-                .MaybeWhere(spec)
-                .MaybeSort(spec);
-        }
+                .ApplyProjectApplyAgain<TSource, TDest>(Projector, spec);
 
         IEnumerable<TDest> IQuery<ILinqSpecification<TDest>, IEnumerable<TDest>>.Ask(ILinqSpecification<TDest> spec)
             => Query(spec).ToArray();
