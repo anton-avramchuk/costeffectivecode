@@ -2,12 +2,8 @@
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 
-namespace CostEffectiveCode.Ddd
+namespace CostEffectiveCode.Ddd.Pagination
 {
-    /// <summary>
-    /// Sort order enumeration
-    /// </summary>
-    [PublicAPI]
     public enum SortOrder
     {
         [PublicAPI] Asc = 1,
@@ -23,7 +19,7 @@ namespace CostEffectiveCode.Ddd
         public SortOrder SortOrder { get; private set; }
 
         public Sorting(
-            [NotNull] Expression<Func<TEntity, TKey>> expression,
+            Expression<Func<TEntity, TKey>> expression,
             SortOrder sortOrder = SortOrder.Asc)
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));

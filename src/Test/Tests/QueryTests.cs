@@ -27,15 +27,15 @@ namespace CostEffectiveCode.Tests
 
         static InMemoryLinqProvider _linqProvider = new InMemoryLinqProvider(_products);
 
-        PagedQuery<int, IdPaging<ProductDto, int>, Product, ProductDto> _productQuery
-            = new PagedQuery<int, IdPaging<ProductDto, int>, Product, ProductDto>(_linqProvider
+        PagedQuery<Product, ProductDto, int> _productQuery
+            = new PagedQuery<Product, ProductDto, int>(_linqProvider
                 , new StaticAutoMapperWrapper());
 
         [Fact]
         public void PagedQuery_Ask_TotalCountAndResultAreRight()
         {
             var spec = new UberProductSpec();
-            var res = _productQuery.AsPaged().Ask(spec);
+            var res = _productQuery.Ask(spec);
             var nonPagedRes = _productQuery.Ask(spec);
             var totalCount = ((IQuery<UberProductSpec, int>) _productQuery).Ask(spec);
 
@@ -48,7 +48,7 @@ namespace CostEffectiveCode.Tests
         public void ProjectionQuery_Ask_Success()
         {
             var spec = new UberProductSpec();
-            var q = new ProjectionQuery<UberProductSpec, Product, ProductDto>(_linqProvider, new StaticAutoMapperWrapper());
+            IQuery<UberProductSpec, IEnumerable<ProductDto>> q = new ProjectionQuery<Product, ProductDto>(_linqProvider, new StaticAutoMapperWrapper());
             var res = q.Ask(spec);
             Assert.Equal(1, res.Count());
         }

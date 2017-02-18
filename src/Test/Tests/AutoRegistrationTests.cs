@@ -23,11 +23,11 @@ namespace CostEffectiveCode.Tests
             sw.Stop();
 
             Assert.Equal(
-                typeof(ProjectionQuery<object, Product, ProductDto>),
+                typeof(ProjectionQuery<Product, ProductDto>),
                 res[typeof(IQuery<object, IEnumerable<ProductDto>>)]);
 
             Assert.Equal(
-                typeof(PagedQuery<int, IdPaging<ProductDto>, Product, ProductDto>),
+                typeof(PagedQuery<Product, ProductDto>),
                 res[typeof(IQuery<IdPaging<ProductDto>, IPagedEnumerable<ProductDto>>)]);
 
             Assert.Equal(
@@ -35,7 +35,7 @@ namespace CostEffectiveCode.Tests
                 res[typeof(IQuery<int, ProductDto>)]);
 
             Assert.Equal(
-                typeof(CreateOrUpdateHandler<int, ProductDto, Product>),
+                typeof(CreateOrUpdateEntityHandler<int, ProductDto, Product>),
                 res[typeof(IHandler<ProductDto, int>)]);
 
             Assert.True(sw.ElapsedMilliseconds < 50);

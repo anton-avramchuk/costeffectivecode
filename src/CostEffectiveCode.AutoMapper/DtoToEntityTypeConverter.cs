@@ -9,12 +9,13 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class DtoEntityTypeConverter<TKey, TDto, TEntity> : ITypeConverter<TDto, TEntity>
-            where TEntity : class, IHasId<TKey>, new()     
+    public class CreateOrUpdateCommandToEntityTypeConverter<TKey, TDto, TEntity> : ITypeConverter<TDto, TEntity>
+        where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
+        where TEntity : class, IHasId<TKey>, new()
     {
         protected readonly IUnitOfWork UnitOfWork;
 
-        public DtoEntityTypeConverter(IUnitOfWork unitOfWork)
+        public CreateOrUpdateCommandToEntityTypeConverter(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
@@ -27,9 +28,6 @@ namespace CostEffectiveCode.AutoMapper
                 ? UnitOfWork.Find<TEntity>(sourceId) ?? new TEntity()
                 : new TEntity());
 
-            // Да, reflection, да медленно и может привести к ошибкам в рантайме.
-            // Можете написать Expression Trees, скомпилировать и закешировать для производительности
-            // И анализатор для проверки корректности Dto на этапе компиляции
             var sp = typeof(TDto)
                 .GetTypeInfo()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -42,7 +40,6 @@ namespace CostEffectiveCode.AutoMapper
                 .Where(x => x.CanRead && x.CanWrite)
                 .ToArray();
 
-            // проходимся по всем свойствам целевого объекта
             foreach (var propertyInfo in dp)
             {
                 var key = typeof(IHasId).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType)
@@ -51,7 +48,6 @@ namespace CostEffectiveCode.AutoMapper
 
                 if (!sp.ContainsKey(key)) continue;
 
-                // маппим один к одному примитивы, связанные сущности тащим из контекста
                 if (key.EndsWith("ID", StringComparison.CurrentCultureIgnoreCase)
                     && typeof(IHasId).GetTypeInfo().IsAssignableFrom(propertyInfo.PropertyType))
                 {
@@ -61,7 +57,6 @@ namespace CostEffectiveCode.AutoMapper
                 {
                     if (propertyInfo.PropertyType != sp[key].PropertyType)
                     {
-                        // маппим коллекции
                         var et = IsEntityGenericColections(sp[key].PropertyType, propertyInfo.PropertyType);
                         if (et != null)
                         {

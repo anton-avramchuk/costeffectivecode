@@ -36,17 +36,13 @@ namespace CostEffectiveCode.Ddd.Pagination
         public static IQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
             where T : class
         {
-            if(paging.OrderBy.Length == 0)
+            if(!paging.OrderBy.Any())
             {
                 throw new ArgumentException("OrderBy can't be null or empty", nameof(paging));
             }
 
-            var ordered = queryable.OrderBy(paging.OrderBy[0]);
-
-            for (int i = 1; i < paging.OrderBy.Length; i++)
-            {
-                ordered = ordered.ThenBy(paging.OrderBy[i]);
-            }
+            var ordered = queryable.OrderBy(paging.OrderBy.First());
+            ordered = paging.OrderBy.Skip(1).Aggregate(ordered, (current, order) => current.ThenBy(order));
 
             return ordered
                 .Skip((paging.Page - 1) * paging.Take)

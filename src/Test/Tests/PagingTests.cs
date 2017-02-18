@@ -1,5 +1,6 @@
 ﻿using System;
 using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Pagination;
 using CostEffectiveCode.Ddd.Specifications;
 using Xunit;
 

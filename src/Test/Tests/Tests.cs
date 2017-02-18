@@ -37,8 +37,8 @@ namespace CostEffectiveCode.Tests
         [Fact]
         public void PagedQuery_Execute()
         {
-           var pagedQuery = new PagedQuery<int, UberProductSpec, Product, ProductDto>(
-               LinqProvider(), new StaticAutoMapperWrapper()).AsPaged();
+            var pagedQuery = new PagedQuery<Product, ProductDto>(
+                LinqProvider(), new StaticAutoMapperWrapper());
 
             var sw = new Stopwatch();
 
@@ -91,9 +91,9 @@ namespace CostEffectiveCode.Tests
 
         [Fact]
         public void TestDbContext_PagedQuery_Ask()
-        {        
-            var pagedQuery = new PagedQuery<int, UberProductSpec, Product, ProductDto>(
-                new TestDbContext(), new StaticAutoMapperWrapper()).AsPaged();
+        {
+            var pagedQuery = new PagedQuery<Product, ProductDto>(
+                new TestDbContext(), new StaticAutoMapperWrapper());
 
             var optimizedQUery = new OptimizedQuery();
 

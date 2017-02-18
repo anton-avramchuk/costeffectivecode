@@ -17,7 +17,7 @@ namespace CostEffectiveCode.Cqrs
 
         public MapType MapType { get; }
 
-        public ProjectionAttribute([NotNull] Type entityType, MapType mapType = MapType.Any)
+        public ProjectionAttribute(Type entityType, MapType mapType = MapType.Any)
         {
             if (entityType == null) throw new ArgumentNullException(nameof(entityType));
             EntityType = entityType;

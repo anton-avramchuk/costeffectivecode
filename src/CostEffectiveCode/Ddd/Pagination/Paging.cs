@@ -1,12 +1,19 @@
 ﻿using System;
-using CostEffectiveCode.Ddd.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CostEffectiveCode.Ddd.Pagination
 {
     public abstract class Paging<TEntity, TOrderKey> : IPaging<TEntity, TOrderKey>
         where TEntity : class
     {
-        private readonly Sorting<TEntity, TOrderKey>[] _orderBy;
+        // ReSharper disable once StaticMemberInGenericType
+        public static int DefaultStartPage = 1;
+
+        // ReSharper disable once StaticMemberInGenericType
+        public static int DefaultTake = 30;
+
+        private readonly IEnumerable<Sorting<TEntity, TOrderKey>> _orderBy;
 
         private int _page;
 
@@ -26,18 +33,18 @@ namespace CostEffectiveCode.Ddd.Pagination
 
         protected Paging()
         {
-            Page = 1;
-            Take = 30;
+            Page = DefaultStartPage;
+            Take = DefaultTake;
             // ReSharper disable once VirtualMemberCallInConstructor
             _orderBy = BuildDefaultSorting();
             
-            if (_orderBy == null || _orderBy.Length == 0)
+            if (_orderBy == null || !_orderBy.Any())
             {
                 throw new ArgumentException("OrderBy can't be null or empty", nameof(_orderBy));
             }
         }
 
-        protected abstract Sorting<TEntity, TOrderKey>[] BuildDefaultSorting();
+        protected abstract IEnumerable<Sorting<TEntity, TOrderKey>> BuildDefaultSorting();
 
         public int Page
         {
@@ -67,6 +74,6 @@ namespace CostEffectiveCode.Ddd.Pagination
             }
         }
 
-        public Sorting<TEntity, TOrderKey>[] OrderBy => _orderBy;
+        public IEnumerable<Sorting<TEntity, TOrderKey>> OrderBy => _orderBy;
     }
 }

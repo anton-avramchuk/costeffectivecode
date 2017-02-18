@@ -48,11 +48,11 @@ namespace CostEffectiveCode.AutoMapper
                     }
 
                     attr = (ITypeAssociation)v.GetTypeInfo().GetCustomAttribute<CommandAttribute>()
-                           ?? v.GetTypeInfo().GetCustomAttribute<EventAttribute>();
+                           ?? v.GetTypeInfo().GetCustomAttribute<DomainEventAttribute>();
 
                     if (attr != null)
                     {
-                        CreateMap(v, kv.Key).ConvertUsing(typeof(DtoEntityTypeConverter<,,>)
+                        CreateMap(v, kv.Key).ConvertUsing(typeof(CreateOrUpdateCommandToEntityTypeConverter<,,>)
                             .MakeGenericType(kv.Key.GetTypeInfo().GetProperty("Id").PropertyType, v, kv.Key));
                     }
                 }

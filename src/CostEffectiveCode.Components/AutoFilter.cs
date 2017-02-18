@@ -11,17 +11,12 @@ namespace CostEffectiveCode.Components
     public static class AutoFilterExtensions
     {
         public static IQueryable<T> ApplyDictionary<T>(this IQueryable<T> query, IDictionary<string, object> filters)
-        {
-            foreach (var kv in filters)
-            {
-                query = query.Where(kv.Value is string
+            => filters.Aggregate(query, (current, kv) => current.Where(kv.Value is string
                     ? $"{kv.Key}.StartsWith(@0)"
-                    : $"{kv.Key}=@0", kv.Value);
-            }
-            return query;
-        }
+                    : $"{kv.Key}=@0", kv.Value));
 
-        public static IDictionary<string, object> GetFilters(this object o) => o.GetType()
+        public static IDictionary<string, object> GetFilters(this object o)
+            => o.GetType()
             .GetTypeInfo()
             .GetProperties(BindingFlags.Public)
             .Where(x => x.CanRead)

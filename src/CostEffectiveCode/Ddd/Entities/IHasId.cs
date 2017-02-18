@@ -1,4 +1,6 @@
-﻿namespace CostEffectiveCode.Ddd.Entities
+﻿using System;
+
+namespace CostEffectiveCode.Ddd.Entities
 {
     public interface IHasId
     {
@@ -6,6 +8,7 @@
     }
 
     public interface IHasId<out TKey> : IHasId
+        where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
     {
         new TKey Id { get; }
     }

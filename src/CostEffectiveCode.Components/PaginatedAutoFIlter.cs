@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.Specifications;
+using CostEffectiveCode.Ddd.Pagination;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Components
 {
     public class PaginatedAutoFilter<TKey, TDto>
-        : IdPaging<TKey> 
+        : IdPaging<TKey>
         , ILinqSpecification<TDto> 
         where TKey : class, IHasId<int>
         where TDto : class

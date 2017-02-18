@@ -1,4 +1,6 @@
-﻿namespace CostEffectiveCode.Ddd.Pagination
+﻿using System.Collections.Generic;
+
+namespace CostEffectiveCode.Ddd.Pagination
 {
     public interface IPaging<TEntity, TSortKey>
         where TEntity : class
@@ -7,6 +9,6 @@
 
         int Take { get; }
 
-        Sorting<TEntity, TSortKey>[] OrderBy { get; }
+        IEnumerable<Sorting<TEntity, TSortKey>> OrderBy { get; }
     }
 }

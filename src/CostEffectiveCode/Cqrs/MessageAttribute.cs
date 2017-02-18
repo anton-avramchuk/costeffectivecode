@@ -8,7 +8,7 @@ namespace CostEffectiveCode.Cqrs
     {
         public Type EntityType { get; }
 
-        protected MessageAttribute([NotNull] Type entityType)
+        protected MessageAttribute(Type entityType)
         {
             if (entityType == null) throw new ArgumentNullException(nameof(entityType));
             EntityType = entityType;
@@ -17,14 +17,14 @@ namespace CostEffectiveCode.Cqrs
 
     public class CommandAttribute : MessageAttribute
     {
-        public CommandAttribute([NotNull] Type entityType) : base(entityType)
+        public CommandAttribute(Type entityType) : base(entityType)
         {
         }
     }
 
-    public class EventAttribute : MessageAttribute
+    public class DomainEventAttribute : MessageAttribute
     {
-        public EventAttribute([NotNull] Type entityType) : base(entityType)
+        public DomainEventAttribute(Type entityType) : base(entityType)
         {
         }
     }

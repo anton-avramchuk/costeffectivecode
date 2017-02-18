@@ -45,7 +45,7 @@ namespace CostEffectiveCode.Components
                 var entityType = GetEntityType(dtoType);
                 if (entityType == null) return null;
 
-                return typeof(CreateOrUpdateHandler<,,>).MakeGenericType(genericArgs[1], dtoType, entityType);
+                return typeof(CreateOrUpdateEntityHandler<,,>).MakeGenericType(genericArgs[1], dtoType, entityType);
             }
 
             return null;
@@ -78,7 +78,7 @@ namespace CostEffectiveCode.Components
                 var entityType = GetEntityType(dtoType);
                 if (entityType == null) return null;
 
-                return typeof(ProjectionQuery<,,>).MakeGenericType(genericArgs[0], entityType, dtoType);
+                return typeof(ProjectionQuery<,>).MakeGenericType(genericArgs[0], entityType, dtoType);
             }
 
             // Paged
@@ -89,7 +89,7 @@ namespace CostEffectiveCode.Components
                 var entityType = GetEntityType(dtoType);
                 if (entityType == null) return null;
                 var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
-                return typeof(PagedQuery<,,,>).MakeGenericType(sortKey, genericArgs[0], entityType, dtoType);
+                return typeof(PagedQuery<,,>).MakeGenericType(sortKey, genericArgs[0], entityType, dtoType);
             }            
 
             return null;

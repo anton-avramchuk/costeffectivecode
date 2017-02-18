@@ -2,6 +2,7 @@
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Cqrs;
+using CostEffectiveCode.Ddd.Pagination;
 
 namespace CostEffectiveCode.Tests
 {

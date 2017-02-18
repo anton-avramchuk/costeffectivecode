@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using CostEffectiveCode.Ddd;
+using CostEffectiveCode.Ddd.Pagination;
 using Xunit;
 
 namespace CostEffectiveCode.Tests

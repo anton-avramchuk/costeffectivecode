@@ -8,7 +8,7 @@ namespace CostEffectiveCode.Ddd.Specifications
     [PublicAPI]
     public class ExpressionSpecification<T> : ISpecification<T>
     {
-        public virtual Expression<Func<T, bool>> Expression { get; private set; }
+        public Expression<Func<T, bool>> Expression { get; private set; }
 
         private Func<T, bool> Func => Expression.AsFunc();
 

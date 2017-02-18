@@ -1,12 +1,15 @@
-﻿namespace CostEffectiveCode.Ddd.Entities
+﻿using System;
+
+namespace CostEffectiveCode.Ddd.Entities
 {
-    public abstract class HasIdBase<T> : IHasId<T>
+    public abstract class HasIdBase<TKey> : IHasId<TKey>
+        where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
     {
-        public T Id { get; set; }
+        public TKey Id { get; set; }
 
         public bool IsNew()
         {
-            return Id == null || Id.Equals(default(T));
+            return Id == null || Id.Equals(default(TKey));
         }
 
         object IHasId.Id => Id;

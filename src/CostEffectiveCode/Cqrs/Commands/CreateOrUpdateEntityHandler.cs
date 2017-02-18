@@ -2,20 +2,17 @@
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
-using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class CreateOrUpdateHandler<TKey, TDto, TEntity> : UowBased, IHandler<TDto, TKey>
-        where TKey: struct
+    public class CreateOrUpdateEntityHandler<TKey, TDto, TEntity>: IHandler<TDto, TKey>
+        where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
         where TEntity : HasIdBase<TKey>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateOrUpdateHandler(
-            [NotNull] IUnitOfWork unitOfWork,
-            [NotNull] IMapper mapper) : base(unitOfWork)
+        public CreateOrUpdateEntityHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             if (unitOfWork == null) throw new ArgumentNullException(nameof(unitOfWork));
             if (mapper == null) throw new ArgumentNullException(nameof(mapper));
@@ -27,16 +24,16 @@ namespace CostEffectiveCode.Cqrs.Commands
         public TKey Handle(TDto context)
         {
             var id = (context as IHasId)?.Id;
-            var entity = id != null && !default(TKey).Equals(id)
+            var entity = id != null && default(TKey)?.Equals(id) == false
                 ? _mapper.Map(context, _unitOfWork.Find<TEntity>(id))
                 : _mapper.Map<TEntity>(context);
 
             if (entity.IsNew())
             {
-                UnitOfWork.Add(entity);
+                _unitOfWork.Add(entity);
             }
 
-            UnitOfWork.Commit();
+            _unitOfWork.Commit();
             return entity.Id;
         }
     }

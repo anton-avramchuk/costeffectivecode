@@ -5,36 +5,28 @@ using System.Linq.Expressions;
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
-using CostEffectiveCode.Ddd.Pagination;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
-using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
-    public class ProjectionQuery<TSpecification, TSource, TDest>
-        : IQuery<TSpecification, IEnumerable<TDest>>
-        , IQuery<TSpecification, int>
+    public class ProjectionQuery<TSource, TDest>
+        : IQuery<ILinqSpecification<TDest>, IEnumerable<TDest>>
+        , IQuery<ILinqSpecification<TDest>, int>
+
+        , IQuery<Expression<Func<TDest,bool>>, IEnumerable<TDest>>
+        , IQuery<Expression<Func<TDest,bool>>, int>
+
+        , IQuery<ExpressionSpecification<TDest>, IEnumerable<TDest>>
+        , IQuery<ExpressionSpecification<TDest>, int>
+
         where TSource : class, IHasId
         where TDest : class
     {
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
 
-        private static readonly Type[] SpecTypes = {
-            typeof(ILinqSorting<TSource>),
-            typeof(ILinqSorting<TDest>),
-            typeof(ILinqSpecification<TSource>),
-            typeof(ILinqSpecification<TDest>),
-            typeof(Expression<Func<TSource,bool>>),
-            typeof(Expression<Func<TDest,bool>>),
-            typeof(ExpressionSpecification<TSource>),
-            typeof(ExpressionSpecification<TDest>)
-        };
-
-        private static string ErrorMessage => SpecTypes.Select(x => x.ToString()).Aggregate((c, n) => $"{c}\n{n}");
-
-        public ProjectionQuery([NotNull] ILinqProvider linqProvider, [NotNull] IProjector projector)
+        public ProjectionQuery(ILinqProvider linqProvider, IProjector projector)
         {
             if (linqProvider == null) throw new ArgumentNullException(nameof(linqProvider));
             if (projector == null) throw new ArgumentNullException(nameof(projector));
@@ -43,7 +35,7 @@ namespace CostEffectiveCode.Cqrs.Queries
             Projector = projector;
         }
 
-        protected virtual IQueryable<TDest> GetQueryable(TSpecification spec)
+        protected virtual IQueryable<TDest> Query(object spec)
         {
             return LinqProvider
                 .Query<TSource>()
@@ -52,10 +44,27 @@ namespace CostEffectiveCode.Cqrs.Queries
                 .Project<TDest>(Projector)
                 .MaybeWhere(spec)
                 .MaybeSort(spec);
-        } 
+        }
 
-        public virtual IEnumerable<TDest> Ask(TSpecification specification) => GetQueryable(specification).ToArray();
+        IEnumerable<TDest> IQuery<ILinqSpecification<TDest>, IEnumerable<TDest>>.Ask(ILinqSpecification<TDest> spec)
+            => Query(spec).ToArray();
 
-        int IQuery<TSpecification, int>.Ask(TSpecification specification) => GetQueryable(specification).Count();
+        int IQuery<ILinqSpecification<TDest>,int>.Ask(ILinqSpecification<TDest> spec)
+            => Query(spec).Count();
+
+
+        IEnumerable<TDest> IQuery<Expression<Func<TDest,bool>>, IEnumerable<TDest>>.Ask(Expression<Func<TDest, bool>> spec)
+            => Query(spec).ToArray();
+
+        int IQuery<Expression<Func<TDest, bool>>, int>.Ask(Expression<Func<TDest, bool>> spec)
+            => Query(spec).Count();
+
+
+        IEnumerable<TDest> IQuery<ExpressionSpecification<TDest>, IEnumerable<TDest>>.Ask(ExpressionSpecification<TDest> spec)
+            => Query(spec).ToArray();
+
+        int IQuery<ExpressionSpecification<TDest>, int>.Ask(ExpressionSpecification<TDest> spec)
+            => Query(spec).Count();
+
     }
 }
