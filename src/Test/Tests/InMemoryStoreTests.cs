@@ -23,6 +23,13 @@ namespace CostEffectiveCode.Tests
 
             Assert.Equal("super", c.Name);
             Assert.Equal(5, c.Rating);
+
+			var a = _store.Query<Category>().Where(x => x.Rating > 5).ToArray();
+
+            c = (Category)_store.Find(typeof(Category), 1);
+            Assert.Equal("super", c.Name);
+            Assert.Equal(5, c.Rating);
+
             _store.Delete(c);
 
             Assert.False(_store.Query<Category>().Any());

@@ -69,7 +69,9 @@ namespace CostEffectiveCode.Extensions
         public static IQueryable<T> MaybeSort<T>(this IQueryable<T> source, object sort)
         {
             var srt = sort as ILinqSorting<T>;
-            return srt != null ? srt.Apply(source) : source;
+            return srt != null
+                ? srt.Apply(source)
+                : source;
         }
 
         public static IQueryable<T> MaybeWhere<T>(this IQueryable<T> source, object spec)

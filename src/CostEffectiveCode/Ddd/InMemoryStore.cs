@@ -40,10 +40,10 @@ namespace CostEffectiveCode.Ddd
         }
 
         public TEntity Find<TEntity>(object id) where TEntity : class, IHasId
-            => (TEntity)GetBag<TEntity>().FirstOrDefault(x => x.Id == id);
+            => (TEntity)GetBag<TEntity>().AsQueryable().FirstOrDefault(x => x.Id.ToString() == id.ToString());
 
         public IHasId Find(Type entityType, object id)
-            => GetBag(entityType).FirstOrDefault(x => x.Id == id);
+            => GetBag(entityType).FirstOrDefault(x => x.Id.ToString() == id.ToString());
 
         public void Commit()
         {

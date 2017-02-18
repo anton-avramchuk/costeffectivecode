@@ -9,7 +9,7 @@ using CostEffectiveCode.Ddd.Entities;
 
 namespace CostEffectiveCode.AutoMapper
 {
-    public class CreateOrUpdateCommandToEntityTypeConverter<TKey, TDto, TEntity> : ITypeConverter<TDto, TEntity>
+    public class CreateOrUpdateCommandToEntityTypeConverter<TKey, TCommand, TEntity> : ITypeConverter<TCommand, TEntity>
         where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
         where TEntity : class, IHasId<TKey>, new()
     {
@@ -20,7 +20,7 @@ namespace CostEffectiveCode.AutoMapper
             UnitOfWork = unitOfWork;
         }
 
-        public virtual TEntity Convert(TDto source, TEntity destination, ResolutionContext context)
+        public virtual TEntity Convert(TCommand source, TEntity destination, ResolutionContext context)
         {
             var sourceId = (source as IHasId)?.Id;
 
@@ -28,7 +28,7 @@ namespace CostEffectiveCode.AutoMapper
                 ? UnitOfWork.Find<TEntity>(sourceId) ?? new TEntity()
                 : new TEntity());
 
-            var sp = typeof(TDto)
+            var sp = typeof(TCommand)
                 .GetTypeInfo()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(x => x.CanRead && x.CanWrite)
