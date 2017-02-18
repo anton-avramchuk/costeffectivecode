@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CostEffectiveCode.Cqrs;
@@ -35,5 +36,13 @@ namespace CostEffectiveCode.Extensions
             => asyncQuery.Ask(spec).Result;
 
         #endregion
+
+        public static void Merge<TKey, TValue>(this IDictionary<TKey, TValue> me, IDictionary<TKey, TValue> merge)
+        {
+            foreach (var item in merge)
+            {
+                me[item.Key] = item.Value;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace CostEffectiveCode.Tests
             var sw = new Stopwatch();
             sw.Start();
             var assembly = GetType().GetTypeInfo().Assembly;
-            var res = new AutoRegistration().GetComponentMap(assembly, t => t == typeof(TestDependentObject), assembly, t => true);
+            var res = new AutoRegistration().GetComponentMap(t => t == typeof(TestDependentObject), assembly, t => true, assembly);
             sw.Stop();
 
             Assert.Equal(
@@ -27,7 +27,7 @@ namespace CostEffectiveCode.Tests
                 res[typeof(IQuery<object, IEnumerable<ProductDto>>)]);
 
             Assert.Equal(
-                typeof(PagedQuery<Product, ProductDto>),
+                typeof(PagedQuery<Product, ProductDto, int>),
                 res[typeof(IQuery<IdPaging<ProductDto>, IPagedEnumerable<ProductDto>>)]);
 
             Assert.Equal(
@@ -38,7 +38,7 @@ namespace CostEffectiveCode.Tests
                 typeof(CreateOrUpdateEntityHandler<int, ProductDto, Product>),
                 res[typeof(IHandler<ProductDto, int>)]);
 
-            Assert.True(sw.ElapsedMilliseconds < 50);
+            Assert.True(sw.ElapsedMilliseconds < 50, $"Elapsed ms: {sw.ElapsedMilliseconds}");
         }
     }
 }

@@ -8,6 +8,7 @@ using CostEffectiveCode.Cqrs;
 using CostEffectiveCode.Cqrs.Commands;
 using CostEffectiveCode.Cqrs.Queries;
 using CostEffectiveCode.Ddd.Pagination;
+using CostEffectiveCode.Extensions;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Components
@@ -78,7 +79,7 @@ namespace CostEffectiveCode.Components
                 var entityType = GetEntityType(dtoType);
                 if (entityType == null) return null;
 
-                return typeof(ProjectionQuery<,>).MakeGenericType(genericArgs[0], entityType, dtoType);
+                return typeof(ProjectionQuery<,>).MakeGenericType(entityType, dtoType);
             }
 
             // Paged
@@ -89,8 +90,8 @@ namespace CostEffectiveCode.Components
                 var entityType = GetEntityType(dtoType);
                 if (entityType == null) return null;
                 var sortKey = paging.GetTypeInfo().GetGenericArguments()[1];
-                return typeof(PagedQuery<,,>).MakeGenericType(sortKey, genericArgs[0], entityType, dtoType);
-            }            
+                return typeof(PagedQuery<,,>).MakeGenericType(entityType, dtoType, sortKey);
+            }
 
             return null;
         }
@@ -117,17 +118,12 @@ namespace CostEffectiveCode.Components
         }
 
         public Dictionary<Type, Type> GetComponentMap(
-            Assembly dependentAssembly,
             Func<Type, bool> dependentTypeSpec,
-            Assembly sourceAssembly,
-            Func<Type, bool> sourceTypeSpec)
+            Assembly dependentAssembly,
+            Func<Type, bool> sourceTypeSpec,
+            params Assembly[] sourceAssemblies)
         {
-            var res = new Dictionary<Type, Type>();
-            var types = sourceAssembly
-                .GetTypes()
-                .ToArray();
-
-            var dependencies = dependentAssembly
+            var dependencyTypes = dependentAssembly
                 .GetTypes()
                 .Where(dependentTypeSpec.Invoke)
                 .Select(x => x
@@ -141,7 +137,17 @@ namespace CostEffectiveCode.Components
                 .Distinct()
                 .ToArray();
 
-            foreach (var dep in dependencies)
+            var allImplementationTypes = sourceAssemblies
+                .SelectMany(x => x.GetTypes())
+                .ToArray();
+
+            return FindImplementations(dependencyTypes, allImplementationTypes);
+        }
+
+        private Dictionary<Type, Type> FindImplementations(ParameterInfo[] dependencyParameters, Type[] allImplementationTypes)
+        {
+            var res = new Dictionary<Type, Type>();
+            foreach (var dep in dependencyParameters)
             {
                 var attr = dep.GetCustomAttribute<ImplementationAttribute>();
                 if (attr != null)
@@ -157,7 +163,7 @@ namespace CostEffectiveCode.Components
                     continue;
                 }
 
-                var implementations = types
+                var implementations = allImplementationTypes
                     .Where(x => dep.ParameterType.GetTypeInfo().IsAssignableFrom(x))
                     .ToArray();
 
@@ -165,7 +171,7 @@ namespace CostEffectiveCode.Components
                 {
                     var aggr = implementations.Select(x => x.Name).Aggregate((c, n) => $"{c},{n}");
                     throw new InvalidOperationException($"{aggr} implementations found for {dep.Name}. " +
-                                                        $"You must have only one implementation per assembly");
+                                                        $"You must have only one implementation per assembly or use [Implementation] Attribute otherwise");
                 }
 
                 var implementation = implementations.FirstOrDefault() ?? GetFallBack(dep.ParameterType);
@@ -178,10 +184,9 @@ namespace CostEffectiveCode.Components
                 {
                     throw new InvalidOperationException($"Can't find implementation for type {dep.ParameterType} in  " +
                                                         $"{dep.Member.DeclaringType?.Name}:{dep.Name} constructor parameter. " +
-                                                        $"Use Implementation Attribute to configure implementation explicitly. By the way don't you forget to use [DtoFor] attribute?");
+                                                        $"Use Implementation Attribute to configure implementation explicitly. By the way don't you forget to use [Projection] / [Command] attribute?");
                 }
             }
-
             return res;
         }
     }

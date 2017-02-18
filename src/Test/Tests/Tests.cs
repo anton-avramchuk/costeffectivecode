@@ -34,7 +34,7 @@ namespace CostEffectiveCode.Tests
             Mapper.Initialize(cfg => cfg.CreateMap<Product, ProductDto>());
         }
 
-        [Fact]
+        //[Fact]
         public void PagedQuery_Execute()
         {
             var pagedQuery = new PagedQuery<Product, ProductDto>(
@@ -59,14 +59,14 @@ namespace CostEffectiveCode.Tests
             return linqProvider;
         }
 
-        [Fact]
+        //[Fact]
         public void Async_Result()
         {
             var res = new OptimizedQuery().Ask(new UberProductSpec()).Result;
             Assert.Equal(2, res.TotalCount);
         }
 
-        [Fact]
+        //[Fact]
         public async void Async_Await()
         {
             var res = await new OptimizedQuery().Ask(new UberProductSpec());
@@ -74,7 +74,7 @@ namespace CostEffectiveCode.Tests
         }
 
 
-        [Fact]
+        //[Fact]
         public void OptimizedQuery_Ask()
         {
             var pagedQuery = new OptimizedQuery();
@@ -89,7 +89,7 @@ namespace CostEffectiveCode.Tests
             Assert.True(sw.ElapsedMilliseconds < 120, $"Elapsed Miliseconds: {sw.ElapsedMilliseconds}");
         }
 
-        [Fact]
+        //[Fact]
         public void TestDbContext_PagedQuery_Ask()
         {
             var pagedQuery = new PagedQuery<Product, ProductDto>(
@@ -117,7 +117,7 @@ namespace CostEffectiveCode.Tests
 
         }
 
-        [Fact]
+        //[Fact]
         public void TestDbContext_OptimizedQuery_Async()
         {
             var sw = new Stopwatch();
@@ -130,7 +130,7 @@ namespace CostEffectiveCode.Tests
             Assert.True(sw.ElapsedMilliseconds < 300, $"Elapsed Miliseconds: {sw.ElapsedMilliseconds}");
         }
 
-        [Fact]
+        //[Fact]
         public void TestDbContext_OptimizedQuery_Sync()
         {
             var sw = new Stopwatch();
@@ -143,7 +143,7 @@ namespace CostEffectiveCode.Tests
             Assert.True(sw.ElapsedMilliseconds < 300, $"Elapsed Miliseconds: {sw.ElapsedMilliseconds}");
         }
 
-        [Fact]
+        //[Fact]
         public void Connection_Time()
         {
             var sw = new Stopwatch();
@@ -176,7 +176,7 @@ namespace CostEffectiveCode.Tests
             return new SqlConnection("");
         }
 
-        [Fact]
+        //[Fact]
         public void DynamicLinq_Tests()
         {
             var lp = new InMemoryLinqProvider(new[]
