@@ -33,6 +33,10 @@ namespace CostEffectiveCode.Ddd.Pagination
                 ? queryable.ThenBy(sorting.Expression)
                 : queryable.ThenByDescending(sorting.Expression);
 
+        public static IQueryable<T> Paginate<T>(this IQueryable<T> queryable, IPaging  paging) => queryable
+            .Skip((paging.Page - 1) * paging.Take)
+            .Take(paging.Take);
+
         public static IQueryable<T> Paginate<T, TKey>(this IQueryable<T> queryable, IPaging<T, TKey> paging)
             where T : class
         {
@@ -49,12 +53,12 @@ namespace CostEffectiveCode.Ddd.Pagination
                 .Take(paging.Take);
         }
 
-        public static IOrderedQueryable<T> Sort<T>(this IQueryable<T> queryable, ILinqSorting<T> paging)
+        public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> queryable, ILinqOrderBy<T> orderBy)
             where T : class
-            => paging.Apply(queryable);
+            => orderBy.Apply(queryable);
 
-        public static IPagedEnumerable<T> ToPagedEnumerable<T, TKey>(this IQueryable<T> queryable,
-            IPaging<T, TKey> paging)
+        public static IPagedEnumerable<T> ToPagedEnumerable<T>(this IQueryable<T> queryable,
+            IPaging paging)
             where T : class
             => From(queryable.Paginate(paging).ToArray(), queryable.Count());
 

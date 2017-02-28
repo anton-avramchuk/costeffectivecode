@@ -1,32 +1,37 @@
 {
-  "version": "3.0.0-rc5",
-  "copyright": "HighTech.Today",
-  "title": "CostEffectiveCode",
-  "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
-  "authors": [ "HighTech" ],
-  "packOptions": {
-    "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
-  },
-  "dependencies": {
-    "JetBrains.Annotations": "10.1.5"
-  },
+    "version": "3.0.0-rc5",
+    "copyright": "HighTech.Today",
+    "title": "CostEffectiveCode",
+    "description": "General-purpose .NET framework powered with CQRS, DDD and EventSourcing patterns",
+    "authors": ["HighTech"],
+    "packOptions": {
+        "projectUrl": "http://github.com/hightechtoday/costeffectivecode"
+    },
+    "dependencies": {
+        "JetBrains.Annotations": "10.1.5"
+    },
 
-  "frameworks": {
-    "net45": {},
-    "netstandard1.6": {
-      "imports": "dnxcore50",
-      "dependencies": {
-        "NETStandard.Library": "1.6.0",
-        "System.Linq.Queryable": "4.0.1",
-        "System.Reflection": "4.1.0",
-        "System.Reflection.Extensions": "4.0.1"
-      }
+    "frameworks": {
+        "net45": {
+            "frameworkAssemblies": {
+                "System.ComponentModel.DataAnnotations": "4.0.0.0"
+            }
+        },
+        "netstandard1.6": {
+            "imports": "dnxcore50",
+            "dependencies": {
+                "System.ComponentModel.Annotations": "4.3.0",
+                "NETStandard.Library": "1.6.0",
+                "System.Linq.Queryable": "4.0.1",
+                "System.Reflection": "4.1.0",
+                "System.Reflection.Extensions": "4.0.1"
+            }
+        }
+    },
+
+    "scripts": {
+        "postcompile": [
+            "dotnet pack --no-build --configuration %compile:Configuration%"
+        ]
     }
-  },
-
-  "scripts": {
-    "postcompile": [
-      "dotnet pack --no-build --configuration %compile:Configuration%"
-    ]
-  }
 }

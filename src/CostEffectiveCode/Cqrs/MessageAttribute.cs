@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public abstract class MessageAttribute : Attribute, ITypeAssociation
     {
         public Type EntityType { get; }

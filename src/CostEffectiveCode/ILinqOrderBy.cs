@@ -2,7 +2,7 @@
 
 namespace CostEffectiveCode
 {
-    public interface ILinqSorting<T>
+    public interface ILinqOrderBy<T>
     {
         IOrderedQueryable<T> Apply(IQueryable<T> queryable);
     }

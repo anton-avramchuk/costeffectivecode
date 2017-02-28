@@ -66,9 +66,9 @@ namespace CostEffectiveCode.Extensions
             where T : class
             => spec.Apply(source);
 
-        public static IQueryable<T> MaybeSort<T>(this IQueryable<T> source, object sort)
+        public static IQueryable<T> MaybeOrderBy<T>(this IQueryable<T> source, object sort)
         {
-            var srt = sort as ILinqSorting<T>;
+            var srt = sort as ILinqOrderBy<T>;
             return srt != null
                 ? srt.Apply(source)
                 : source;
@@ -79,10 +79,19 @@ namespace CostEffectiveCode.Extensions
             where TDest : class
             => queryable
             .MaybeWhere(spec)
-            .MaybeSort(spec)
+            .MaybeOrderBy(spec)
             .Project<TDest>(projector)
             .MaybeWhere(spec)
-            .MaybeSort(spec);
+            .MaybeOrderBy(spec);
+
+        public static IQueryable<TDest> ApplyProjectApplyAgainWithoutOrderBy<TSource, TDest>(
+            this IQueryable<TSource> queryable, IProjector projector, object spec)
+            where TSource : class
+            where TDest : class
+            => queryable
+                .MaybeWhere(spec)
+                .Project<TDest>(projector)
+                .MaybeWhere(spec);
 
         public static IQueryable<T> MaybeWhere<T>(this IQueryable<T> source, object spec)
             where T : class

@@ -21,11 +21,16 @@ namespace CostEffectiveCode.Cqrs.Queries
     }
 
 
-    public class PagedQuery<TSource, TDest> : PagedQuery<TSource, TDest, int>
+    public class PagedQuery<TSource, TDest>
+        : PagedQuery<TSource, TDest, int>
+        , IQuery<IPaging, IPagedEnumerable<TDest>>
         where TSource : class, IHasId
         where TDest : class
     {
         public PagedQuery(ILinqProvider linqProvider, IProjector projector) : base(linqProvider, projector)
         {}
+
+        public IPagedEnumerable<TDest> Ask(IPaging spec)
+            => Query(spec).ToPagedEnumerable(spec);
     }
 }

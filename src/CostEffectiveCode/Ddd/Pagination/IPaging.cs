@@ -2,12 +2,17 @@
 
 namespace CostEffectiveCode.Ddd.Pagination
 {
-    public interface IPaging<TEntity, TSortKey>
-        where TEntity : class
+    public interface IPaging
     {
         int Page { get; }
 
         int Take { get; }
+
+    }
+
+    public interface IPaging<TEntity, TSortKey> : IPaging
+        where TEntity : class
+    {
 
         IEnumerable<Sorting<TEntity, TSortKey>> OrderBy { get; }
     }

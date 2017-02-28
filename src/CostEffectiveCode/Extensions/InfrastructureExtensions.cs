@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 using CostEffectiveCode.Cqrs;
+using CostEffectiveCode.Ddd.Entities;
 using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Extensions
@@ -36,6 +39,17 @@ namespace CostEffectiveCode.Extensions
             => asyncQuery.Ask(spec).Result;
 
         #endregion
+
+        public static MapType GetMapType(this Type t) => t.GetTypeInfo()
+                                              .GetCustomAttributes<ProjectionAttribute>()
+                                              .FirstOrDefault()
+                                              ?.MapType ?? MapType.Expression;
+
+        public static bool IsNew<TKey>(this IHasId<TKey> obj)
+            where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
+        {
+            return obj.Id == null || obj.Id.Equals(default(TKey));
+        }
 
         public static void Merge<TKey, TValue>(this IDictionary<TKey, TValue> me, IDictionary<TKey, TValue> merge)
         {

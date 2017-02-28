@@ -2,12 +2,13 @@
 using CostEffectiveCode.Common;
 using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
+using CostEffectiveCode.Extensions;
 
 namespace CostEffectiveCode.Cqrs.Commands
 {
-    public class CreateOrUpdateEntityHandler<TKey, TDto, TEntity>: IHandler<TDto, TKey>
+    public class CreateOrUpdateEntityHandler<TKey, TCommand, TEntity>: IHandler<TCommand, TKey>
         where TKey: IComparable, IComparable<TKey>, IEquatable<TKey>
-        where TEntity : HasIdBase<TKey>
+        where TEntity : class, IHasId<TKey>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,12 +22,12 @@ namespace CostEffectiveCode.Cqrs.Commands
             _mapper = mapper;
         }
 
-        public TKey Handle(TDto context)
+        public TKey Handle(TCommand command)
         {
-            var id = (context as IHasId)?.Id;
-            var entity = id != null && default(TKey)?.Equals(id) == false
-                ? _mapper.Map(context, _unitOfWork.Find<TEntity>(id))
-                : _mapper.Map<TEntity>(context);
+            var id = (command as IHasId)?.Id;
+            var entity = id != null && id.Equals(default(TKey)) == false
+                ? _mapper.Map(command, _unitOfWork.Find<TEntity>(id))
+                : _mapper.Map<TEntity>(command);
 
             if (entity.IsNew())
             {

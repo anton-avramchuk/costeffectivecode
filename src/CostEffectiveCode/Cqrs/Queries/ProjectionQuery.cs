@@ -7,6 +7,7 @@ using CostEffectiveCode.Ddd;
 using CostEffectiveCode.Ddd.Entities;
 using CostEffectiveCode.Ddd.Specifications;
 using CostEffectiveCode.Extensions;
+using JetBrains.Annotations;
 
 namespace CostEffectiveCode.Cqrs.Queries
 {
@@ -25,6 +26,7 @@ namespace CostEffectiveCode.Cqrs.Queries
     {
         protected readonly ILinqProvider LinqProvider;
         protected readonly IProjector Projector;
+        protected readonly IMapper Mapper;
 
         public ProjectionQuery(ILinqProvider linqProvider, IProjector projector)
         {
@@ -40,25 +42,28 @@ namespace CostEffectiveCode.Cqrs.Queries
                 .Query<TSource>()
                 .ApplyProjectApplyAgain<TSource, TDest>(Projector, spec);
 
+        protected virtual IQueryable<TDest> CountQuery(object spec)
+            => LinqProvider
+                .Query<TSource>()
+                .ApplyProjectApplyAgainWithoutOrderBy<TSource, TDest>(Projector, spec);
+
         IEnumerable<TDest> IQuery<ILinqSpecification<TDest>, IEnumerable<TDest>>.Ask(ILinqSpecification<TDest> spec)
             => Query(spec).ToArray();
 
         int IQuery<ILinqSpecification<TDest>,int>.Ask(ILinqSpecification<TDest> spec)
-            => Query(spec).Count();
-
+            => CountQuery(spec).Count();
 
         IEnumerable<TDest> IQuery<Expression<Func<TDest,bool>>, IEnumerable<TDest>>.Ask(Expression<Func<TDest, bool>> spec)
             => Query(spec).ToArray();
 
         int IQuery<Expression<Func<TDest, bool>>, int>.Ask(Expression<Func<TDest, bool>> spec)
-            => Query(spec).Count();
-
+            => CountQuery(spec).Count();
 
         IEnumerable<TDest> IQuery<ExpressionSpecification<TDest>, IEnumerable<TDest>>.Ask(ExpressionSpecification<TDest> spec)
             => Query(spec).ToArray();
 
         int IQuery<ExpressionSpecification<TDest>, int>.Ask(ExpressionSpecification<TDest> spec)
-            => Query(spec).Count();
+            => CountQuery(spec).Count();
 
     }
 }
